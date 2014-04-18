@@ -42,6 +42,10 @@
 		3C1395AB19006C4100762572 /* camera-flip-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A819006C4100762572 /* camera-flip-button.png */; };
 		3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */; };
 		3C1395AD19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */; };
+		3C1395B61900C66C00762572 /* create_send_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B41900C66C00762572 /* create_send_button.png */; };
+		3C1395B71900C66C00762572 /* create_send_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B41900C66C00762572 /* create_send_button.png */; };
+		3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */; };
+		3C1395B91900C66C00762572 /* create_send_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,8 @@
 		3C1395A319006BDC00762572 /* camera-quit-button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-quit-button@2x~iphone.png"; sourceTree = "<group>"; };
 		3C1395A819006C4100762572 /* camera-flip-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flip-button.png"; sourceTree = "<group>"; };
 		3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flip-button@2x~iphone.png"; sourceTree = "<group>"; };
+		3C1395B41900C66C00762572 /* create_send_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_send_button.png; sourceTree = "<group>"; };
+		3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create_send_button@2x~iphone.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +232,8 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3C1395B41900C66C00762572 /* create_send_button.png */,
+				3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */,
 				3C1395A819006C4100762572 /* camera-flip-button.png */,
 				3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */,
 				3C1395A219006BDC00762572 /* camera-quit-button.png */,
@@ -309,9 +317,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C1395B61900C66C00762572 /* create_send_button.png in Resources */,
 				3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */,
 				3C1395A419006BDC00762572 /* camera-quit-button.png in Resources */,
 				3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */,
+				3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */,
 				3C13959218FDACB700762572 /* CameraOverlayView.xib in Resources */,
 				3C1395A619006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */,
 				3C13958D18FDAA3D00762572 /* Main.storyboard in Resources */,
@@ -325,6 +335,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C13957518FD9E7100762572 /* InfoPlist.strings in Resources */,
+				3C1395B71900C66C00762572 /* create_send_button.png in Resources */,
+				3C1395B91900C66C00762572 /* create_send_button@2x~iphone.png in Resources */,
 				3C13959318FDACB700762572 /* CameraOverlayView.xib in Resources */,
 				3C1395AD19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */,
 				3C1395A719006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */,

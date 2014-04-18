@@ -9,6 +9,7 @@
 #import "holoImageView.h"
 #import "Constants.h"
 #import "ImageUtilities.h"
+#import "GeneralUtilities.h"
 
 @interface holoImageView()
 
@@ -154,50 +155,24 @@
             }
         }
     } else if(!self.path.empty) { // 1st continuous mvt: draw path
+        // End path
+        [self closePath:self.path];
+        [self closePath:self.globalPath];
+        isPathBuilt = YES;
+        
         // Draw path
-        [self.path addLineToPoint:initialPoint];
         [self setNeedsDisplay];
         [self drawBitmapAlongPath:self.path];
         [self.path removeAllPoints];
         ctr = 0;
-        [self.globalPath addLineToPoint:initialPoint];
-        isPathBuilt = YES;
+        
         if (self.fullImage) {
             self.isInsideImageVisible = YES;
             self.isOutsideImageVisible = YES;
-//            UIGraphicsBeginImageContextWithOptions(self.image.size, NO, 0);
-//            [self.globalPath addClip];
-//            [self.image drawAtPoint:CGPointZero];
-//            self.insideImage = UIGraphicsGetImageFromCurrentImageContext();
-//            
+     
             self.insideImage = [ImageUtilities drawFromImage:self.image insidePath:self.globalPath];
             self.outsideImage = [ImageUtilities drawFromImage:self.image outsidePath:self.globalPath];
-//            // Outside the path image
-//            // Create an image context containing the original UIImage.
-//            UIGraphicsBeginImageContext(self.image.size);
-//            [self.image drawAtPoint:CGPointZero];
-//            
-//            // Clip to the bezier path and clear that portion of the image.
-//            CGContextRef context = UIGraphicsGetCurrentContext();
-//            CGContextAddPath(context,self.globalPath.CGPath);
-//            CGContextClip(context);
-//            CGContextClearRect(context,CGRectMake(0,0,self.image.size.width,self.image.size.height));
-//            
-//            // Build a new UIImage from the image context.
-//            self.outsideImage = UIGraphicsGetImageFromCurrentImageContext();
-//            UIGraphicsEndImageContext();
         }
-        // If full screen picture, divide it
-//        if (self.fullImage) {
-//            // Inside the path image
-//            self.insideImage = [ImageUtilities drawFromImage:self.fullImage insidePath:self.globalPath];
-//            
-//            // Outside the path image
-//            self.outsideImage = [ImageUtilities drawFromImage:self.fullImage outsidePath:self.globalPath withSize:self.bounds.size];
-//            
-//            self.isInsideImageVisible = YES;
-//            self.isOutsideImageVisible = YES;
-//        }
     }
 }
 
@@ -229,17 +204,55 @@
     isPathBuilt = NO;
 }
 
-// todo delete
-- (void)drawBitmap2
+- (void)closePath:(UIBezierPath *)path
 {
-    UIGraphicsBeginImageContext(self.frame.size);
-    [self.image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    [[UIColor blackColor] setFill];
-    [self.globalPath fill];
-    self.image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    CGPoint lastPoint = [path currentPoint];
+    CGPoint lastPointBundaryProj = [GeneralUtilities closestPointInBoundary:self.bounds.size fromPoint:lastPoint];
+    CGPoint initialPointBundaryProj = [GeneralUtilities closestPointInBoundary:self.bounds.size fromPoint:initialPoint];
+    if ([GeneralUtilities distanceBetweenPoint:lastPoint andPoint:initialPoint] < MAX([GeneralUtilities distanceBetweenPoint:lastPoint andPoint:lastPointBundaryProj], [GeneralUtilities distanceBetweenPoint:initialPoint andPoint:initialPointBundaryProj])) {
+        [path addLineToPoint:initialPoint];
+    } else {
+        [path addLineToPoint:lastPointBundaryProj];
+        
+        if(initialPointBundaryProj.x != lastPointBundaryProj.x && initialPointBundaryProj.y != lastPointBundaryProj.y) {
+            CGPoint interPoint1;
+            if (lastPointBundaryProj.x == 0 || lastPointBundaryProj.x == self.bounds.size.width) {
+                interPoint1.x = lastPointBundaryProj.x;
+                interPoint1.y = (2 * lastPointBundaryProj.y > self.bounds.size.height)? self.bounds.size.height : 0;
+            } else {
+                interPoint1.x = (2 * lastPointBundaryProj.x > self.bounds.size.width)? self.bounds.size.width : 0;
+                interPoint1.y = lastPointBundaryProj.y;
+            }
+            [path addLineToPoint:interPoint1];
+            
+            if(initialPointBundaryProj.x != interPoint1.x && initialPointBundaryProj.y != interPoint1.y) {
+                CGPoint interPoint2;
+                if (interPoint1.x == lastPointBundaryProj.x){
+                    interPoint2.x = interPoint1.x ? 0 : self.bounds.size.width;
+                    interPoint2.y = interPoint1.y;
+                } else {
+                    interPoint2.y = interPoint1.y ? 0 : self.bounds.size.height;
+                    interPoint2.x = interPoint1.x;
+                }
+                [path addLineToPoint:interPoint2];
+                
+                if(initialPointBundaryProj.x != interPoint2.x && initialPointBundaryProj.y != interPoint2.y) {
+                    CGPoint interPoint3;
+                    if (interPoint2.x == interPoint1.x){
+                        interPoint3.x = interPoint2.x ? 0 : self.bounds.size.width;
+                        interPoint3.y = interPoint2.y;
+                    } else {
+                        interPoint3.y = interPoint2.y ? 0 : self.bounds.size.height;
+                        interPoint3.x = interPoint2.x;
+                    }
+                    [path addLineToPoint:interPoint3];
+                }
+            }
+        }
+        [path addLineToPoint:initialPointBundaryProj];
+        [path addLineToPoint:initialPoint];
+    }
 }
-//
 
 @end
 

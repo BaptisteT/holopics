@@ -17,6 +17,7 @@
 
 @interface PicsCreationViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) UIImagePickerController * imagePickerController;
 @property (weak, nonatomic) IBOutlet holoImageView *holoImageView;
 @property (strong, nonatomic) UIImage *lastPicture;
@@ -33,7 +34,6 @@
 {
     [super viewDidLoad];
     self.displayMode = kNoDisplay;
-    
     // Alloc and init full screen camera
     [self allocAndInitFullScreenCamera];
 }
@@ -42,7 +42,7 @@
 {
     // Present the camera
     [self presentViewController:self.imagePickerController animated:NO completion:NULL];
-    
+    [self.saveButton setHidden:YES];
     // Make this controller the delegate of holoImageView
     self.holoImageView.holoImageViewDelegate = self;
 }
@@ -94,9 +94,17 @@
 {
     UIImage *image =  [editInfo objectForKey:UIImagePickerControllerOriginalImage];
     
-    double rescalingRatio = self.view.frame.size.height / kCameraHeight;
-    self.lastPicture = [ImageUtilities cropWidthOfImage:image by:(1-1/rescalingRatio)];
+    // Force portrait, and avoid flip of front camera
+    UIImageOrientation orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationUpMirrored : UIImageOrientationUp;
+    image = [UIImage imageWithCGImage:image.CGImage
+                                scale:1
+                          orientation:orientation];
     
+    // Crop
+    double rescalingRatio = self.view.frame.size.height / kCameraHeight;
+    self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropWidthOfImage:image by:(1-1/rescalingRatio)] scaledToSize:self.holoImageView.bounds.size];
+    
+    // Display partly or fully on camera overlay
     if (self.displayMode == kDisplayFull) {
         self.holoImageView.fullImage = self.lastPicture;
         [self.holoImageView setImage:self.holoImageView.fullImage];
@@ -106,6 +114,7 @@
             // full composed picture
             self.holoImageView.fullImage = [ImageUtilities addImage:self.holoImageView.insideImage toImage:self.holoImageView.outsideImage withSize:self.holoImageView.bounds.size];
             [self.holoImageView setImage:self.holoImageView.fullImage];
+            [self.saveButton setHidden:NO];
         } else {
             [self.holoImageView setImage:self.holoImageView.insideImage];
         }
@@ -116,6 +125,7 @@
             // full composed picture
             self.holoImageView.fullImage = [ImageUtilities addImage:self.holoImageView.insideImage toImage:self.holoImageView.outsideImage withSize:self.holoImageView.bounds.size];
             [self.holoImageView setImage:self.holoImageView.fullImage];
+            [self.saveButton setHidden:NO];
         } else {
             [self.holoImageView setImage:self.holoImageView.outsideImage];
         }
@@ -138,6 +148,12 @@
                                    }];
 }
 
+- (IBAction)saveButtonClicked:(id)sender {
+    [self saveImageToFileSystem:self.holoImageView.image];
+    [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
+    [self cancelButtonClicked:nil];
+}
+
 // Front camera
 - (IBAction)flipCameraButtonClicked:(id)sender {
     if (self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront){
@@ -151,6 +167,7 @@
 - (IBAction)cancelButtonClicked:(id)sender {
     [self.holoImageView clearPathAndPictures];
     self.lastPicture = nil;
+    [self.saveButton setHidden:YES];
 }
 
 // Take picture and display it on overlay
@@ -159,36 +176,7 @@
     [self.imagePickerController takePicture];
 }
 
-// Create two pictures from path and full screen pic
-- (void)dividePictureAlongPath:(UIBezierPath *)path
-{
-//    [self.holoImageView setImage:self.fullScreenPicture];
-    
-//    if (![[self.holoImageView layer] mask])
-//        [[self.holoImageView layer] setMask:[CAShapeLayer layer]];
-//    
-//    [(CAShapeLayer*) [[self.holoImageView layer] mask] setPath:[path CGPath]];
-//    [self.view addSubview:self.holoImageView];
-    
-//    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-//    CGContextRef    context    = CGBitmapContextCreate(nil, self.view.frame.size.width, self.view.frame.size.height, 8, 4*self.view.frame.size.width, colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
-//    
-//    CGContextAddPath(context, path.CGPath);
-//    CGContextClip(context);
-//    CGContextDrawImage(context, self.view.frame, self.fullScreenPicture.CGImage);
-//    
-//    self.firstHalfPicture = [UIImage imageWithCGImage:CGBitmapContextCreateImage(context)];
-//    [self.holoImageView setImage:self.firstHalfPicture];
-    
-//    [self saveImageToFileSystem:self.firstHalfPicture];
-    
-//    UIGraphicsBeginImageContextWithOptions(self.fullScreenPicture.size, NO, 0);
-//    [path addClip];
-//    [self.fullScreenPicture drawAtPoint:CGPointZero];
-//    UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    [self.holoImageView setImage:maskedImage];
-}
+
 
 
 @end

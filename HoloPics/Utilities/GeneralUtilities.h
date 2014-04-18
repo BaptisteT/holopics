@@ -12,4 +12,8 @@
 
 + (void)showMessage:(NSString *)text withTitle:(NSString *)title;
 
++ (float) distanceBetweenPoint:(CGPoint)p1 andPoint:(CGPoint)p2;
+
++ (CGPoint) closestPointInBoundary:(CGSize)size fromPoint:(CGPoint)p;
+
 @end

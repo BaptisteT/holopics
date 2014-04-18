@@ -16,24 +16,23 @@
         // do nothing
         return image;
     }
+    // Put orientation up before cropping
     image = [UIImage imageWithCGImage:image.CGImage
                                 scale:1
                           orientation:UIImageOrientationUp];
+    
+    // Crop
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
-    CGRect cropRect; UIImageOrientation imageOrientation;
+    CGRect cropRect;
    
     if (imageWidth <= imageHeight) {
         // Create rectangle from middle of current image
         CGFloat croppedWidth = croppedPercentage * imageWidth;
-        cropRect = CGRectMake(croppedWidth / 2, 0.0,
-                                     imageWidth - croppedWidth, imageHeight);
-        imageOrientation = UIImageOrientationRight;
+        cropRect = CGRectMake(croppedWidth / 2, 0.0, imageWidth - croppedWidth, imageHeight);
     } else {
         CGFloat croppedHeight = croppedPercentage * imageHeight;
-        cropRect = CGRectMake(0.0, croppedHeight /2,
-                                     imageWidth, imageHeight - croppedHeight);
-        imageOrientation = UIImageOrientationRight;
+        cropRect = CGRectMake(0.0, croppedHeight /2, imageWidth, imageHeight - croppedHeight);
     }
     
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
@@ -41,9 +40,17 @@
     // Create new cropped UIImage
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef
                                                 scale:1
-                                          orientation:imageOrientation];
+                                          orientation:image.imageOrientation];
     CGImageRelease(imageRef);
     return croppedImage;
+}
+
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 + (ALAssetOrientation)convertImageOrientationToAssetOrientation:(UIImageOrientation)orientation
@@ -65,9 +72,9 @@
 + (UIImage *)drawFromImage:(UIImage *)fullImage outsidePath:(UIBezierPath *)path
 {
     UIGraphicsBeginImageContextWithOptions(fullImage.size, NO, 0);
-    
     // Clip to the bezier path and clear that portion of the image.
     CGContextRef context =  UIGraphicsGetCurrentContext();
+    
     [fullImage drawAtPoint:CGPointZero];
     CGContextAddPath(context,path.CGPath);
     CGContextClip(context);
@@ -82,6 +89,7 @@
 {
     UIGraphicsBeginImageContextWithOptions(fullImage.size, NO, 0);
     [path addClip];
+    [fullImage drawInRect:CGRectMake(0,0,fullImage.size.width,fullImage.size.height)];
     [fullImage drawAtPoint:CGPointZero];
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
