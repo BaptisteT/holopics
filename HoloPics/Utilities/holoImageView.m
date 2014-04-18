@@ -73,7 +73,14 @@
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self];
     ctr++;
-    // We deal with continuous movement only when there is no path yet
+    
+    if (isPathBuilt && self.isOutsideImageVisible && self.isInsideImageVisible) {
+        self.fullImage = [ImageUtilities addImage:self.insideImage toImage:self.outsideImage withSize:self.bounds.size];
+        [self setImage:self.fullImage];
+        [self.globalPath removeAllPoints];
+        isPathBuilt = NO;
+    }
+    // 1st contiuous mvt
     if (!isPathBuilt) {
         pts[ctr] = p;
         if (ctr == 4)
@@ -154,7 +161,7 @@
                 }
             }
         }
-    } else if(!self.path.empty) { // 1st continuous mvt: draw path
+    } else if(!self.path.empty) { // continuous mvt: draw path
         // End path
         [self closePath:self.path];
         [self closePath:self.globalPath];
@@ -170,8 +177,8 @@
             self.isInsideImageVisible = YES;
             self.isOutsideImageVisible = YES;
      
-            self.insideImage = [ImageUtilities drawFromImage:self.image insidePath:self.globalPath];
-            self.outsideImage = [ImageUtilities drawFromImage:self.image outsidePath:self.globalPath];
+            self.insideImage = [ImageUtilities drawFromImage:self.fullImage insidePath:self.globalPath];
+            self.outsideImage = [ImageUtilities drawFromImage:self.fullImage outsidePath:self.globalPath];
         }
     }
 }

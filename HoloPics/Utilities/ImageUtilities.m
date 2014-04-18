@@ -10,7 +10,7 @@
 
 @implementation ImageUtilities
 
-+ (UIImage*)cropWidthOfImage:(UIImage*)image by:(CGFloat)croppedPercentage {
++ (UIImage*)cropWidthOfImage:(UIImage*)image by:(CGFloat)croppedPercentage andOrientate:(UIImageOrientation)orientation {
     
     if(croppedPercentage<0 || croppedPercentage>=1){
         // do nothing
@@ -40,7 +40,7 @@
     // Create new cropped UIImage
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef
                                                 scale:1
-                                          orientation:image.imageOrientation];
+                                          orientation:orientation];
     CGImageRelease(imageRef);
     return croppedImage;
 }

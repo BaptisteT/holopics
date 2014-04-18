@@ -94,15 +94,12 @@
 {
     UIImage *image =  [editInfo objectForKey:UIImagePickerControllerOriginalImage];
     
-    // Force portrait, and avoid flip of front camera
-    UIImageOrientation orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationUpMirrored : UIImageOrientationUp;
-    image = [UIImage imageWithCGImage:image.CGImage
-                                scale:1
-                          orientation:orientation];
+    // Force portrait, and avoid mirror of front camera
+    UIImageOrientation orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationLeftMirrored : UIImageOrientationRight;
     
     // Crop
     double rescalingRatio = self.view.frame.size.height / kCameraHeight;
-    self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropWidthOfImage:image by:(1-1/rescalingRatio)] scaledToSize:self.holoImageView.bounds.size];
+    self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropWidthOfImage:image by:(1-1/rescalingRatio) andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
     
     // Display partly or fully on camera overlay
     if (self.displayMode == kDisplayFull) {

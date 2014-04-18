@@ -11,7 +11,7 @@
 
 @interface ImageUtilities : NSObject
 
-+ (UIImage*)cropWidthOfImage:(UIImage*)image by:(CGFloat)croppedPercentage;
++ (UIImage*)cropWidthOfImage:(UIImage*)image by:(CGFloat)croppedPercentage andOrientate:(UIImageOrientation)orientation;
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 
