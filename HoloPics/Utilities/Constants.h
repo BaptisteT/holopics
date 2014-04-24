@@ -21,3 +21,9 @@ static const NSUInteger kNoDisplay = 0;
 static const NSUInteger kDisplayFull = 1;
 static const NSUInteger kDisplayInside = 2;
 static const NSUInteger kDisplayOutside = 3;
+
+// TODO remove this
+#define ACCESS_KEY_ID @"AKIAJTBDZSZ2Y3XF5XYQ"
+#define SECRET_KEY @"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"
+#define S3_URL @"street-shout1.s3.amazonaws.com/"
+#define S3_BUCKET @"holopics-production"

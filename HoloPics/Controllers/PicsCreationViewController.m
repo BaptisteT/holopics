@@ -14,6 +14,9 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIKit.h>
+#import <AWSS3/AWSS3.h>
+#import <AWSS3/AmazonS3Client.h>
+
 
 @interface PicsCreationViewController ()
 
@@ -147,8 +150,25 @@
 
 - (IBAction)saveButtonClicked:(id)sender {
     [self saveImageToFileSystem:self.holoImageView.image];
-    [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
-    [self cancelButtonClicked:nil];
+    
+    if(!self.holoImageView.fullImage) {
+        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"incomplete_pics", @"Strings", @"comment") withTitle:nil];
+        return;
+    }
+    if (![GeneralUtilities connected]) {
+        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"no_connection", @"Strings", @"comment") withTitle:nil];
+    } else {
+        NSString *imageName = [[GeneralUtilities getDeviceID] stringByAppendingFormat:@"--%lu", (unsigned long)[GeneralUtilities currentDateInMilliseconds]];
+        AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
+        [s3 createBucket:[[S3CreateBucketRequest alloc] initWithName:S3_BUCKET]];
+        S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:imageName inBucket:S3_BUCKET];
+        por.contentType = @"image/jpeg";
+        NSData *imageData = UIImageJPEGRepresentation (self.holoImageView.fullImage, 0.8);
+        por.data = imageData;
+        [s3 putObject:por];
+        [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
+        [self cancelButtonClicked:nil];
+    }
 }
 
 // Front camera

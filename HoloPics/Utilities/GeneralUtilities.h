@@ -10,7 +10,9 @@
 
 @interface GeneralUtilities : NSObject
 
++ (BOOL)connected;
 + (void)showMessage:(NSString *)text withTitle:(NSString *)title;
 
-
++ (NSString *)getDeviceID;
++ (NSUInteger)currentDateInMilliseconds;
 @end
