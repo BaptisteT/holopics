@@ -15,6 +15,8 @@
 
 static const NSUInteger kCameraHeight = 426;
 
+static const NSUInteger kPathMinimalArea = 100;
+
 static const NSUInteger kNoDisplay = 0;
 static const NSUInteger kDisplayFull = 1;
 static const NSUInteger kDisplayInside = 2;

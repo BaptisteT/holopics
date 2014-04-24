@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C362A2FA-0CC5-4681-A90C-A41D84F36A5F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HoloPics</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C6EA169E-9AF0-4E55-90B7-B4CD88D70698</key>
+		<string>https://github.com/bastienbeurier/holopics.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HoloPics.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C6EA169E-9AF0-4E55-90B7-B4CD88D70698</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/bastienbeurier/holopics.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C6EA169E-9AF0-4E55-90B7-B4CD88D70698</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C6EA169E-9AF0-4E55-90B7-B4CD88D70698</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HoloPics</string>
+		</dict>
+	</array>
+</dict>
+</plist>

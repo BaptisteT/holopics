@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAB71908F917005DAA9C /* PathUtility.m */; };
 		3C13955218FD9E7100762572 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955118FD9E7100762572 /* Foundation.framework */; };
 		3C13955418FD9E7100762572 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955318FD9E7100762572 /* CoreGraphics.framework */; };
 		3C13955618FD9E7100762572 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955518FD9E7100762572 /* UIKit.framework */; };
@@ -59,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C09FAB61908F917005DAA9C /* PathUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtility.h; sourceTree = "<group>"; };
+		3C09FAB71908F917005DAA9C /* PathUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtility.m; sourceTree = "<group>"; };
 		3C13954E18FD9E7100762572 /* HoloPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoloPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C13955118FD9E7100762572 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3C13955318FD9E7100762572 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -215,6 +218,8 @@
 				3C13959B18FDBFE700762572 /* GeneralUtilities.m */,
 				3C13959E18FDEF8E00762572 /* holoImageView.h */,
 				3C13959F18FDEF8E00762572 /* holoImageView.m */,
+				3C09FAB61908F917005DAA9C /* PathUtility.h */,
+				3C09FAB71908F917005DAA9C /* PathUtility.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -289,6 +294,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Baptiste Truchot";
 				TargetAttributes = {
+					3C13954D18FD9E7100762572 = {
+						DevelopmentTeam = Y7RQR83KUE;
+					};
 					3C13956818FD9E7100762572 = {
 						TestTargetID = 3C13954D18FD9E7100762572;
 					};
@@ -354,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C13958518FDA3B400762572 /* PicsCreationViewController.m in Sources */,
+				3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */,
 				3C13956218FD9E7100762572 /* AppDelegate.m in Sources */,
 				3C13959618FDB82400762572 /* ImageUtilities.m in Sources */,
 				3C13959C18FDBFE700762572 /* GeneralUtilities.m in Sources */,
@@ -422,7 +431,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (63863BWF5M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (63863BWF5M)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -438,9 +448,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "0FC0A097-B969-4846-AFE3-8CF6FBA82322";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -460,7 +472,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -470,8 +483,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "0FC0A097-B969-4846-AFE3-8CF6FBA82322";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -481,10 +496,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HoloPics/HoloPics-Prefix.pch";
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0FC0A097-B969-4846-AFE3-8CF6FBA82322";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -494,10 +513,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HoloPics/HoloPics-Prefix.pch";
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0FC0A097-B969-4846-AFE3-8CF6FBA82322";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

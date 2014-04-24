@@ -20,23 +20,6 @@
                       otherButtonTitles:nil] show];
 }
 
-+ (float) distanceBetweenPoint:(CGPoint)p1 andPoint:(CGPoint)p2
-{
-    return sqrt(pow(p2.x-p1.x,2)+pow(p2.y-p1.y,2));
-}
-
-+ (CGPoint) closestPointInBoundary:(CGSize)size fromPoint:(CGPoint)p
-{
-    CGPoint closestBoundaryPoint;
-    if (MIN(p.x,size.width - p.x) < MIN(p.y,size.height - p.y)) {
-        closestBoundaryPoint.x = (2*p.x > size.width)? size.width : 0;
-        closestBoundaryPoint.y = p.y;
-    } else {
-        closestBoundaryPoint.x = p.x;
-        closestBoundaryPoint.y = (2*p.y > size.height)? size.height : 0;
-    }
-    return closestBoundaryPoint;
-}
 
 @end
 

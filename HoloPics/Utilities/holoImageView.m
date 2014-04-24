@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "ImageUtilities.h"
 #import "GeneralUtilities.h"
+#import "PathUtility.h"
 
 @interface holoImageView()
 
@@ -74,14 +75,15 @@
     CGPoint p = [touch locationInView:self];
     ctr++;
     
-    if (isPathBuilt && self.isOutsideImageVisible && self.isInsideImageVisible) {
-        self.fullImage = [ImageUtilities addImage:self.insideImage toImage:self.outsideImage withSize:self.bounds.size];
-        [self setImage:self.fullImage];
-        [self.globalPath removeAllPoints];
-        isPathBuilt = NO;
-    }
-    // 1st contiuous mvt
-    if (!isPathBuilt) {
+    // Draw path only when we have a full picture
+    if(self.fullImage) {
+        if (isPathBuilt) {
+            // Remove previous path
+            [self setImage:self.fullImage];
+            [self.globalPath removeAllPoints];
+            isPathBuilt = NO;
+        }
+        
         pts[ctr] = p;
         if (ctr == 4)
         {
@@ -126,16 +128,9 @@
                 if(self.isInsideImageVisible) {
                     // Remove inside
                     self.isInsideImageVisible = NO;
-                    if(self.isOutsideImageVisible) {
-                        if (self.outsideImage) {
-                            [self setImage:self.outsideImage];
-                        } else {
-                            [self.holoImageViewDelegate takePictureAndDisplay:kDisplayOutside];
-                        }
-                    } else {
-                        [self setImage:nil];
-                        [self drawBitmapAlongPath:self.globalPath];
-                    }
+                    [self setImage:self.outsideImage];
+                    self.isOutsideImageVisible = YES;
+                    self.fullImage = nil;
                 } else {
                     // take inside picture
                     [self.holoImageViewDelegate takePictureAndDisplay:kDisplayInside];
@@ -144,17 +139,9 @@
                 if(self.isOutsideImageVisible) {
                     // remove outside
                     self.isOutsideImageVisible = NO;
-                    // if inside image, make it visible
-                    if(self.isInsideImageVisible) {
-                        if(self.insideImage) {
-                            [self setImage:self.insideImage];
-                        } else {
-                            [self.holoImageViewDelegate takePictureAndDisplay:kDisplayInside];
-                        }
-                    } else {
-                        [self setImage:nil];
-                        [self drawBitmapAlongPath:self.globalPath];
-                    }
+                    [self setImage:self.insideImage];
+                    self.isInsideImageVisible = YES;
+                    self.fullImage = nil;
                 } else {
                     // take oustside picture
                     [self.holoImageViewDelegate takePictureAndDisplay:kDisplayOutside];
@@ -163,23 +150,30 @@
         }
     } else if(!self.path.empty) { // continuous mvt: draw path
         // End path
-        [self closePath:self.path];
-        [self closePath:self.globalPath];
-        isPathBuilt = YES;
+        [PathUtility closePath:self.path withInitialPoint:initialPoint inRect:self.bounds.size];
         
-        // Draw path
-        [self setNeedsDisplay];
-        [self drawBitmapAlongPath:self.path];
+        if([PathUtility isMinimalSizePath:self.path]) {
+            // Draw path
+            [self setNeedsDisplay];
+            [self drawBitmapAlongPath:self.path];
+            
+            isPathBuilt = YES;
+            [PathUtility closePath:self.globalPath withInitialPoint:initialPoint inRect:self.bounds.size];
+
+            if (self.fullImage) {
+                self.isInsideImageVisible = YES;
+                self.isOutsideImageVisible = YES;
+                self.insideImage = [ImageUtilities drawFromImage:self.fullImage insidePath:self.globalPath];
+                self.outsideImage = [ImageUtilities drawFromImage:self.fullImage outsidePath:self.globalPath];
+            }
+        } else {
+            // Cancel path
+            isPathBuilt = NO;
+            [self.globalPath removeAllPoints];
+            [self setImage:self.fullImage];
+        }
         [self.path removeAllPoints];
         ctr = 0;
-        
-        if (self.fullImage) {
-            self.isInsideImageVisible = YES;
-            self.isOutsideImageVisible = YES;
-     
-            self.insideImage = [ImageUtilities drawFromImage:self.fullImage insidePath:self.globalPath];
-            self.outsideImage = [ImageUtilities drawFromImage:self.fullImage outsidePath:self.globalPath];
-        }
     }
 }
 
@@ -211,101 +205,5 @@
     isPathBuilt = NO;
 }
 
-- (void)closePath:(UIBezierPath *)path
-{
-    CGPoint lastPoint = [path currentPoint];
-    CGPoint lastPointBundaryProj = [GeneralUtilities closestPointInBoundary:self.bounds.size fromPoint:lastPoint];
-    CGPoint initialPointBundaryProj = [GeneralUtilities closestPointInBoundary:self.bounds.size fromPoint:initialPoint];
-    if ([GeneralUtilities distanceBetweenPoint:lastPoint andPoint:initialPoint] < MAX([GeneralUtilities distanceBetweenPoint:lastPoint andPoint:lastPointBundaryProj], [GeneralUtilities distanceBetweenPoint:initialPoint andPoint:initialPointBundaryProj])) {
-        [path addLineToPoint:initialPoint];
-    } else {
-        [path addLineToPoint:lastPointBundaryProj];
-        
-        if(initialPointBundaryProj.x != lastPointBundaryProj.x && initialPointBundaryProj.y != lastPointBundaryProj.y) {
-            CGPoint interPoint1;
-            if (lastPointBundaryProj.x == 0 || lastPointBundaryProj.x == self.bounds.size.width) {
-                interPoint1.x = lastPointBundaryProj.x;
-                interPoint1.y = (2 * lastPointBundaryProj.y > self.bounds.size.height)? self.bounds.size.height : 0;
-            } else {
-                interPoint1.x = (2 * lastPointBundaryProj.x > self.bounds.size.width)? self.bounds.size.width : 0;
-                interPoint1.y = lastPointBundaryProj.y;
-            }
-            [path addLineToPoint:interPoint1];
-            
-            if(initialPointBundaryProj.x != interPoint1.x && initialPointBundaryProj.y != interPoint1.y) {
-                CGPoint interPoint2;
-                if (interPoint1.x == lastPointBundaryProj.x){
-                    interPoint2.x = interPoint1.x ? 0 : self.bounds.size.width;
-                    interPoint2.y = interPoint1.y;
-                } else {
-                    interPoint2.y = interPoint1.y ? 0 : self.bounds.size.height;
-                    interPoint2.x = interPoint1.x;
-                }
-                [path addLineToPoint:interPoint2];
-                
-                if(initialPointBundaryProj.x != interPoint2.x && initialPointBundaryProj.y != interPoint2.y) {
-                    CGPoint interPoint3;
-                    if (interPoint2.x == interPoint1.x){
-                        interPoint3.x = interPoint2.x ? 0 : self.bounds.size.width;
-                        interPoint3.y = interPoint2.y;
-                    } else {
-                        interPoint3.y = interPoint2.y ? 0 : self.bounds.size.height;
-                        interPoint3.x = interPoint2.x;
-                    }
-                    [path addLineToPoint:interPoint3];
-                }
-            }
-        }
-        [path addLineToPoint:initialPointBundaryProj];
-        [path addLineToPoint:initialPoint];
-    }
-}
 
 @end
-
-
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    
-//    self.mouseSwiped = NO;
-//    UITouch *touch = [touches anyObject];
-//    self.lastPoint = [touch locationInView:self];
-//    self.pathPoints = [NSMutableArray arrayWithObject:[NSValue valueWithCGPoint:self.lastPoint]];
-//}
-//
-//- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-//    
-//    self.mouseSwiped = YES;
-//    UITouch *touch = [touches anyObject];
-//    CGPoint currentPoint = [touch locationInView:self];
-//    [self.pathPoints addObject:[NSValue valueWithCGPoint:currentPoint]];
-//    
-//    UIGraphicsBeginImageContext(self.frame.size);
-//    [self.image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-//    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), self.lastPoint.x, self.lastPoint.y);
-//    
-//    // design
-//    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-//    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-//    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), 2 );// todo
-//    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), 0, 0, 0, 1.0); //todo
-//    CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
-//    
-//    CGContextStrokePath(UIGraphicsGetCurrentContext());
-//    self.image = UIGraphicsGetImageFromCurrentImageContext();
-//    [self setAlpha:1];
-//    UIGraphicsEndImageContext();
-//    
-//    self.lastPoint = currentPoint;
-//    NSLog(@"a");
-//}
-//
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//    
-//    UIGraphicsBeginImageContext(self.frame.size);
-//    [self.image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
-//    self.image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//}
-//
-//
-//@end
