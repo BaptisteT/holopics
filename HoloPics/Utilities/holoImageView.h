@@ -28,5 +28,6 @@
 @protocol holoImageViewDelegate
 
 - (void)takePictureAndDisplay:(NSInteger)displayMode;
+- (void)letUserImportPhotoAndDisplay:(NSInteger)displayMode;
 
 @end

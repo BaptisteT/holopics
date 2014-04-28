@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "holoImageView.h"
 
-@interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, holoImageViewDelegate>
+@interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, holoImageViewDelegate, UIActionSheetDelegate>
 
 @end

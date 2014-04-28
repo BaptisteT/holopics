@@ -1,13 +1,12 @@
 /* 
   Strings.strings
   street-shout-ios
-
-  Created by Bastien Beurier on 7/23/13.
-  Copyright (c) 2013 Street Shout. All rights reserved.
 */
 
 "no_connection" = "No connection";
 "incomplete_pics" = "Finish the pics before saving it!";
-
+"photo_library" = "Your library";
+"cancel" = "Cancel";
+"photo_bank" = "Bank of images";
 
  

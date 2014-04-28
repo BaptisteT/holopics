@@ -17,6 +17,9 @@
 #import <AWSS3/AWSS3.h>
 #import <AWSS3/AmazonS3Client.h>
 
+#define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"photo_bank", @"Strings", @"comment")
+#define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"photo_library", @"Strings", @"comment")
+#define ACTION_SHEET_CANCEL NSLocalizedStringFromTable (@"cancel", @"Strings", @"comment")
 
 @interface PicsCreationViewController ()
 
@@ -97,13 +100,17 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)editInfo
 {
     UIImage *image =  [editInfo objectForKey:UIImagePickerControllerOriginalImage];
+    UIImageOrientation orientation;
+    double targetRatio = kScreenWidth / self.view.frame.size.height;
     
-    // Force portrait, and avoid mirror of front camera
-    UIImageOrientation orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationLeftMirrored : UIImageOrientationRight;
-    
-    // Crop
-    double rescalingRatio = self.view.frame.size.height / kCameraHeight;
-    self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropWidthOfImage:image by:(1-1/rescalingRatio) andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        // Force portrait, and avoid mirror of front camera
+        orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationLeftMirrored : UIImageOrientationRight;
+    } else {
+        orientation = UIImageOrientationRight;
+    }
+    self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
+
     
     // Display partly or fully on camera overlay
     if (self.displayMode == kDisplayFull) {
@@ -132,22 +139,20 @@
         }
         self.holoImageView.isOutsideImageVisible = YES;
     }
+    
     self.displayMode = kNoDisplay;
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
 
-// Save image in the phone
-- (void)saveImageToFileSystem:(UIImage *)image
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    __weak typeof(self) weakSelf = self;
-    
-    [weakSelf.library writeImageToSavedPhotosAlbum:[image CGImage]
-                                       orientation:[ImageUtilities convertImageOrientationToAssetOrientation:image.imageOrientation]
-                                   completionBlock:^(NSURL *assetURL, NSError *error){
-                                       if (error) {
-                                           [GeneralUtilities showMessage:[error localizedDescription] withTitle:@"Error Saving"];
-                                       }
-                                   }];
+     self.displayMode = kNoDisplay;
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
+
+// --------------------------------
+// Camera button clicked
+// --------------------------------
 
 - (IBAction)saveButtonClicked:(id)sender {
     [self saveImageToFileSystem:self.holoImageView.image];
@@ -194,7 +199,44 @@
     [self.imagePickerController takePicture];
 }
 
+// Import picure
+- (void)letUserImportPhotoAndDisplay:(NSInteger)displayMode
+{
+    self.displayMode = displayMode;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_1, ACTION_SHEET_OPTION_2, nil];
+    
+    [actionSheet showInView:self.holoImageView];
+}
 
+// --------------------------------
+// Utilities
+// --------------------------------
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    
+    if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_1]) {
+//        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    } else if ([buttonTitle isEqualToString:ACTION_SHEET_CANCEL]) {
+        // do nothing
+    }
+}
+
+// Save image in the phone
+- (void)saveImageToFileSystem:(UIImage *)image
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [weakSelf.library writeImageToSavedPhotosAlbum:[image CGImage]
+                                       orientation:[ImageUtilities convertImageOrientationToAssetOrientation:image.imageOrientation]
+                                   completionBlock:^(NSURL *assetURL, NSError *error){
+                                       if (error) {
+                                           [GeneralUtilities showMessage:[error localizedDescription] withTitle:@"Error Saving"];
+                                       }
+                                   }];
+}
 
 @end
