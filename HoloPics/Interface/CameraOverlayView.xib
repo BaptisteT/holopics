@@ -19,9 +19,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KO1-su-2Wy">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KO1-su-2Wy">
                     <rect key="frame" x="5" y="5" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="QDc-hQ-bUr"/>
+                        <constraint firstAttribute="height" constant="50" id="zyH-oj-JqT"/>
+                    </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="camera-quit-button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,9 +34,13 @@
                         <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="zfG-ev-TFc"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnH-cb-SA8">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnH-cb-SA8">
                     <rect key="frame" x="247" y="5" width="68" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="7NW-Q7-7UO"/>
+                        <constraint firstAttribute="width" constant="68" id="WJC-wS-AFR"/>
+                    </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="camera-flip-button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,9 +49,13 @@
                         <action selector="flipCameraButtonClicked:" destination="-1" eventType="touchUpInside" id="Ej8-bL-6vH"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-4F-Elk">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-4F-Elk">
                     <rect key="frame" x="265" y="513" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="6Hs-9L-uBP"/>
+                        <constraint firstAttribute="height" constant="50" id="m7f-Pu-JgL"/>
+                    </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="create_send_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,6 +66,14 @@
                 </button>
             </subviews>
             <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="KO1-su-2Wy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="4qi-u8-Ao3"/>
+                <constraint firstAttribute="bottom" secondItem="L3c-4F-Elk" secondAttribute="bottom" constant="5" id="W8d-Fj-tyG"/>
+                <constraint firstAttribute="trailing" secondItem="L3c-4F-Elk" secondAttribute="trailing" constant="5" id="YrI-9a-wOM"/>
+                <constraint firstItem="KO1-su-2Wy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="n1q-Nz-k4p"/>
+                <constraint firstItem="AnH-cb-SA8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="scK-zc-ZPV"/>
+                <constraint firstAttribute="trailing" secondItem="AnH-cb-SA8" secondAttribute="trailing" constant="5" id="vJF-Ix-5km"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>

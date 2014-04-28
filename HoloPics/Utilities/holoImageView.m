@@ -22,6 +22,7 @@
     CGPoint pts[5];
     CGPoint initialPoint;
     int ctr;
+    BOOL isContinuousMovement;
     BOOL isPathBuilt;
 }
 
@@ -31,13 +32,7 @@
 {
     if (self = [super initWithCoder:aDecoder])
     {
-        [self setMultipleTouchEnabled:NO];
-        self.path = [UIBezierPath bezierPath];
-        [self.path setLineWidth:2.0];
-        self.globalPath = [UIBezierPath bezierPath];
-        self.isOutsideImageVisible = NO;
-        self.isInsideImageVisible = NO;
-        isPathBuilt = NO;
+        [self initHoloImageView];
     }
     return self;
     
@@ -46,13 +41,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setMultipleTouchEnabled:NO];
-        self.path = [UIBezierPath bezierPath];
-        [self.path setLineWidth:2.0];
-        self.globalPath = [UIBezierPath bezierPath];
-        self.isOutsideImageVisible = NO;
-        self.isInsideImageVisible = NO;
-        isPathBuilt = NO;
+        [self initHoloImageView];
     }
     return self;
 }
@@ -63,7 +52,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    ctr = 0;
+    ctr = 0; isContinuousMovement = NO;
     UITouch *touch = [touches anyObject];
     initialPoint = [touch locationInView:self];
     pts[0] = initialPoint;
@@ -71,9 +60,7 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint p = [touch locationInView:self];
-    ctr++;
+    isContinuousMovement = true;
     
     // Draw path only when we have a full picture
     if(self.fullImage) {
@@ -84,6 +71,9 @@
             isPathBuilt = NO;
         }
         
+        UITouch *touch = [touches anyObject];
+        CGPoint p = [touch locationInView:self];
+        ctr++;
         pts[ctr] = p;
         if (ctr == 4)
         {
@@ -110,7 +100,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if(ctr == 0) { // non continuous mvt
+    if(!isContinuousMovement) {
         if(self.globalPath.empty) {
             if(!self.fullImage) {
                 // take full picture and display it
@@ -205,5 +195,16 @@
     isPathBuilt = NO;
 }
 
+- (void)initHoloImageView
+{
+    [self setMultipleTouchEnabled:NO];
+    self.path = [UIBezierPath bezierPath];
+    [self.path setLineWidth:2.0];
+    self.globalPath = [UIBezierPath bezierPath];
+    self.isOutsideImageVisible = NO;
+    self.isInsideImageVisible = NO;
+    isPathBuilt = NO;
+    [self setBackgroundColor:[UIColor clearColor]];
+}
 
 @end

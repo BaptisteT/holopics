@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PicsCreationViewController">
+            <connections>
+                <outlet property="holoImageView" destination="fdh-fI-2W3" id="c7a-pW-6ZY"/>
+                <outlet property="saveButton" destination="tMO-oE-Bp2" id="05V-qi-BBN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="holoImageView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fdh-fI-2W3" customClass="holoImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3f-ac-tSv">
+                    <rect key="frame" x="5" y="10" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="NKP-4P-BBf"/>
+                        <constraint firstAttribute="height" constant="50" id="aeh-PP-Mca"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" image="camera-quit-button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="yXm-hJ-c6f"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDZ-Ij-CrM">
+                    <rect key="frame" x="247" y="10" width="68" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="68" id="DUe-zr-nTr"/>
+                        <constraint firstAttribute="height" constant="50" id="ytO-rp-G7q"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" image="camera-flip-button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="flipCameraButtonClicked:" destination="-1" eventType="touchUpInside" id="Mgh-A1-Xgb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMO-oE-Bp2">
+                    <rect key="frame" x="265" y="425" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="2xo-vD-ZKN"/>
+                        <constraint firstAttribute="height" constant="50" id="oEQ-Fr-leW"/>
+                    </constraints>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" image="create_send_button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="saveButtonClicked:" destination="-1" eventType="touchUpInside" id="b7h-FC-R5G"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="tMO-oE-Bp2" secondAttribute="bottom" constant="5" id="B6Q-b9-Q6V"/>
+                <constraint firstAttribute="bottom" secondItem="fdh-fI-2W3" secondAttribute="bottom" id="C1y-9e-T1o"/>
+                <constraint firstAttribute="trailing" secondItem="tMO-oE-Bp2" secondAttribute="trailing" constant="5" id="Hg3-fs-J1I"/>
+                <constraint firstItem="fdh-fI-2W3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ode-dF-Y6C"/>
+                <constraint firstItem="W3f-ac-tSv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="YAQ-7c-XUF"/>
+                <constraint firstItem="FDZ-Ij-CrM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="a5Z-PM-3Ct"/>
+                <constraint firstAttribute="trailing" secondItem="FDZ-Ij-CrM" secondAttribute="trailing" constant="5" id="dW1-Yt-UpK"/>
+                <constraint firstItem="fdh-fI-2W3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eYN-gA-iiz"/>
+                <constraint firstItem="W3f-ac-tSv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="gtP-hp-E0g"/>
+                <constraint firstAttribute="trailing" secondItem="fdh-fI-2W3" secondAttribute="trailing" id="q4U-3f-Cen"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="camera-flip-button.png" width="150" height="111"/>
+        <image name="camera-quit-button.png" width="150" height="151"/>
+        <image name="create_send_button.png" width="150" height="151"/>
+    </resources>
+</document>
