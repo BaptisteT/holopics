@@ -16,6 +16,7 @@
 #import <UIKit/UIKit.h>
 #import <AWSS3/AWSS3.h>
 #import <AWSS3/AmazonS3Client.h>
+#import "flexibleImageView.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"photo_bank", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"photo_library", @"Strings", @"comment")
@@ -30,6 +31,8 @@
 @property (nonatomic, strong) ALAssetsLibrary *library;
 @property (nonatomic) NSInteger displayMode;
 
+@property (strong, nonatomic) IBOutlet  flexibleImageView *flexibleSubView;
+@property (nonatomic, strong) IBOutlet UIPinchGestureRecognizer *pinchRecognizer;
 
 @end
 
@@ -138,6 +141,10 @@
             [self.holoImageView setImage:self.holoImageView.outsideImage];
         }
         self.holoImageView.isOutsideImageVisible = YES;
+        
+        //
+        self.flexibleSubView = [[flexibleImageView alloc] initWithImage:self.holoImageView.insideImage];
+        [self.imagePickerController.cameraOverlayView addSubview:self.flexibleSubView];
     }
     
     self.displayMode = kNoDisplay;

@@ -13,8 +13,6 @@
 
 + (UIImage*)cropImage:(UIImage*)image toFitWidthOnHeightTargetRatio:(CGFloat)targetRatio andOrientate:(UIImageOrientation)orientation;
 
-+ (UIImage*)cropWidthOfImage:(UIImage*)image by:(CGFloat)croppedPercentage andOrientate:(UIImageOrientation)orientation;
-
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 
 + (ALAssetOrientation)convertImageOrientationToAssetOrientation:(UIImageOrientation)orientation;

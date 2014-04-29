@@ -38,8 +38,8 @@
             CGFloat croppedHeight = (1 - imageRatio / targetRatio) * imageHeight;
             cropRect = CGRectMake(0.0, croppedHeight / 2, imageWidth, imageHeight - croppedHeight);
         } else {
-            CGFloat croppedWidth = (1 - imageRatio / targetRatio) * imageHeight;
-            cropRect = CGRectMake(0.0, croppedWidth /2, imageWidth, imageHeight - croppedWidth);
+            CGFloat croppedWidth = (1 - imageRatio / targetRatio) * imageWidth;
+            cropRect = CGRectMake(croppedWidth / 2, 0.0, imageWidth - croppedWidth, imageHeight);
         }
     }
     // Create new cropped UIImage
@@ -51,40 +51,6 @@
     return croppedImage;
 }
 
-+ (UIImage*)cropWidthOfImage:(UIImage*)image by:(CGFloat)croppedPercentage andOrientate:(UIImageOrientation)orientation {
-    
-    if(croppedPercentage<0 || croppedPercentage>=1){
-        // do nothing
-        return image;
-    }
-    // Put orientation up before cropping
-    image = [UIImage imageWithCGImage:image.CGImage
-                                scale:1
-                          orientation:UIImageOrientationUp];
-    
-    // Crop
-    CGFloat imageWidth = image.size.width;
-    CGFloat imageHeight = image.size.height;
-    CGRect cropRect;
-   
-    if (imageWidth <= imageHeight) {
-        // Create rectangle from middle of current image
-        CGFloat croppedWidth = croppedPercentage * imageWidth;
-        cropRect = CGRectMake(croppedWidth / 2, 0.0, imageWidth - croppedWidth, imageHeight);
-    } else {
-        CGFloat croppedHeight = croppedPercentage * imageHeight;
-        cropRect = CGRectMake(0.0, croppedHeight /2, imageWidth, imageHeight - croppedHeight);
-    }
-    
-    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
-    
-    // Create new cropped UIImage
-    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef
-                                                scale:1
-                                          orientation:orientation];
-    CGImageRelease(imageRef);
-    return croppedImage;
-}
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
     UIGraphicsBeginImageContext( newSize );

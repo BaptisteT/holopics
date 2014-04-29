@@ -20,6 +20,7 @@
 @end
 
 @implementation holoImageView {
+    // One finger
     CGPoint pts[5];
     CGPoint initialPoint;
     int ctr;
@@ -37,7 +38,6 @@
         [self initHoloImageView];
     }
     return self;
-    
 }
 - (id)initWithFrame:(CGRect)frame
 {
@@ -54,40 +54,45 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    ctr = 0;
-    isContinuousMovement = NO;
-    isLongTouch = NO;
-    UITouch *touch = [touches anyObject];
-    initialPoint = [touch locationInView:self];
-    pts[0] = initialPoint;
-    
-    // Start timer for long touch gesture detection
-    [self performSelector:@selector(fireLongPress:)
-               withObject:(id)touches
-               afterDelay:kLongPressTimeThreshold];
+    if ([touches count] == 1) {
+        ctr = 0;
+        isContinuousMovement = NO;
+        isLongTouch = NO;
+        UITouch *touch = [touches anyObject];
+        initialPoint = [touch locationInView:self];
+        pts[0] = initialPoint;
+        
+        // Start timer for long touch gesture detection
+        [self performSelector:@selector(fireLongPress:)
+                   withObject:(id)touches
+                   afterDelay:kLongPressTimeThreshold];
+        
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint p = [touch locationInView:self];
-    
-    if([PathUtility distanceBetweenPoint:initialPoint andPoint:p] > kContinuousMovementDistanceThreshold) {
-        isContinuousMovement = true;
-        // Cancel long touch timer
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    }
-    
-    // Draw path only when we have a full picture
-    if(self.fullImage) {
-        // Remove previous path if any
-        if (isPathBuilt) {
-            [self setImage:self.fullImage];
-            [self.globalPath removeAllPoints];
-            isPathBuilt = NO;
+    if ([touches count] == 1) {
+        UITouch *touch = [touches anyObject];
+        CGPoint p = [touch locationInView:self];
+        
+        if([PathUtility distanceBetweenPoint:initialPoint andPoint:p] > kContinuousMovementDistanceThreshold) {
+            isContinuousMovement = true;
+            // Cancel long touch timer
+            [NSObject cancelPreviousPerformRequestsWithTarget:self];
         }
-        // Build and draw path
-        [self buildPathAlongContinuousTouch:p];
+        
+        // Draw path only when we have a full picture
+        if(self.fullImage) {
+            // Remove previous path if any
+            if (isPathBuilt) {
+                [self setImage:self.fullImage];
+                [self.globalPath removeAllPoints];
+                isPathBuilt = NO;
+            }
+            // Build and draw path
+            [self buildPathAlongContinuousTouch:p];
+        }
     }
 }
 
