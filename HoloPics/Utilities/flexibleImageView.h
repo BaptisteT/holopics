@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol flexibaleImageViewDelegate;
+
 @interface flexibleImageView : UIImageView <UIGestureRecognizerDelegate>
 
+@property (weak, nonatomic) id <flexibaleImageViewDelegate> flexibaleImageViewDelegate;
+
+@property (nonatomic) NSInteger index;
+
+- (id)initWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
+
+@end
+
+@protocol flexibaleImageViewDelegate
+
+- (void)unhideBinButton;
+- (void)hideBinButton;
+- (void)deleteView:(flexibleImageView *)view ifBinContainsPoint:(CGPoint)point;
 @end

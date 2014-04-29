@@ -7,6 +7,7 @@
 //
 
 #import "flexibleImageView.h"
+#import "ImageUtilities.h"
 
 @interface flexibleImageView()
 
@@ -15,13 +16,15 @@
 @property (nonatomic, strong) IBOutlet UIPanGestureRecognizer *panningRecognizer;
 @property (nonatomic, strong) NSMutableSet *activeRecognizers;
 @property(nonatomic) CGAffineTransform referenceTransform;
+@property (strong, nonatomic) UIBezierPath *imagePath;
 
 @end
 
 @implementation flexibleImageView
 
-- (id)initWithImage:(UIImage *)image
+- (id)initWithImage:(UIImage *)image andPath:(UIBezierPath *)path
 {
+    image = [ImageUtilities drawFromImage:image insidePath:path];
     if (self = [super initWithImage:image])
     {
         // Add gesture recognisers
@@ -34,9 +37,10 @@
         self.pinchRecognizer.delegate = self;
         self.rotationRecognizer.delegate = self;
         self.panningRecognizer.delegate = self;
-        
         self.activeRecognizers = [NSMutableSet set];
+        
         self.userInteractionEnabled = YES;
+        self.imagePath = [UIBezierPath bezierPathWithCGPath:path.CGPath];
     }
     return self;
 }
@@ -74,10 +78,19 @@
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         initialCenter = recognizer.view.center;
+        // display bin
+        [self.flexibaleImageViewDelegate unhideBinButton];
     }
     CGPoint translation = [recognizer translationInView:recognizer.view.superview];
     recognizer.view.center = CGPointMake(initialCenter.x + translation.x,
                                      initialCenter.y + translation.y);
+    
+    if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled)
+    {
+        // Remove view if on bin
+        CGPoint finalPoint = [recognizer locationInView:recognizer.view.superview];
+        [self.flexibaleImageViewDelegate deleteView:self ifBinContainsPoint:finalPoint];
+    }
 }
 
 - (CGAffineTransform)applyRecognizer:(UIGestureRecognizer *)recognizer toTransform:(CGAffineTransform)transform
@@ -105,6 +118,11 @@
     if (![otherGestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] && ![otherGestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] && ![gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
         return NO;
     return YES;
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return [self.imagePath containsPoint:point];
 }
 
 @end

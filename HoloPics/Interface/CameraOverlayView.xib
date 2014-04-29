@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PicsCreationViewController">
             <connections>
+                <outlet property="binButton" destination="hf5-Rm-9lR" id="gm0-B7-nE1"/>
+                <outlet property="cameraFlipButton" destination="AnH-cb-SA8" id="iG8-v1-7CW"/>
                 <outlet property="holoImageView" destination="jYL-lw-JZW" id="3mF-c1-lzL"/>
                 <outlet property="saveButton" destination="L3c-4F-Elk" id="kv9-a8-zOF"/>
             </connections>
@@ -64,6 +66,14 @@
                         <action selector="saveButtonClicked:" destination="-1" eventType="touchUpInside" id="BQO-op-3Wx"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-Rm-9lR">
+                    <rect key="frame" x="5" y="513" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                    <state key="normal" image="trash.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <gestureRecognizers/>
             <constraints>
@@ -81,5 +91,6 @@
         <image name="camera-flip-button.png" width="150" height="111"/>
         <image name="camera-quit-button.png" width="150" height="151"/>
         <image name="create_send_button.png" width="150" height="151"/>
+        <image name="trash.png" width="128" height="128"/>
     </resources>
 </document>

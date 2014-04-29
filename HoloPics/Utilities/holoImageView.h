@@ -15,11 +15,7 @@
 
 @property (weak, nonatomic) id <holoImageViewDelegate> holoImageViewDelegate;
 @property (strong, nonatomic) UIImage *fullImage;
-@property (strong, nonatomic) UIImage *insideImage;
-@property (strong, nonatomic) UIImage *outsideImage;
 @property (strong, nonatomic) UIBezierPath *globalPath;
-@property (nonatomic) BOOL isInsideImageVisible;
-@property (nonatomic) BOOL isOutsideImageVisible;
 
 - (void)clearPathAndPictures;
 
@@ -27,7 +23,10 @@
 
 @protocol holoImageViewDelegate
 
-- (void)takePictureAndDisplay:(NSInteger)displayMode;
-- (void)letUserImportPhotoAndDisplay:(NSInteger)displayMode;
+- (void)takePictureAndDisplay;
+- (void)letUserImportPhotoAndDisplay;
+- (void)createFlexibleSubView;
+- (void)hideSaveandUnhideFlipButton;
+- (void)unhideSaveandHideFlipButton;
 
 @end

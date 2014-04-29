@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "holoImageView.h"
+#import "flexibleImageView.h"
 
-@interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, holoImageViewDelegate, UIActionSheetDelegate>
+@interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, holoImageViewDelegate, UIActionSheetDelegate, flexibaleImageViewDelegate>
 
 @end

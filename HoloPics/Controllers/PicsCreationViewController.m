@@ -25,14 +25,15 @@
 @interface PicsCreationViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *binButton;
+@property (weak, nonatomic) IBOutlet UIButton *cameraFlipButton;
 @property (strong, nonatomic) UIImagePickerController * imagePickerController;
 @property (weak, nonatomic) IBOutlet holoImageView *holoImageView;
 @property (strong, nonatomic) UIImage *lastPicture;
-@property (nonatomic, strong) ALAssetsLibrary *library;
-@property (nonatomic) NSInteger displayMode;
+@property (strong, nonatomic) ALAssetsLibrary *library;
 
-@property (strong, nonatomic) IBOutlet  flexibleImageView *flexibleSubView;
-@property (nonatomic, strong) IBOutlet UIPinchGestureRecognizer *pinchRecognizer;
+@property (strong, nonatomic) IBOutlet  NSMutableArray *flexibleSubViews;
+@property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer *pinchRecognizer;
 
 @end
 
@@ -42,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.displayMode = kNoDisplay;
+    
     // Alloc and init full screen camera
     [self allocAndInitFullScreenCamera];
 }
@@ -52,6 +53,7 @@
     // Present the camera
     [self presentViewController:self.imagePickerController animated:NO completion:NULL];
     [self.saveButton setHidden:YES];
+    [self.binButton setHidden:YES];
     // Make this controller the delegate of holoImageView
     self.holoImageView.holoImageViewDelegate = self;
 }
@@ -114,46 +116,13 @@
     }
     self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
 
-    
-    // Display partly or fully on camera overlay
-    if (self.displayMode == kDisplayFull) {
-        self.holoImageView.fullImage = self.lastPicture;
-        [self.holoImageView setImage:self.holoImageView.fullImage];
-    } else if (self.displayMode == kDisplayInside) {
-        self.holoImageView.insideImage = [ImageUtilities drawFromImage:self.lastPicture insidePath:self.holoImageView.globalPath];
-        if(self.holoImageView.isOutsideImageVisible) {
-            // full composed picture
-            self.holoImageView.fullImage = [ImageUtilities addImage:self.holoImageView.insideImage toImage:self.holoImageView.outsideImage withSize:self.holoImageView.bounds.size];
-            [self.holoImageView setImage:self.holoImageView.fullImage];
-            [self.saveButton setHidden:NO];
-        } else {
-            [self.holoImageView setImage:self.holoImageView.insideImage];
-        }
-        self.holoImageView.isInsideImageVisible = YES;
-    } else if (self.displayMode == kDisplayOutside) {
-        self.holoImageView.outsideImage = [ImageUtilities drawFromImage:self.lastPicture outsidePath:self.holoImageView.globalPath];
-        if(self.holoImageView.isInsideImageVisible) {
-            // full composed picture
-            self.holoImageView.fullImage = [ImageUtilities addImage:self.holoImageView.insideImage toImage:self.holoImageView.outsideImage withSize:self.holoImageView.bounds.size];
-            [self.holoImageView setImage:self.holoImageView.fullImage];
-            [self.saveButton setHidden:NO];
-        } else {
-            [self.holoImageView setImage:self.holoImageView.outsideImage];
-        }
-        self.holoImageView.isOutsideImageVisible = YES;
-        
-        //
-        self.flexibleSubView = [[flexibleImageView alloc] initWithImage:self.holoImageView.insideImage];
-        [self.imagePickerController.cameraOverlayView addSubview:self.flexibleSubView];
-    }
-    
-    self.displayMode = kNoDisplay;
+    self.holoImageView.fullImage = self.lastPicture;
+    [self.holoImageView setImage:self.holoImageView.fullImage];
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-     self.displayMode = kNoDisplay;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
 
@@ -162,30 +131,31 @@
 // --------------------------------
 
 - (IBAction)saveButtonClicked:(id)sender {
-    [self saveImageToFileSystem:self.holoImageView.image];
-    
-    if(!self.holoImageView.fullImage) {
-        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"incomplete_pics", @"Strings", @"comment") withTitle:nil];
-        return;
-    }
-    if (![GeneralUtilities connected]) {
-        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"no_connection", @"Strings", @"comment") withTitle:nil];
-    } else {
-        NSString *imageName = [[GeneralUtilities getDeviceID] stringByAppendingFormat:@"--%lu", (unsigned long)[GeneralUtilities currentDateInMilliseconds]];
-        AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
-        [s3 createBucket:[[S3CreateBucketRequest alloc] initWithName:S3_BUCKET]];
-        S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:imageName inBucket:S3_BUCKET];
-        por.contentType = @"image/jpeg";
-        NSData *imageData = UIImageJPEGRepresentation (self.holoImageView.fullImage, 0.8);
-        por.data = imageData;
-        [s3 putObject:por];
-        [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
-        [self cancelButtonClicked:nil];
-    }
+//    [self saveImageToFileSystem:self.holoImageView.image];
+//    
+//    if(!self.holoImageView.fullImage) {
+//        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"incomplete_pics", @"Strings", @"comment") withTitle:nil];
+//        return;
+//    }
+//    if (![GeneralUtilities connected]) {
+//        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"no_connection", @"Strings", @"comment") withTitle:nil];
+//    } else {
+//        NSString *imageName = [[GeneralUtilities getDeviceID] stringByAppendingFormat:@"--%lu", (unsigned long)[GeneralUtilities currentDateInMilliseconds]];
+//        AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
+//        [s3 createBucket:[[S3CreateBucketRequest alloc] initWithName:S3_BUCKET]];
+//        S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:imageName inBucket:S3_BUCKET];
+//        por.contentType = @"image/jpeg";
+//        NSData *imageData = UIImageJPEGRepresentation (self.holoImageView.fullImage, 0.8);
+//        por.data = imageData;
+//        [s3 putObject:por];
+//        [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
+//        [self cancelButtonClicked:nil];
+//    }
 }
 
 // Front camera
-- (IBAction)flipCameraButtonClicked:(id)sender {
+- (IBAction)flipCameraButtonClicked:(id)sender
+{
     if (self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront){
         self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
     } else {
@@ -194,26 +164,96 @@
 }
 
 // Cancel path and pictures
-- (IBAction)cancelButtonClicked:(id)sender {
+- (IBAction)cancelButtonClicked:(id)sender
+{
     [self.holoImageView clearPathAndPictures];
     self.lastPicture = nil;
     [self.saveButton setHidden:YES];
+    [self.cameraFlipButton setHidden:NO];
+    
+    for(id subView in self.flexibleSubViews) {
+        [(flexibleImageView *)subView removeFromSuperview];
+    }
+    self.flexibleSubViews = nil;
 }
 
+
+// --------------------------------
+// holoImageViewDelegate protocol
+// --------------------------------
+
 // Take picture and display it on overlay
-- (void)takePictureAndDisplay:(NSInteger)displayMode {
-    self.displayMode = displayMode;
+- (void)takePictureAndDisplay
+{
     [self.imagePickerController takePicture];
 }
 
 // Import picure
-- (void)letUserImportPhotoAndDisplay:(NSInteger)displayMode
+- (void)letUserImportPhotoAndDisplay
 {
-    self.displayMode = displayMode;
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_1, ACTION_SHEET_OPTION_2, nil];
     
     [actionSheet showInView:self.holoImageView];
 }
+
+// Create flexible subview with the image inside the path
+- (void)createFlexibleSubView
+{
+    if (!self.flexibleSubViews){
+        self.flexibleSubViews = [NSMutableArray arrayWithCapacity:1];
+    }
+    
+    // Return if we reached the limit of images
+    if (self.flexibleSubViews.count > kMaxNumberOfFlexibleImage) {
+        return;
+    }
+        
+    flexibleImageView *flexibleImage = [[flexibleImageView alloc] initWithImage:self.holoImageView.fullImage andPath:self.holoImageView.globalPath];
+    flexibleImage.flexibaleImageViewDelegate = self;
+    flexibleImage.index = self.flexibleSubViews.count;
+    
+    [self.flexibleSubViews addObject:flexibleImage];
+    // Add this subview to cameraOverlayView (before buttons)
+    NSInteger index = self.flexibleSubViews.count;
+    [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:index];
+}
+
+- (void)hideSaveandUnhideFlipButton
+{
+    [self.saveButton setHidden:YES];
+    [self.cameraFlipButton setHidden:NO];
+}
+
+- (void)unhideSaveandHideFlipButton
+{
+    [self.saveButton setHidden:NO];
+    [self.cameraFlipButton setHidden:YES];
+}
+
+
+// --------------------------------
+// flexibleImageView protocol
+// --------------------------------
+
+- (void)unhideBinButton
+{
+    [self.binButton setHidden:NO];
+}
+
+- (void)hideBinButton
+{
+    [self.binButton setHidden:YES];
+}
+
+- (void)deleteView:(flexibleImageView *)view ifBinContainsPoint:(CGPoint)point
+{
+    if (CGRectContainsPoint(self.binButton.frame,point)) {
+        [view removeFromSuperview];
+        [self.flexibleSubViews removeObjectAtIndex:view.index];
+    }
+    [self.binButton setHidden:YES];
+}
+
 
 // --------------------------------
 // Utilities
@@ -224,7 +264,7 @@
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     
     if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_1]) {
-//        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypeCamera];
+        // todo
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_CANCEL]) {

@@ -18,14 +18,11 @@ static const NSUInteger kScreenWidth = 320;
 
 static const NSUInteger kPathMinimalArea = 100;
 
-static const NSUInteger kNoDisplay = 0;
-static const NSUInteger kDisplayFull = 1;
-static const NSUInteger kDisplayInside = 2;
-static const NSUInteger kDisplayOutside = 3;
-
-static const CGFloat kLongPressTimeThreshold = 0.6f;
+static const CGFloat    kLongPressTimeThreshold = 0.6f;
 static const NSUInteger kContinuousMovementDistanceThreshold = 1;
 static const NSUInteger kMinimumPinchDelta = 1;
+
+static const NSUInteger kMaxNumberOfFlexibleImage = 10;
 
 // TODO remove this
 #define ACCESS_KEY_ID @"AKIAJTBDZSZ2Y3XF5XYQ"

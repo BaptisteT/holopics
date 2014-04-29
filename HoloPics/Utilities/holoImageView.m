@@ -54,45 +54,40 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if ([touches count] == 1) {
-        ctr = 0;
-        isContinuousMovement = NO;
-        isLongTouch = NO;
-        UITouch *touch = [touches anyObject];
-        initialPoint = [touch locationInView:self];
-        pts[0] = initialPoint;
-        
-        // Start timer for long touch gesture detection
-        [self performSelector:@selector(fireLongPress:)
-                   withObject:(id)touches
-                   afterDelay:kLongPressTimeThreshold];
-        
-    }
+    ctr = 0;
+    isContinuousMovement = NO;
+    isLongTouch = NO;
+    UITouch *touch = [touches anyObject];
+    initialPoint = [touch locationInView:self];
+    pts[0] = initialPoint;
+    
+    // Start timer for long touch gesture detection
+    [self performSelector:@selector(fireLongPress:)
+               withObject:(id)touches
+               afterDelay:kLongPressTimeThreshold];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if ([touches count] == 1) {
-        UITouch *touch = [touches anyObject];
-        CGPoint p = [touch locationInView:self];
-        
-        if([PathUtility distanceBetweenPoint:initialPoint andPoint:p] > kContinuousMovementDistanceThreshold) {
-            isContinuousMovement = true;
-            // Cancel long touch timer
-            [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    UITouch *touch = [touches anyObject];
+    CGPoint p = [touch locationInView:self];
+    
+    if([PathUtility distanceBetweenPoint:initialPoint andPoint:p] > kContinuousMovementDistanceThreshold) {
+        isContinuousMovement = true;
+        // Cancel long touch timer
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    }
+    
+    // Draw path only when we have a full picture
+    if(self.fullImage) {
+        // Remove previous path if any
+        if (isPathBuilt) {
+            [self setImage:self.fullImage];
+            [self.globalPath removeAllPoints];
+            isPathBuilt = NO;
         }
-        
-        // Draw path only when we have a full picture
-        if(self.fullImage) {
-            // Remove previous path if any
-            if (isPathBuilt) {
-                [self setImage:self.fullImage];
-                [self.globalPath removeAllPoints];
-                isPathBuilt = NO;
-            }
-            // Build and draw path
-            [self buildPathAlongContinuousTouch:p];
-        }
+        // Build and draw path
+        [self buildPathAlongContinuousTouch:p];
     }
 }
 
@@ -105,44 +100,15 @@
     }
     
     if(!isContinuousMovement) {
-        if(self.globalPath.empty) {
-            if(!self.fullImage) {
-                // take full picture and display it
-                [self.holoImageViewDelegate takePictureAndDisplay:kDisplayFull];
-            } else {
-                self.fullImage = nil;
-                [self setImage:nil];
-            }
+        if(!self.fullImage) {
+            // take full picture and display it
+            [self.holoImageViewDelegate takePictureAndDisplay];
+            [self.holoImageViewDelegate unhideSaveandHideFlipButton];
         } else {
-            UITouch *touch = [touches anyObject];
-            CGPoint point = [touch locationInView:self];
-            BOOL isHit = [self.globalPath containsPoint:point];
-            
-            if(isHit) {
-                if(self.isInsideImageVisible) {
-                    // Remove inside
-                    self.isInsideImageVisible = NO;
-                    [self setImage:self.outsideImage];
-                    self.isOutsideImageVisible = YES;
-                    self.fullImage = nil;
-                } else {
-                    // take inside picture
-                    [self.holoImageViewDelegate takePictureAndDisplay:kDisplayInside];
-                }
-            } else {
-                if(self.isOutsideImageVisible) {
-                    // remove outside
-                    self.isOutsideImageVisible = NO;
-                    [self setImage:self.insideImage];
-                    self.isInsideImageVisible = YES;
-                    self.fullImage = nil;
-                } else {
-                    // take oustside picture
-                    [self.holoImageViewDelegate takePictureAndDisplay:kDisplayOutside];
-                }
-            }
+            [self clearPathAndPictures];
+            [self.holoImageViewDelegate hideSaveandUnhideFlipButton];
         }
-    } else if(!self.path.empty) { // continuous mvt: draw path
+    } else if(self.fullImage) { // continuous mvt: draw path
         // End path
         [PathUtility closePath:self.path withInitialPoint:initialPoint inRect:self.bounds.size];
         
@@ -153,13 +119,9 @@
             
             isPathBuilt = YES;
             [PathUtility closePath:self.globalPath withInitialPoint:initialPoint inRect:self.bounds.size];
-
-            if (self.fullImage) {
-                self.isInsideImageVisible = YES;
-                self.isOutsideImageVisible = YES;
-                self.insideImage = [ImageUtilities drawFromImage:self.fullImage insidePath:self.globalPath];
-                self.outsideImage = [ImageUtilities drawFromImage:self.fullImage outsidePath:self.globalPath];
-            }
+            
+            // Create a flexible subview with the image inside the path 
+            [self.holoImageViewDelegate createFlexibleSubView];
         } else {
             // Cancel path
             isPathBuilt = NO;
@@ -183,19 +145,7 @@
 - (void)fireLongPress:(NSSet *)touches
 {
     isLongTouch = YES;
-    if(self.globalPath.empty) {
-        [self.holoImageViewDelegate letUserImportPhotoAndDisplay:kDisplayFull];
-    } else {
-        UITouch *touch = [touches anyObject];
-        CGPoint point = [touch locationInView:self];
-        BOOL isHit = [self.globalPath containsPoint:point];
-        
-        if(isHit) {
-            [self.holoImageViewDelegate letUserImportPhotoAndDisplay:kDisplayInside];
-        } else {
-            [self.holoImageViewDelegate letUserImportPhotoAndDisplay:kDisplayOutside];
-        }
-    }
+    [self.holoImageViewDelegate letUserImportPhotoAndDisplay];
 }
 
 
@@ -241,11 +191,7 @@
 
 - (void)clearPathAndPictures
 {
-    self.isInsideImageVisible = NO;
-    self.isOutsideImageVisible = NO;
     self.fullImage = nil;
-    self.insideImage = nil;
-    self.outsideImage = nil;
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
     [self setImage:nil];
@@ -258,8 +204,6 @@
     self.path = [UIBezierPath bezierPath];
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];
-    self.isOutsideImageVisible = NO;
-    self.isInsideImageVisible = NO;
     isPathBuilt = NO;
     [self setBackgroundColor:[UIColor clearColor]];
 }
