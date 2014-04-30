@@ -14,8 +14,6 @@
 
 @property (weak, nonatomic) id <flexibaleImageViewDelegate> flexibaleImageViewDelegate;
 
-@property (nonatomic) NSInteger index;
-
 - (id)initWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
 
 @end

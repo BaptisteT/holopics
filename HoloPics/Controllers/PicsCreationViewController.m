@@ -31,8 +31,8 @@
 @property (weak, nonatomic) IBOutlet holoImageView *holoImageView;
 @property (strong, nonatomic) UIImage *lastPicture;
 @property (strong, nonatomic) ALAssetsLibrary *library;
-
 @property (strong, nonatomic) IBOutlet  NSMutableArray *flexibleSubViews;
+@property (nonatomic) NSInteger subViewIndex;
 @property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer *pinchRecognizer;
 
 @end
@@ -54,6 +54,7 @@
     [self presentViewController:self.imagePickerController animated:NO completion:NULL];
     [self.saveButton setHidden:YES];
     [self.binButton setHidden:YES];
+    self.subViewIndex = 0;
     // Make this controller the delegate of holoImageView
     self.holoImageView.holoImageViewDelegate = self;
 }
@@ -211,12 +212,11 @@
         
     flexibleImageView *flexibleImage = [[flexibleImageView alloc] initWithImage:self.holoImageView.fullImage andPath:self.holoImageView.globalPath];
     flexibleImage.flexibaleImageViewDelegate = self;
-    flexibleImage.index = self.flexibleSubViews.count;
-    
     [self.flexibleSubViews addObject:flexibleImage];
+    
     // Add this subview to cameraOverlayView (before buttons)
-    NSInteger index = self.flexibleSubViews.count;
-    [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:index];
+    self.subViewIndex ++;
+    [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:self.subViewIndex];
 }
 
 - (void)hideSaveandUnhideFlipButton
@@ -250,7 +250,7 @@
 {
     if (CGRectContainsPoint(self.binButton.frame,point)) {
         [view removeFromSuperview];
-        [self.flexibleSubViews removeObjectAtIndex:view.index];
+        [self.flexibleSubViews removeObject:view];
     }
     [self.binButton setHidden:YES];
 }
