@@ -103,7 +103,6 @@
         if(!self.fullImage) {
             // take full picture and display it
             [self.holoImageViewDelegate takePictureAndDisplay];
-            [self.holoImageViewDelegate unhideSaveandHideFlipButton];
         } else {
             [self clearPathAndPictures];
             [self.holoImageViewDelegate hideSaveandUnhideFlipButton];

@@ -27,6 +27,5 @@
 - (void)letUserImportPhotoAndDisplay;
 - (void)createFlexibleSubView;
 - (void)hideSaveandUnhideFlipButton;
-- (void)unhideSaveandHideFlipButton;
 
 @end

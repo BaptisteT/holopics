@@ -112,12 +112,13 @@
         // Force portrait, and avoid mirror of front camera
         orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationLeftMirrored : UIImageOrientationRight;
     } else {
-        orientation = UIImageOrientationRight;
+        orientation = UIImageOrientationRight;// image.imageOrientation ;//== UIImageOrientationUp ? UIImageOrientationRight : image.imageOrientation;
     }
     self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
 
     self.holoImageView.fullImage = self.lastPicture;
     [self.holoImageView setImage:self.holoImageView.fullImage];
+    [self unhideSaveandHideFlipButton];
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
 

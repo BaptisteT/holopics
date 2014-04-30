@@ -12,15 +12,19 @@
 
 + (UIImage*)cropImage:(UIImage*)image toFitWidthOnHeightTargetRatio:(CGFloat)targetRatio andOrientate:(UIImageOrientation)orientation {
 
+    UIImageOrientation originalOrientation = image.imageOrientation;
+    
     // Put orientation up before cropping
     image = [UIImage imageWithCGImage:image.CGImage
                                 scale:1
                           orientation:UIImageOrientationUp];
-    
     // Crop
     CGRect cropRect;
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
+    if(imageWidth <= imageHeight) {
+        orientation = originalOrientation;
+    }
     CGFloat imageRatio = MIN(imageWidth,imageHeight) / MAX(imageWidth,imageHeight);
     
     if (imageRatio > targetRatio) {
