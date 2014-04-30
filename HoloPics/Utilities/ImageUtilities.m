@@ -120,4 +120,40 @@
     return result;
 }
 
+// code from
+// http://stackoverflow.com/questions/3869692/iphone-flattening-a-uiimageview-and-subviews-to-image-blank-image
++ (UIImage*)imageFromView:(UIView *)view
+{
+    // Create a graphics context with the target size
+    CGSize imageSize = [view bounds].size;
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // -renderInContext: renders in the coordinate space of the layer,
+    // so we must first apply the layer's geometry to the graphics context
+    CGContextSaveGState(context);
+    // Center the context around the view's anchor point
+    CGContextTranslateCTM(context, [view center].x, [view center].y);
+    // Apply the view's transform about the anchor point
+    CGContextConcatCTM(context, [view transform]);
+    // Offset by the portion of the bounds left of and above the anchor point
+    CGContextTranslateCTM(context,
+                          -[view bounds].size.width * [[view layer] anchorPoint].x,
+                          -[view bounds].size.height * [[view layer] anchorPoint].y);
+    
+    // Render the layer hierarchy to the current context
+    [[view layer] renderInContext:context];
+    
+    // Restore the context
+    CGContextRestoreGState(context);
+    
+    // Retrieve the screenshot image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
 @end

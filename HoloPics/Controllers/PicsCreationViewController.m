@@ -29,11 +29,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *cameraFlipButton;
 @property (strong, nonatomic) UIImagePickerController * imagePickerController;
 @property (weak, nonatomic) IBOutlet holoImageView *holoImageView;
-@property (strong, nonatomic) UIImage *lastPicture;
 @property (strong, nonatomic) ALAssetsLibrary *library;
-@property (strong, nonatomic) IBOutlet  NSMutableArray *flexibleSubViews;
+@property (strong, nonatomic)  NSMutableArray *flexibleSubViews;
 @property (nonatomic) NSInteger subViewIndex;
-@property (strong, nonatomic) IBOutlet UIPinchGestureRecognizer *pinchRecognizer;
+@property (strong, nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
+@property (strong, nonatomic) UIImage *savedImage;
 
 @end
 
@@ -115,9 +115,8 @@
     } else {
         orientation = UIImageOrientationRight;// image.imageOrientation ;//== UIImageOrientationUp ? UIImageOrientationRight : image.imageOrientation;
     }
-    self.lastPicture = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
+    self.holoImageView.fullImage = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
 
-    self.holoImageView.fullImage = self.lastPicture;
     [self.holoImageView setImage:self.holoImageView.fullImage];
     [self unhideSaveandHideFlipButton];
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -133,12 +132,10 @@
 // --------------------------------
 
 - (IBAction)saveButtonClicked:(id)sender {
-//    [self saveImageToFileSystem:self.holoImageView.image];
-//    
-//    if(!self.holoImageView.fullImage) {
-//        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"incomplete_pics", @"Strings", @"comment") withTitle:nil];
-//        return;
-//    }
+
+    [self saveImageToFileSystem:[ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView]];
+    [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
+    
 //    if (![GeneralUtilities connected]) {
 //        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"no_connection", @"Strings", @"comment") withTitle:nil];
 //    } else {
@@ -150,7 +147,6 @@
 //        NSData *imageData = UIImageJPEGRepresentation (self.holoImageView.fullImage, 0.8);
 //        por.data = imageData;
 //        [s3 putObject:por];
-//        [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
 //        [self cancelButtonClicked:nil];
 //    }
 }
@@ -169,9 +165,8 @@
 - (IBAction)cancelButtonClicked:(id)sender
 {
     [self.holoImageView clearPathAndPictures];
-    self.lastPicture = nil;
-    [self.saveButton setHidden:YES];
-    [self.cameraFlipButton setHidden:NO];
+    [self hideSaveandUnhideFlipButton];
+    self.subViewIndex = 0;
     
     for(id subView in self.flexibleSubViews) {
         [(flexibleImageView *)subView removeFromSuperview];
@@ -217,6 +212,9 @@
     // Add this subview to cameraOverlayView (before buttons)
     self.subViewIndex ++;
     [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:self.subViewIndex];
+    
+    //
+    flexibleImage.center = CGPointMake(flexibleImage.center.x + 10, flexibleImage.center.y + 10);
 }
 
 - (void)hideSaveandUnhideFlipButton

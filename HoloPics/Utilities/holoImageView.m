@@ -121,6 +121,9 @@
             
             // Create a flexible subview with the image inside the path 
             [self.holoImageViewDelegate createFlexibleSubView];
+            
+            // Remove the drawing
+            [self setImage:self.fullImage];
         } else {
             // Cancel path
             isPathBuilt = NO;

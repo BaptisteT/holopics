@@ -23,4 +23,7 @@
 
 + (UIImage *) addImage:(UIImage *)img toImage:(UIImage *)img2 withSize:(CGSize)size;
 
++ (UIImage*)imageFromView:(UIView *)view;
+
+
 @end
