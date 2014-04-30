@@ -207,9 +207,6 @@
         
     flexibleImageView *flexibleImage = [[flexibleImageView alloc] initWithImage:self.holoImageView.fullImage andPath:self.holoImageView.globalPath];
     flexibleImage.flexibaleImageViewDelegate = self;
-    //
-    flexibleImage.backgroundColor = [UIColor blackColor];
-    //
     [self.flexibleSubViews addObject:flexibleImage];
     
     // Add this subview to cameraOverlayView (before buttons)
