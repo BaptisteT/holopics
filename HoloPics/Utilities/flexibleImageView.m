@@ -11,9 +11,9 @@
 
 @interface flexibleImageView()
 
-@property (nonatomic, strong) IBOutlet UIPinchGestureRecognizer *pinchRecognizer;
-@property (nonatomic, strong) IBOutlet UIRotationGestureRecognizer *rotationRecognizer;
-@property (nonatomic, strong) IBOutlet UIPanGestureRecognizer *panningRecognizer;
+@property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
+@property (nonatomic, strong) UIRotationGestureRecognizer *rotationRecognizer;
+@property (nonatomic, strong) UIPanGestureRecognizer *panningRecognizer;
 @property (nonatomic, strong) NSMutableSet *activeRecognizers;
 @property(nonatomic) CGAffineTransform referenceTransform;
 @property (strong, nonatomic) UIBezierPath *imagePath;
@@ -39,13 +39,14 @@
         self.panningRecognizer.delegate = self;
         self.activeRecognizers = [NSMutableSet set];
         
+        self.transform = CGAffineTransformIdentity;
         self.userInteractionEnabled = YES;
         self.imagePath = [UIBezierPath bezierPathWithCGPath:path.CGPath];
     }
     return self;
 }
 
-- (IBAction)handleGesture:(UIGestureRecognizer *)recognizer
+- (void)handleGesture:(UIGestureRecognizer *)recognizer
 {
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
@@ -72,7 +73,7 @@
     }
 }
 
-- (IBAction)handlePanningGesture:(UIPanGestureRecognizer *)recognizer
+- (void)handlePanningGesture:(UIPanGestureRecognizer *)recognizer
 {
     static CGPoint initialCenter;
     if (recognizer.state == UIGestureRecognizerStateBegan)

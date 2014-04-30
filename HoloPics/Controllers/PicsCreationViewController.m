@@ -113,7 +113,7 @@
         // Force portrait, and avoid mirror of front camera
         orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationLeftMirrored : UIImageOrientationRight;
     } else {
-        orientation = UIImageOrientationRight;// image.imageOrientation ;//== UIImageOrientationUp ? UIImageOrientationRight : image.imageOrientation;
+        orientation = UIImageOrientationRight;
     }
     self.holoImageView.fullImage = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
 
@@ -207,6 +207,9 @@
         
     flexibleImageView *flexibleImage = [[flexibleImageView alloc] initWithImage:self.holoImageView.fullImage andPath:self.holoImageView.globalPath];
     flexibleImage.flexibaleImageViewDelegate = self;
+    //
+    flexibleImage.backgroundColor = [UIColor blackColor];
+    //
     [self.flexibleSubViews addObject:flexibleImage];
     
     // Add this subview to cameraOverlayView (before buttons)
@@ -249,6 +252,7 @@
     if (CGRectContainsPoint(self.binButton.frame,point)) {
         [view removeFromSuperview];
         [self.flexibleSubViews removeObject:view];
+        self.subViewIndex --;
     }
     [self.binButton setHidden:YES];
 }
