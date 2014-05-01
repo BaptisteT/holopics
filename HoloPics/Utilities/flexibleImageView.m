@@ -8,6 +8,7 @@
 
 #import "flexibleImageView.h"
 #import "ImageUtilities.h"
+#import "GeneralUtilities.h"
 
 @interface flexibleImageView()
 
@@ -39,10 +40,12 @@
         self.panningRecognizer.delegate = self;
         self.activeRecognizers = [NSMutableSet set];
         
-        self.transform = CGAffineTransformIdentity;
         self.userInteractionEnabled = YES;
         self.imagePath = [UIBezierPath bezierPathWithCGPath:path.CGPath];
+        CGPoint anchorPoint = CGPointMake((path.bounds.origin.x + path.bounds.size.width / 2)/self.frame.size.width, (path.bounds.origin.y + path.bounds.size.height / 2)/self.frame.size.height);
+        [GeneralUtilities setAnchorPoint:anchorPoint forView:self];
     }
+
     return self;
 }
 
@@ -65,6 +68,7 @@
             for (UIGestureRecognizer *recognizer in self.activeRecognizers)
                 transform = [self applyRecognizer:recognizer toTransform:transform];
             self.transform = transform;
+            
             break;
         }
             
@@ -125,5 +129,7 @@
 {
     return [self.imagePath containsPoint:point];
 }
+
+
 
 @end

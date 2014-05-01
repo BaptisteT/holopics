@@ -15,4 +15,7 @@
 
 + (NSString *)getDeviceID;
 + (NSUInteger)currentDateInMilliseconds;
+
++(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view;
+
 @end
