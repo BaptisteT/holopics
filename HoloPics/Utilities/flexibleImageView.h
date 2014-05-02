@@ -23,4 +23,5 @@
 - (void)unhideBinButton;
 - (void)hideBinButton;
 - (void)deleteView:(flexibleImageView *)view ifBinContainsPoint:(CGPoint)point;
+- (void)sendToFrontView:(flexibleImageView *)view;
 @end

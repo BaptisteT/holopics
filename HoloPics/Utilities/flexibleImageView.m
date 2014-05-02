@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UIRotationGestureRecognizer *rotationRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *panningRecognizer;
+@property (nonatomic, strong) UITapGestureRecognizer *oneTapRecognizer;
 @property (nonatomic, strong) NSMutableSet *activeRecognizers;
 @property(nonatomic) CGAffineTransform referenceTransform;
 @property (strong, nonatomic) UIBezierPath *imagePath;
@@ -32,12 +33,16 @@
         self.pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
         self.rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
         self.panningRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanningGesture:)];
+        self.oneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(oneTapGesture:)];
         [self addGestureRecognizer:self.pinchRecognizer];
         [self addGestureRecognizer:self.rotationRecognizer];
         [self addGestureRecognizer:self.panningRecognizer];
+        [self addGestureRecognizer:self.oneTapRecognizer];
         self.pinchRecognizer.delegate = self;
         self.rotationRecognizer.delegate = self;
         self.panningRecognizer.delegate = self;
+        self.oneTapRecognizer.delegate = self;
+        self.oneTapRecognizer.numberOfTapsRequired = 1;
         self.activeRecognizers = [NSMutableSet set];
         
         self.userInteractionEnabled = YES;
@@ -96,6 +101,11 @@
         CGPoint finalPoint = [recognizer locationInView:recognizer.view.superview];
         [self.flexibaleImageViewDelegate deleteView:self ifBinContainsPoint:finalPoint];
     }
+}
+
+- (void)oneTapGesture:(UITapGestureRecognizer *)recognizer
+{
+    [self.flexibaleImageViewDelegate sendToFrontView:self];
 }
 
 - (CGAffineTransform)applyRecognizer:(UIGestureRecognizer *)recognizer toTransform:(CGAffineTransform)transform

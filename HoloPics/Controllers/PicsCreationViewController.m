@@ -213,7 +213,6 @@
     self.subViewIndex ++;
     [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:self.subViewIndex];
     
-    //
     flexibleImage.center = CGPointMake(flexibleImage.center.x + 10, flexibleImage.center.y + 10);
 }
 
@@ -252,6 +251,11 @@
         self.subViewIndex --;
     }
     [self.binButton setHidden:YES];
+}
+
+- (void)sendToFrontView:(flexibleImageView *)view
+{
+    [self.imagePickerController.cameraOverlayView insertSubview:view atIndex:self.subViewIndex];
 }
 
 
