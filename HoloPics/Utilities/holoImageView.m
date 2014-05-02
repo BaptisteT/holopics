@@ -11,11 +11,13 @@
 #import "ImageUtilities.h"
 #import "GeneralUtilities.h"
 #import "PathUtility.h"
+#import "MagnifierView.h"
 
 
 @interface holoImageView()
 
 @property (strong, nonatomic) UIBezierPath *path;
+@property (strong, nonatomic) MagnifierView *zoomImage;
 
 @end
 
@@ -26,7 +28,6 @@
     int ctr;
     BOOL isContinuousMovement;
     BOOL isLongTouch;
-    BOOL isPathBuilt;
 }
 
 
@@ -57,6 +58,7 @@
     ctr = 0;
     isContinuousMovement = NO;
     isLongTouch = NO;
+    
     UITouch *touch = [touches anyObject];
     initialPoint = [touch locationInView:self];
     pts[0] = initialPoint;
@@ -65,6 +67,16 @@
     [self performSelector:@selector(fireLongPress:)
                withObject:(id)touches
                afterDelay:kLongPressTimeThreshold];
+    
+    if(self.fullImage) {
+        if (self.zoomImage == nil) {
+            self.zoomImage = [[MagnifierView alloc] init];
+            self.zoomImage.viewToMagnify = self;
+        }
+        [self.zoomImage setCenterPoint:initialPoint];
+        [self.zoomImage setNeedsDisplay];
+        [self addSubview:self.zoomImage];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -72,7 +84,7 @@
     UITouch *touch = [touches anyObject];
     CGPoint p = [touch locationInView:self];
     
-    if([PathUtility distanceBetweenPoint:initialPoint andPoint:p] > kContinuousMovementDistanceThreshold) {
+    if(!isContinuousMovement && [PathUtility distanceBetweenPoint:initialPoint andPoint:p] > kContinuousMovementDistanceThreshold) {
         isContinuousMovement = true;
         // Cancel long touch timer
         [NSObject cancelPreviousPerformRequestsWithTarget:self];
@@ -80,13 +92,6 @@
     
     // Draw path only when we have a full picture
     if(self.fullImage) {
-        // Remove previous path if any
-        if (isPathBuilt) {
-            [self setImage:self.fullImage];
-            [self.globalPath removeAllPoints];
-            isPathBuilt = NO;
-        }
-        // Build and draw path
         [self buildPathAlongContinuousTouch:p];
     }
 }
@@ -116,23 +121,19 @@
             [self setNeedsDisplay];
             [self drawBitmapAlongPath:self.path];
             
-            isPathBuilt = YES;
             [PathUtility closePath:self.globalPath withInitialPoint:initialPoint inRect:self.bounds.size];
             
             // Create a flexible subview with the image inside the path 
             [self.holoImageViewDelegate createFlexibleSubView];
-            
-            // Remove the drawing
-            [self setImage:self.fullImage];
-        } else {
-            // Cancel path
-            isPathBuilt = NO;
-            [self.globalPath removeAllPoints];
-            [self setImage:self.fullImage];
         }
+        
+        [self.globalPath removeAllPoints];
         [self.path removeAllPoints];
+        [self setImage:self.fullImage];
         ctr = 0;
     }
+    
+    [self.zoomImage removeFromSuperview];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -147,6 +148,7 @@
 - (void)fireLongPress:(NSSet *)touches
 {
     isLongTouch = YES;
+    [self.zoomImage removeFromSuperview];
     [self.holoImageViewDelegate letUserImportPhotoAndDisplay];
 }
 
@@ -159,6 +161,9 @@
 {
     ctr++;
     pts[ctr] = p;
+    
+    [self.zoomImage setCenterPoint:p];
+    [self.zoomImage setNeedsDisplay];
     if (ctr == 4)
     {
         pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
@@ -197,16 +202,14 @@
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
     [self setImage:nil];
-    isPathBuilt = NO;
 }
 
 - (void)initHoloImageView
 {
     [self setMultipleTouchEnabled:NO];
     self.path = [UIBezierPath bezierPath];
-    [self.path setLineWidth:2.0];
+    [self.path setLineWidth:3.0];
     self.globalPath = [UIBezierPath bezierPath];
-    isPathBuilt = NO;
     [self setBackgroundColor:[UIColor clearColor]];
 }
 

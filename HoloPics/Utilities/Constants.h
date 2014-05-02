@@ -22,7 +22,7 @@ static const CGFloat    kLongPressTimeThreshold = 0.6f;
 static const NSUInteger kContinuousMovementDistanceThreshold = 1;
 static const NSUInteger kMinimumPinchDelta = 1;
 
-static const NSUInteger kMaxNumberOfFlexibleImage = 10;
+static const NSUInteger kMaxNumberOfFlexibleImage = 20;
 
 // TODO remove this
 #define ACCESS_KEY_ID @"AKIAJTBDZSZ2Y3XF5XYQ"

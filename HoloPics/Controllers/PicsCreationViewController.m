@@ -25,6 +25,7 @@
 @interface PicsCreationViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *binButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraFlipButton;
 @property (strong, nonatomic) UIImagePickerController * imagePickerController;
@@ -133,8 +134,12 @@
 
 - (IBAction)saveButtonClicked:(id)sender {
 
+    [self.saveButton setHidden:YES];
+    [self.cancelButton setHidden:YES];
     [self saveImageToFileSystem:[ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView]];
     [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
+    [self.saveButton setHidden:NO];
+    [self.cancelButton setHidden:NO];
     
 //    if (![GeneralUtilities connected]) {
 //        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"no_connection", @"Strings", @"comment") withTitle:nil];
@@ -269,6 +274,7 @@
     
     if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_1]) {
         // todo
+        [GeneralUtilities showMessage:@"Coming soon" withTitle:nil];
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_CANCEL]) {

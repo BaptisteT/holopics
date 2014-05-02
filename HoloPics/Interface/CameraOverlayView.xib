@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="binButton" destination="hf5-Rm-9lR" id="gm0-B7-nE1"/>
                 <outlet property="cameraFlipButton" destination="AnH-cb-SA8" id="iG8-v1-7CW"/>
+                <outlet property="cancelButton" destination="KO1-su-2Wy" id="e7U-wi-Dd0"/>
                 <outlet property="holoImageView" destination="jYL-lw-JZW" id="3mF-c1-lzL"/>
                 <outlet property="saveButton" destination="L3c-4F-Elk" id="kv9-a8-zOF"/>
             </connections>
