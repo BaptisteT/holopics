@@ -20,14 +20,15 @@
 @property(nonatomic) CGAffineTransform referenceTransform;
 @property (strong, nonatomic) UIBezierPath *imagePath;
 
+
 @end
 
 @implementation flexibleImageView
 
 - (id)initWithImage:(UIImage *)image andPath:(UIBezierPath *)path
 {
-    image = [ImageUtilities drawFromImage:image insidePath:path];
-    if (self = [super initWithImage:image])
+    self.attachedImage = [ImageUtilities drawFromImage:image insidePath:path];
+    if (self = [super initWithImage:self.attachedImage])
     {
         // Add gesture recognisers
         self.pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
@@ -45,14 +46,28 @@
         self.oneTapRecognizer.numberOfTapsRequired = 1;
         self.activeRecognizers = [NSMutableSet set];
         
+        // User interaction
         self.userInteractionEnabled = YES;
+        self.multipleTouchEnabled = YES;
+        self.exclusiveTouch = YES;
+        
+        // Path
         self.imagePath = [UIBezierPath bezierPathWithCGPath:path.CGPath];
+        [self.imagePath setLineWidth:0.3];
+        [ImageUtilities drawPath:self.imagePath inImageView:self];
+         
+        // Init anchor point
         CGPoint anchorPoint = CGPointMake((path.bounds.origin.x + path.bounds.size.width / 2)/self.frame.size.width, (path.bounds.origin.y + path.bounds.size.height / 2)/self.frame.size.height);
         [GeneralUtilities setAnchorPoint:anchorPoint forView:self];
     }
 
     return self;
 }
+
+
+// -------------------
+// Gesture handling
+// ------------------
 
 - (void)handleGesture:(UIGestureRecognizer *)recognizer
 {
@@ -134,6 +149,11 @@
         return NO;
     return YES;
 }
+
+
+// ------------
+// Utilities
+// ------------
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {

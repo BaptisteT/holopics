@@ -23,6 +23,8 @@
 
 + (UIImage *) addImage:(UIImage *)img toImage:(UIImage *)img2 withSize:(CGSize)size;
 
++ (void)drawPath:(UIBezierPath *)path inImageView:(UIImageView *)view;
+
 + (UIImage*)imageFromView:(UIView *)view;
 
 

@@ -13,6 +13,7 @@
 @interface flexibleImageView : UIImageView <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) id <flexibaleImageViewDelegate> flexibaleImageViewDelegate;
+@property (strong, nonatomic) UIImage *attachedImage;
 
 - (id)initWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
 

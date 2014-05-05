@@ -18,7 +18,7 @@ static const NSUInteger kScreenWidth = 320;
 
 static const NSUInteger kPathMinimalArea = 100;
 
-static const CGFloat    kLongPressTimeThreshold = 0.6f;
+static const CGFloat    kLongPressTimeThreshold = 0.4f;
 static const NSUInteger kContinuousMovementDistanceThreshold = 1;
 static const NSUInteger kMinimumPinchDelta = 1;
 

@@ -11,7 +11,7 @@
 
 @protocol holoImageViewDelegate;
 
-@interface holoImageView : UIImageView
+@interface holoImageView : UIImageView <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) id <holoImageViewDelegate> holoImageViewDelegate;
 @property (strong, nonatomic) UIImage *fullImage;
@@ -27,5 +27,6 @@
 - (void)letUserImportPhotoAndDisplay;
 - (void)createFlexibleSubView;
 - (void)hideSaveandUnhideFlipButton;
+- (void)handleCustomCameraZoom:(UIPinchGestureRecognizer *)recogniser;
 
 @end

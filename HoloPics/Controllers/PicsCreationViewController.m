@@ -35,6 +35,7 @@
 @property (nonatomic) NSInteger subViewIndex;
 @property (strong, nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
 @property (strong, nonatomic) UIImage *savedImage;
+@property (nonatomic) CGAffineTransform referenceTransform;
 
 @end
 
@@ -136,6 +137,11 @@
 
     [self.saveButton setHidden:YES];
     [self.cancelButton setHidden:YES];
+    
+    for (flexibleImageView *views in self.flexibleSubViews){
+        [views setImage:views.attachedImage];
+    }
+    
     [self saveImageToFileSystem:[ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView]];
     [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
     [self.saveButton setHidden:NO];
@@ -218,7 +224,7 @@
     self.subViewIndex ++;
     [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:self.subViewIndex];
     
-    flexibleImage.center = CGPointMake(flexibleImage.center.x + 10, flexibleImage.center.y + 10);
+    flexibleImage.center = CGPointMake(flexibleImage.center.x + 5, flexibleImage.center.y + 5);
 }
 
 - (void)hideSaveandUnhideFlipButton
@@ -233,6 +239,15 @@
     [self.cameraFlipButton setHidden:YES];
 }
 
+- (void)handleCustomCameraZoom:(UIPinchGestureRecognizer *)recogniser
+{
+    if (recogniser.state == UIGestureRecognizerStateBegan) {
+        self.referenceTransform = self.imagePickerController.cameraViewTransform;
+    } else if (recogniser.state == UIGestureRecognizerStateChanged) {
+        CGFloat scale = [recogniser scale];
+        self.imagePickerController.cameraViewTransform = CGAffineTransformScale(self.referenceTransform,scale,scale);
+    }
+}
 
 // --------------------------------
 // flexibleImageView protocol

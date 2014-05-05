@@ -9,47 +9,26 @@
 /* Begin PBXBuildFile section */
 		3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAB71908F917005DAA9C /* PathUtility.m */; };
 		3C09FABA19093DB6005DAA9C /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C09FAB919093DB6005DAA9C /* AWSS3.framework */; };
-		3C09FABB19093DB6005DAA9C /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C09FAB919093DB6005DAA9C /* AWSS3.framework */; };
 		3C09FABD190944CC005DAA9C /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C09FABC190944CC005DAA9C /* AWSRuntime.framework */; };
-		3C09FABE190944CC005DAA9C /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C09FABC190944CC005DAA9C /* AWSRuntime.framework */; };
 		3C09FAE6190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC2190949B6005DAA9C /* AFHTTPRequestOperation.m */; };
-		3C09FAE7190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC2190949B6005DAA9C /* AFHTTPRequestOperation.m */; };
 		3C09FAE8190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC4190949B6005DAA9C /* AFHTTPRequestOperationManager.m */; };
-		3C09FAE9190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC4190949B6005DAA9C /* AFHTTPRequestOperationManager.m */; };
 		3C09FAEA190949B7005DAA9C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC6190949B6005DAA9C /* AFHTTPSessionManager.m */; };
-		3C09FAEB190949B7005DAA9C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC6190949B6005DAA9C /* AFHTTPSessionManager.m */; };
 		3C09FAEC190949B7005DAA9C /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC9190949B6005DAA9C /* AFNetworkReachabilityManager.m */; };
-		3C09FAED190949B7005DAA9C /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC9190949B6005DAA9C /* AFNetworkReachabilityManager.m */; };
 		3C09FAEE190949B7005DAA9C /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FACB190949B6005DAA9C /* AFSecurityPolicy.m */; };
-		3C09FAEF190949B7005DAA9C /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FACB190949B6005DAA9C /* AFSecurityPolicy.m */; };
 		3C09FAF0190949B7005DAA9C /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FACD190949B6005DAA9C /* AFURLConnectionOperation.m */; };
-		3C09FAF1190949B7005DAA9C /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FACD190949B6005DAA9C /* AFURLConnectionOperation.m */; };
 		3C09FAF2190949B7005DAA9C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FACF190949B6005DAA9C /* AFURLRequestSerialization.m */; };
-		3C09FAF3190949B7005DAA9C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FACF190949B6005DAA9C /* AFURLRequestSerialization.m */; };
 		3C09FAF4190949B7005DAA9C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD1190949B7005DAA9C /* AFURLResponseSerialization.m */; };
-		3C09FAF5190949B7005DAA9C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD1190949B7005DAA9C /* AFURLResponseSerialization.m */; };
 		3C09FAF6190949B7005DAA9C /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD3190949B7005DAA9C /* AFURLSessionManager.m */; };
-		3C09FAF7190949B7005DAA9C /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD3190949B7005DAA9C /* AFURLSessionManager.m */; };
 		3C09FAF8190949B7005DAA9C /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD6190949B7005DAA9C /* AFNetworkActivityIndicatorManager.m */; };
-		3C09FAF9190949B7005DAA9C /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD6190949B7005DAA9C /* AFNetworkActivityIndicatorManager.m */; };
 		3C09FAFA190949B7005DAA9C /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD8190949B7005DAA9C /* UIActivityIndicatorView+AFNetworking.m */; };
-		3C09FAFB190949B7005DAA9C /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAD8190949B7005DAA9C /* UIActivityIndicatorView+AFNetworking.m */; };
 		3C09FAFC190949B7005DAA9C /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FADA190949B7005DAA9C /* UIAlertView+AFNetworking.m */; };
-		3C09FAFD190949B7005DAA9C /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FADA190949B7005DAA9C /* UIAlertView+AFNetworking.m */; };
 		3C09FAFE190949B7005DAA9C /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FADC190949B7005DAA9C /* UIButton+AFNetworking.m */; };
-		3C09FAFF190949B7005DAA9C /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FADC190949B7005DAA9C /* UIButton+AFNetworking.m */; };
 		3C09FB00190949B7005DAA9C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FADE190949B7005DAA9C /* UIImageView+AFNetworking.m */; };
-		3C09FB01190949B7005DAA9C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FADE190949B7005DAA9C /* UIImageView+AFNetworking.m */; };
 		3C09FB02190949B7005DAA9C /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAE1190949B7005DAA9C /* UIProgressView+AFNetworking.m */; };
-		3C09FB03190949B7005DAA9C /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAE1190949B7005DAA9C /* UIProgressView+AFNetworking.m */; };
 		3C09FB04190949B7005DAA9C /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAE3190949B7005DAA9C /* UIRefreshControl+AFNetworking.m */; };
-		3C09FB05190949B7005DAA9C /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAE3190949B7005DAA9C /* UIRefreshControl+AFNetworking.m */; };
 		3C09FB06190949B7005DAA9C /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAE5190949B7005DAA9C /* UIWebView+AFNetworking.m */; };
-		3C09FB07190949B7005DAA9C /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAE5190949B7005DAA9C /* UIWebView+AFNetworking.m */; };
 		3C09FB0B19094A29005DAA9C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FB0A19094A29005DAA9C /* Reachability.m */; };
-		3C09FB0C19094A29005DAA9C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FB0A19094A29005DAA9C /* Reachability.m */; };
 		3C09FB0E19095AEF005DAA9C /* Strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C09FB0D19095AEF005DAA9C /* Strings.strings */; };
-		3C09FB0F19095AEF005DAA9C /* Strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C09FB0D19095AEF005DAA9C /* Strings.strings */; };
 		3C13955218FD9E7100762572 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955118FD9E7100762572 /* Foundation.framework */; };
 		3C13955418FD9E7100762572 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955318FD9E7100762572 /* CoreGraphics.framework */; };
 		3C13955618FD9E7100762572 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955518FD9E7100762572 /* UIKit.framework */; };
@@ -57,55 +36,25 @@
 		3C13955E18FD9E7100762572 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13955D18FD9E7100762572 /* main.m */; };
 		3C13956218FD9E7100762572 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13956118FD9E7100762572 /* AppDelegate.m */; };
 		3C13956418FD9E7100762572 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C13956318FD9E7100762572 /* Images.xcassets */; };
-		3C13956B18FD9E7100762572 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13956A18FD9E7100762572 /* XCTest.framework */; };
-		3C13956C18FD9E7100762572 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955118FD9E7100762572 /* Foundation.framework */; };
-		3C13956D18FD9E7100762572 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955518FD9E7100762572 /* UIKit.framework */; };
-		3C13957518FD9E7100762572 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C13957318FD9E7100762572 /* InfoPlist.strings */; };
-		3C13957718FD9E7100762572 /* HoloPicsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13957618FD9E7100762572 /* HoloPicsTests.m */; };
 		3C13958518FDA3B400762572 /* PicsCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13958418FDA3B400762572 /* PicsCreationViewController.m */; };
-		3C13958618FDA3B400762572 /* PicsCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13958418FDA3B400762572 /* PicsCreationViewController.m */; };
 		3C13958A18FDA66F00762572 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13958918FDA66F00762572 /* Constants.m */; };
-		3C13958B18FDA66F00762572 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13958918FDA66F00762572 /* Constants.m */; };
 		3C13958D18FDAA3D00762572 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C13958C18FDAA3D00762572 /* Main.storyboard */; };
-		3C13958E18FDAA3D00762572 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C13958C18FDAA3D00762572 /* Main.storyboard */; };
 		3C13959218FDACB700762572 /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C13959118FDACB700762572 /* CameraOverlayView.xib */; };
-		3C13959318FDACB700762572 /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C13959118FDACB700762572 /* CameraOverlayView.xib */; };
 		3C13959618FDB82400762572 /* ImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13959518FDB82400762572 /* ImageUtilities.m */; };
-		3C13959718FDB82400762572 /* ImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13959518FDB82400762572 /* ImageUtilities.m */; };
 		3C13959918FDBF6B00762572 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13959818FDBF6B00762572 /* AssetsLibrary.framework */; };
 		3C13959C18FDBFE700762572 /* GeneralUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13959B18FDBFE700762572 /* GeneralUtilities.m */; };
-		3C13959D18FDBFE700762572 /* GeneralUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13959B18FDBFE700762572 /* GeneralUtilities.m */; };
 		3C1395A018FDEF8E00762572 /* holoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13959F18FDEF8E00762572 /* holoImageView.m */; };
-		3C1395A118FDEF8E00762572 /* holoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C13959F18FDEF8E00762572 /* holoImageView.m */; };
 		3C1395A419006BDC00762572 /* camera-quit-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A219006BDC00762572 /* camera-quit-button.png */; };
-		3C1395A519006BDC00762572 /* camera-quit-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A219006BDC00762572 /* camera-quit-button.png */; };
 		3C1395A619006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A319006BDC00762572 /* camera-quit-button@2x~iphone.png */; };
-		3C1395A719006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A319006BDC00762572 /* camera-quit-button@2x~iphone.png */; };
 		3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A819006C4100762572 /* camera-flip-button.png */; };
-		3C1395AB19006C4100762572 /* camera-flip-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A819006C4100762572 /* camera-flip-button.png */; };
 		3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */; };
-		3C1395AD19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */; };
 		3C1395B61900C66C00762572 /* create_send_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B41900C66C00762572 /* create_send_button.png */; };
-		3C1395B71900C66C00762572 /* create_send_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B41900C66C00762572 /* create_send_button.png */; };
 		3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */; };
-		3C1395B91900C66C00762572 /* create_send_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */; };
 		3C99669219097D9A00C5D4FF /* CameraOverlayView_small.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C99669119097D9A00C5D4FF /* CameraOverlayView_small.xib */; };
-		3C996693190BEC6600C5D4FF /* CameraOverlayView_small.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C99669119097D9A00C5D4FF /* CameraOverlayView_small.xib */; };
 		3CA89FDF190EA66A002E4D1D /* flexibleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA89FDE190EA66A002E4D1D /* flexibleImageView.m */; };
 		3CA89FE1190FE584002E4D1D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA89FE0190FE584002E4D1D /* trash.png */; };
-		3CA89FE2190FE584002E4D1D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA89FE0190FE584002E4D1D /* trash.png */; };
 		3CAF48B51913E3C3000C79CC /* MagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF48B41913E3C3000C79CC /* MagnifierView.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3C13956E18FD9E7100762572 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C13954618FD9E7100762572 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C13954D18FD9E7100762572;
-			remoteInfo = HoloPics;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3C09FAB61908F917005DAA9C /* PathUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtility.h; sourceTree = "<group>"; };
@@ -162,11 +111,7 @@
 		3C13956018FD9E7100762572 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
 		3C13956118FD9E7100762572 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../AppDelegate.m; sourceTree = "<group>"; };
 		3C13956318FD9E7100762572 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
-		3C13956918FD9E7100762572 /* HoloPicsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoloPicsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C13956A18FD9E7100762572 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3C13957218FD9E7100762572 /* HoloPicsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HoloPicsTests-Info.plist"; sourceTree = "<group>"; };
-		3C13957418FD9E7100762572 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3C13957618FD9E7100762572 /* HoloPicsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoloPicsTests.m; sourceTree = "<group>"; };
 		3C13958318FDA3B400762572 /* PicsCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicsCreationViewController.h; sourceTree = "<group>"; };
 		3C13958418FDA3B400762572 /* PicsCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicsCreationViewController.m; sourceTree = "<group>"; };
 		3C13958818FDA66F00762572 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -205,18 +150,6 @@
 				3C09FABD190944CC005DAA9C /* AWSRuntime.framework in Frameworks */,
 				3C13955218FD9E7100762572 /* Foundation.framework in Frameworks */,
 				3C09FABA19093DB6005DAA9C /* AWSS3.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C13956618FD9E7100762572 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C09FABB19093DB6005DAA9C /* AWSS3.framework in Frameworks */,
-				3C13956B18FD9E7100762572 /* XCTest.framework in Frameworks */,
-				3C13956D18FD9E7100762572 /* UIKit.framework in Frameworks */,
-				3C09FABE190944CC005DAA9C /* AWSRuntime.framework in Frameworks */,
-				3C13956C18FD9E7100762572 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				3C13955718FD9E7100762572 /* HoloPics */,
-				3C13957018FD9E7100762572 /* HoloPicsTests */,
 				3C13955018FD9E7100762572 /* Frameworks */,
 				3C13954F18FD9E7100762572 /* Products */,
 			);
@@ -306,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				3C13954E18FD9E7100762572 /* HoloPics.app */,
-				3C13956918FD9E7100762572 /* HoloPicsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -346,24 +277,6 @@
 				3C13955A18FD9E7100762572 /* InfoPlist.strings */,
 				3C13955D18FD9E7100762572 /* main.m */,
 				3C13955F18FD9E7100762572 /* HoloPics-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3C13957018FD9E7100762572 /* HoloPicsTests */ = {
-			isa = PBXGroup;
-			children = (
-				3C13957618FD9E7100762572 /* HoloPicsTests.m */,
-				3C13957118FD9E7100762572 /* Supporting Files */,
-			);
-			path = HoloPicsTests;
-			sourceTree = "<group>";
-		};
-		3C13957118FD9E7100762572 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3C13957218FD9E7100762572 /* HoloPicsTests-Info.plist */,
-				3C13957318FD9E7100762572 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -453,24 +366,6 @@
 			productReference = 3C13954E18FD9E7100762572 /* HoloPics.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3C13956818FD9E7100762572 /* HoloPicsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C13957D18FD9E7100762572 /* Build configuration list for PBXNativeTarget "HoloPicsTests" */;
-			buildPhases = (
-				3C13956518FD9E7100762572 /* Sources */,
-				3C13956618FD9E7100762572 /* Frameworks */,
-				3C13956718FD9E7100762572 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3C13956F18FD9E7100762572 /* PBXTargetDependency */,
-			);
-			name = HoloPicsTests;
-			productName = HoloPicsTests;
-			productReference = 3C13956918FD9E7100762572 /* HoloPicsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -481,10 +376,7 @@
 				ORGANIZATIONNAME = "Baptiste Truchot";
 				TargetAttributes = {
 					3C13954D18FD9E7100762572 = {
-						DevelopmentTeam = Y7RQR83KUE;
-					};
-					3C13956818FD9E7100762572 = {
-						TestTargetID = 3C13954D18FD9E7100762572;
+						DevelopmentTeam = 9688VHJV6U;
 					};
 				};
 			};
@@ -494,6 +386,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 3C13954518FD9E7100762572;
 			productRefGroup = 3C13954F18FD9E7100762572 /* Products */;
@@ -501,7 +394,6 @@
 			projectRoot = "";
 			targets = (
 				3C13954D18FD9E7100762572 /* HoloPics */,
-				3C13956818FD9E7100762572 /* HoloPicsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -524,25 +416,6 @@
 				3C13955C18FD9E7100762572 /* InfoPlist.strings in Resources */,
 				3C13956418FD9E7100762572 /* Images.xcassets in Resources */,
 				3CA89FE1190FE584002E4D1D /* trash.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C13956718FD9E7100762572 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C13957518FD9E7100762572 /* InfoPlist.strings in Resources */,
-				3C1395B71900C66C00762572 /* create_send_button.png in Resources */,
-				3CA89FE2190FE584002E4D1D /* trash.png in Resources */,
-				3C996693190BEC6600C5D4FF /* CameraOverlayView_small.xib in Resources */,
-				3C1395B91900C66C00762572 /* create_send_button@2x~iphone.png in Resources */,
-				3C09FB0F19095AEF005DAA9C /* Strings.strings in Resources */,
-				3C13959318FDACB700762572 /* CameraOverlayView.xib in Resources */,
-				3C1395AD19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */,
-				3C1395A719006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */,
-				3C13958E18FDAA3D00762572 /* Main.storyboard in Resources */,
-				3C1395A519006BDC00762572 /* camera-quit-button.png in Resources */,
-				3C1395AB19006C4100762572 /* camera-flip-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,60 +457,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3C13956518FD9E7100762572 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C09FAF7190949B7005DAA9C /* AFURLSessionManager.m in Sources */,
-				3C1395A118FDEF8E00762572 /* holoImageView.m in Sources */,
-				3C13958618FDA3B400762572 /* PicsCreationViewController.m in Sources */,
-				3C09FAED190949B7005DAA9C /* AFNetworkReachabilityManager.m in Sources */,
-				3C09FAF9190949B7005DAA9C /* AFNetworkActivityIndicatorManager.m in Sources */,
-				3C13957718FD9E7100762572 /* HoloPicsTests.m in Sources */,
-				3C09FAF1190949B7005DAA9C /* AFURLConnectionOperation.m in Sources */,
-				3C09FB03190949B7005DAA9C /* UIProgressView+AFNetworking.m in Sources */,
-				3C09FAEB190949B7005DAA9C /* AFHTTPSessionManager.m in Sources */,
-				3C09FAF3190949B7005DAA9C /* AFURLRequestSerialization.m in Sources */,
-				3C09FB0C19094A29005DAA9C /* Reachability.m in Sources */,
-				3C13959718FDB82400762572 /* ImageUtilities.m in Sources */,
-				3C09FAFF190949B7005DAA9C /* UIButton+AFNetworking.m in Sources */,
-				3C09FB01190949B7005DAA9C /* UIImageView+AFNetworking.m in Sources */,
-				3C13959D18FDBFE700762572 /* GeneralUtilities.m in Sources */,
-				3C13958B18FDA66F00762572 /* Constants.m in Sources */,
-				3C09FAFD190949B7005DAA9C /* UIAlertView+AFNetworking.m in Sources */,
-				3C09FB07190949B7005DAA9C /* UIWebView+AFNetworking.m in Sources */,
-				3C09FAFB190949B7005DAA9C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				3C09FAE9190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */,
-				3C09FB05190949B7005DAA9C /* UIRefreshControl+AFNetworking.m in Sources */,
-				3C09FAEF190949B7005DAA9C /* AFSecurityPolicy.m in Sources */,
-				3C09FAF5190949B7005DAA9C /* AFURLResponseSerialization.m in Sources */,
-				3C09FAE7190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3C13956F18FD9E7100762572 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C13954D18FD9E7100762572 /* HoloPics */;
-			targetProxy = 3C13956E18FD9E7100762572 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3C13955A18FD9E7100762572 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3C13955B18FD9E7100762572 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		3C13957318FD9E7100762572 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C13957418FD9E7100762572 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -680,7 +506,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "BB6C27DC-0A5E-4C7D-B7A4-2AC010BA1FBE";
+				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -714,7 +540,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "BB6C27DC-0A5E-4C7D-B7A4-2AC010BA1FBE";
+				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -737,7 +563,7 @@
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31518AB7-86CD-42A5-B920-52AAAD8F5896";
+				PROVISIONING_PROFILE = "DB0C287C-11AA-4A22-9BB8-672A7EEEE411";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -758,50 +584,8 @@
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "31518AB7-86CD-42A5-B920-52AAAD8F5896";
+				PROVISIONING_PROFILE = "DB0C287C-11AA-4A22-9BB8-672A7EEEE411";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		3C13957E18FD9E7100762572 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HoloPics.app/HoloPics";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HoloPics/HoloPics-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "HoloPicsTests/HoloPicsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		3C13957F18FD9E7100762572 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/HoloPics.app/HoloPics";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "HoloPics/HoloPics-Prefix.pch";
-				INFOPLIST_FILE = "HoloPicsTests/HoloPicsTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -822,15 +606,6 @@
 			buildConfigurations = (
 				3C13957B18FD9E7100762572 /* Debug */,
 				3C13957C18FD9E7100762572 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3C13957D18FD9E7100762572 /* Build configuration list for PBXNativeTarget "HoloPicsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C13957E18FD9E7100762572 /* Debug */,
-				3C13957F18FD9E7100762572 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

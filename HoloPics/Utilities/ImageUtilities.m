@@ -120,6 +120,17 @@
     return result;
 }
 
+// Draw path
++ (void)drawPath:(UIBezierPath *)path inImageView:(UIImageView *)view
+{
+    UIGraphicsBeginImageContext(view.frame.size);
+    [view.image drawInRect:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
+    [[UIColor blackColor] setStroke];
+    [path stroke];
+    view.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+}
+
 // code from
 // http://stackoverflow.com/questions/3869692/iphone-flattening-a-uiimageview-and-subviews-to-image-blank-image
 + (UIImage*)imageFromView:(UIView *)view

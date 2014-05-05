@@ -38,6 +38,16 @@
                ReferencedContainer = "container:HoloPics.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3CD97A1C19178D8C00A0E655"
+               BuildableName = "HoloPics-DevTests.xctest"
+               BlueprintName = "HoloPics-DevTests"
+               ReferencedContainer = "container:HoloPics.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
