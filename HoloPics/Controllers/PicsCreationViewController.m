@@ -142,11 +142,21 @@
         [views setImage:views.attachedImage];
     }
     
-    [self saveImageToFileSystem:[ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView]];
-    [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
+    UIImage *imageToShare = [ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView];
     [self.saveButton setHidden:NO];
     [self.cancelButton setHidden:NO];
     
+    // Share to FB, sms, email.. using UIActivityViewController
+    NSString *shareString = @"";
+    NSArray *activityItems = [NSArray arrayWithObjects:shareString, imageToShare, nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop];
+    [self.imagePickerController presentViewController:activityViewController animated:YES completion:nil];
+    
+    
+//    [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
+//    [self saveImageToFileSystem:[ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView]];
 //    if (![GeneralUtilities connected]) {
 //        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"no_connection", @"Strings", @"comment") withTitle:nil];
 //    } else {
