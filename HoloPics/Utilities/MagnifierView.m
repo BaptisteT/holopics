@@ -12,27 +12,26 @@
 
 
 - (id)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:CGRectMake(0, 0, 80, 80)]) {
+	if (self = [super initWithFrame:CGRectMake(0, 0, 60, 60)]) {
 		// make the circle-shape outline with a nice border.
 		self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-		self.layer.borderWidth = 3;
-		self.layer.cornerRadius = 40;
+		self.layer.borderWidth = 2;
+		self.layer.cornerRadius = 30;
 		self.layer.masksToBounds = YES;
+        self.center = CGPointMake(290,30);
 	}
 	return self;
 }
 
 - (void)setCenterPoint:(CGPoint)pt {
     self.touchPoint = pt;
-    // whenever touchPoint is set, update the position of the magnifier (to just above what's being magnified)
-    self.center = CGPointMake(pt.x, pt.y-70);
 }
 
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextTranslateCTM(context,1*(self.frame.size.width*0.5),1*(self.frame.size.height*0.5));
-	CGContextScaleCTM(context, 1.5, 1.5);
+	CGContextScaleCTM(context, 1.2, 1.2);
 	CGContextTranslateCTM(context,-1*(self.touchPoint.x),-1*(self.touchPoint.y));
 	[self.viewToMagnify.layer renderInContext:context];
 }
