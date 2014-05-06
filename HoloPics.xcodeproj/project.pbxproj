@@ -51,8 +51,11 @@
 		3C1395B61900C66C00762572 /* create_send_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B41900C66C00762572 /* create_send_button.png */; };
 		3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */; };
 		3C99669219097D9A00C5D4FF /* CameraOverlayView_small.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C99669119097D9A00C5D4FF /* CameraOverlayView_small.xib */; };
+		3C9ED4F11918E98C003A8269 /* TutoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9ED4F01918E98C003A8269 /* TutoImageView.m */; };
 		3CA89FDF190EA66A002E4D1D /* flexibleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA89FDE190EA66A002E4D1D /* flexibleImageView.m */; };
 		3CA89FE1190FE584002E4D1D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA89FE0190FE584002E4D1D /* trash.png */; };
+		3CABFB551919367900EEB378 /* tuto1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CABFB541919367900EEB378 /* tuto1.png */; };
+		3CABFB5719194A2A00EEB378 /* tuto2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CABFB5619194A2A00EEB378 /* tuto2.png */; };
 		3CAF48B51913E3C3000C79CC /* MagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF48B41913E3C3000C79CC /* MagnifierView.m */; };
 /* End PBXBuildFile section */
 
@@ -132,9 +135,13 @@
 		3C1395B41900C66C00762572 /* create_send_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_send_button.png; sourceTree = "<group>"; };
 		3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create_send_button@2x~iphone.png"; sourceTree = "<group>"; };
 		3C99669119097D9A00C5D4FF /* CameraOverlayView_small.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView_small.xib; sourceTree = "<group>"; };
+		3C9ED4EF1918E98C003A8269 /* TutoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutoImageView.h; path = Utilities/TutoImageView.h; sourceTree = "<group>"; };
+		3C9ED4F01918E98C003A8269 /* TutoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutoImageView.m; path = Utilities/TutoImageView.m; sourceTree = "<group>"; };
 		3CA89FDD190EA66A002E4D1D /* flexibleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = flexibleImageView.h; path = Utilities/flexibleImageView.h; sourceTree = "<group>"; };
 		3CA89FDE190EA66A002E4D1D /* flexibleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = flexibleImageView.m; path = Utilities/flexibleImageView.m; sourceTree = "<group>"; };
 		3CA89FE0190FE584002E4D1D /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		3CABFB541919367900EEB378 /* tuto1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tuto1.png; sourceTree = "<group>"; };
+		3CABFB5619194A2A00EEB378 /* tuto2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tuto2.png; sourceTree = "<group>"; };
 		3CAF48B31913E3C3000C79CC /* MagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagnifierView.h; path = Utilities/MagnifierView.h; sourceTree = "<group>"; };
 		3CAF48B41913E3C3000C79CC /* MagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagnifierView.m; path = Utilities/MagnifierView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -322,6 +329,8 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3CABFB541919367900EEB378 /* tuto1.png */,
+				3CABFB5619194A2A00EEB378 /* tuto2.png */,
 				3CA89FE0190FE584002E4D1D /* trash.png */,
 				3C1395B41900C66C00762572 /* create_send_button.png */,
 				3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */,
@@ -342,6 +351,8 @@
 				3CA89FDE190EA66A002E4D1D /* flexibleImageView.m */,
 				3CAF48B31913E3C3000C79CC /* MagnifierView.h */,
 				3CAF48B41913E3C3000C79CC /* MagnifierView.m */,
+				3C9ED4EF1918E98C003A8269 /* TutoImageView.h */,
+				3C9ED4F01918E98C003A8269 /* TutoImageView.m */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -414,8 +425,10 @@
 				3C1395A619006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */,
 				3C13958D18FDAA3D00762572 /* Main.storyboard in Resources */,
 				3C13955C18FD9E7100762572 /* InfoPlist.strings in Resources */,
+				3CABFB5719194A2A00EEB378 /* tuto2.png in Resources */,
 				3C13956418FD9E7100762572 /* Images.xcassets in Resources */,
 				3CA89FE1190FE584002E4D1D /* trash.png in Resources */,
+				3CABFB551919367900EEB378 /* tuto1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +447,7 @@
 				3C09FB02190949B7005DAA9C /* UIProgressView+AFNetworking.m in Sources */,
 				3C09FAE6190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */,
 				3C13958518FDA3B400762572 /* PicsCreationViewController.m in Sources */,
+				3C9ED4F11918E98C003A8269 /* TutoImageView.m in Sources */,
 				3C09FAFC190949B7005DAA9C /* UIAlertView+AFNetworking.m in Sources */,
 				3CA89FDF190EA66A002E4D1D /* flexibleImageView.m in Sources */,
 				3C09FAE8190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */,

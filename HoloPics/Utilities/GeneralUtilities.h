@@ -16,6 +16,7 @@
 + (NSString *)getDeviceID;
 + (NSUInteger)currentDateInMilliseconds;
 
-+(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view;
++ (void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view;
++ (BOOL)isFirstOpening;
 
 @end

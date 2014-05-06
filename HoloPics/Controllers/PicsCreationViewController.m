@@ -17,6 +17,7 @@
 #import <AWSS3/AWSS3.h>
 #import <AWSS3/AmazonS3Client.h>
 #import "flexibleImageView.h"
+#import "TutoImageView.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"photo_bank", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"photo_library", @"Strings", @"comment")
@@ -36,6 +37,9 @@
 @property (strong, nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
 @property (strong, nonatomic) UIImage *savedImage;
 @property (nonatomic) CGAffineTransform referenceTransform;
+@property (nonatomic) BOOL firstOpening;
+@property (strong, nonatomic) TutoImageView *tutoView;
+
 
 @end
 
@@ -46,6 +50,8 @@
 {
     [super viewDidLoad];
     
+    self.firstOpening = [GeneralUtilities isFirstOpening];
+
     // Alloc and init full screen camera
     [self allocAndInitFullScreenCamera];
 }
@@ -59,6 +65,14 @@
     self.subViewIndex = 0;
     // Make this controller the delegate of holoImageView
     self.holoImageView.holoImageViewDelegate = self;
+    
+    // On first opening of the app
+    if (self.firstOpening)
+    {
+        self.tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
+        self.tutoView.image = [UIImage imageNamed:@"tuto1.png"];
+        [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
+    }
 }
 
 // ----------------------------------------------------------
@@ -222,7 +236,8 @@
     }
     
     // Return if we reached the limit of images
-    if (self.flexibleSubViews.count > kMaxNumberOfFlexibleImage) {
+    if (self.subViewIndex > kMaxNumberOfFlexibleImage) {
+        [GeneralUtilities showMessage:@"You reached the maximum number of pics!" withTitle:nil];
         return;
     }
         
@@ -234,7 +249,15 @@
     self.subViewIndex ++;
     [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:self.subViewIndex];
     
-    flexibleImage.center = CGPointMake(flexibleImage.center.x + 5, flexibleImage.center.y + 5);
+    if (self.firstOpening) {
+        flexibleImage.backgroundColor = [UIColor blackColor];
+        self.firstOpening = NO;
+        [self.tutoView setImage:[UIImage imageNamed:@"tuto2"]];
+        self.tutoView.imageForTuto2 = flexibleImage;
+        [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
+    } else {
+        flexibleImage.center = CGPointMake(flexibleImage.center.x + 5, flexibleImage.center.y + 5);
+    }
 }
 
 - (void)hideSaveandUnhideFlipButton

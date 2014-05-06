@@ -141,7 +141,7 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)recogniser
 {
     if ([recogniser isKindOfClass:[UIPanGestureRecognizer class]]) {
-        return self.fullImage;
+        return (self.fullImage !=nil);
     } else {
         return YES;
     }
@@ -181,16 +181,6 @@
     [ImageUtilities drawPath:self.path inImageView:self];
 }
 
-//- (void)drawBitmapAlongPath:(UIBezierPath *)path
-//{
-//    UIGraphicsBeginImageContext(self.frame.size);
-//    [self.image drawInRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-//    [[UIColor blackColor] setStroke];
-//    [path stroke];
-//    self.image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//}
-
 - (void)clearPathAndPictures
 {
     self.fullImage = nil;
@@ -201,7 +191,7 @@
 
 - (void)initHoloImageView
 {
-    [self setMultipleTouchEnabled:NO];
+    [self setMultipleTouchEnabled:YES];
     self.exclusiveTouch = YES;
     self.path = [UIBezierPath bezierPath];
     [self.path setLineWidth:2.0];

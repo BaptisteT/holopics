@@ -8,6 +8,7 @@
 
 #import "GeneralUtilities.h"
 #import "Reachability.h"
+#import "Constants.h"
 
 @implementation GeneralUtilities
 
@@ -40,7 +41,7 @@
     return (int) seconds;
 }
 
-+(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
++ (void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
 {
     CGPoint newPoint = CGPointMake(view.bounds.size.width * anchorPoint.x, view.bounds.size.height * anchorPoint.y);
     CGPoint oldPoint = CGPointMake(view.bounds.size.width * view.layer.anchorPoint.x, view.bounds.size.height * view.layer.anchorPoint.y);
@@ -58,6 +59,18 @@
     
     view.layer.position = position;
     view.layer.anchorPoint = anchorPoint;
+}
+
++ (BOOL)isFirstOpening
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    if([prefs objectForKey:FIRST_OPENING_PREF]) {
+        return NO;
+    } else {
+        [prefs setObject:[NSNumber numberWithBool:YES] forKey:FIRST_OPENING_PREF];
+        return YES;
+    }
 }
 
 

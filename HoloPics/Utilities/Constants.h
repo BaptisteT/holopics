@@ -22,7 +22,9 @@ static const CGFloat    kLongPressTimeThreshold = 0.4f;
 static const NSUInteger kContinuousMovementDistanceThreshold = 1;
 static const NSUInteger kMinimumPinchDelta = 1;
 
-static const NSUInteger kMaxNumberOfFlexibleImage = 20;
+static const NSUInteger kMaxNumberOfFlexibleImage = 50;
+
+#define FIRST_OPENING_PREF @"First Opening"
 
 // TODO remove this
 #define ACCESS_KEY_ID @"AKIAJTBDZSZ2Y3XF5XYQ"
