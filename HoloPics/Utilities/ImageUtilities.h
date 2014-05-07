@@ -27,5 +27,6 @@
 
 + (UIImage*)imageFromView:(UIView *)view;
 
++ (NSString *)encodeToBase64String:(UIImage *)image;
 
 @end

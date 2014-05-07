@@ -166,5 +166,8 @@
     return image;
 }
 
++ (NSString *)encodeToBase64String:(UIImage *)image {
+    return [UIImageJPEGRepresentation(image,0.9) base64EncodedStringWithOptions:0];
+}
 
 @end

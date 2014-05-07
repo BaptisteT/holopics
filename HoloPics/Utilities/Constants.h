@@ -13,6 +13,9 @@
 
 @end
 
+// API Version
+static NSString * const kApiVersion = @"1";
+
 static const NSUInteger kCameraHeight = 426;
 static const NSUInteger kScreenWidth = 320;
 
@@ -26,8 +29,6 @@ static const NSUInteger kMaxNumberOfFlexibleImage = 50;
 
 #define FIRST_OPENING_PREF @"First Opening"
 
-// TODO remove this
-#define ACCESS_KEY_ID @"AKIAJTBDZSZ2Y3XF5XYQ"
-#define SECRET_KEY @"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"
-#define S3_URL @"street-shout1.s3.amazonaws.com/"
-#define S3_BUCKET @"holopics-production"
+// Production
+static NSString * const kProdAFHolopicsAPIBaseURLString = @"http://holopics.herokuapp.com/";
+static NSString * const kProdHolopicsImageBaseURL = @"http://s3.amazonaws.com/holopics-production/original/image_";

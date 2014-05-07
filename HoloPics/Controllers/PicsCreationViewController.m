@@ -18,6 +18,9 @@
 #import <AWSS3/AmazonS3Client.h>
 #import "flexibleImageView.h"
 #import "TutoImageView.h"
+#import "AFHolopicsAPIClient.h"
+#import "MBProgressHUD.h"
+#import "Holopic.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"photo_bank", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"photo_library", @"Strings", @"comment")
@@ -150,24 +153,43 @@
 
 - (IBAction)saveButtonClicked:(id)sender {
 
+    [MBProgressHUD showHUDAddedTo:self.imagePickerController.cameraOverlayView animated:YES];
+
+    // Create encoded image
     [self.saveButton setHidden:YES];
     [self.cancelButton setHidden:YES];
-    
     for (flexibleImageView *views in self.flexibleSubViews){
         [views setImage:views.attachedImage];
     }
-    
     UIImage *imageToShare = [ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView];
     [self.saveButton setHidden:NO];
     [self.cancelButton setHidden:NO];
+    NSString *encodedImage = [ImageUtilities encodeToBase64String:imageToShare];
     
+    // Results block
+    typedef void (^SuccessBlock)(Holopic *);
+    SuccessBlock successBlock = ^(Holopic *holopic) {
+        [MBProgressHUD hideHUDForView:self.imagePickerController.cameraOverlayView animated:YES];
+    };
+    
+    typedef void (^FailureBlock)(NSURLSessionDataTask *);
+    FailureBlock failureBlock = ^(NSURLSessionDataTask *task) {
+        [MBProgressHUD hideHUDForView:self.imagePickerController.cameraOverlayView animated:YES];
+        
+        NSString *title = NSLocalizedStringFromTable (@"create_holopic_failed_title", @"Strings", @"comment");
+        NSString *message = NSLocalizedStringFromTable (@"create_holopic_failed_message", @"Strings", @"comment");
+        [GeneralUtilities showMessage:message withTitle:title];
+    };
+    
+    // Request
+    [AFHolopicsAPIClient createHolopicsWithEncodedImage:encodedImage AndExecuteSuccess:successBlock failure:failureBlock];
     // Share to FB, sms, email.. using UIActivityViewController
-    NSString *shareString = @"";
-    NSArray *activityItems = [NSArray arrayWithObjects:shareString, imageToShare, nil];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop];
-    [self.imagePickerController presentViewController:activityViewController animated:YES completion:nil];
+//    NSString *shareString = @"";
+//    NSArray *activityItems = [NSArray arrayWithObjects:shareString, imageToShare, nil];
+//    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+//    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop];
+//    [self.imagePickerController presentViewController:activityViewController animated:YES completion:nil];
     
     
 //    [GeneralUtilities showMessage:@"Image saved" withTitle:nil];

@@ -56,6 +56,9 @@
 		3CABFB551919367900EEB378 /* tuto1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CABFB541919367900EEB378 /* tuto1.png */; };
 		3CABFB5719194A2A00EEB378 /* tuto2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CABFB5619194A2A00EEB378 /* tuto2.png */; };
 		3CAF48B51913E3C3000C79CC /* MagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF48B41913E3C3000C79CC /* MagnifierView.m */; };
+		3CBA8BAA191A980F00064E7C /* AFHolopicsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8BA9191A980F00064E7C /* AFHolopicsAPIClient.m */; };
+		3CBA8BB1191A9DE100064E7C /* Holopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8BB0191A9DE100064E7C /* Holopic.m */; };
+		3CBA8D6D191ABE9800064E7C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8D6C191ABE9800064E7C /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +145,12 @@
 		3CABFB5619194A2A00EEB378 /* tuto2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tuto2.png; sourceTree = "<group>"; };
 		3CAF48B31913E3C3000C79CC /* MagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagnifierView.h; path = Utilities/MagnifierView.h; sourceTree = "<group>"; };
 		3CAF48B41913E3C3000C79CC /* MagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagnifierView.m; path = Utilities/MagnifierView.m; sourceTree = "<group>"; };
+		3CBA8BA8191A980F00064E7C /* AFHolopicsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHolopicsAPIClient.h; sourceTree = "<group>"; };
+		3CBA8BA9191A980F00064E7C /* AFHolopicsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHolopicsAPIClient.m; sourceTree = "<group>"; };
+		3CBA8BAF191A9DE100064E7C /* Holopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Holopic.h; path = Models/Holopic.h; sourceTree = "<group>"; };
+		3CBA8BB0191A9DE100064E7C /* Holopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Holopic.m; path = Models/Holopic.m; sourceTree = "<group>"; };
+		3CBA8D6B191ABE9800064E7C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		3CBA8D6C191ABE9800064E7C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +173,7 @@
 		3C09FABF1909499C005DAA9C /* Third Parties */ = {
 			isa = PBXGroup;
 			children = (
+				3CBA8D6A191ABE8F00064E7C /* MBProgressHUD */,
 				3C09FB0819094A0E005DAA9C /* Reachability */,
 				3C09FAC0190949B6005DAA9C /* AFNetworking */,
 				3C09FAD4190949B7005DAA9C /* UIKit+AFNetworking */,
@@ -271,6 +281,7 @@
 				3C13958718FDA65100762572 /* Utilities */,
 				3CAF48B61913E3DA000C79CC /* Custom Views */,
 				3C13958218FDA37400762572 /* Controllers */,
+				3CBA8BAB191A9CEF00064E7C /* Models */,
 			);
 			path = HoloPics;
 			sourceTree = "<group>";
@@ -298,11 +309,13 @@
 		3C13958718FDA65100762572 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				3C09FB0D19095AEF005DAA9C /* Strings.strings */,
+				3CBA8BA8191A980F00064E7C /* AFHolopicsAPIClient.h */,
+				3CBA8BA9191A980F00064E7C /* AFHolopicsAPIClient.m */,
 				3C13956018FD9E7100762572 /* AppDelegate.h */,
 				3C13956118FD9E7100762572 /* AppDelegate.m */,
 				3C13958818FDA66F00762572 /* Constants.h */,
 				3C13958918FDA66F00762572 /* Constants.m */,
+				3C09FB0D19095AEF005DAA9C /* Strings.strings */,
 				3C13959418FDB82400762572 /* ImageUtilities.h */,
 				3C13959518FDB82400762572 /* ImageUtilities.m */,
 				3C13959A18FDBFE700762572 /* GeneralUtilities.h */,
@@ -354,6 +367,24 @@
 			name = "Custom Views";
 			sourceTree = "<group>";
 		};
+		3CBA8BAB191A9CEF00064E7C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3CBA8BAF191A9DE100064E7C /* Holopic.h */,
+				3CBA8BB0191A9DE100064E7C /* Holopic.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3CBA8D6A191ABE8F00064E7C /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				3CBA8D6B191ABE9800064E7C /* MBProgressHUD.h */,
+				3CBA8D6C191ABE9800064E7C /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -395,6 +426,37 @@
 			knownRegions = (
 				en,
 				Base,
+				ca,
+				cs,
+				da,
+				de,
+				el,
+				"en-GB",
+				es,
+				fi,
+				fr,
+				hr,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nb,
+				nl,
+				pl,
+				"pt-PT",
+				pt,
+				ro,
+				ru,
+				sk,
+				sv,
+				th,
+				tr,
+				uk,
+				vi,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 3C13954518FD9E7100762572;
 			productRefGroup = 3C13954F18FD9E7100762572 /* Products */;
@@ -450,8 +512,10 @@
 				3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */,
 				3C13956218FD9E7100762572 /* AppDelegate.m in Sources */,
 				3C09FB00190949B7005DAA9C /* UIImageView+AFNetworking.m in Sources */,
+				3CBA8D6D191ABE9800064E7C /* MBProgressHUD.m in Sources */,
 				3C09FAEA190949B7005DAA9C /* AFHTTPSessionManager.m in Sources */,
 				3C09FAFA190949B7005DAA9C /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				3CBA8BAA191A980F00064E7C /* AFHolopicsAPIClient.m in Sources */,
 				3C09FAF8190949B7005DAA9C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3C13959618FDB82400762572 /* ImageUtilities.m in Sources */,
 				3C13959C18FDBFE700762572 /* GeneralUtilities.m in Sources */,
@@ -463,6 +527,7 @@
 				3C09FAEC190949B7005DAA9C /* AFNetworkReachabilityManager.m in Sources */,
 				3C09FB06190949B7005DAA9C /* UIWebView+AFNetworking.m in Sources */,
 				3C09FAF4190949B7005DAA9C /* AFURLResponseSerialization.m in Sources */,
+				3CBA8BB1191A9DE100064E7C /* Holopic.m in Sources */,
 				3C1395A018FDEF8E00762572 /* holoImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -562,8 +627,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LINCS";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINCS";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -572,8 +637,9 @@
 				GCC_PREFIX_HEADER = "HoloPics/HoloPics-Prefix.pch";
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
+				PROVISIONING_PROFILE = "DB0C287C-11AA-4A22-9BB8-672A7EEEE411";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -583,8 +649,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LINCS";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINCS";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -593,8 +659,9 @@
 				GCC_PREFIX_HEADER = "HoloPics/HoloPics-Prefix.pch";
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
+				PROVISIONING_PROFILE = "DB0C287C-11AA-4A22-9BB8-672A7EEEE411";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

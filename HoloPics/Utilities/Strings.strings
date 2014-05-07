@@ -8,5 +8,7 @@
 "photo_library" = "Your library";
 "cancel" = "Cancel";
 "photo_bank" = "Bank of images";
+"create_holopic_failed_title" = "Connection problem";
+"create_holopic_failed_message" = "Your holopic failed, please try again.";
 
  
