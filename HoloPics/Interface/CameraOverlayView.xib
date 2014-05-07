@@ -14,11 +14,11 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleAspectFit" id="iN0-l3-epB">
+        <view clipsSubviews="YES" contentMode="scaleAspectFit" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jYL-lw-JZW" customClass="holoImageView">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jYL-lw-JZW" customClass="holoImageView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
@@ -26,8 +26,8 @@
                     <rect key="frame" x="5" y="5" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="QDc-hQ-bUr"/>
-                        <constraint firstAttribute="height" constant="50" id="zyH-oj-JqT"/>
+                        <constraint firstAttribute="width" constant="50" id="UKS-7r-Wym"/>
+                        <constraint firstAttribute="height" constant="50" id="agU-9H-zxy"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="camera-quit-button.png">
@@ -67,9 +67,13 @@
                         <action selector="saveButtonClicked:" destination="-1" eventType="touchUpInside" id="BQO-op-3Wx"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-Rm-9lR">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-Rm-9lR">
                     <rect key="frame" x="5" y="513" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="MlW-D8-wqC"/>
+                        <constraint firstAttribute="height" constant="50" id="tqR-pO-qft"/>
+                    </constraints>
                     <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                     <state key="normal" image="trash.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,14 +82,19 @@
             </subviews>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="KO1-su-2Wy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="4qi-u8-Ao3"/>
-                <constraint firstAttribute="bottom" secondItem="L3c-4F-Elk" secondAttribute="bottom" constant="5" id="W8d-Fj-tyG"/>
-                <constraint firstAttribute="trailing" secondItem="L3c-4F-Elk" secondAttribute="trailing" constant="5" id="YrI-9a-wOM"/>
-                <constraint firstItem="KO1-su-2Wy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="n1q-Nz-k4p"/>
-                <constraint firstItem="AnH-cb-SA8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="scK-zc-ZPV"/>
-                <constraint firstAttribute="trailing" secondItem="AnH-cb-SA8" secondAttribute="trailing" constant="5" id="vJF-Ix-5km"/>
+                <constraint firstAttribute="trailing" secondItem="L3c-4F-Elk" secondAttribute="trailing" constant="5" id="1h0-hZ-l8g"/>
+                <constraint firstAttribute="bottom" secondItem="jYL-lw-JZW" secondAttribute="bottom" id="8jb-qC-Y0U"/>
+                <constraint firstItem="KO1-su-2Wy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Bsc-2x-u8u"/>
+                <constraint firstItem="AnH-cb-SA8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="S6S-u0-T64"/>
+                <constraint firstItem="hf5-Rm-9lR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="SYq-pW-aCp"/>
+                <constraint firstAttribute="trailing" secondItem="AnH-cb-SA8" secondAttribute="trailing" constant="5" id="Tmc-Kt-dUh"/>
+                <constraint firstItem="KO1-su-2Wy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="WXx-3K-8CE"/>
+                <constraint firstItem="jYL-lw-JZW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e5u-0u-Gbc"/>
+                <constraint firstAttribute="bottom" secondItem="hf5-Rm-9lR" secondAttribute="bottom" constant="5" id="gka-Cj-Q71"/>
+                <constraint firstItem="jYL-lw-JZW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yLo-je-whJ"/>
+                <constraint firstAttribute="bottom" secondItem="L3c-4F-Elk" secondAttribute="bottom" constant="5" id="zL8-b5-sIT"/>
+                <constraint firstAttribute="trailing" secondItem="jYL-lw-JZW" secondAttribute="trailing" id="zqw-tC-NZW"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>

@@ -96,9 +96,10 @@
     imagePickerController.allowsEditing = NO;
     imagePickerController.navigationBarHidden=YES;
     
-    NSString *xibName = self.view.frame.size.height == 568 ? @"CameraOverlayView" : @"CameraOverlayView_small";
+    NSString *xibName = @"CameraOverlayView";
     NSArray* nibViews = [[NSBundle mainBundle] loadNibNamed:xibName owner:self options:nil];
     UIView* myView = [ nibViews objectAtIndex: 0];
+    myView.frame = self.view.frame;
     
     imagePickerController.cameraOverlayView = myView;
     

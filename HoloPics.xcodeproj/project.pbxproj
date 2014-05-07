@@ -50,7 +50,6 @@
 		3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */; };
 		3C1395B61900C66C00762572 /* create_send_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B41900C66C00762572 /* create_send_button.png */; };
 		3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */; };
-		3C99669219097D9A00C5D4FF /* CameraOverlayView_small.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C99669119097D9A00C5D4FF /* CameraOverlayView_small.xib */; };
 		3C9ED4F11918E98C003A8269 /* TutoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9ED4F01918E98C003A8269 /* TutoImageView.m */; };
 		3CA89FDF190EA66A002E4D1D /* flexibleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA89FDE190EA66A002E4D1D /* flexibleImageView.m */; };
 		3CA89FE1190FE584002E4D1D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA89FE0190FE584002E4D1D /* trash.png */; };
@@ -134,7 +133,6 @@
 		3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flip-button@2x~iphone.png"; sourceTree = "<group>"; };
 		3C1395B41900C66C00762572 /* create_send_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_send_button.png; sourceTree = "<group>"; };
 		3C1395B51900C66C00762572 /* create_send_button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create_send_button@2x~iphone.png"; sourceTree = "<group>"; };
-		3C99669119097D9A00C5D4FF /* CameraOverlayView_small.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView_small.xib; sourceTree = "<group>"; };
 		3C9ED4EF1918E98C003A8269 /* TutoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutoImageView.h; path = Utilities/TutoImageView.h; sourceTree = "<group>"; };
 		3C9ED4F01918E98C003A8269 /* TutoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutoImageView.m; path = Utilities/TutoImageView.m; sourceTree = "<group>"; };
 		3CA89FDD190EA66A002E4D1D /* flexibleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = flexibleImageView.h; path = Utilities/flexibleImageView.h; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 				3C13958C18FDAA3D00762572 /* Main.storyboard */,
 				3C13956318FD9E7100762572 /* Images.xcassets */,
 				3C13959118FDACB700762572 /* CameraOverlayView.xib */,
-				3C99669119097D9A00C5D4FF /* CameraOverlayView_small.xib */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -420,7 +417,6 @@
 				3C1395A419006BDC00762572 /* camera-quit-button.png in Resources */,
 				3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */,
 				3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */,
-				3C99669219097D9A00C5D4FF /* CameraOverlayView_small.xib in Resources */,
 				3C13959218FDACB700762572 /* CameraOverlayView.xib in Resources */,
 				3C1395A619006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */,
 				3C13958D18FDAA3D00762572 /* Main.storyboard in Resources */,
@@ -566,8 +562,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LINCS";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINCS";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -577,7 +573,7 @@
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DB0C287C-11AA-4A22-9BB8-672A7EEEE411";
+				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -587,8 +583,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LINCS";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINCS";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -598,7 +594,7 @@
 				INFOPLIST_FILE = "HoloPics/HoloPics-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "DB0C287C-11AA-4A22-9BB8-672A7EEEE411";
+				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
