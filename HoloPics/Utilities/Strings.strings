@@ -6,9 +6,12 @@
 "no_connection" = "No connection";
 "incomplete_pics" = "Finish the pics before saving it!";
 "photo_library" = "Your library";
+"return_feed" = "Return to feed";
+"clean_screen" = "Clean screen";
 "cancel" = "Cancel";
 "photo_bank" = "Bank of images";
 "create_holopic_failed_title" = "Connection problem";
 "create_holopic_failed_message" = "Your holopic failed, please try again.";
+"image_saved" = "Image saved";
 
  

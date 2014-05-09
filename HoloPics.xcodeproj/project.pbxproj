@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAB71908F917005DAA9C /* PathUtility.m */; };
-		3C09FABA19093DB6005DAA9C /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C09FAB919093DB6005DAA9C /* AWSS3.framework */; };
-		3C09FABD190944CC005DAA9C /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C09FABC190944CC005DAA9C /* AWSRuntime.framework */; };
 		3C09FAE6190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC2190949B6005DAA9C /* AFHTTPRequestOperation.m */; };
 		3C09FAE8190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC4190949B6005DAA9C /* AFHTTPRequestOperationManager.m */; };
 		3C09FAEA190949B7005DAA9C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC6190949B6005DAA9C /* AFHTTPSessionManager.m */; };
@@ -59,13 +57,22 @@
 		3CBA8BAA191A980F00064E7C /* AFHolopicsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8BA9191A980F00064E7C /* AFHolopicsAPIClient.m */; };
 		3CBA8BB1191A9DE100064E7C /* Holopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8BB0191A9DE100064E7C /* Holopic.m */; };
 		3CBA8D6D191ABE9800064E7C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8D6C191ABE9800064E7C /* MBProgressHUD.m */; };
+		3CBA8D70191B868F00064E7C /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8D6F191B868F00064E7C /* FeedViewController.m */; };
+		3CBA8D74191B8AE200064E7C /* DisplayHolopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8D72191B8AE200064E7C /* DisplayHolopicViewController.m */; };
+		3CBA8D75191B8AE200064E7C /* DisplayHolopic.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CBA8D73191B8AE200064E7C /* DisplayHolopic.xib */; };
+		3CBA8D78191B8FB100064E7C /* TimeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8D77191B8FB100064E7C /* TimeUtilities.m */; };
+		3CBA8D7B191BB16F00064E7C /* explore_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CBA8D79191BB16F00064E7C /* explore_refresh.png */; };
+		3CBA8D7C191BB16F00064E7C /* explore_refresh@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CBA8D7A191BB16F00064E7C /* explore_refresh@2x~iphone.png */; };
+		3CE01890191BD2E40057EE0B /* explore_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE0188E191BD2E40057EE0B /* explore_camera.png */; };
+		3CE01891191BD2E40057EE0B /* explore_camera@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE0188F191BD2E40057EE0B /* explore_camera@2x~iphone.png */; };
+		3CE01894191CCB490057EE0B /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE01893191CCB490057EE0B /* ShareViewController.m */; };
+		3CE0189B191CF74A0057EE0B /* bar-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE01899191CF74A0057EE0B /* bar-back.png */; };
+		3CE0189C191CF74A0057EE0B /* bar-back@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CE0189A191CF74A0057EE0B /* bar-back@2x~iphone.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3C09FAB61908F917005DAA9C /* PathUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtility.h; sourceTree = "<group>"; };
 		3C09FAB71908F917005DAA9C /* PathUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtility.m; sourceTree = "<group>"; };
-		3C09FAB919093DB6005DAA9C /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSS3.framework; sourceTree = "<group>"; };
-		3C09FABC190944CC005DAA9C /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSRuntime.framework; sourceTree = "<group>"; };
 		3C09FAC1190949B6005DAA9C /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		3C09FAC2190949B6005DAA9C /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		3C09FAC3190949B6005DAA9C /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -151,6 +158,21 @@
 		3CBA8BB0191A9DE100064E7C /* Holopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Holopic.m; path = Models/Holopic.m; sourceTree = "<group>"; };
 		3CBA8D6B191ABE9800064E7C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		3CBA8D6C191ABE9800064E7C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		3CBA8D6E191B868F00064E7C /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		3CBA8D6F191B868F00064E7C /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
+		3CBA8D71191B8AE200064E7C /* DisplayHolopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayHolopicViewController.h; sourceTree = "<group>"; };
+		3CBA8D72191B8AE200064E7C /* DisplayHolopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayHolopicViewController.m; sourceTree = "<group>"; };
+		3CBA8D73191B8AE200064E7C /* DisplayHolopic.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisplayHolopic.xib; path = ../Controllers/DisplayHolopic.xib; sourceTree = "<group>"; };
+		3CBA8D76191B8FB100064E7C /* TimeUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeUtilities.h; sourceTree = "<group>"; };
+		3CBA8D77191B8FB100064E7C /* TimeUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeUtilities.m; sourceTree = "<group>"; };
+		3CBA8D79191BB16F00064E7C /* explore_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explore_refresh.png; sourceTree = "<group>"; };
+		3CBA8D7A191BB16F00064E7C /* explore_refresh@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explore_refresh@2x~iphone.png"; sourceTree = "<group>"; };
+		3CE0188E191BD2E40057EE0B /* explore_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explore_camera.png; sourceTree = "<group>"; };
+		3CE0188F191BD2E40057EE0B /* explore_camera@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "explore_camera@2x~iphone.png"; sourceTree = "<group>"; };
+		3CE01892191CCB490057EE0B /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		3CE01893191CCB490057EE0B /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		3CE01899191CF74A0057EE0B /* bar-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-back.png"; sourceTree = "<group>"; };
+		3CE0189A191CF74A0057EE0B /* bar-back@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-back@2x~iphone.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,9 +183,7 @@
 				3C13959918FDBF6B00762572 /* AssetsLibrary.framework in Frameworks */,
 				3C13955418FD9E7100762572 /* CoreGraphics.framework in Frameworks */,
 				3C13955618FD9E7100762572 /* UIKit.framework in Frameworks */,
-				3C09FABD190944CC005DAA9C /* AWSRuntime.framework in Frameworks */,
 				3C13955218FD9E7100762572 /* Foundation.framework in Frameworks */,
-				3C09FABA19093DB6005DAA9C /* AWSS3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,8 +280,6 @@
 		3C13955018FD9E7100762572 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3C09FABC190944CC005DAA9C /* AWSRuntime.framework */,
-				3C09FAB919093DB6005DAA9C /* AWSS3.framework */,
 				3C13959818FDBF6B00762572 /* AssetsLibrary.framework */,
 				3C13955118FD9E7100762572 /* Foundation.framework */,
 				3C13955318FD9E7100762572 /* CoreGraphics.framework */,
@@ -302,6 +320,12 @@
 			children = (
 				3C13958318FDA3B400762572 /* PicsCreationViewController.h */,
 				3C13958418FDA3B400762572 /* PicsCreationViewController.m */,
+				3CBA8D6E191B868F00064E7C /* FeedViewController.h */,
+				3CBA8D6F191B868F00064E7C /* FeedViewController.m */,
+				3CBA8D71191B8AE200064E7C /* DisplayHolopicViewController.h */,
+				3CBA8D72191B8AE200064E7C /* DisplayHolopicViewController.m */,
+				3CE01892191CCB490057EE0B /* ShareViewController.h */,
+				3CE01893191CCB490057EE0B /* ShareViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -322,6 +346,8 @@
 				3C13959B18FDBFE700762572 /* GeneralUtilities.m */,
 				3C09FAB61908F917005DAA9C /* PathUtility.h */,
 				3C09FAB71908F917005DAA9C /* PathUtility.m */,
+				3CBA8D76191B8FB100064E7C /* TimeUtilities.h */,
+				3CBA8D77191B8FB100064E7C /* TimeUtilities.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -332,6 +358,7 @@
 				3C13958C18FDAA3D00762572 /* Main.storyboard */,
 				3C13956318FD9E7100762572 /* Images.xcassets */,
 				3C13959118FDACB700762572 /* CameraOverlayView.xib */,
+				3CBA8D73191B8AE200064E7C /* DisplayHolopic.xib */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -339,6 +366,12 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3CE01899191CF74A0057EE0B /* bar-back.png */,
+				3CE0189A191CF74A0057EE0B /* bar-back@2x~iphone.png */,
+				3CE0188E191BD2E40057EE0B /* explore_camera.png */,
+				3CE0188F191BD2E40057EE0B /* explore_camera@2x~iphone.png */,
+				3CBA8D79191BB16F00064E7C /* explore_refresh.png */,
+				3CBA8D7A191BB16F00064E7C /* explore_refresh@2x~iphone.png */,
 				3CABFB541919367900EEB378 /* tuto1.png */,
 				3CABFB5619194A2A00EEB378 /* tuto2.png */,
 				3CA89FE0190FE584002E4D1D /* trash.png */,
@@ -473,8 +506,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CBA8D7C191BB16F00064E7C /* explore_refresh@2x~iphone.png in Resources */,
+				3CE0189C191CF74A0057EE0B /* bar-back@2x~iphone.png in Resources */,
 				3C09FB0E19095AEF005DAA9C /* Strings.strings in Resources */,
 				3C1395B61900C66C00762572 /* create_send_button.png in Resources */,
+				3CBA8D75191B8AE200064E7C /* DisplayHolopic.xib in Resources */,
+				3CBA8D7B191BB16F00064E7C /* explore_refresh.png in Resources */,
 				3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */,
 				3C1395A419006BDC00762572 /* camera-quit-button.png in Resources */,
 				3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */,
@@ -486,6 +523,9 @@
 				3CABFB5719194A2A00EEB378 /* tuto2.png in Resources */,
 				3C13956418FD9E7100762572 /* Images.xcassets in Resources */,
 				3CA89FE1190FE584002E4D1D /* trash.png in Resources */,
+				3CE01891191BD2E40057EE0B /* explore_camera@2x~iphone.png in Resources */,
+				3CE01890191BD2E40057EE0B /* explore_camera.png in Resources */,
+				3CE0189B191CF74A0057EE0B /* bar-back.png in Resources */,
 				3CABFB551919367900EEB378 /* tuto1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,10 +541,12 @@
 				3C09FAF6190949B7005DAA9C /* AFURLSessionManager.m in Sources */,
 				3C09FAF0190949B7005DAA9C /* AFURLConnectionOperation.m in Sources */,
 				3C09FB04190949B7005DAA9C /* UIRefreshControl+AFNetworking.m in Sources */,
+				3CBA8D74191B8AE200064E7C /* DisplayHolopicViewController.m in Sources */,
 				3C09FAFE190949B7005DAA9C /* UIButton+AFNetworking.m in Sources */,
 				3C09FB02190949B7005DAA9C /* UIProgressView+AFNetworking.m in Sources */,
 				3C09FAE6190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */,
 				3C13958518FDA3B400762572 /* PicsCreationViewController.m in Sources */,
+				3CBA8D78191B8FB100064E7C /* TimeUtilities.m in Sources */,
 				3C9ED4F11918E98C003A8269 /* TutoImageView.m in Sources */,
 				3C09FAFC190949B7005DAA9C /* UIAlertView+AFNetworking.m in Sources */,
 				3CA89FDF190EA66A002E4D1D /* flexibleImageView.m in Sources */,
@@ -528,6 +570,8 @@
 				3C09FB06190949B7005DAA9C /* UIWebView+AFNetworking.m in Sources */,
 				3C09FAF4190949B7005DAA9C /* AFURLResponseSerialization.m in Sources */,
 				3CBA8BB1191A9DE100064E7C /* Holopic.m in Sources */,
+				3CBA8D70191B868F00064E7C /* FeedViewController.m in Sources */,
+				3CE01894191CCB490057EE0B /* ShareViewController.m in Sources */,
 				3C1395A018FDEF8E00762572 /* holoImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

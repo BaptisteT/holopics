@@ -14,4 +14,6 @@
 
 + (void)createHolopicsWithEncodedImage:(NSString *)encodedImage AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock;
 
++ (void)getHolopicsAtPage:(NSUInteger)page pageSize:(NSUInteger)pageSize AndExecuteSuccess:(void(^)(NSArray *holopics, NSInteger page))successBlock failure:(void (^)())failureBlock;
+
 @end

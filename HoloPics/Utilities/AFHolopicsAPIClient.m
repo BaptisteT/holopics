@@ -8,6 +8,7 @@
 
 #import "AFHolopicsAPIClient.h"
 #import "Constants.h"
+#import "Holopic.h"
 
 @implementation AFHolopicsAPIClient
 
@@ -57,6 +58,30 @@
         if (successBlock) {
             successBlock();
         }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failureBlock) {
+            failureBlock();
+        }
+    }];
+}
+
+
+// Retrieve most recent holopics
++ (void)getHolopicsAtPage:(NSUInteger)page pageSize:(NSUInteger)pageSize AndExecuteSuccess:(void(^)(NSArray *holopics, NSInteger page))successBlock failure:(void (^)())failureBlock
+{
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    
+    [parameters setObject:[NSNumber numberWithLong:page] forKey:@"page"];
+    [parameters setObject:[NSNumber numberWithLong:pageSize] forKey:@"page_size"];
+    
+    NSString *path = [[AFHolopicsAPIClient getBasePath] stringByAppendingString:@"holopics.json"];
+    
+    [[AFHolopicsAPIClient sharedClient] GET:path parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+        NSDictionary *result = [JSON valueForKeyPath:@"result"];
+        NSArray *rawHolopics = [result valueForKeyPath:@"holopics"];
+        NSInteger page = [[result valueForKeyPath:@"page"] integerValue];
+        successBlock([Holopic rawHolopicsToInstances:rawHolopics], page);
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failureBlock) {
             failureBlock();

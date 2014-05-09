@@ -13,12 +13,9 @@
 #import "holoImageView.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKitDefines.h>
-#import <UIKit/UIKit.h>
-#import <AWSS3/AWSS3.h>
-#import <AWSS3/AmazonS3Client.h>
 #import "flexibleImageView.h"
 #import "TutoImageView.h"
-#import "AFHolopicsAPIClient.h"
+#import "ShareViewController.h"
 #import "MBProgressHUD.h"
 #import "Holopic.h"
 
@@ -34,7 +31,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *cameraFlipButton;
 @property (strong, nonatomic) UIImagePickerController * imagePickerController;
 @property (weak, nonatomic) IBOutlet holoImageView *holoImageView;
-@property (strong, nonatomic) ALAssetsLibrary *library;
 @property (strong, nonatomic)  NSMutableArray *flexibleSubViews;
 @property (nonatomic) NSInteger subViewIndex;
 @property (strong, nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
@@ -46,35 +42,61 @@
 
 @end
 
-@implementation PicsCreationViewController
+@implementation PicsCreationViewController {
+    BOOL continueToSharing;
+}
 
+// ----------------------------------------------------------
+// Life cycle
+// ----------------------------------------------------------
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.firstOpening = [GeneralUtilities isFirstOpening];
+    continueToSharing = NO;
 
     // Alloc and init full screen camera
     [self allocAndInitFullScreenCamera];
+    
+    // Design stuff
+    [self.saveButton setHidden:YES];
+    [self.binButton setHidden:YES];
+    self.subViewIndex = 0;
+    [ImageUtilities outerGlow:self.saveButton];
+    [ImageUtilities outerGlow:self.binButton];
+    [ImageUtilities outerGlow:self.cancelButton];
+    [ImageUtilities outerGlow:self.cameraFlipButton];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    // Present the camera
-    [self presentViewController:self.imagePickerController animated:NO completion:NULL];
-    [self.saveButton setHidden:YES];
-    [self.binButton setHidden:YES];
-    self.subViewIndex = 0;
-    // Make this controller the delegate of holoImageView
-    self.holoImageView.holoImageViewDelegate = self;
-    
-    // On first opening of the app
-    if (self.firstOpening)
-    {
-        self.tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
-        self.tutoView.image = [UIImage imageNamed:@"tuto1.png"];
-        [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
+    if(!continueToSharing) {
+        // Present the camera
+        [self presentViewController:self.imagePickerController animated:NO completion:NULL];
+
+        // Make this controller the delegate of holoImageView
+        self.holoImageView.holoImageViewDelegate = self;
+
+        // On first opening of the app
+        if (self.firstOpening)
+        {
+            self.tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
+            self.tutoView.image = [UIImage imageNamed:@"tuto1.png"];
+            [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
+        }
+    } else {
+        continueToSharing = NO;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString * segueName = segue.identifier;
+
+    if ([segueName isEqualToString: @"Share From Create Push Segue"]) {
+        ((ShareViewController *) [segue destinationViewController]).imageToShare = (UIImage *)sender;
     }
 }
 
@@ -117,8 +139,7 @@
     
     // flash disactivated by default
     imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-    
-    self.library = [ALAssetsLibrary new];
+
     self.imagePickerController = imagePickerController;
 }
 
@@ -153,36 +174,26 @@
 
 - (IBAction)saveButtonClicked:(id)sender {
 
-    [MBProgressHUD showHUDAddedTo:self.imagePickerController.cameraOverlayView animated:YES];
-
-    // Create encoded image
+    // Remove button before saving
     [self.saveButton setHidden:YES];
     [self.cancelButton setHidden:YES];
+    
+    // Remove border around flexibleimageviews
     for (flexibleImageView *views in self.flexibleSubViews){
         [views setImage:views.attachedImage];
     }
+    
+    // Create Image
     UIImage *imageToShare = [ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView];
+    
     [self.saveButton setHidden:NO];
     [self.cancelButton setHidden:NO];
-    NSString *encodedImage = [ImageUtilities encodeToBase64String:imageToShare];
     
-    // Results block
-    typedef void (^SuccessBlock)(Holopic *);
-    SuccessBlock successBlock = ^(Holopic *holopic) {
-        [MBProgressHUD hideHUDForView:self.imagePickerController.cameraOverlayView animated:YES];
-    };
+    // Perform segue
+    continueToSharing = TRUE;
+    [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+    [self performSegueWithIdentifier:@"Share From Create Push Segue" sender:imageToShare];
     
-    typedef void (^FailureBlock)(NSURLSessionDataTask *);
-    FailureBlock failureBlock = ^(NSURLSessionDataTask *task) {
-        [MBProgressHUD hideHUDForView:self.imagePickerController.cameraOverlayView animated:YES];
-        
-        NSString *title = NSLocalizedStringFromTable (@"create_holopic_failed_title", @"Strings", @"comment");
-        NSString *message = NSLocalizedStringFromTable (@"create_holopic_failed_message", @"Strings", @"comment");
-        [GeneralUtilities showMessage:message withTitle:title];
-    };
-    
-    // Request
-    [AFHolopicsAPIClient createHolopicsWithEncodedImage:encodedImage AndExecuteSuccess:successBlock failure:failureBlock];
     // Share to FB, sms, email.. using UIActivityViewController
 //    NSString *shareString = @"";
 //    NSArray *activityItems = [NSArray arrayWithObjects:shareString, imageToShare, nil];
@@ -222,16 +233,10 @@
 // Cancel path and pictures
 - (IBAction)cancelButtonClicked:(id)sender
 {
-    [self.holoImageView clearPathAndPictures];
-    [self hideSaveandUnhideFlipButton];
-    self.subViewIndex = 0;
-    
-    for(id subView in self.flexibleSubViews) {
-        [(flexibleImageView *)subView removeFromSuperview];
-    }
-    self.flexibleSubViews = nil;
+    continueToSharing = TRUE;
+    [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popViewControllerAnimated:NO];
 }
-
 
 // --------------------------------
 // holoImageViewDelegate protocol
@@ -348,23 +353,11 @@
         [GeneralUtilities showMessage:@"Coming soon" withTitle:nil];
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_CANCEL]) {
         // do nothing
     }
 }
 
-// Save image in the phone
-- (void)saveImageToFileSystem:(UIImage *)image
-{
-    __weak typeof(self) weakSelf = self;
-    
-    [weakSelf.library writeImageToSavedPhotosAlbum:[image CGImage]
-                                       orientation:[ImageUtilities convertImageOrientationToAssetOrientation:image.imageOrientation]
-                                   completionBlock:^(NSURL *assetURL, NSError *error){
-                                       if (error) {
-                                           [GeneralUtilities showMessage:[error localizedDescription] withTitle:@"Error Saving"];
-                                       }
-                                   }];
-}
 
 @end

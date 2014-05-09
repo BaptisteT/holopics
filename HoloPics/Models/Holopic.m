@@ -10,6 +10,7 @@
 #import "Constants.h"
 
 #define HOLOPIC_ID @"id"
+#define HOLOPIC_CREATED_AT @"created_at"
 
 @implementation Holopic
 
@@ -28,7 +29,7 @@
 {
     Holopic *holopic = [[Holopic alloc] init];
     holopic.identifier = [[rawHolopic objectForKey:HOLOPIC_ID] integerValue];
-    
+    holopic.created = [rawHolopic objectForKey:HOLOPIC_CREATED_AT];
     return holopic;
 }
 

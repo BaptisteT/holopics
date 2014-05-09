@@ -170,4 +170,79 @@
     return [UIImageJPEGRepresentation(image,0.9) base64EncodedStringWithOptions:0];
 }
 
++ (void)outerGlow:(UIView *)view
+{
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    view.layer.shadowRadius = 1;
+    view.layer.shadowOpacity = 0.3;
+    view.layer.masksToBounds = NO;
+}
+
++ (void)drawCustomNavBarWithLeftItem:(NSString *)leftItem rightItem:(NSString *)rightItem title:(NSString *)title sizeBig:(BOOL)sizeBig inViewController:(UIViewController *)viewController
+{
+    //Status bar color
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    //Constants
+    NSUInteger barHeight = sizeBig ? 80 : 60;
+    NSUInteger buttonSize = sizeBig ? 45 : 35;
+    NSUInteger buttonSideMargin = 10;
+    NSUInteger buttonTopMargin = sizeBig ? 25 : 20;
+    NSUInteger titleTopMargin = sizeBig ? 32 : 22;
+    
+    //Create bar view
+    UIView *customNavBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, viewController.view.frame.size.width, barHeight)];
+    customNavBar.backgroundColor =  [UIColor groupTableViewBackgroundColor];
+    [viewController.view addSubview:customNavBar];
+    
+    // Right Button
+//    CGRect rightRect = CGRectMake(viewController.view.frame.size.width - buttonSize - buttonSideMargin, buttonTopMargin, buttonSize, buttonSize);
+//    if ([rightItem isEqualToString:@"ok"]) {
+//        [ImageUtilities addButtonWithImage:@"bar-ok.png"
+//                                    target:viewController
+//                                  selector:@selector(okButtonClicked)
+//                                      rect:rightRect
+//                                  toNavBar:customNavBar];
+//    }
+    
+    // Left Button
+    CGRect leftRect = CGRectMake(buttonSideMargin, buttonTopMargin, buttonSize, buttonSize);
+    if ([leftItem isEqualToString:@"back"]) {
+        [ImageUtilities addButtonWithImage:@"bar-back.png"
+                                    target:viewController
+                                  selector:@selector(backButtonClicked)
+                                      rect:leftRect
+                                  toNavBar:customNavBar];
+    }
+    
+    //Add title
+    if (title) {
+        UIFont *customFont = [UIFont fontWithName:@"Avenir Heavy" size:20];
+        NSString *text = title;
+        
+        CGSize labelSize = [text sizeWithAttributes:@{NSFontAttributeName:customFont}];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(viewController.view.frame.size.width/2 - labelSize.width/2, titleTopMargin, labelSize.width, labelSize.height)];
+        label.text = text;
+        label.font = customFont;
+        label.numberOfLines = 1;
+        label.textColor = [UIColor darkTextColor];
+        
+        [customNavBar addSubview:label];
+    }
+}
+
++ (void)addButtonWithImage:(NSString*)imageName
+                    target:(UIViewController *)viewController
+                  selector:(SEL)selector
+                      rect:(CGRect)rect
+                  toNavBar:(UIView *)navBar
+{
+    UIButton *customButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    customButton.frame = rect;
+    [customButton addTarget:viewController action:selector forControlEvents:UIControlEventTouchUpInside];
+    [customButton setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [navBar addSubview:customButton];
+}
+
 @end

@@ -15,5 +15,6 @@
 - (NSURL *)getHolopicImageURL;
 
 @property (nonatomic) NSUInteger identifier;
+@property (strong, nonatomic) NSString *created;
 
 @end

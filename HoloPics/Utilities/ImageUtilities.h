@@ -29,4 +29,8 @@
 
 + (NSString *)encodeToBase64String:(UIImage *)image;
 
++ (void)outerGlow:(UIView *)view;
+
++ (void)drawCustomNavBarWithLeftItem:(NSString *)leftItem rightItem:(NSString *)rightItem title:(NSString *)title sizeBig:(BOOL)sizeBig inViewController:(UIViewController *)viewController;
+
 @end
