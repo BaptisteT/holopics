@@ -12,4 +12,6 @@
 
 @interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, holoImageViewDelegate, UIActionSheetDelegate, flexibaleImageViewDelegate>
 
+@property (strong, nonatomic) UIImage *forwardedImage;
+
 @end

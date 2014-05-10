@@ -125,6 +125,7 @@
                     <navigationItem key="navigationItem" id="TGf-ZT-VS4"/>
                     <connections>
                         <outlet property="imageView" destination="V2n-ov-07X" id="GjR-5j-TVR"/>
+                        <outlet property="publishButton" destination="WPL-5a-sNs" id="A2F-bQ-35o"/>
                         <outlet property="saveLibraryButton" destination="ybB-66-DMQ" id="fyK-b8-lLR"/>
                         <outlet property="shareButton" destination="gAJ-ma-z4K" id="uWy-yi-K74"/>
                     </connections>
@@ -184,7 +185,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="aEh-eK-93S" kind="push" identifier="Pics Creation From Feed Push Segue" id="i9K-HF-OOf"/>
+                                    <action selector="cameraButtonClicked:" destination="TE3-gK-DVl" eventType="touchUpInside" id="I00-PA-qMm"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UiV-9f-5Xv">
@@ -196,6 +197,20 @@
                                     <constraint firstAttribute="height" constant="20" id="xdT-Ry-7cI"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ynp-iz-WH4">
+                                <rect key="frame" x="275" y="526" width="35" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="YKT-X6-p1L"/>
+                                    <constraint firstAttribute="height" constant="22" id="m0q-n0-PDg"/>
+                                </constraints>
+                                <state key="normal" image="forward_icon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="forwardButtonClicked:" destination="TE3-gK-DVl" eventType="touchUpInside" id="QoA-8q-Q55"/>
+                                </connections>
+                            </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Wq-iX-12S">
                                 <rect key="frame" x="0.0" y="150" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -224,17 +239,19 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="cln-F9-2yC" secondAttribute="trailing" id="4Dy-Rk-AoO"/>
+                            <constraint firstItem="cln-F9-2yC" firstAttribute="top" secondItem="4l9-wU-fBf" secondAttribute="bottom" id="G14-Us-cgg"/>
+                            <constraint firstAttribute="trailing" secondItem="Ynp-iz-WH4" secondAttribute="trailing" constant="10" id="HTw-VW-eAV"/>
                             <constraint firstAttribute="trailing" secondItem="v26-Xn-Swc" secondAttribute="trailing" id="Nn1-HG-cND"/>
+                            <constraint firstItem="fJA-cP-4Gm" firstAttribute="top" secondItem="Ynp-iz-WH4" secondAttribute="bottom" constant="20" id="abJ-ci-GxD"/>
                             <constraint firstItem="3Wq-iX-12S" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" id="g6D-C7-JRi"/>
                             <constraint firstItem="v26-Xn-Swc" firstAttribute="top" secondItem="73h-qH-dyw" secondAttribute="top" id="gO0-3H-uWN"/>
                             <constraint firstItem="v26-Xn-Swc" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" id="gYz-dc-I5F"/>
                             <constraint firstItem="PLU-qf-uHh" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" constant="135" id="oYr-Qp-JNp"/>
+                            <constraint firstAttribute="trailing" secondItem="cln-F9-2yC" secondAttribute="trailing" id="rOp-3L-yF5"/>
                             <constraint firstItem="UiV-9f-5Xv" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" id="sPs-pd-hFC"/>
                             <constraint firstItem="fJA-cP-4Gm" firstAttribute="top" secondItem="v26-Xn-Swc" secondAttribute="bottom" id="vtM-89-G5t"/>
                             <constraint firstItem="UiV-9f-5Xv" firstAttribute="top" secondItem="73h-qH-dyw" secondAttribute="top" id="wYE-sf-JLp"/>
                             <constraint firstItem="3Wq-iX-12S" firstAttribute="top" secondItem="4l9-wU-fBf" secondAttribute="bottom" constant="130" id="y1R-0J-haF"/>
-                            <constraint firstItem="cln-F9-2yC" firstAttribute="top" secondItem="4l9-wU-fBf" secondAttribute="bottom" id="ymf-CB-29U"/>
                             <constraint firstItem="PLU-qf-uHh" firstAttribute="top" secondItem="3Wq-iX-12S" secondAttribute="bottom" constant="29" id="yoG-nI-dod"/>
                         </constraints>
                     </view>
@@ -242,9 +259,11 @@
                     <connections>
                         <outlet property="cameraButton" destination="cln-F9-2yC" id="W3W-NS-nqw"/>
                         <outlet property="errorMessage" destination="3Wq-iX-12S" id="RQw-30-tti"/>
+                        <outlet property="forwardButton" destination="Ynp-iz-WH4" id="zce-gy-RTl"/>
                         <outlet property="refreshButton" destination="PLU-qf-uHh" id="n76-ba-HHq"/>
                         <outlet property="scrollView" destination="v26-Xn-Swc" id="Dgc-Ls-Dny"/>
                         <outlet property="statusBarContainer" destination="UiV-9f-5Xv" id="7yP-86-cmP"/>
+                        <segue destination="aEh-eK-93S" kind="push" identifier="Create From Feed Push Segue" id="zjn-Xz-jje"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJi-1X-e5J" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -260,6 +279,7 @@
     <resources>
         <image name="explore_camera.png" width="49" height="49"/>
         <image name="explore_refresh.png" width="99" height="99"/>
+        <image name="forward_icon.png" width="88" height="57"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

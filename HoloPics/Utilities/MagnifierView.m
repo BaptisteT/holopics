@@ -18,7 +18,6 @@
 		self.layer.borderWidth = 2;
 		self.layer.cornerRadius = 30;
 		self.layer.masksToBounds = YES;
-        self.center = CGPointMake(290,30);
 	}
 	return self;
 }

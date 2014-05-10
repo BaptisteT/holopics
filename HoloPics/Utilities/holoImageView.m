@@ -69,6 +69,7 @@
         if(self.fullImage) {
             if (self.zoomImage == nil) {
                 self.zoomImage = [[MagnifierView alloc] init];
+                self.zoomImage.center = CGPointMake(self.superview.frame.size.width - 30 ,30);
                 self.zoomImage.viewToMagnify = self;
             }
             [self.zoomImage setCenterPoint:initialPoint];

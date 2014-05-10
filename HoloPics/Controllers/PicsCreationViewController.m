@@ -62,6 +62,7 @@
     // Alloc and init full screen camera
     [self allocAndInitFullScreenCamera];
     
+
     // Design stuff
     [self.saveButton setHidden:YES];
     [self.binButton setHidden:YES];
@@ -70,6 +71,13 @@
     [ImageUtilities outerGlow:self.binButton];
     [ImageUtilities outerGlow:self.cancelButton];
     [ImageUtilities outerGlow:self.cameraFlipButton];
+    
+    // If there is a forwarded image, we display it
+    if(self.forwardedImage) {
+        [self unhideSaveandHideFlipButton];
+        self.holoImageView.fullImage = self.forwardedImage;
+        [self.holoImageView setImage:self.forwardedImage];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -141,7 +149,7 @@
     
     // flash disactivated by default
     imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-
+    
     self.imagePickerController = imagePickerController;
 }
 
@@ -260,8 +268,6 @@
         [self.tutoView setImage:[UIImage imageNamed:@"tuto2"]];
         self.tutoView.imageForTuto2 = flexibleImage;
         [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
-    } else {
-        flexibleImage.center = CGPointMake(flexibleImage.center.x + 5, flexibleImage.center.y + 5);
     }
 }
 

@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveLibraryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *publishButton;
 
 
 @end
@@ -37,11 +38,14 @@
     self.library = [ALAssetsLibrary new];
     // Design
     [self.saveLibraryButton setTitle:NSLocalizedStringFromTable (@"image_saved", @"Strings", @"comment") forState:UIControlStateDisabled];
-    [self.saveLibraryButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+    [self.saveLibraryButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [[self.saveLibraryButton layer] setBorderWidth:0.8f];
+    [[self.saveLibraryButton layer] setCornerRadius:15];
     [[self.saveLibraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
     [[self.shareButton layer] setBorderWidth:0.8f];
+    [[self.shareButton layer] setCornerRadius:15];
     [[self.shareButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [[self.publishButton layer] setCornerRadius:15];
     [self.imageView setImage:self.imageToShare];
     [self.imageView setAlpha:0.4f];
     
@@ -80,7 +84,7 @@
 - (IBAction)saveLibraryButtonClicked:(id)sender {
     if (self.saveLibraryButton.enabled) {
         self.saveLibraryButton.enabled = NO;
-        [[self.saveLibraryButton layer] setBorderColor:[UIColor lightGrayColor].CGColor];
+        [[self.saveLibraryButton layer] setBorderColor:[UIColor grayColor].CGColor];
         [self saveImageToFileSystem:self.imageToShare];
     }
 }

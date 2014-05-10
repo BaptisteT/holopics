@@ -10,6 +10,7 @@
 #import "AFHolopicsAPIClient.h"
 #import "ImageUtilities.h"
 #import "DisplayHolopicViewController.h"
+#import "PicsCreationViewController.h"
 
 #define PER_PAGE 10
 
@@ -17,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *statusBarContainer;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *forwardButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic) NSInteger page;
 @property (nonatomic) BOOL noMoreHolopicToPull;
@@ -52,6 +54,7 @@
     
     self.fullscreenModeInExplore = NO;
     [ImageUtilities outerGlow:self.cameraButton];
+    [ImageUtilities outerGlow:self.forwardButton];
     
     // a page is the width of the scroll view
     self.scrollView.pagingEnabled = YES;
@@ -71,6 +74,17 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self loadFirstPageHolopics];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSString * segueName = segue.identifier;
+    
+    if ([segueName isEqualToString: @"Create From Feed Push Segue"]) {
+        if (sender) {
+            ((PicsCreationViewController *) [segue destinationViewController]).forwardedImage = (UIImage *)sender;
+        }
+    }
 }
 
 // ------------------------------------------------
@@ -155,6 +169,19 @@
 }
 
 // ------------------------------------------------
+// Feed Buttons Clicked
+// ------------------------------------------------
+- (IBAction)cameraButtonClicked:(id)sender {
+    [self performSegueWithIdentifier:@"Create From Feed Push Segue" sender:nil];
+}
+- (IBAction)forwardButtonClicked:(id)sender {
+    DisplayHolopicViewController *controller = [self.viewControllers objectAtIndex:[self getScrollViewPage]];
+    UIImage *forwardedImage = controller.imageView.image;
+    [self performSegueWithIdentifier:@"Create From Feed Push Segue" sender:forwardedImage];
+}
+
+
+// ------------------------------------------------
 // Scroll view delegate methods
 // ------------------------------------------------
 
@@ -185,7 +212,7 @@
     [self loadHolopics];
     
     //Pull more snapbies if it's the last snapby
-    if (page >= self.holopics.count - 5 && !self.noMoreHolopicToPull && !self.pullingMoreHolopics) {
+    if (page >= self.holopics.count - 1 && !self.noMoreHolopicToPull && !self.pullingMoreHolopics) {
         
         self.pullingMoreHolopics = YES;
         
@@ -330,6 +357,7 @@
 {
     self.fullscreenModeInExplore = YES;
     self.cameraButton.hidden = YES;
+    self.forwardButton.hidden = YES;
     self.statusBarContainer.hidden = YES;
     
     for (DisplayHolopicViewController *controller in self.viewControllers) {
@@ -345,6 +373,7 @@
 {
     self.fullscreenModeInExplore = NO;
     self.cameraButton.hidden = NO;
+    self.forwardButton.hidden = NO;
     self.statusBarContainer.hidden = NO;
     
     for (DisplayHolopicViewController *controller in self.viewControllers) {

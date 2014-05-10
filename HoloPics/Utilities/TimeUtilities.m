@@ -35,27 +35,27 @@
         
         if (weeks >= 1) {
             if (weeks > 1) {
-                return [[NSString stringWithFormat:@"%ld", weeks] stringByAppendingString:@" weeks"];
+                return [[NSString stringWithFormat:@"%ld", (long)weeks] stringByAppendingString:@" weeks"];
             } else {
-                return [[NSString stringWithFormat:@"%ld", weeks] stringByAppendingString:@" week"];
+                return [[NSString stringWithFormat:@"%ld", (long)weeks] stringByAppendingString:@" week"];
             }
         } else if (days >= 1) {
             if (days > 1) {
-                return [[NSString stringWithFormat:@"%ld", days] stringByAppendingString:@" days"];
+                return [[NSString stringWithFormat:@"%ld", (long)days] stringByAppendingString:@" days"];
             } else {
-                return [[NSString stringWithFormat:@"%ld", days] stringByAppendingString:@" day"];
+                return [[NSString stringWithFormat:@"%ld", (long)days] stringByAppendingString:@" day"];
             }
         } else if (hours >= 1) {
             if (hours > 1) {
-                return [[NSString stringWithFormat:@"%ld", hours] stringByAppendingString:@" hours"];
+                return [[NSString stringWithFormat:@"%ld", (long)hours] stringByAppendingString:@" hours"];
             } else {
-                return [[NSString stringWithFormat:@"%ld", hours] stringByAppendingString:@" hour"];
+                return [[NSString stringWithFormat:@"%ld", (long)hours] stringByAppendingString:@" hour"];
             }
         } else {
             if (minutes > 1) {
-                return [[NSString stringWithFormat:@"%ld", minutes] stringByAppendingString:@" minutes"];
+                return [[NSString stringWithFormat:@"%ld", (long)minutes] stringByAppendingString:@" minutes"];
             } else if (minutes == 1) {
-                return [[NSString stringWithFormat:@"%ld", minutes] stringByAppendingString:@" minute"];
+                return [[NSString stringWithFormat:@"%ld", (long)minutes] stringByAppendingString:@" minute"];
             } else {
                 return @"Now";
             }
@@ -74,13 +74,13 @@
         NSInteger minutes = age / ONE_MINUTE;
         
         if (weeks >= 1) {
-            return [[NSString stringWithFormat:@"%ld", weeks] stringByAppendingString:@"w"];
+            return [[NSString stringWithFormat:@"%ld", (long)weeks] stringByAppendingString:@"w"];
         } else if (days >= 1) {
-            return [[NSString stringWithFormat:@"%ld", days] stringByAppendingString:@"d"];
+            return [[NSString stringWithFormat:@"%ld", (long)days] stringByAppendingString:@"d"];
         } else if (hours >= 1) {
-            return [[NSString stringWithFormat:@"%ld", hours] stringByAppendingString:@"h"];
+            return [[NSString stringWithFormat:@"%ld", (long)hours] stringByAppendingString:@"h"];
         } else {
-            return [[NSString stringWithFormat:@"%ld", minutes] stringByAppendingString:@"m"];
+            return [[NSString stringWithFormat:@"%ld", (long)minutes] stringByAppendingString:@"m"];
         }
     } else {
         return @"0m";
