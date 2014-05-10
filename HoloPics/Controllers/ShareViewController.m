@@ -12,12 +12,15 @@
 #import "GeneralUtilities.h"
 #import "MBProgressHUD.h"
 #import "Holopic.h"
+#import <Twitter/Twitter.h>
 
 @interface ShareViewController ()
 
 @property (strong, nonatomic) ALAssetsLibrary *library;
 @property (weak, nonatomic) IBOutlet UIButton *saveLibraryButton;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+
 
 @end
 
@@ -32,14 +35,15 @@
     [super viewDidLoad];
     
     self.library = [ALAssetsLibrary new];
-    
     // Design
     [self.saveLibraryButton setTitle:NSLocalizedStringFromTable (@"image_saved", @"Strings", @"comment") forState:UIControlStateDisabled];
     [self.saveLibraryButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-    [[self.saveLibraryButton layer] setBorderWidth:1.0f];
+    [[self.saveLibraryButton layer] setBorderWidth:0.8f];
     [[self.saveLibraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    [[self.shareButton layer] setBorderWidth:0.8f];
+    [[self.shareButton layer] setBorderColor:[UIColor blackColor].CGColor];
     [self.imageView setImage:self.imageToShare];
-    [self.imageView setAlpha:0.3f];
+    [self.imageView setAlpha:0.4f];
     
     [ImageUtilities drawCustomNavBarWithLeftItem:@"back" rightItem:nil title:@"Publish " sizeBig:NO inViewController:self];
 }
@@ -81,6 +85,16 @@
     }
 }
 
+- (IBAction)shareButtonClicked:(id)sender {
+    // Share to FB, sms, email.. using UIActivityViewController
+    NSString *shareString = @"";
+    NSArray *activityItems = [NSArray arrayWithObjects:shareString, self.imageToShare, nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop, UIActivityTypeSaveToCameraRoll];
+    [self presentViewController:activityViewController animated:YES completion:nil];
+}
+
 - (void)backButtonClicked {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -103,4 +117,6 @@
                                    }];
 }
 
+- (IBAction)shareLabel:(id)sender {
+}
 @end

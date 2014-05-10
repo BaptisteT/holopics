@@ -21,6 +21,8 @@
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"photo_bank", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"photo_library", @"Strings", @"comment")
+#define ACTION_SHEET_OPTION_3 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
+#define ACTION_SHEET_OPTION_4 NSLocalizedStringFromTable (@"return_to_feed", @"Strings", @"comment")
 #define ACTION_SHEET_CANCEL NSLocalizedStringFromTable (@"cancel", @"Strings", @"comment")
 
 @interface PicsCreationViewController ()
@@ -192,32 +194,7 @@
     // Perform segue
     continueToSharing = TRUE;
     [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-    [self performSegueWithIdentifier:@"Share From Create Push Segue" sender:imageToShare];
-    
-    // Share to FB, sms, email.. using UIActivityViewController
-//    NSString *shareString = @"";
-//    NSArray *activityItems = [NSArray arrayWithObjects:shareString, imageToShare, nil];
-//    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-//    activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop];
-//    [self.imagePickerController presentViewController:activityViewController animated:YES completion:nil];
-    
-    
-//    [GeneralUtilities showMessage:@"Image saved" withTitle:nil];
-//    [self saveImageToFileSystem:[ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView]];
-//    if (![GeneralUtilities connected]) {
-//        [GeneralUtilities showMessage:NSLocalizedStringFromTable (@"no_connection", @"Strings", @"comment") withTitle:nil];
-//    } else {
-//        NSString *imageName = [[GeneralUtilities getDeviceID] stringByAppendingFormat:@"--%lu", (unsigned long)[GeneralUtilities currentDateInMilliseconds]];
-//        AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
-//        [s3 createBucket:[[S3CreateBucketRequest alloc] initWithName:S3_BUCKET]];
-//        S3PutObjectRequest *por = [[S3PutObjectRequest alloc] initWithKey:imageName inBucket:S3_BUCKET];
-//        por.contentType = @"image/jpeg";
-//        NSData *imageData = UIImageJPEGRepresentation (self.holoImageView.fullImage, 0.8);
-//        por.data = imageData;
-//        [s3 putObject:por];
-//        [self cancelButtonClicked:nil];
-//    }
+    [self performSegueWithIdentifier:@"Share From Create Push Segue" sender:imageToShare];    
 }
 
 // Front camera
@@ -233,9 +210,9 @@
 // Cancel path and pictures
 - (IBAction)cancelButtonClicked:(id)sender
 {
-    continueToSharing = TRUE;
-    [self.navigationController dismissViewControllerAnimated:NO completion:nil];
-    [self.navigationController popViewControllerAnimated:NO];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_3, ACTION_SHEET_OPTION_4, nil];
+    
+    [actionSheet showInView:self.holoImageView];
 }
 
 // --------------------------------
@@ -353,9 +330,23 @@
         [GeneralUtilities showMessage:@"Coming soon" withTitle:nil];
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_CANCEL]) {
         // do nothing
+    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_3]) {
+        // Clean everything
+        [self.holoImageView clearPathAndPictures];
+        [self hideSaveandUnhideFlipButton];
+        self.subViewIndex = 0;
+        
+        for(id subView in self.flexibleSubViews) {
+            [(flexibleImageView *)subView removeFromSuperview];
+        }
+        self.flexibleSubViews = nil;
+    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_4]) {
+        // Delete and return to feed
+        continueToSharing = TRUE;
+        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+        [self.navigationController popViewControllerAnimated:NO];
     }
 }
 

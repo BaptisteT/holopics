@@ -13,5 +13,7 @@
 "create_holopic_failed_title" = "Connection problem";
 "create_holopic_failed_message" = "Your holopic failed, please try again.";
 "image_saved" = "Image saved";
+"clean_screen" = "Clean screen";
+"return_to_feed" = "Return to feed";
 
  
