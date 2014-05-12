@@ -24,7 +24,6 @@
 @property (nonatomic) BOOL noMoreHolopicToPull;
 @property (nonatomic) BOOL pullingMoreHolopics;
 @property (nonatomic) NSUInteger lastPageScrolled;
-@property(nonatomic) BOOL firstExplorePositionSet;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (weak, nonatomic) IBOutlet UIButton *refreshButton;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessage;
@@ -62,18 +61,15 @@
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.scrollsToTop = NO;
     self.scrollView.delegate = self;
-    
-    self.page = 1;
-    self.noMoreHolopicToPull = NO;
-    self.pullingMoreHolopics = NO;
-    
-    self.firstExplorePositionSet = NO;
-
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    self.page = 1;
+    self.noMoreHolopicToPull = NO;
+    self.pullingMoreHolopics = NO;
     [self loadFirstPageHolopics];
+    [self.scrollView setContentOffset:CGPointMake(0, 0)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
