@@ -212,7 +212,7 @@
     [self loadHolopics];
     
     //Pull more snapbies if it's the last snapby
-    if (page >= self.holopics.count - 1 && !self.noMoreHolopicToPull && !self.pullingMoreHolopics) {
+    if (page >= self.holopics.count - 5 && !self.noMoreHolopicToPull && !self.pullingMoreHolopics) {
         
         self.pullingMoreHolopics = YES;
         
