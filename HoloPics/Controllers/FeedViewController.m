@@ -52,6 +52,8 @@
     [super viewDidLoad];
     
     self.fullscreenModeInExplore = NO;
+    NSUInteger buttonHeight = self.cameraButton.bounds.size.height;
+    self.cameraButton.layer.cornerRadius = buttonHeight/2;
     [ImageUtilities outerGlow:self.cameraButton];
     [ImageUtilities outerGlow:self.forwardButton];
     

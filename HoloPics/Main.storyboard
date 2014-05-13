@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Csp-Mj-DE0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Csp-Mj-DE0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -174,16 +174,30 @@
                                     <outletCollection property="gestureRecognizers" destination="zd0-Sx-iCg" appends="YES" id="zCd-Es-14H"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cln-F9-2yC">
-                                <rect key="frame" x="270" y="20" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ynp-iz-WH4">
+                                <rect key="frame" x="270" y="521" width="45" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="2Wv-dW-fBf"/>
-                                    <constraint firstAttribute="height" constant="50" id="OqR-ze-3B6"/>
+                                    <constraint firstAttribute="width" constant="45" id="YKT-X6-p1L"/>
+                                    <constraint firstAttribute="height" constant="32" id="m0q-n0-PDg"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="explore_camera.png">
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" image="forward_icon.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="forwardButtonClicked:" destination="TE3-gK-DVl" eventType="touchUpInside" id="QoA-8q-Q55"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cln-F9-2yC">
+                                <rect key="frame" x="270" y="30" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.58999999999999997" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="2Wv-dW-fBf"/>
+                                    <constraint firstAttribute="height" constant="40" id="OqR-ze-3B6"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="create-button2.png"/>
                                 <connections>
                                     <action selector="cameraButtonClicked:" destination="TE3-gK-DVl" eventType="touchUpInside" id="I00-PA-qMm"/>
                                 </connections>
@@ -197,20 +211,6 @@
                                     <constraint firstAttribute="height" constant="20" id="xdT-Ry-7cI"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ynp-iz-WH4">
-                                <rect key="frame" x="275" y="526" width="35" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="YKT-X6-p1L"/>
-                                    <constraint firstAttribute="height" constant="22" id="m0q-n0-PDg"/>
-                                </constraints>
-                                <state key="normal" image="forward_icon.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="forwardButtonClicked:" destination="TE3-gK-DVl" eventType="touchUpInside" id="QoA-8q-Q55"/>
-                                </connections>
-                            </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Wq-iX-12S">
                                 <rect key="frame" x="0.0" y="150" width="320" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -239,15 +239,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cln-F9-2yC" firstAttribute="top" secondItem="4l9-wU-fBf" secondAttribute="bottom" id="G14-Us-cgg"/>
-                            <constraint firstAttribute="trailing" secondItem="Ynp-iz-WH4" secondAttribute="trailing" constant="10" id="HTw-VW-eAV"/>
+                            <constraint firstItem="fJA-cP-4Gm" firstAttribute="top" secondItem="Ynp-iz-WH4" secondAttribute="bottom" constant="15" id="4cI-ff-0TD"/>
+                            <constraint firstItem="cln-F9-2yC" firstAttribute="top" secondItem="4l9-wU-fBf" secondAttribute="bottom" constant="10" id="G14-Us-cgg"/>
                             <constraint firstAttribute="trailing" secondItem="v26-Xn-Swc" secondAttribute="trailing" id="Nn1-HG-cND"/>
-                            <constraint firstItem="fJA-cP-4Gm" firstAttribute="top" secondItem="Ynp-iz-WH4" secondAttribute="bottom" constant="20" id="abJ-ci-GxD"/>
                             <constraint firstItem="3Wq-iX-12S" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" id="g6D-C7-JRi"/>
                             <constraint firstItem="v26-Xn-Swc" firstAttribute="top" secondItem="73h-qH-dyw" secondAttribute="top" id="gO0-3H-uWN"/>
                             <constraint firstItem="v26-Xn-Swc" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" id="gYz-dc-I5F"/>
                             <constraint firstItem="PLU-qf-uHh" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" constant="135" id="oYr-Qp-JNp"/>
-                            <constraint firstAttribute="trailing" secondItem="cln-F9-2yC" secondAttribute="trailing" id="rOp-3L-yF5"/>
+                            <constraint firstAttribute="trailing" secondItem="cln-F9-2yC" secondAttribute="trailing" constant="10" id="rOp-3L-yF5"/>
+                            <constraint firstAttribute="trailing" secondItem="Ynp-iz-WH4" secondAttribute="trailing" constant="5" id="rhO-kE-r8V"/>
                             <constraint firstItem="UiV-9f-5Xv" firstAttribute="leading" secondItem="73h-qH-dyw" secondAttribute="leading" id="sPs-pd-hFC"/>
                             <constraint firstItem="fJA-cP-4Gm" firstAttribute="top" secondItem="v26-Xn-Swc" secondAttribute="bottom" id="vtM-89-G5t"/>
                             <constraint firstItem="UiV-9f-5Xv" firstAttribute="top" secondItem="73h-qH-dyw" secondAttribute="top" id="wYE-sf-JLp"/>
@@ -277,7 +277,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="explore_camera.png" width="49" height="49"/>
+        <image name="create-button2.png" width="148" height="148"/>
         <image name="explore_refresh.png" width="99" height="99"/>
         <image name="forward_icon.png" width="88" height="57"/>
     </resources>
