@@ -54,6 +54,8 @@
     self.fullscreenModeInExplore = NO;
     NSUInteger buttonHeight = self.cameraButton.bounds.size.height;
     self.cameraButton.layer.cornerRadius = buttonHeight/2;
+    buttonHeight = self.forwardButton.bounds.size.height;
+    self.forwardButton.layer.cornerRadius = buttonHeight/2;
     [ImageUtilities outerGlow:self.cameraButton];
     [ImageUtilities outerGlow:self.forwardButton];
     
@@ -188,6 +190,7 @@
     NSUInteger page = [self getScrollViewPage];
     
     if (scrollView.contentOffset.y < -50 && !self.pullingMoreHolopics) {
+        self.page = 1;
         self.pullingMoreHolopics = YES;
         [self loadFirstPageHolopics];
         return;
