@@ -7,6 +7,7 @@
 //
 
 #import "ImageUtilities.h"
+#import "Constants.h"
 
 @implementation ImageUtilities
 
@@ -196,16 +197,6 @@
     customNavBar.backgroundColor =  [UIColor groupTableViewBackgroundColor];
     [viewController.view addSubview:customNavBar];
     
-    // Right Button
-//    CGRect rightRect = CGRectMake(viewController.view.frame.size.width - buttonSize - buttonSideMargin, buttonTopMargin, buttonSize, buttonSize);
-//    if ([rightItem isEqualToString:@"ok"]) {
-//        [ImageUtilities addButtonWithImage:@"bar-ok.png"
-//                                    target:viewController
-//                                  selector:@selector(okButtonClicked)
-//                                      rect:rightRect
-//                                  toNavBar:customNavBar];
-//    }
-    
     // Left Button
     CGRect leftRect = CGRectMake(buttonSideMargin, buttonTopMargin, buttonSize, buttonSize);
     if ([leftItem isEqualToString:@"back"]) {
@@ -244,5 +235,52 @@
     [customButton setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [navBar addSubview:customButton];
 }
+
+
+// Save image locally
+// http://stackoverflow.com/questions/14531912/storing-images-locally-on-an-ios-device
++ (void)saveImageInAppDirectory:(UIImage *)image
+{
+    NSData *imageData = UIImagePNGRepresentation(image);
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSArray *imagePathArray = [prefs objectForKey:SAVED_SHAPED_PREF];
+    NSInteger imageIndex;
+    if(imagePathArray.lastObject) {
+        imageIndex = [imagePathArray.lastObject integerValue]+ 1;
+        imagePathArray = [imagePathArray arrayByAddingObject:[NSNumber numberWithInteger:imageIndex]];
+    } else {
+        imageIndex = 0;
+        imagePathArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithInteger:imageIndex], nil];
+    }
+
+    NSString *imagePath = [ImageUtilities getPathOfImageWithIndex:imageIndex];
+    if (![imageData writeToFile:imagePath atomically:NO])
+    {
+        NSLog((@"Failed to cache image data to disk"));
+    } else {
+        // Add new index to object
+        [prefs setObject:imagePathArray forKey:SAVED_SHAPED_PREF];
+    }
+}
+
+// Get image saved locally
++ (UIImage *)getImageSavedLocally:(NSInteger)imageIndex
+{
+    return [UIImage imageWithContentsOfFile:[ImageUtilities getPathOfImageWithIndex:imageIndex]];
+}
+
+// Get the path of the image saved locally
++ (NSString *)getPathOfImageWithIndex:(NSInteger)imageIndex
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%lu.png",imageIndex]];
+}
+
+// NSData *bezierData = [NSKeyedArchiver archivedDataWithRootObject:bezierPath];
+// UIBezierPath *bezierPath = [NSKeyedUnarchiver unarchiveObjectWithData:bezierData];
+// http://stackoverflow.com/questions/11452918/uibezierpath-persistence-with-core-data
+
 
 @end

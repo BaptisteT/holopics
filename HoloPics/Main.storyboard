@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="1176" y="6"/>
         </scene>
-        <!--Share View Controller-->
+        <!--Sharing View Controller-->
         <scene sceneID="Gms-HO-F99">
             <objects>
-                <viewController id="Ou6-XH-Y73" customClass="ShareViewController" sceneMemberID="viewController">
+                <viewController id="Ou6-XH-Y73" customClass="SharingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UNu-kS-mDu"/>
                         <viewControllerLayoutGuide type="bottom" id="UvL-Br-ABv"/>

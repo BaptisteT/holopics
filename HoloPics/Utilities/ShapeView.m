@@ -1,16 +1,16 @@
 //
-//  flexibleImageView.m
+//  ShapeView.m
 //  HoloPics
 //
 //  Created by Baptiste Truchot on 4/28/14.
 //  Copyright (c) 2014 Baptiste Truchot. All rights reserved.
 //
 
-#import "flexibleImageView.h"
+#import "ShapeView.h"
 #import "ImageUtilities.h"
 #import "GeneralUtilities.h"
 
-@interface flexibleImageView()
+@interface ShapeView()
 
 @property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 @property (nonatomic, strong) UIRotationGestureRecognizer *rotationRecognizer;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation flexibleImageView
+@implementation ShapeView
 
 - (id)initWithImage:(UIImage *)image andPath:(UIBezierPath *)path
 {
@@ -104,7 +104,7 @@
     {
         initialCenter = recognizer.view.center;
         // display bin
-        [self.flexibaleImageViewDelegate unhideBinButton];
+        [self.shapeViewDelegate unhideBinButton];
     }
     CGPoint translation = [recognizer translationInView:recognizer.view.superview];
     recognizer.view.center = CGPointMake(initialCenter.x + translation.x,
@@ -114,13 +114,13 @@
     {
         // Remove view if on bin
         CGPoint finalPoint = [recognizer locationInView:recognizer.view.superview];
-        [self.flexibaleImageViewDelegate deleteView:self ifBinContainsPoint:finalPoint];
+        [self.shapeViewDelegate deleteView:self ifBinContainsPoint:finalPoint];
     }
 }
 
 - (void)oneTapGesture:(UITapGestureRecognizer *)recognizer
 {
-    [self.flexibaleImageViewDelegate sendToFrontView:self];
+    [self.shapeViewDelegate sendToFrontView:self];
 }
 
 - (CGAffineTransform)applyRecognizer:(UIGestureRecognizer *)recognizer toTransform:(CGAffineTransform)transform

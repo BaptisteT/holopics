@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "holoImageView.h"
-#import "flexibleImageView.h"
+#import "BackgroundView.h"
+#import "ShapeView.h"
 
-@interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, holoImageViewDelegate, UIActionSheetDelegate, flexibaleImageViewDelegate>
+@interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, BackgroundViewDelegate, UIActionSheetDelegate, ShapeViewDelegate>
 
 @property (strong, nonatomic) UIImage *forwardedImage;
 

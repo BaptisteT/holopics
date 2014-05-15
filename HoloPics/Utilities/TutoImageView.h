@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "flexibleImageView.h"
+#import "ShapeView.h"
 
 @interface TutoImageView : UIImageView
 
-@property (weak, nonatomic) flexibleImageView *imageForTuto2;
+@property (weak, nonatomic) ShapeView *imageForTuto2;
 
 @end

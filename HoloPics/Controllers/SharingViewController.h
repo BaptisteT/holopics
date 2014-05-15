@@ -10,7 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 
-@interface ShareViewController : UIViewController
+@interface SharingViewController : UIViewController
 
 @property (strong, nonatomic) UIImage *imageToShare;
 

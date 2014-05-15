@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Baptiste Truchot. All rights reserved.
 //
 
-#import "ShareViewController.h"
+#import "SharingViewController.h"
 #import "AFHolopicsAPIClient.h"
 #import "ImageUtilities.h"
 #import "GeneralUtilities.h"
@@ -14,7 +14,7 @@
 #import "Holopic.h"
 #import <Twitter/Twitter.h>
 
-@interface ShareViewController ()
+@interface SharingViewController ()
 
 @property (strong, nonatomic) ALAssetsLibrary *library;
 @property (weak, nonatomic) IBOutlet UIButton *saveLibraryButton;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation ShareViewController
+@implementation SharingViewController
 
 // --------------------------------
 // Life Cycle
@@ -86,6 +86,7 @@
         self.saveLibraryButton.enabled = NO;
         [[self.saveLibraryButton layer] setBorderColor:[UIColor grayColor].CGColor];
         [self saveImageToFileSystem:self.imageToShare];
+//        [ImageUtilities saveImageInAppDirectory:self.imageToShare];
     }
 }
 

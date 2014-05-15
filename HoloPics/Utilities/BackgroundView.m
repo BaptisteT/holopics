@@ -1,12 +1,12 @@
 //
-//  holoImageView.m
+//  BackgroundView.m
 //  HoloPics
 //
 //  Created by Baptiste Truchot on 4/15/14.
 //  Copyright (c) 2014 Baptiste Truchot. All rights reserved.
 //
 
-#import "holoImageView.h"
+#import "BackgroundView.h"
 #import "Constants.h"
 #import "ImageUtilities.h"
 #import "GeneralUtilities.h"
@@ -14,7 +14,7 @@
 #import "MagnifierView.h"
 
 
-@interface holoImageView()
+@interface BackgroundView()
 
 @property (strong, nonatomic) UIBezierPath *path;
 @property (strong, nonatomic) MagnifierView *zoomImage;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation holoImageView {
+@implementation BackgroundView {
     // One finger
     CGPoint pts[5];
     CGPoint initialPoint;
@@ -40,7 +40,7 @@
 {
     if (self = [super initWithCoder:aDecoder])
     {
-        [self initHoloImageView];
+        [self initBackgroundView];
     }
     return self;
 }
@@ -48,7 +48,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self initHoloImageView];
+        [self initBackgroundView];
     }
     return self;
 }
@@ -93,7 +93,7 @@
             [PathUtility closePath:self.globalPath withInitialPoint:initialPoint inRect:self.bounds.size];
             
             // Create a flexible subview with the image inside the path
-            [self.holoImageViewDelegate createFlexibleSubView];
+            [self.backgroundViewDelegate createFlexibleSubView];
         }
         
         [self.globalPath removeAllPoints];
@@ -110,11 +110,11 @@
 {
     if(!self.fullImage) {
         // take full picture and display it
-        [self.holoImageViewDelegate takePictureAndDisplay];
+        [self.backgroundViewDelegate takePictureAndDisplay];
         [self addGestureRecognizer:self.pinchRecognizer];
     } else {
         [self clearPathAndPictures];
-        [self.holoImageViewDelegate hideSaveandUnhideFlipButton];
+        [self.backgroundViewDelegate hideSaveandUnhideFlipButton];
         [self removeGestureRecognizer:self.pinchRecognizer];
     }
 }
@@ -123,7 +123,7 @@
 - (void)handleLongPressGesture:(UITapGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        [self.holoImageViewDelegate letUserImportPhotoAndDisplay];
+        [self.backgroundViewDelegate letUserImportPhotoAndDisplay];
         [self addGestureRecognizer:self.pinchRecognizer];
     }
 }
@@ -190,7 +190,7 @@
     [self setImage:nil];
 }
 
-- (void)initHoloImageView
+- (void)initBackgroundView
 {
     [self setMultipleTouchEnabled:YES];
     self.exclusiveTouch = YES;

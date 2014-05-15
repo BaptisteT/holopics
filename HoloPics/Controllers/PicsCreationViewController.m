@@ -10,12 +10,12 @@
 #import "Constants.h"
 #import "ImageUtilities.h"
 #import "GeneralUtilities.h"
-#import "holoImageView.h"
+#import "BackgroundView.h"
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKitDefines.h>
-#import "flexibleImageView.h"
+#import "ShapeView.h"
 #import "TutoImageView.h"
-#import "ShareViewController.h"
+#import "SharingViewController.h"
 #import "MBProgressHUD.h"
 #import "Holopic.h"
 
@@ -32,7 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *binButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraFlipButton;
 @property (strong, nonatomic) UIImagePickerController * imagePickerController;
-@property (weak, nonatomic) IBOutlet holoImageView *holoImageView;
+@property (weak, nonatomic) IBOutlet BackgroundView *backgroundView;
 @property (strong, nonatomic)  NSMutableArray *flexibleSubViews;
 @property (nonatomic) NSInteger subViewIndex;
 @property (strong, nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
@@ -75,8 +75,8 @@
     // If there is a forwarded image, we display it
     if(self.forwardedImage) {
         [self unhideSaveandHideFlipButton];
-        self.holoImageView.fullImage = self.forwardedImage;
-        [self.holoImageView setImage:self.forwardedImage];
+        self.backgroundView.fullImage = self.forwardedImage;
+        [self.backgroundView setImage:self.forwardedImage];
     }
 }
 
@@ -86,8 +86,8 @@
         // Present the camera
         [self presentViewController:self.imagePickerController animated:NO completion:NULL];
 
-        // Make this controller the delegate of holoImageView
-        self.holoImageView.holoImageViewDelegate = self;
+        // Make this controller the delegate of backgroundView
+        self.backgroundView.backgroundViewDelegate = self;
 
         // On first opening of the app
         if (self.firstOpening)
@@ -96,6 +96,13 @@
             self.tutoView.image = [UIImage imageNamed:@"tuto1.png"];
             [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
         }
+        //
+//        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+//        NSArray *imagePathArray = [prefs objectForKey:SAVED_SHAPED_PREF];
+//        if(imagePathArray.lastObject) {
+//            [self.imagePickerController.cameraOverlayView addSubview:[[UIImageView alloc] initWithImage:[ImageUtilities getImageSavedLocally:[imagePathArray.lastObject integerValue]]]];
+//        }
+        
     } else {
         continueToSharing = NO;
     }
@@ -106,7 +113,7 @@
     NSString * segueName = segue.identifier;
 
     if ([segueName isEqualToString: @"Share From Create Push Segue"]) {
-        ((ShareViewController *) [segue destinationViewController]).imageToShare = (UIImage *)sender;
+        ((SharingViewController *) [segue destinationViewController]).imageToShare = (UIImage *)sender;
     }
 }
 
@@ -166,9 +173,9 @@
     } else {
         orientation = UIImageOrientationRight;
     }
-    self.holoImageView.fullImage = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.holoImageView.bounds.size];
+    self.backgroundView.fullImage = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.backgroundView.bounds.size];
 
-    [self.holoImageView setImage:self.holoImageView.fullImage];
+    [self.backgroundView setImage:self.backgroundView.fullImage];
     [self unhideSaveandHideFlipButton];
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
 }
@@ -188,8 +195,8 @@
     [self.saveButton setHidden:YES];
     [self.cancelButton setHidden:YES];
     
-    // Remove border around flexibleimageviews
-    for (flexibleImageView *views in self.flexibleSubViews){
+    // Remove border around shapes
+    for (ShapeView *views in self.flexibleSubViews){
         [views setImage:views.attachedImage];
     }
     
@@ -220,11 +227,11 @@
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_3, ACTION_SHEET_OPTION_4, nil];
     
-    [actionSheet showInView:self.holoImageView];
+    [actionSheet showInView:self.backgroundView];
 }
 
 // --------------------------------
-// holoImageViewDelegate protocol
+// backgroundViewDelegate protocol
 // --------------------------------
 
 // Take picture and display it on overlay
@@ -238,7 +245,7 @@
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_1, ACTION_SHEET_OPTION_2, nil];
     
-    [actionSheet showInView:self.holoImageView];
+    [actionSheet showInView:self.backgroundView];
 }
 
 // Create flexible subview with the image inside the path
@@ -249,24 +256,24 @@
     }
     
     // Return if we reached the limit of images
-    if (self.subViewIndex > kMaxNumberOfFlexibleImage) {
+    if (self.subViewIndex > kMaxNumberOfShapes) {
         [GeneralUtilities showMessage:@"You reached the maximum number of pics!" withTitle:nil];
         return;
     }
         
-    flexibleImageView *flexibleImage = [[flexibleImageView alloc] initWithImage:self.holoImageView.fullImage andPath:self.holoImageView.globalPath];
-    flexibleImage.flexibaleImageViewDelegate = self;
-    [self.flexibleSubViews addObject:flexibleImage];
+    ShapeView *shape = [[ShapeView alloc] initWithImage:self.backgroundView.fullImage andPath:self.backgroundView.globalPath];
+    shape.shapeViewDelegate = self;
+    [self.flexibleSubViews addObject:shape];
     
     // Add this subview to cameraOverlayView (before buttons)
     self.subViewIndex ++;
-    [self.imagePickerController.cameraOverlayView insertSubview:flexibleImage atIndex:self.subViewIndex];
+    [self.imagePickerController.cameraOverlayView insertSubview:shape atIndex:self.subViewIndex];
     
     if (self.firstOpening) {
-        flexibleImage.backgroundColor = [UIColor blackColor];
+        shape.backgroundColor = [UIColor blackColor];
         self.firstOpening = NO;
         [self.tutoView setImage:[UIImage imageNamed:@"tuto2"]];
-        self.tutoView.imageForTuto2 = flexibleImage;
+        self.tutoView.imageForTuto2 = shape;
         [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
     }
 }
@@ -294,7 +301,7 @@
 }
 
 // --------------------------------
-// flexibleImageView protocol
+// ShapeViewDelegate protocol
 // --------------------------------
 
 - (void)unhideBinButton
@@ -307,7 +314,7 @@
     [self.binButton setHidden:YES];
 }
 
-- (void)deleteView:(flexibleImageView *)view ifBinContainsPoint:(CGPoint)point
+- (void)deleteView:(ShapeView *)view ifBinContainsPoint:(CGPoint)point
 {
     if (CGRectContainsPoint(self.binButton.frame,point)) {
         [view removeFromSuperview];
@@ -317,7 +324,7 @@
     [self.binButton setHidden:YES];
 }
 
-- (void)sendToFrontView:(flexibleImageView *)view
+- (void)sendToFrontView:(ShapeView *)view
 {
     [self.imagePickerController.cameraOverlayView insertSubview:view atIndex:self.subViewIndex];
 }
@@ -340,12 +347,12 @@
         // do nothing
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_3]) {
         // Clean everything
-        [self.holoImageView clearPathAndPictures];
+        [self.backgroundView clearPathAndPictures];
         [self hideSaveandUnhideFlipButton];
         self.subViewIndex = 0;
         
         for(id subView in self.flexibleSubViews) {
-            [(flexibleImageView *)subView removeFromSuperview];
+            [(ShapeView *)subView removeFromSuperview];
         }
         self.flexibleSubViews = nil;
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_4]) {

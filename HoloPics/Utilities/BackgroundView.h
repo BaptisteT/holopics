@@ -1,5 +1,5 @@
 //
-//  holoImageView.h
+//  BackgroundView.h
 //  HoloPics
 //
 //  Created by Baptiste Truchot on 4/15/14.
@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreGraphics/CGPath.h>
 
-@protocol holoImageViewDelegate;
+@protocol BackgroundViewDelegate;
 
-@interface holoImageView : UIImageView <UIGestureRecognizerDelegate>
+@interface BackgroundView : UIImageView <UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) id <holoImageViewDelegate> holoImageViewDelegate;
+@property (weak, nonatomic) id <BackgroundViewDelegate> backgroundViewDelegate;
 @property (strong, nonatomic) UIImage *fullImage;
 @property (strong, nonatomic) UIBezierPath *globalPath;
 
@@ -21,7 +21,7 @@
 
 @end
 
-@protocol holoImageViewDelegate
+@protocol BackgroundViewDelegate
 
 - (void)takePictureAndDisplay;
 - (void)letUserImportPhotoAndDisplay;
