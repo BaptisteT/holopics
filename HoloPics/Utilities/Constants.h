@@ -28,7 +28,6 @@ static const NSUInteger kMinimumPinchDelta = 1;
 static const NSUInteger kMaxNumberOfShapes = 50;
 
 #define FIRST_OPENING_PREF @"First Opening"
-#define SAVED_SHAPED_PREF @"Saved Shapes"
 
 // Production
 static NSString * const kProdAFHolopicsAPIBaseURLString = @"http://holopics.herokuapp.com/";

@@ -4,13 +4,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PicsCreationViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController">
             <connections>
-                <outlet property="binButton" destination="hf5-Rm-9lR" id="gm0-B7-nE1"/>
                 <outlet property="cameraFlipButton" destination="AnH-cb-SA8" id="iG8-v1-7CW"/>
-                <outlet property="cancelButton" destination="KO1-su-2Wy" id="e7U-wi-Dd0"/>
-                <outlet property="holoImageView" destination="jYL-lw-JZW" id="3mF-c1-lzL"/>
-                <outlet property="saveButton" destination="L3c-4F-Elk" id="kv9-a8-zOF"/>
+                <outlet property="cancelButton" destination="ClI-KY-iiZ" id="5wk-pH-fLx"/>
+                <outlet property="flashButton" destination="926-Xe-vbB" id="TYi-lM-MgB"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -18,31 +16,12 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jYL-lw-JZW" customClass="BackgroundView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KO1-su-2Wy">
-                    <rect key="frame" x="5" y="5" width="50" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="50" id="UKS-7r-Wym"/>
-                        <constraint firstAttribute="height" constant="50" id="agU-9H-zxy"/>
-                    </constraints>
-                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                    <state key="normal" image="camera-quit-button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="zfG-ev-TFc"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnH-cb-SA8">
-                    <rect key="frame" x="247" y="5" width="68" height="50"/>
+                    <rect key="frame" x="252" y="513" width="68" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="7NW-Q7-7UO"/>
-                        <constraint firstAttribute="width" constant="68" id="WJC-wS-AFR"/>
+                        <constraint firstAttribute="height" constant="50" id="EC2-IH-8Ro"/>
+                        <constraint firstAttribute="width" constant="68" id="e9i-dE-0Zf"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     <state key="normal" image="camera-flip-button.png">
@@ -52,55 +31,62 @@
                         <action selector="flipCameraButtonClicked:" destination="-1" eventType="touchUpInside" id="Ej8-bL-6vH"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3c-4F-Elk">
-                    <rect key="frame" x="265" y="513" width="50" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="926-Xe-vbB">
+                    <rect key="frame" x="0.0" y="513" width="80" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="6Hs-9L-uBP"/>
-                        <constraint firstAttribute="height" constant="50" id="m7f-Pu-JgL"/>
+                        <constraint firstAttribute="height" constant="50" id="Jvc-U1-ac6"/>
+                        <constraint firstAttribute="width" constant="80" id="UXL-bM-cnS"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                    <state key="normal" image="create_send_button.png">
+                    <state key="normal" image="flash_off.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="saveButtonClicked:" destination="-1" eventType="touchUpInside" id="BQO-op-3Wx"/>
+                        <action selector="flashButtonClicked:" destination="-1" eventType="touchUpInside" id="ga7-of-bp9"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hf5-Rm-9lR">
-                    <rect key="frame" x="5" y="513" width="50" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwL-xe-4Bp">
+                    <rect key="frame" x="130" y="503" width="60" height="60"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="MlW-D8-wqC"/>
-                        <constraint firstAttribute="height" constant="50" id="tqR-pO-qft"/>
+                        <constraint firstAttribute="height" constant="60" id="82m-Nb-gRL"/>
+                        <constraint firstAttribute="width" constant="60" id="ZqU-7f-kV8"/>
                     </constraints>
-                    <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                    <state key="normal" image="trash.png">
+                    <state key="normal" image="camera_capture.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="takePictureButtonClicked:" destination="-1" eventType="touchUpInside" id="Kfr-sC-Gag"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClI-KY-iiZ">
+                    <rect key="frame" x="0.0" y="5" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                    <state key="normal" image="camera-quit-button.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelButtonClicked:" destination="-1" eventType="touchUpInside" id="2pY-qg-L8M"/>
+                    </connections>
                 </button>
             </subviews>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="L3c-4F-Elk" secondAttribute="trailing" constant="5" id="1h0-hZ-l8g"/>
-                <constraint firstAttribute="bottom" secondItem="jYL-lw-JZW" secondAttribute="bottom" id="8jb-qC-Y0U"/>
-                <constraint firstItem="KO1-su-2Wy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Bsc-2x-u8u"/>
-                <constraint firstItem="AnH-cb-SA8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="S6S-u0-T64"/>
-                <constraint firstItem="hf5-Rm-9lR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="SYq-pW-aCp"/>
-                <constraint firstAttribute="trailing" secondItem="AnH-cb-SA8" secondAttribute="trailing" constant="5" id="Tmc-Kt-dUh"/>
-                <constraint firstItem="KO1-su-2Wy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="WXx-3K-8CE"/>
-                <constraint firstItem="jYL-lw-JZW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="e5u-0u-Gbc"/>
-                <constraint firstAttribute="bottom" secondItem="hf5-Rm-9lR" secondAttribute="bottom" constant="5" id="gka-Cj-Q71"/>
-                <constraint firstItem="jYL-lw-JZW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yLo-je-whJ"/>
-                <constraint firstAttribute="bottom" secondItem="L3c-4F-Elk" secondAttribute="bottom" constant="5" id="zL8-b5-sIT"/>
-                <constraint firstAttribute="trailing" secondItem="jYL-lw-JZW" secondAttribute="trailing" id="zqw-tC-NZW"/>
+                <constraint firstAttribute="trailing" secondItem="AnH-cb-SA8" secondAttribute="trailing" id="2Rx-Qy-FJz"/>
+                <constraint firstAttribute="bottom" secondItem="926-Xe-vbB" secondAttribute="bottom" constant="5" id="DeL-h2-Yvf"/>
+                <constraint firstAttribute="bottom" secondItem="OwL-xe-4Bp" secondAttribute="bottom" constant="5" id="OjJ-ev-FI8"/>
+                <constraint firstItem="OwL-xe-4Bp" firstAttribute="leading" secondItem="926-Xe-vbB" secondAttribute="trailing" constant="50" id="PuP-0A-KUb"/>
+                <constraint firstAttribute="bottom" secondItem="AnH-cb-SA8" secondAttribute="bottom" constant="5" id="UvJ-GV-mqF"/>
+                <constraint firstItem="926-Xe-vbB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fv4-Gg-6El"/>
             </constraints>
         </view>
     </objects>
     <resources>
         <image name="camera-flip-button.png" width="150" height="111"/>
         <image name="camera-quit-button.png" width="150" height="151"/>
-        <image name="create_send_button.png" width="150" height="151"/>
-        <image name="trash.png" width="128" height="128"/>
+        <image name="camera_capture.png" width="100" height="100"/>
+        <image name="flash_off.png" width="100" height="62"/>
     </resources>
 </document>

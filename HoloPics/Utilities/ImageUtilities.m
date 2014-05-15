@@ -108,6 +108,20 @@
     return img;
 }
 
+// Draw a unicolor image
++ (UIImage *)imageInRect:(CGRect)rect WithColor:(UIColor *)color {
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 // Merge two images
 + (UIImage *) addImage:(UIImage *)img toImage:(UIImage *)img2 withSize:(CGSize)size
 {
@@ -122,15 +136,21 @@
 }
 
 // Draw path
-+ (void)drawPath:(UIBezierPath *)path inImageView:(UIImageView *)view
++ (void)drawPath:(UIBezierPath *)path inImageView:(UIImageView *)view WithColor:(UIColor *)color
 {
     UIGraphicsBeginImageContext(view.frame.size);
     [view.image drawInRect:CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)];
-    [[UIColor blackColor] setStroke];
+    [color setStroke];
     [path stroke];
     view.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 }
+// By default draw in black
++ (void)drawPath:(UIBezierPath *)path inImageView:(UIImageView *)view
+{
+    [self drawPath:path inImageView:view WithColor:[UIColor blackColor]];
+}
+
 
 // code from
 // http://stackoverflow.com/questions/3869692/iphone-flattening-a-uiimageview-and-subviews-to-image-blank-image
@@ -238,8 +258,8 @@
 
 
 // Save image locally
-// http://stackoverflow.com/questions/14531912/storing-images-locally-on-an-ios-device
-+ (void)saveImageInAppDirectory:(UIImage *)image
+// todo remove user default, go in core data instead
++ (BOOL)saveImageInAppDirectory:(UIImage *)image
 {
     NSData *imageData = UIImagePNGRepresentation(image);
     
@@ -261,6 +281,7 @@
     } else {
         // Add new index to object
         [prefs setObject:imagePathArray forKey:SAVED_SHAPED_PREF];
+        return YES;
     }
 }
 

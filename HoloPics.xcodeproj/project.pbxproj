@@ -52,6 +52,13 @@
 		3C20FC181924AFA6003F3858 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C20FC161924AFA6003F3858 /* Model.xcdatamodeld */; };
 		3C20FC1B1924B18D003F3858 /* ShapeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C20FC1A1924B18D003F3858 /* ShapeInfo.m */; };
 		3C20FC1E1924BB28003F3858 /* ShapesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C20FC1D1924BB28003F3858 /* ShapesViewController.m */; };
+		3C20FC231924EE63003F3858 /* flash_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C20FC1F1924EE63003F3858 /* flash_off.png */; };
+		3C20FC241924EE63003F3858 /* flash_off@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C20FC201924EE63003F3858 /* flash_off@2x~iphone.png */; };
+		3C20FC251924EE63003F3858 /* flash_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C20FC211924EE63003F3858 /* flash_on.png */; };
+		3C20FC261924EE63003F3858 /* flash_on@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C20FC221924EE63003F3858 /* flash_on@2x~iphone.png */; };
+		3C20FC291924EEB5003F3858 /* camera_capture.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C20FC271924EEB5003F3858 /* camera_capture.png */; };
+		3C20FC2A1924EEB5003F3858 /* camera_capture@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C20FC281924EEB5003F3858 /* camera_capture@2x~iphone.png */; };
+		3C20FC2D1924F181003F3858 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C20FC2C1924F181003F3858 /* CameraViewController.m */; };
 		3C9ED4F11918E98C003A8269 /* TutoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9ED4F01918E98C003A8269 /* TutoImageView.m */; };
 		3CA1F46C191E69FA00CFB99B /* forward_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA1F46B191E69FA00CFB99B /* forward_icon.png */; };
 		3CA89FDF190EA66A002E4D1D /* ShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA89FDE190EA66A002E4D1D /* ShapeView.m */; };
@@ -158,6 +165,14 @@
 		3C20FC1A1924B18D003F3858 /* ShapeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShapeInfo.m; path = Models/ShapeInfo.m; sourceTree = "<group>"; };
 		3C20FC1C1924BB28003F3858 /* ShapesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapesViewController.h; sourceTree = "<group>"; };
 		3C20FC1D1924BB28003F3858 /* ShapesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShapesViewController.m; sourceTree = "<group>"; };
+		3C20FC1F1924EE63003F3858 /* flash_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_off.png; sourceTree = "<group>"; };
+		3C20FC201924EE63003F3858 /* flash_off@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_off@2x~iphone.png"; sourceTree = "<group>"; };
+		3C20FC211924EE63003F3858 /* flash_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flash_on.png; sourceTree = "<group>"; };
+		3C20FC221924EE63003F3858 /* flash_on@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flash_on@2x~iphone.png"; sourceTree = "<group>"; };
+		3C20FC271924EEB5003F3858 /* camera_capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_capture.png; sourceTree = "<group>"; };
+		3C20FC281924EEB5003F3858 /* camera_capture@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_capture@2x~iphone.png"; sourceTree = "<group>"; };
+		3C20FC2B1924F181003F3858 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		3C20FC2C1924F181003F3858 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		3C9ED4EF1918E98C003A8269 /* TutoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutoImageView.h; path = Utilities/TutoImageView.h; sourceTree = "<group>"; };
 		3C9ED4F01918E98C003A8269 /* TutoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutoImageView.m; path = Utilities/TutoImageView.m; sourceTree = "<group>"; };
 		3CA1F46B191E69FA00CFB99B /* forward_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_icon.png; sourceTree = "<group>"; };
@@ -348,6 +363,8 @@
 				3CE01893191CCB490057EE0B /* SharingViewController.m */,
 				3C20FC1C1924BB28003F3858 /* ShapesViewController.h */,
 				3C20FC1D1924BB28003F3858 /* ShapesViewController.m */,
+				3C20FC2B1924F181003F3858 /* CameraViewController.h */,
+				3C20FC2C1924F181003F3858 /* CameraViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -388,6 +405,12 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3C20FC1F1924EE63003F3858 /* flash_off.png */,
+				3C20FC201924EE63003F3858 /* flash_off@2x~iphone.png */,
+				3C20FC211924EE63003F3858 /* flash_on.png */,
+				3C20FC221924EE63003F3858 /* flash_on@2x~iphone.png */,
+				3C20FC271924EEB5003F3858 /* camera_capture.png */,
+				3C20FC281924EEB5003F3858 /* camera_capture@2x~iphone.png */,
 				3CA1F46B191E69FA00CFB99B /* forward_icon.png */,
 				3CE0189D191D3A930057EE0B /* facebook_icon.png */,
 				3CE0189E191D3A930057EE0B /* mail_icon.png */,
@@ -538,11 +561,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CBA8D7C191BB16F00064E7C /* explore_refresh@2x~iphone.png in Resources */,
+				3C20FC291924EEB5003F3858 /* camera_capture.png in Resources */,
 				3CE0189C191CF74A0057EE0B /* bar-back@2x~iphone.png in Resources */,
 				3CE018A1191D3A930057EE0B /* facebook_icon.png in Resources */,
 				3C09FB0E19095AEF005DAA9C /* Strings.strings in Resources */,
+				3C20FC231924EE63003F3858 /* flash_off.png in Resources */,
 				3CE018A4191D3A930057EE0B /* twitter_icon.png in Resources */,
 				3C1395B61900C66C00762572 /* create_send_button.png in Resources */,
+				3C20FC251924EE63003F3858 /* flash_on.png in Resources */,
 				3CBA8D75191B8AE200064E7C /* DisplayHolopic.xib in Resources */,
 				3CBA8D7B191BB16F00064E7C /* explore_refresh.png in Resources */,
 				3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */,
@@ -550,7 +576,10 @@
 				3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */,
 				3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */,
 				3C13959218FDACB700762572 /* CameraOverlayView.xib in Resources */,
+				3C20FC261924EE63003F3858 /* flash_on@2x~iphone.png in Resources */,
+				3C20FC2A1924EEB5003F3858 /* camera_capture@2x~iphone.png in Resources */,
 				3CE018A2191D3A930057EE0B /* mail_icon.png in Resources */,
+				3C20FC241924EE63003F3858 /* flash_off@2x~iphone.png in Resources */,
 				3C1395A619006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */,
 				3C20FBD71922189D003F3858 /* create-button2.png in Resources */,
 				3C13958D18FDAA3D00762572 /* Main.storyboard in Resources */,
@@ -599,6 +628,7 @@
 				3C09FAF8190949B7005DAA9C /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3C13959618FDB82400762572 /* ImageUtilities.m in Sources */,
 				3C20FC1E1924BB28003F3858 /* ShapesViewController.m in Sources */,
+				3C20FC2D1924F181003F3858 /* CameraViewController.m in Sources */,
 				3C13959C18FDBFE700762572 /* GeneralUtilities.m in Sources */,
 				3C13955E18FD9E7100762572 /* main.m in Sources */,
 				3C09FAEE190949B7005DAA9C /* AFSecurityPolicy.m in Sources */,

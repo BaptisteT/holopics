@@ -21,8 +21,7 @@
 
 @protocol ShapeViewDelegate
 
-- (void)unhideBinButton;
-- (void)hideBinButton;
-- (void)deleteView:(ShapeView *)view ifBinContainsPoint:(CGPoint)point;
+//- (void)deleteView:(ShapeView *)view ifBinContainsPoint:(CGPoint)point;
 - (void)sendToFrontView:(ShapeView *)view;
+
 @end

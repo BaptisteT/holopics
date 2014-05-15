@@ -18,34 +18,40 @@
 #import "SharingViewController.h"
 #import "MBProgressHUD.h"
 #import "Holopic.h"
+#include "AppDelegate.h"
+#include "ShapeInfo.h"
 
-#define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"photo_bank", @"Strings", @"comment")
-#define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"photo_library", @"Strings", @"comment")
-#define ACTION_SHEET_OPTION_3 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
-#define ACTION_SHEET_OPTION_4 NSLocalizedStringFromTable (@"return_to_feed", @"Strings", @"comment")
+#define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
+#define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"return_to_feed", @"Strings", @"comment")
 #define ACTION_SHEET_CANCEL NSLocalizedStringFromTable (@"cancel", @"Strings", @"comment")
 
 @interface PicsCreationViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
-@property (weak, nonatomic) IBOutlet UIButton *binButton;
-@property (weak, nonatomic) IBOutlet UIButton *cameraFlipButton;
-@property (strong, nonatomic) UIImagePickerController * imagePickerController;
+@property (weak, nonatomic) IBOutlet UIButton *backgroundButton;
+@property (weak, nonatomic) IBOutlet UIButton *shapeButton;
+
+@property (weak, nonatomic) IBOutlet UIView *backgroundOptionsView;
+@property (weak, nonatomic) IBOutlet UIScrollView *shapeOptionsScrollView;
+
 @property (weak, nonatomic) IBOutlet BackgroundView *backgroundView;
 @property (strong, nonatomic)  NSMutableArray *flexibleSubViews;
 @property (nonatomic) NSInteger subViewIndex;
-@property (strong, nonatomic) UIPinchGestureRecognizer *pinchRecognizer;
-@property (strong, nonatomic) UIImage *savedImage;
-@property (nonatomic) CGAffineTransform referenceTransform;
+
 @property (nonatomic) BOOL firstOpening;
 @property (strong, nonatomic) TutoImageView *tutoView;
+
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 
 @end
 
-@implementation PicsCreationViewController {
-    BOOL continueToSharing;
+@implementation PicsCreationViewController
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 // ----------------------------------------------------------
@@ -55,58 +61,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    // Some init
     self.firstOpening = [GeneralUtilities isFirstOpening];
-    continueToSharing = NO;
-
-    // Alloc and init full screen camera
-    [self allocAndInitFullScreenCamera];
-    
-
-    // Design stuff
-    [self.saveButton setHidden:YES];
-    [self.binButton setHidden:YES];
     self.subViewIndex = 0;
-    [ImageUtilities outerGlow:self.saveButton];
-    [ImageUtilities outerGlow:self.binButton];
+    
+    // Some design
+    [ImageUtilities outerGlow:self.shareButton];
     [ImageUtilities outerGlow:self.cancelButton];
-    [ImageUtilities outerGlow:self.cameraFlipButton];
     
     // If there is a forwarded image, we display it
     if(self.forwardedImage) {
-        [self unhideSaveandHideFlipButton];
-        self.backgroundView.fullImage = self.forwardedImage;
+        self.backgroundView.originalImage = self.forwardedImage;
         [self.backgroundView setImage:self.forwardedImage];
     }
+    
+    // Get managed object context
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [appDelegate managedObjectContext];
+    
+    // todo load shapes
+    
+    
+    self.backgroundView.backgroundViewDelegate = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    if(!continueToSharing) {
-        // Present the camera
-        [self presentViewController:self.imagePickerController animated:NO completion:NULL];
-
-        // Make this controller the delegate of backgroundView
-        self.backgroundView.backgroundViewDelegate = self;
-
-        // On first opening of the app
-        if (self.firstOpening)
-        {
-            self.tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
-            self.tutoView.image = [UIImage imageNamed:@"tuto1.png"];
-            [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
-        }
-        //
-//        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-//        NSArray *imagePathArray = [prefs objectForKey:SAVED_SHAPED_PREF];
-//        if(imagePathArray.lastObject) {
-//            [self.imagePickerController.cameraOverlayView addSubview:[[UIImageView alloc] initWithImage:[ImageUtilities getImageSavedLocally:[imagePathArray.lastObject integerValue]]]];
-//        }
-        
-    } else {
-        continueToSharing = NO;
-    }
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -117,83 +96,26 @@
     }
 }
 
-// ----------------------------------------------------------
-// Full screen Camera
-// ----------------------------------------------------------
-
-// Alloc the impage picker controller
-- (void) allocAndInitFullScreenCamera
+- (void)viewDidUnload
 {
-    // Create custom camera view
-    UIImagePickerController *imagePickerController = [UIImagePickerController new];
-    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        return;
-    }
-    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerController.delegate = self;
+    [super viewDidUnload];
     
-    // Custom buttons
-    imagePickerController.showsCameraControls = NO;
-    imagePickerController.allowsEditing = NO;
-    imagePickerController.navigationBarHidden=YES;
-    
-    NSString *xibName = @"CameraOverlayView";
-    NSArray* nibViews = [[NSBundle mainBundle] loadNibNamed:xibName owner:self options:nil];
-    UIView* myView = [ nibViews objectAtIndex: 0];
-    myView.frame = self.view.frame;
-    
-    imagePickerController.cameraOverlayView = myView;
-    
-    // Transform camera to get full screen
-    double translationFactor = (self.view.frame.size.height - kCameraHeight) / 2;
-    CGAffineTransform translate = CGAffineTransformMakeTranslation(0.0, translationFactor);
-    imagePickerController.cameraViewTransform = translate;
-    
-    double rescalingRatio = self.view.frame.size.height / kCameraHeight;
-    CGAffineTransform scale = CGAffineTransformScale(translate, rescalingRatio, rescalingRatio);
-    imagePickerController.cameraViewTransform = scale;
-    
-    // flash disactivated by default
-    imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-    
-    self.imagePickerController = imagePickerController;
-}
-
-// Display the relevant part of the photo once taken
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)editInfo
-{
-    UIImage *image =  [editInfo objectForKey:UIImagePickerControllerOriginalImage];
-    UIImageOrientation orientation;
-    double targetRatio = kScreenWidth / self.view.frame.size.height;
-    
-    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        // Force portrait, and avoid mirror of front camera
-        orientation = self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront ? UIImageOrientationLeftMirrored : UIImageOrientationRight;
-    } else {
-        orientation = UIImageOrientationRight;
-    }
-    self.backgroundView.fullImage = [ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.backgroundView.bounds.size];
-
-    [self.backgroundView setImage:self.backgroundView.fullImage];
-    [self unhideSaveandHideFlipButton];
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.fetchedResultsController = nil;
 }
 
 // --------------------------------
-// Camera button clicked
+// Buttons clicked
 // --------------------------------
 
 - (IBAction)saveButtonClicked:(id)sender {
 
     // Remove button before saving
-    [self.saveButton setHidden:YES];
+    [self.shareButton setHidden:YES];
     [self.cancelButton setHidden:YES];
+    [self.backgroundButton setHidden:YES];
+    [self.shapeButton setHidden:YES];
+    [self.shapeOptionsScrollView setHidden:YES];
+    [self.backgroundOptionsView setHidden:YES];
     
     // Remove border around shapes
     for (ShapeView *views in self.flexibleSubViews){
@@ -201,102 +123,118 @@
     }
     
     // Create Image
-    UIImage *imageToShare = [ImageUtilities imageFromView:self.imagePickerController.cameraOverlayView];
+    UIImage *imageToShare = [ImageUtilities imageFromView:self.view];
     
-    [self.saveButton setHidden:NO];
+    [self.shareButton setHidden:NO];
     [self.cancelButton setHidden:NO];
+    [self.backgroundButton setHidden:NO];
+    [self.shapeButton setHidden:NO];
     
     // Perform segue
-    continueToSharing = TRUE;
     [self.navigationController dismissViewControllerAnimated:NO completion:nil];
     [self performSegueWithIdentifier:@"Share From Create Push Segue" sender:imageToShare];    
 }
 
-// Front camera
-- (IBAction)flipCameraButtonClicked:(id)sender
-{
-    if (self.imagePickerController.cameraDevice == UIImagePickerControllerCameraDeviceFront){
-        self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-    } else {
-        self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-    }
-}
-
 // Cancel path and pictures
 - (IBAction)cancelButtonClicked:(id)sender
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_3, ACTION_SHEET_OPTION_4, nil];
-    
-    [actionSheet showInView:self.backgroundView];
-}
-
-// --------------------------------
-// backgroundViewDelegate protocol
-// --------------------------------
-
-// Take picture and display it on overlay
-- (void)takePictureAndDisplay
-{
-    [self.imagePickerController takePicture];
-}
-
-// Import picure
-- (void)letUserImportPhotoAndDisplay
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_1, ACTION_SHEET_OPTION_2, nil];
     
     [actionSheet showInView:self.backgroundView];
 }
 
+// Display or hide background options
+- (IBAction)backgroundButtonClicked:(id)sender {
+    [self hideOrDisplayBackgroundOptionsView];
+}
+
+// Display or hide shape options
+- (IBAction)shapeButtonClicked:(id)sender {
+    if (self.shapeOptionsScrollView.isHidden) {
+        self.shapeOptionsScrollView.hidden = NO;
+    } else {
+        self.shapeOptionsScrollView.hidden = YES;
+    }
+}
+
+- (IBAction)cameraButtonClicked:(id)sender {
+    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (IBAction)libraryButtonClicked:(id)sender {
+    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+
+// --------------------------------
+// CameraVCDelegate protocol
+// --------------------------------
+
+- (void)setBackgoundImage:(UIImage *)image {
+    self.backgroundView.originalImage = image;
+    [self.backgroundView setImage:image];
+}
+
+
+// --------------------------------
+// backgroundViewDelegate protocol
+// --------------------------------
+
 // Create flexible subview with the image inside the path
-- (void)createFlexibleSubView
+- (void)createShapeWithImage:(UIImage *)image andPath:(UIBezierPath *)path
 {
-    if (!self.flexibleSubViews){
-        self.flexibleSubViews = [NSMutableArray arrayWithCapacity:1];
-    }
-    
-    // Return if we reached the limit of images
-    if (self.subViewIndex > kMaxNumberOfShapes) {
-        [GeneralUtilities showMessage:@"You reached the maximum number of pics!" withTitle:nil];
-        return;
-    }
-        
-    ShapeView *shape = [[ShapeView alloc] initWithImage:self.backgroundView.fullImage andPath:self.backgroundView.globalPath];
+    // Create shape
+    // todo check that we don't exceed a certain number
+    ShapeView *shape = [[ShapeView alloc] initWithImage:image andPath:path];
     shape.shapeViewDelegate = self;
-    [self.flexibleSubViews addObject:shape];
     
-    // Add this subview to cameraOverlayView (before buttons)
-    self.subViewIndex ++;
-    [self.imagePickerController.cameraOverlayView insertSubview:shape atIndex:self.subViewIndex];
+    // Save image
+    // todo
     
-    if (self.firstOpening) {
-        shape.backgroundColor = [UIColor blackColor];
-        self.firstOpening = NO;
-        [self.tutoView setImage:[UIImage imageNamed:@"tuto2"]];
-        self.tutoView.imageForTuto2 = shape;
-        [self.imagePickerController.cameraOverlayView addSubview:self.tutoView];
+    // Save path and index in the core data
+    // todo save it in the data
+    NSManagedObjectContext *context = [self managedObjectContext];
+    ShapeInfo *shapeInfo = [NSEntityDescription
+                                      insertNewObjectForEntityForName:@"ShapeInfo"
+                                      inManagedObjectContext:context];
+    shapeInfo.index = @"Test Bank";
+    shapeInfo.relativeImagePath = @"Testville";
+    shapeInfo.bezierPath = path;
+
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
+    
+    // todo add it to the scroll view (first position)
+    
+//    
+//    if (!self.flexibleSubViews){
+//        self.flexibleSubViews = [NSMutableArray arrayWithCapacity:1];
+//    }
+//    
+//    // Return if we reached the limit of images
+//    if (self.subViewIndex > kMaxNumberOfShapes) {
+//        [GeneralUtilities showMessage:@"You reached the maximum number of pics!" withTitle:nil];
+//        return;
+//    }
+//    
+//    // Add it to
+//    
+//    [self.flexibleSubViews addObject:shape];
+//    
+//    // Add this subview to cameraOverlayView (before buttons)
+//    self.subViewIndex ++;
+//    [self.imagePickerController.cameraOverlayView insertSubview:shape atIndex:self.subViewIndex];
+    
 }
 
-- (void)hideSaveandUnhideFlipButton
+- (void)hideOrDisplayBackgroundOptionsView
 {
-    [self.saveButton setHidden:YES];
-    [self.cameraFlipButton setHidden:NO];
-}
-
-- (void)unhideSaveandHideFlipButton
-{
-    [self.saveButton setHidden:NO];
-    [self.cameraFlipButton setHidden:YES];
-}
-
-- (void)handleCustomCameraZoom:(UIPinchGestureRecognizer *)recogniser
-{
-    if (recogniser.state == UIGestureRecognizerStateBegan) {
-        self.referenceTransform = self.imagePickerController.cameraViewTransform;
-    } else if (recogniser.state == UIGestureRecognizerStateChanged) {
-        CGFloat scale = [recogniser scale];
-        self.imagePickerController.cameraViewTransform = CGAffineTransformScale(self.referenceTransform,scale,scale);
+    if (self.backgroundOptionsView.isHidden) {
+        self.backgroundOptionsView.hidden = NO;
+    } else {
+        self.backgroundOptionsView.hidden = YES;
     }
 }
 
@@ -304,30 +242,98 @@
 // ShapeViewDelegate protocol
 // --------------------------------
 
-- (void)unhideBinButton
-{
-    [self.binButton setHidden:NO];
-}
-
-- (void)hideBinButton
-{
-    [self.binButton setHidden:YES];
-}
-
-- (void)deleteView:(ShapeView *)view ifBinContainsPoint:(CGPoint)point
-{
-    if (CGRectContainsPoint(self.binButton.frame,point)) {
-        [view removeFromSuperview];
-        [self.flexibleSubViews removeObject:view];
-        self.subViewIndex --;
-    }
-    [self.binButton setHidden:YES];
-}
-
 - (void)sendToFrontView:(ShapeView *)view
 {
-    [self.imagePickerController.cameraOverlayView insertSubview:view atIndex:self.subViewIndex];
+    [self.view insertSubview:view atIndex:self.subViewIndex];
 }
+
+
+// --------------------------------------------
+// NSFetchedResultsControllerDelegate protocol
+// ---------------------------------------------
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"FailedBankInfo" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+                              initWithKey:@"details.closeDate" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSFetchedResultsController *theFetchedResultsController =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                        managedObjectContext:managedObjectContext sectionNameKeyPath:nil
+                                                   cacheName:@"Root"];
+    self.fetchedResultsController = theFetchedResultsController;
+    _fetchedResultsController.delegate = self;
+    
+    return _fetchedResultsController;
+    
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.tableView;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
+}
+
 
 
 // --------------------------------
@@ -338,29 +344,26 @@
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     
-    if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_1]) {
-        // todo
-        [GeneralUtilities showMessage:@"Coming soon" withTitle:nil];
-    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
-        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    } else if ([buttonTitle isEqualToString:ACTION_SHEET_CANCEL]) {
+    if ([buttonTitle isEqualToString:ACTION_SHEET_CANCEL]) {
         // do nothing
-    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_3]) {
+    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_1]) {
         // Clean everything
         [self.backgroundView clearPathAndPictures];
-        [self hideSaveandUnhideFlipButton];
         self.subViewIndex = 0;
-        
         for(id subView in self.flexibleSubViews) {
             [(ShapeView *)subView removeFromSuperview];
         }
         self.flexibleSubViews = nil;
-    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_4]) {
-        // Delete and return to feed
-        continueToSharing = TRUE;
-        [self.navigationController dismissViewControllerAnimated:NO completion:nil];
+    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
         [self.navigationController popViewControllerAnimated:NO];
     }
+}
+
+- (void)presentCameraViewControllerWithSourceType:(UIImagePickerControllerSourceType)sourceType {
+    CameraViewController *cameraViewController = [[CameraViewController alloc] init];
+    cameraViewController.cameraVCDelegate = self;
+    cameraViewController.sourceType = sourceType;
+    [self.navigationController pushViewController:cameraViewController animated:NO];
 }
 
 

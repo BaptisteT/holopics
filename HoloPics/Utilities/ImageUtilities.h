@@ -21,6 +21,8 @@
 
 + (UIImage *)drawFromImage:(UIImage *)fullImage insidePath:(UIBezierPath *)path;
 
++ (UIImage *)imageInRect:(CGRect)rect WithColor:(UIColor *)color;
+
 + (UIImage *) addImage:(UIImage *)img toImage:(UIImage *)img2 withSize:(CGSize)size;
 
 + (void)drawPath:(UIBezierPath *)path inImageView:(UIImageView *)view;
@@ -33,7 +35,7 @@
 
 + (void)drawCustomNavBarWithLeftItem:(NSString *)leftItem rightItem:(NSString *)rightItem title:(NSString *)title sizeBig:(BOOL)sizeBig inViewController:(UIViewController *)viewController;
 
-+ (void)saveImageInAppDirectory:(UIImage *)image;
++ (BOOL)saveImageInAppDirectory:(UIImage *)image;
 
 + (UIImage *)getImageSavedLocally:(NSInteger)imageIndex;
 

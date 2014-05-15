@@ -14,7 +14,7 @@
 @interface BackgroundView : UIImageView <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) id <BackgroundViewDelegate> backgroundViewDelegate;
-@property (strong, nonatomic) UIImage *fullImage;
+@property (strong, nonatomic) UIImage *originalImage;
 @property (strong, nonatomic) UIBezierPath *globalPath;
 
 - (void)clearPathAndPictures;
@@ -23,10 +23,7 @@
 
 @protocol BackgroundViewDelegate
 
-- (void)takePictureAndDisplay;
-- (void)letUserImportPhotoAndDisplay;
-- (void)createFlexibleSubView;
-- (void)hideSaveandUnhideFlipButton;
-- (void)handleCustomCameraZoom:(UIPinchGestureRecognizer *)recogniser;
+- (void)createShapeWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
+- (void)hideOrDisplayBackgroundOptionsView;
 
 @end

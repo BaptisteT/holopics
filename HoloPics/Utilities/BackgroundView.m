@@ -20,8 +20,6 @@
 @property (strong, nonatomic) MagnifierView *zoomImage;
 @property (nonatomic, strong) UIPanGestureRecognizer *panningRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *oneTapRecognizer;
-@property (nonatomic, strong) UILongPressGestureRecognizer *longPressRecognizer;
-@property (nonatomic, strong) UIPinchGestureRecognizer *pinchRecognizer;
 
 @end
 
@@ -66,7 +64,7 @@
         ctr = 0;
         initialPoint = currentPoint;
         pts[0] = initialPoint;
-        if(self.fullImage) {
+        if(self.originalImage) {
             if (self.zoomImage == nil) {
                 self.zoomImage = [[MagnifierView alloc] init];
                 self.zoomImage.center = CGPointMake(self.superview.frame.size.width - 30 ,30);
@@ -93,12 +91,12 @@
             [PathUtility closePath:self.globalPath withInitialPoint:initialPoint inRect:self.bounds.size];
             
             // Create a flexible subview with the image inside the path
-            [self.backgroundViewDelegate createFlexibleSubView];
+            [self.backgroundViewDelegate createShapeWithImage:self.originalImage andPath:self.globalPath];
         }
         
         [self.globalPath removeAllPoints];
         [self.path removeAllPoints];
-        [self setImage:self.fullImage];
+        [self setImage:self.originalImage];
         ctr = 0;
         
         [self.zoomImage removeFromSuperview];
@@ -108,44 +106,7 @@
 // One tap
 - (void)handleOneTapGesture:(UITapGestureRecognizer *)recognizer
 {
-    if(!self.fullImage) {
-        // take full picture and display it
-        [self.backgroundViewDelegate takePictureAndDisplay];
-        [self addGestureRecognizer:self.pinchRecognizer];
-    } else {
-        [self clearPathAndPictures];
-        [self.backgroundViewDelegate hideSaveandUnhideFlipButton];
-        [self removeGestureRecognizer:self.pinchRecognizer];
-    }
-}
-
-// Long touch
-- (void)handleLongPressGesture:(UITapGestureRecognizer *)recognizer
-{
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        [self.backgroundViewDelegate letUserImportPhotoAndDisplay];
-        [self addGestureRecognizer:self.pinchRecognizer];
-    }
-}
-
-// Pinch
-- (void)handlePinchGesture:(UIPinchGestureRecognizer *)recogniser
-{
-    // fo nothing
-}
-
-
-// --------------------------------
-// Gesture Recogniser protocol
-// --------------------------------
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)recogniser
-{
-    if ([recogniser isKindOfClass:[UIPanGestureRecognizer class]]) {
-        return (self.fullImage !=nil);
-    } else {
-        return YES;
-    }
+    [self.backgroundViewDelegate hideOrDisplayBackgroundOptionsView];
 }
 
 
@@ -184,10 +145,11 @@
 
 - (void)clearPathAndPictures
 {
-    self.fullImage = nil;
+    self.originalImage = nil;
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
     [self setImage:nil];
+    self.backgroundColor = [UIColor blackColor];
 }
 
 - (void)initBackgroundView
@@ -197,25 +159,19 @@
     self.path = [UIBezierPath bezierPath];
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];
-    [self setBackgroundColor:[UIColor clearColor]];
+    
+    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor blackColor]];
     
     // Alloc and add gesture recognisers
     self.panningRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanningGesture:)];
     self.oneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleOneTapGesture:)];
-    self.longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
-    self.pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchGesture:)];
     
     [self addGestureRecognizer:self.panningRecognizer];
     [self addGestureRecognizer:self.oneTapRecognizer];
-    [self addGestureRecognizer:self.longPressRecognizer];
     
     self.panningRecognizer.delegate = self;
     self.oneTapRecognizer.delegate = self;
-    self.longPressRecognizer.delegate = self;
-    self.pinchRecognizer.delegate = self;
-    
     self.oneTapRecognizer.numberOfTapsRequired = 1;
-    self.longPressRecognizer.minimumPressDuration = kLongPressTimeThreshold;
 }
 
 

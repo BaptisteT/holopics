@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "BackgroundView.h"
 #import "ShapeView.h"
+#import "CameraViewController.h"
+#import <CoreData/CoreData.h>
 
-@interface PicsCreationViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, BackgroundViewDelegate, UIActionSheetDelegate, ShapeViewDelegate>
+@interface PicsCreationViewController : UIViewController <BackgroundViewDelegate, UIActionSheetDelegate, ShapeViewDelegate, CameraViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) UIImage *forwardedImage;
+
 
 @end

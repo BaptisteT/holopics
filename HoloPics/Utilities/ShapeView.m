@@ -103,19 +103,10 @@
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         initialCenter = recognizer.view.center;
-        // display bin
-        [self.shapeViewDelegate unhideBinButton];
     }
     CGPoint translation = [recognizer translationInView:recognizer.view.superview];
     recognizer.view.center = CGPointMake(initialCenter.x + translation.x,
                                      initialCenter.y + translation.y);
-    
-    if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled)
-    {
-        // Remove view if on bin
-        CGPoint finalPoint = [recognizer locationInView:recognizer.view.superview];
-        [self.shapeViewDelegate deleteView:self ifBinContainsPoint:finalPoint];
-    }
 }
 
 - (void)oneTapGesture:(UITapGestureRecognizer *)recognizer
