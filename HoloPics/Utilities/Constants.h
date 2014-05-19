@@ -26,6 +26,8 @@ static const NSUInteger kContinuousMovementDistanceThreshold = 1;
 static const NSUInteger kMinimumPinchDelta = 1;
 
 static const NSUInteger kMaxNumberOfShapes = 50;
+static const NSUInteger kScrollableViewHeight = 80;
+
 
 #define FIRST_OPENING_PREF @"First Opening"
 

@@ -91,6 +91,7 @@
             [PathUtility closePath:self.globalPath withInitialPoint:initialPoint inRect:self.bounds.size];
             
             // Create a flexible subview with the image inside the path
+                        CGRect test = self.globalPath.bounds;
             [self.backgroundViewDelegate createShapeWithImage:self.originalImage andPath:self.globalPath];
         }
         
@@ -106,7 +107,7 @@
 // One tap
 - (void)handleOneTapGesture:(UITapGestureRecognizer *)recognizer
 {
-    [self.backgroundViewDelegate hideOrDisplayBackgroundOptionsView];
+//    [self.backgroundViewDelegate hideOrDisplayBackgroundOptionsView];
 }
 
 
@@ -149,7 +150,7 @@
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
     [self setImage:nil];
-    self.backgroundColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)initBackgroundView
@@ -160,7 +161,7 @@
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];
     
-    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor blackColor]];
+    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor whiteColor]];
     
     // Alloc and add gesture recognisers
     self.panningRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanningGesture:)];
@@ -172,6 +173,14 @@
     self.panningRecognizer.delegate = self;
     self.oneTapRecognizer.delegate = self;
     self.oneTapRecognizer.numberOfTapsRequired = 1;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        // Don't pan if we are on the scroll view
+        return [self.backgroundViewDelegate isShapeScrollableViewHidden] || [gestureRecognizer locationInView:self].y < self.frame.size.height - kScrollableViewHeight;
+    }
+    return YES;
 }
 
 

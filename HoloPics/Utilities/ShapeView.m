@@ -25,9 +25,17 @@
 
 @implementation ShapeView
 
-- (id)initWithImage:(UIImage *)image andPath:(UIBezierPath *)path
+- (id)initWithImage:(UIImage *)image
+              frame:(CGRect) frame
+            andPath:(UIBezierPath *)path
 {
-    self.attachedImage = [ImageUtilities drawFromImage:image insidePath:path];
+    self.attachedImage = [ImageUtilities imageWithImage:image scaledToSize:frame.size];
+    self.frame = frame;
+    return [self initShapeViewWithPath:path];
+}
+
+- (id)initShapeViewWithPath:(UIBezierPath *)path
+{
     if (self = [super initWithImage:self.attachedImage])
     {
         // Add gesture recognisers
@@ -52,15 +60,14 @@
         self.exclusiveTouch = YES;
         
         // Path
-        self.imagePath = [UIBezierPath bezierPathWithCGPath:path.CGPath];
+        self.imagePath = path;
         [self.imagePath setLineWidth:0.3];
         [ImageUtilities drawPath:self.imagePath inImageView:self];
-         
+        
         // Init anchor point
         CGPoint anchorPoint = CGPointMake((path.bounds.origin.x + path.bounds.size.width / 2)/self.frame.size.width, (path.bounds.origin.y + path.bounds.size.height / 2)/self.frame.size.height);
         [GeneralUtilities setAnchorPoint:anchorPoint forView:self];
     }
-
     return self;
 }
 
@@ -149,6 +156,12 @@
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
     return [self.imagePath containsPoint:point];
+}
+
+- (void)setAnchorPointToPosition:(CGPoint)anchorPointPosition {
+    CGFloat xTranslation = self.frame.size.width / 2 - (self.imagePath.bounds.origin.x + self.imagePath.bounds.size.width / 2);
+    CGFloat yTranslation = self.frame.size.height / 2 - (self.imagePath.bounds.origin.y + self.imagePath.bounds.size.height / 2);
+    self.center = CGPointMake(anchorPointPosition.x + xTranslation, anchorPointPosition.y + yTranslation);
 }
 
 

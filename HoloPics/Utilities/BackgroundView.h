@@ -25,5 +25,6 @@
 
 - (void)createShapeWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
 - (void)hideOrDisplayBackgroundOptionsView;
+- (BOOL)isShapeScrollableViewHidden;
 
 @end

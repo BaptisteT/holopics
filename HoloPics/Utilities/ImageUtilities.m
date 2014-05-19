@@ -258,50 +258,27 @@
 
 
 // Save image locally
-// todo remove user default, go in core data instead
-+ (BOOL)saveImageInAppDirectory:(UIImage *)image
++ (BOOL)saveImage:(UIImage *)image inAppDirectoryPath:(NSString *)relativePath
 {
     NSData *imageData = UIImagePNGRepresentation(image);
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSArray *imagePathArray = [prefs objectForKey:SAVED_SHAPED_PREF];
-    NSInteger imageIndex;
-    if(imagePathArray.lastObject) {
-        imageIndex = [imagePathArray.lastObject integerValue]+ 1;
-        imagePathArray = [imagePathArray arrayByAddingObject:[NSNumber numberWithInteger:imageIndex]];
-    } else {
-        imageIndex = 0;
-        imagePathArray = [[NSArray alloc] initWithObjects:[NSNumber numberWithInteger:imageIndex], nil];
-    }
 
-    NSString *imagePath = [ImageUtilities getPathOfImageWithIndex:imageIndex];
-    if (![imageData writeToFile:imagePath atomically:NO])
-    {
-        NSLog((@"Failed to cache image data to disk"));
-    } else {
-        // Add new index to object
-        [prefs setObject:imagePathArray forKey:SAVED_SHAPED_PREF];
-        return YES;
-    }
+    NSString *imagePath = [ImageUtilities absolutePathOfImage:relativePath];
+    return [imageData writeToFile:imagePath atomically:NO];
 }
 
 // Get image saved locally
-+ (UIImage *)getImageSavedLocally:(NSInteger)imageIndex
++ (UIImage *)getImageAtRelativePath:(NSString *)relativePath
 {
-    return [UIImage imageWithContentsOfFile:[ImageUtilities getPathOfImageWithIndex:imageIndex]];
+    return [UIImage imageWithContentsOfFile:[ImageUtilities absolutePathOfImage:relativePath]];
 }
 
 // Get the path of the image saved locally
-+ (NSString *)getPathOfImageWithIndex:(NSInteger)imageIndex
++ (NSString *)absolutePathOfImage:(NSString *)relativePath
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    return [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%lu.png",imageIndex]];
+    return [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",relativePath]];
 }
-
-// NSData *bezierData = [NSKeyedArchiver archivedDataWithRootObject:bezierPath];
-// UIBezierPath *bezierPath = [NSKeyedUnarchiver unarchiveObjectWithData:bezierData];
-// http://stackoverflow.com/questions/11452918/uibezierpath-persistence-with-core-data
 
 
 @end

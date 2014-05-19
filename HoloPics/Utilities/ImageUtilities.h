@@ -35,8 +35,8 @@
 
 + (void)drawCustomNavBarWithLeftItem:(NSString *)leftItem rightItem:(NSString *)rightItem title:(NSString *)title sizeBig:(BOOL)sizeBig inViewController:(UIViewController *)viewController;
 
-+ (BOOL)saveImageInAppDirectory:(UIImage *)image;
++ (BOOL)saveImage:(UIImage *)image inAppDirectoryPath:(NSString *)relativePath;
 
-+ (UIImage *)getImageSavedLocally:(NSInteger)imageIndex;
++ (UIImage *)getImageAtRelativePath:(NSString *)relativePath;
 
 @end
