@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) id<ScrollableShapeViewDelegate> scrollableShapeViewDelegate;
 
+
 - (id)initWithShapeInfo:(ShapeInfo *)shapeInfo;
 - (void)incremenentIndexAndFrame;
 
@@ -25,5 +26,6 @@
 
 - (ShapeView *)createNewShapeViewWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
 - (void)removeShape:(ShapeView *)shapeView;
+- (void)setShapeCenter:(ShapeView *)shapeView ToPoint:(CGPoint)point;
 
 @end

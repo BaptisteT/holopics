@@ -207,10 +207,10 @@
     
     // Add it to the array
     [self.shapeViews addObject:newShapeView];
-    self.subViewIndex ++;
     
     // Show it
-    [self.view insertSubview:newShapeView aboveSubview:self.backgroundView];
+    [self.view insertSubview:newShapeView atIndex:self.subViewIndex];
+    self.subViewIndex ++;
     
     return newShapeView;
 }
@@ -219,6 +219,16 @@
     [shapeView removeFromSuperview];
     [self.shapeViews removeObject:shapeView];
     self.subViewIndex --;
+}
+
+- (void)setShapeCenter:(ShapeView *)shapeView ToPoint:(CGPoint)point
+{
+    // Translate into superview coordinate system
+    CGFloat x = point.x - self.shapeOptionsScrollView.contentOffset.x;
+    CGFloat y = point.y + self.view.frame.size.height - kScrollableViewHeight;
+    
+    shapeView.center = CGPointMake(x, y);
+
 }
 
 

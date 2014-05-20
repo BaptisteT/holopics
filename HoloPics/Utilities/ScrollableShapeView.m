@@ -38,7 +38,7 @@
         self.panningRecognizer.delegate = self;
         
         // Create Image
-        self.shapeImage = [ImageUtilities getImageAtRelativePath:self.shapeInfo.relativeImagePath];
+        self.shapeImage = [ImageUtilities imageWithImage:[ImageUtilities getImageAtRelativePath:self.shapeInfo.relativeImagePath] scaledToSize:[[UIScreen mainScreen] bounds].size];
         self.image = self.shapeImage;
     }
     return self;
@@ -47,8 +47,13 @@
 
 - (void)setImage:(UIImage *)image
 {
-    //todo crop image to show only path bounds
-    [super setImage:image];
+    // crop image to show only path bounds
+    CGRect pathBounds = self.shapeInfo.bezierPath.bounds;
+    CGFloat side = MAX(pathBounds.size.height,pathBounds.size.width);
+    CGRect newRect = CGRectMake(pathBounds.origin.x, pathBounds.origin.y, side, side);
+    
+    CGImageRef subImage = CGImageCreateWithImageInRect ([image CGImage],newRect);
+    [super setImage:[UIImage imageWithCGImage:subImage]];
 }
 
 - (void)incremenentIndexAndFrame
@@ -76,26 +81,25 @@
     }
     CGPoint translation = [recognizer translationInView:recognizer.view.superview];
     if (isSlide) {
-        CGFloat newCenter = MIN( ((UIScrollView *)self.superview).contentSize.width - kScreenWidth,MAX(initialCenter.x - translation.x, 0));
+        CGFloat newCenter = MIN( MAX(((UIScrollView *)self.superview).contentSize.width - kScreenWidth,0),MAX(initialCenter.x - translation.x, 0));
         ((UIScrollView *)self.superview).contentOffset = CGPointMake(newCenter,0);
     } else {
         CGPoint newCenterPoint = CGPointMake(initialCenter.x + translation.x,initialCenter.y + translation.y);
-        self.center = newCenterPoint;
-        
+    
         if (initialCenter.y + translation.y < 0) {
+            self.center = initialCenter;
             if(!self.controlledShapeView) {
                 self.controlledShapeView = [self.scrollableShapeViewDelegate createNewShapeViewWithImage:self.shapeImage andPath:self.shapeInfo.bezierPath];
             }
         } else {
+            self.center = newCenterPoint;
             if (self.controlledShapeView) {
                 [self.scrollableShapeViewDelegate removeShape:self.controlledShapeView];
                 self.controlledShapeView = nil;
             }
         }
         if(self.controlledShapeView) {
-            CGFloat x = newCenterPoint.x;
-            CGFloat y = newCenterPoint.y + self.superview.superview.frame.size.height - kScrollableViewHeight;
-            [self.controlledShapeView setAnchorPointToPosition:CGPointMake(x,y)];
+            [self.scrollableShapeViewDelegate setShapeCenter:self.controlledShapeView ToPoint:newCenterPoint];
         }
     }
     

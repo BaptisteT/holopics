@@ -65,8 +65,8 @@
         [ImageUtilities drawPath:self.imagePath inImageView:self];
         
         // Init anchor point
-        CGPoint anchorPoint = CGPointMake((path.bounds.origin.x + path.bounds.size.width / 2)/self.frame.size.width, (path.bounds.origin.y + path.bounds.size.height / 2)/self.frame.size.height);
-        [GeneralUtilities setAnchorPoint:anchorPoint forView:self];
+        self.anchorPoint = CGPointMake(path.bounds.origin.x + path.bounds.size.width / 2, path.bounds.origin.y + path.bounds.size.height / 2);
+        [GeneralUtilities setAnchorPoint:CGPointMake(self.anchorPoint.x / self.frame.size.width, self.anchorPoint.y/self.frame.size.height) forView:self];
     }
     return self;
 }
@@ -158,11 +158,15 @@
     return [self.imagePath containsPoint:point];
 }
 
-- (void)setAnchorPointToPosition:(CGPoint)anchorPointPosition {
-    CGFloat xTranslation = self.frame.size.width / 2 - (self.imagePath.bounds.origin.x + self.imagePath.bounds.size.width / 2);
-    CGFloat yTranslation = self.frame.size.height / 2 - (self.imagePath.bounds.origin.y + self.imagePath.bounds.size.height / 2);
-    self.center = CGPointMake(anchorPointPosition.x + xTranslation, anchorPointPosition.y + yTranslation);
-}
+//- (void)setAnchorPointToPosition:(CGPoint)anchorPointPosition {
+//    CGPoint a = self.center;
+//    CGRect b = self.imagePath.bounds;
+//    CGRect c = self.frame;
+//    CGRect d = self.bounds;
+//    CGFloat xTranslation = self.frame.size.width / 2 - (self.imagePath.bounds.origin.x + self.imagePath.bounds.size.width / 2);
+//    CGFloat yTranslation = self.frame.size.height / 2 - (self.imagePath.bounds.origin.y + self.imagePath.bounds.size.height / 2);
+//    self.center = CGPointMake(anchorPointPosition.x + xTranslation, anchorPointPosition.y + yTranslation);
+//}
 
 
 

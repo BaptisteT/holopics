@@ -277,12 +277,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cln-F9-2yC">
-                                <rect key="frame" x="270" y="30" width="40" height="40"/>
+                                <rect key="frame" x="260" y="30" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.58999999999999997" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="2Wv-dW-fBf"/>
-                                    <constraint firstAttribute="height" constant="40" id="OqR-ze-3B6"/>
+                                    <constraint firstAttribute="width" constant="50" id="2Wv-dW-fBf"/>
+                                    <constraint firstAttribute="height" constant="50" id="OqR-ze-3B6"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="create-button2.png"/>
                                 <connections>

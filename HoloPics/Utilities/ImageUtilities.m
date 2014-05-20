@@ -58,12 +58,16 @@
 
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
+    if(CGSizeEqualToSize(image.size, newSize)) {
+        return image;
+    }
     UIGraphicsBeginImageContext( newSize );
     [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
 }
+
 
 + (ALAssetOrientation)convertImageOrientationToAssetOrientation:(UIImageOrientation)orientation
 {

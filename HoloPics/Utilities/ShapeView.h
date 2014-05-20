@@ -14,9 +14,10 @@
 
 @property (weak, nonatomic) id <ShapeViewDelegate> shapeViewDelegate;
 @property (strong, nonatomic) UIImage *attachedImage;
+@property (nonatomic) CGPoint anchorPoint;
 
 - (id)initWithImage:(UIImage *)image frame:(CGRect)frame andPath:(UIBezierPath *)path;
-- (void)setAnchorPointToPosition:(CGPoint)anchorPointPosition;
+//- (void)setAnchorPointToPosition:(CGPoint)anchorPointPosition;
 
 @end
 

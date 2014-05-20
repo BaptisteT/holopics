@@ -91,7 +91,6 @@
             [PathUtility closePath:self.globalPath withInitialPoint:initialPoint inRect:self.bounds.size];
             
             // Create a flexible subview with the image inside the path
-                        CGRect test = self.globalPath.bounds;
             [self.backgroundViewDelegate createShapeWithImage:self.originalImage andPath:self.globalPath];
         }
         
