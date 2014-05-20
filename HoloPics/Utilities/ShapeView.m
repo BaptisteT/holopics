@@ -155,18 +155,9 @@
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
+    BOOL a = [self.imagePath containsPoint:point];
     return [self.imagePath containsPoint:point];
 }
-
-//- (void)setAnchorPointToPosition:(CGPoint)anchorPointPosition {
-//    CGPoint a = self.center;
-//    CGRect b = self.imagePath.bounds;
-//    CGRect c = self.frame;
-//    CGRect d = self.bounds;
-//    CGFloat xTranslation = self.frame.size.width / 2 - (self.imagePath.bounds.origin.x + self.imagePath.bounds.size.width / 2);
-//    CGFloat yTranslation = self.frame.size.height / 2 - (self.imagePath.bounds.origin.y + self.imagePath.bounds.size.height / 2);
-//    self.center = CGPointMake(anchorPointPosition.x + xTranslation, anchorPointPosition.y + yTranslation);
-//}
 
 
 

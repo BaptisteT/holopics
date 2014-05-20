@@ -61,13 +61,17 @@
 {
     CGPoint currentPoint = [recognizer locationInView:self];
     if (recognizer.state == UIGestureRecognizerStateBegan) {
+        // Hide all subviews
+        for (UIView * view in self.subviews) {
+            [view setHidden:YES];
+        }
         ctr = 0;
         initialPoint = currentPoint;
         pts[0] = initialPoint;
         if(self.originalImage) {
             if (self.zoomImage == nil) {
                 self.zoomImage = [[MagnifierView alloc] init];
-                self.zoomImage.center = CGPointMake(self.superview.frame.size.width - 30 ,30);
+                self.zoomImage.center = CGPointMake(self.superview.frame.size.width - 60 ,60);
                 self.zoomImage.viewToMagnify = self;
             }
             [self.zoomImage setCenterPoint:initialPoint];
@@ -100,6 +104,9 @@
         ctr = 0;
         
         [self.zoomImage removeFromSuperview];
+        for (UIView * view in self.subviews) {
+            [view setHidden:NO];
+        }
     }
 }
 

@@ -12,11 +12,11 @@
 
 
 - (id)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:CGRectMake(0, 0, 60, 60)]) {
+	if (self = [super initWithFrame:CGRectMake(0, 0, 120, 120)]) {
 		// make the circle-shape outline with a nice border.
 		self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
 		self.layer.borderWidth = 2;
-		self.layer.cornerRadius = 30;
+		self.layer.cornerRadius = 60;
 		self.layer.masksToBounds = YES;
 	}
 	return self;

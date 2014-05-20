@@ -17,7 +17,6 @@
 @property (nonatomic) CGPoint anchorPoint;
 
 - (id)initWithImage:(UIImage *)image frame:(CGRect)frame andPath:(UIBezierPath *)path;
-//- (void)setAnchorPointToPosition:(CGPoint)anchorPointPosition;
 
 @end
 

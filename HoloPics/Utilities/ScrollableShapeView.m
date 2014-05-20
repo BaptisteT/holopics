@@ -85,14 +85,13 @@
         ((UIScrollView *)self.superview).contentOffset = CGPointMake(newCenter,0);
     } else {
         CGPoint newCenterPoint = CGPointMake(initialCenter.x + translation.x,initialCenter.y + translation.y);
-    
+        self.center = newCenterPoint;
         if (initialCenter.y + translation.y < 0) {
             self.center = initialCenter;
             if(!self.controlledShapeView) {
                 self.controlledShapeView = [self.scrollableShapeViewDelegate createNewShapeViewWithImage:self.shapeImage andPath:self.shapeInfo.bezierPath];
             }
         } else {
-            self.center = newCenterPoint;
             if (self.controlledShapeView) {
                 [self.scrollableShapeViewDelegate removeShape:self.controlledShapeView];
                 self.controlledShapeView = nil;

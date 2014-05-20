@@ -202,8 +202,9 @@
 
     ShapeView *newShapeView = [[ShapeView alloc] initWithImage:image frame:self.view.frame andPath:path];
     
-    // frame
+    // Param
     newShapeView.frame = self.view.frame;
+    newShapeView.shapeViewDelegate = self;
     
     // Add it to the array
     [self.shapeViews addObject:newShapeView];
@@ -300,7 +301,7 @@
 
 - (void)sendToFrontView:(ShapeView *)view
 {
-    [self.view insertSubview:view atIndex:self.subViewIndex];
+    [self.view insertSubview:view atIndex:self.subViewIndex-1];
 }
 
 
