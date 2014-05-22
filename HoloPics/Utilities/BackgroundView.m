@@ -61,23 +61,19 @@
 {
     CGPoint currentPoint = [recognizer locationInView:self];
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        // Hide all subviews
-        for (UIView * view in self.subviews) {
-            [view setHidden:YES];
-        }
+        // Hide shapes
+        [self.backgroundViewDelegate hideShapesDuringDrawing];
         ctr = 0;
         initialPoint = currentPoint;
         pts[0] = initialPoint;
-        if(self.originalImage) {
-            if (self.zoomImage == nil) {
-                self.zoomImage = [[MagnifierView alloc] init];
-                self.zoomImage.center = CGPointMake(self.superview.frame.size.width - 60 ,60);
-                self.zoomImage.viewToMagnify = self;
-            }
-            [self.zoomImage setCenterPoint:initialPoint];
-            [self.zoomImage setNeedsDisplay];
-            [self.superview addSubview:self.zoomImage];
+        if (self.zoomImage == nil) {
+            self.zoomImage = [[MagnifierView alloc] init];
+            self.zoomImage.center = CGPointMake(self.superview.frame.size.width - 60 ,60);
+            self.zoomImage.viewToMagnify = self;
         }
+        [self.zoomImage setCenterPoint:initialPoint];
+        [self.zoomImage setNeedsDisplay];
+        [self.superview addSubview:self.zoomImage];
     }
     if (recognizer.state == UIGestureRecognizerStateChanged) {
         [self buildPathAlongContinuousTouch:currentPoint];
@@ -104,16 +100,16 @@
         ctr = 0;
         
         [self.zoomImage removeFromSuperview];
-        for (UIView * view in self.subviews) {
-            [view setHidden:NO];
-        }
+        
+        // display shapes again
+        [self.backgroundViewDelegate displayShapesAfterDrawing];
     }
 }
 
 // One tap
 - (void)handleOneTapGesture:(UITapGestureRecognizer *)recognizer
 {
-//    [self.backgroundViewDelegate hideOrDisplayBackgroundOptionsView];
+    [self.backgroundViewDelegate removeAllShapeOverlay];
 }
 
 
@@ -152,11 +148,10 @@
 
 - (void)clearPathAndPictures
 {
-    self.originalImage = nil;
+    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
-    [self setImage:nil];
-    self.backgroundColor = [UIColor whiteColor];
+    [self setImage:self.originalImage];
 }
 
 - (void)initBackgroundView
@@ -167,7 +162,7 @@
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];
     
-    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor whiteColor]];
+    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
     
     // Alloc and add gesture recognisers
     self.panningRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanningGesture:)];
@@ -189,5 +184,12 @@
     return YES;
 }
 
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    // if the gesture recognizers's view isn't one of our views, don't allow simultaneous recognition
+    if (gestureRecognizer.view != self || otherGestureRecognizer.view != self)
+        return NO;
+    return YES;
+}
 
 @end

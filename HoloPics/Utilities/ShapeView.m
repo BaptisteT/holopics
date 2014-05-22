@@ -9,6 +9,9 @@
 #import "ShapeView.h"
 #import "ImageUtilities.h"
 #import "GeneralUtilities.h"
+#import "Constants.h"
+#import "ShapeOptionOverlayView.h"
+
 
 @interface ShapeView()
 
@@ -18,7 +21,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *oneTapRecognizer;
 @property (nonatomic, strong) NSMutableSet *activeRecognizers;
 @property(nonatomic) CGAffineTransform referenceTransform;
-@property (strong, nonatomic) UIBezierPath *imagePath;
+@property (strong, nonatomic) ShapeOptionOverlayView *shapeOptionOverlayView;
 
 
 @end
@@ -43,10 +46,12 @@
         self.rotationRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
         self.panningRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanningGesture:)];
         self.oneTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(oneTapGesture:)];
+        
         [self addGestureRecognizer:self.pinchRecognizer];
         [self addGestureRecognizer:self.rotationRecognizer];
         [self addGestureRecognizer:self.panningRecognizer];
         [self addGestureRecognizer:self.oneTapRecognizer];
+        
         self.pinchRecognizer.delegate = self;
         self.rotationRecognizer.delegate = self;
         self.panningRecognizer.delegate = self;
@@ -61,12 +66,13 @@
         
         // Path
         self.imagePath = path;
-        [self.imagePath setLineWidth:0.3];
-        [ImageUtilities drawPath:self.imagePath inImageView:self];
         
         // Init anchor point
         self.anchorPoint = CGPointMake(path.bounds.origin.x + path.bounds.size.width / 2, path.bounds.origin.y + path.bounds.size.height / 2);
         [GeneralUtilities setAnchorPoint:CGPointMake(self.anchorPoint.x / self.frame.size.width, self.anchorPoint.y/self.frame.size.height) forView:self];
+        
+        // Init option overlay
+        [self initAndDisplayShapeOptionOverlay];
     }
     return self;
 }
@@ -92,10 +98,18 @@
             
         case UIGestureRecognizerStateChanged: {
             CGAffineTransform transform = self.referenceTransform;
-            for (UIGestureRecognizer *recognizer in self.activeRecognizers)
+            CGAffineTransform scaleTransform = self.referenceTransform;
+            for (UIGestureRecognizer *recognizer in self.activeRecognizers) {
                 transform = [self applyRecognizer:recognizer toTransform:transform];
+                if ([recognizer isKindOfClass:[UIPinchGestureRecognizer class]]) {
+                    scaleTransform = [self applyRecognizer:recognizer toTransform:scaleTransform];
+                }
+            }
             self.transform = transform;
             
+            // Revert transform for overlaybutton
+            [self.shapeOptionOverlayView revertTransformForOverlayButtons:transform
+                                                           scaleTransform:scaleTransform];
             break;
         }
             
@@ -118,7 +132,12 @@
 
 - (void)oneTapGesture:(UITapGestureRecognizer *)recognizer
 {
-    [self.shapeViewDelegate sendToFrontView:self];
+    if (self.shapeOptionOverlayView.isHidden) {
+        [self.shapeViewDelegate removeAllShapeOverlay];
+        [self.shapeOptionOverlayView setHidden:NO];
+    } else {
+        [self.shapeOptionOverlayView setHidden:YES];
+    }
 }
 
 - (CGAffineTransform)applyRecognizer:(UIGestureRecognizer *)recognizer toTransform:(CGAffineTransform)transform
@@ -155,10 +174,23 @@
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
-    BOOL a = [self.imagePath containsPoint:point];
-    return [self.imagePath containsPoint:point];
+    if (self.shapeOptionOverlayView.isHidden) {
+        return [self.imagePath containsPoint:point];
+    } else {
+        return CGRectContainsPoint(self.shapeOptionOverlayView.frame, point);
+    }
 }
 
+- (void)initAndDisplayShapeOptionOverlay
+{
+    self.shapeOptionOverlayView = [[ShapeOptionOverlayView alloc] initWithShapeView:self];
+    [self addSubview:self.shapeOptionOverlayView];
+}
+
+- (void)hideOptionOverlayView
+{
+    [self.shapeOptionOverlayView setHidden:YES];
+}
 
 
 @end

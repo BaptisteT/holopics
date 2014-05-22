@@ -29,10 +29,15 @@
                         <viewControllerLayoutGuide type="top" id="Azu-8C-ny9"/>
                         <viewControllerLayoutGuide type="bottom" id="xaJ-CI-6h1"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="icA-cL-3vS" customClass="BackgroundView">
+                    <view key="view" contentMode="scaleToFill" id="icA-cL-3vS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nnY-Be-WIf" customClass="BackgroundView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wc-xF-NaZ">
                                 <rect key="frame" x="0.0" y="5" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -55,43 +60,27 @@
                                     <action selector="saveButtonClicked:" destination="aEh-eK-93S" eventType="touchUpInside" id="D1Z-wA-0C5"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1BX-VC-upV">
-                                <rect key="frame" x="0.0" y="438" width="320" height="50"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oap-HE-RXY">
+                                <rect key="frame" x="1" y="398" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4j-zV-nFX">
-                                        <rect key="frame" x="120" y="5" width="40" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="explore_camera.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cameraButtonClicked:" destination="aEh-eK-93S" eventType="touchUpInside" id="Mb1-f9-YnT"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ne1-Uu-Z9o">
-                                        <rect key="frame" x="187" y="10" width="49" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Library">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="libraryButtonClicked:" destination="aEh-eK-93S" eventType="touchUpInside" id="7Qe-zq-DYm"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOD-J8-6ft">
+                                <rect key="frame" x="0.0" y="468" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GJ4-E3-dZS">
-                                <rect key="frame" x="0.0" y="488" width="320" height="80"/>
+                                <rect key="frame" x="0.0" y="468" width="320" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.031372550874948502" green="0.0039215688593685627" blue="0.015686275437474251" alpha="0.59999999999999998" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="an2-Rj-JRI">
-                                <rect key="frame" x="5" y="513" width="81" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="an2-Rj-JRI">
+                                <rect key="frame" x="5" y="487" width="42" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.011764705882352941" green="0.31372549019607843" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
-                                <state key="normal" title="Shapes">
+                                <state key="normal" title="Form">
                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -99,11 +88,45 @@
                                     <action selector="shapeButtonClicked:" destination="aEh-eK-93S" eventType="touchUpInside" id="e4I-Gd-uw1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaL-Jm-cxF">
-                                <rect key="frame" x="5" y="448" width="81" height="30"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1BX-VC-upV">
+                                <rect key="frame" x="0.0" y="398" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4j-zV-nFX">
+                                        <rect key="frame" x="97" y="5" width="55" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                        <state key="normal" image="camera_button.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cameraButtonClicked:" destination="aEh-eK-93S" eventType="touchUpInside" id="Mb1-f9-YnT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ne1-Uu-Z9o">
+                                        <rect key="frame" x="180" y="5" width="48" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                        <state key="normal" image="library_button.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="libraryButtonClicked:" destination="aEh-eK-93S" eventType="touchUpInside" id="7Qe-zq-DYm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70000000000000007" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Xav-lt-VCW" appends="YES" id="UbL-ld-8vz"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaL-Jm-cxF">
+                                <rect key="frame" x="5" y="402" width="42" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.011764705882352941" green="0.31372549019607843" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="15"/>
-                                <state key="normal" title="Background">
+                                <state key="normal" title="Back">
                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -112,7 +135,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9S6-zJ-2qv"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -121,15 +143,18 @@
                     <connections>
                         <outlet property="backgroundButton" destination="IaL-Jm-cxF" id="2OH-4O-QPa"/>
                         <outlet property="backgroundOptionsView" destination="1BX-VC-upV" id="eNm-DA-K0t"/>
-                        <outlet property="backgroundView" destination="icA-cL-3vS" id="99k-29-fbf"/>
+                        <outlet property="backgroundView" destination="nnY-Be-WIf" id="KUs-bO-4ai"/>
                         <outlet property="cancelButton" destination="4Wc-xF-NaZ" id="e6R-64-tkc"/>
                         <outlet property="shapeButton" destination="an2-Rj-JRI" id="ux4-Ou-bKI"/>
                         <outlet property="shapeOptionsScrollView" destination="GJ4-E3-dZS" id="Pav-qK-kQ1"/>
                         <outlet property="shareButton" destination="hDc-NB-dde" id="BHQ-1R-W8x"/>
+                        <outlet property="whiteBackgroundOptionsView" destination="Oap-HE-RXY" id="JHp-1b-tTQ"/>
+                        <outlet property="whiteShapeOptionsView" destination="eOD-J8-6ft" id="G8B-5f-4cP"/>
                         <segue destination="Ou6-XH-Y73" kind="push" identifier="Share From Create Push Segue" id="wvV-tU-rPz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMS-Fe-jJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Xav-lt-VCW"/>
             </objects>
             <point key="canvasLocation" x="1176" y="6"/>
         </scene>
@@ -365,11 +390,12 @@
     </scenes>
     <resources>
         <image name="camera-quit-button.png" width="150" height="151"/>
+        <image name="camera_button.png" width="60" height="44"/>
         <image name="create-button2.png" width="148" height="148"/>
         <image name="create_send_button.png" width="150" height="151"/>
-        <image name="explore_camera.png" width="49" height="49"/>
         <image name="explore_refresh.png" width="99" height="99"/>
         <image name="forward_icon.png" width="88" height="57"/>
+        <image name="library_button.png" width="63" height="53"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

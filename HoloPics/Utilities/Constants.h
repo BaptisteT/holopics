@@ -19,7 +19,7 @@ static NSString * const kApiVersion = @"1";
 static const NSUInteger kCameraHeight = 426;
 static const NSUInteger kScreenWidth = 320;
 
-static const NSUInteger kPathMinimalArea = 100;
+static const NSUInteger kPathMinimalArea = 200;
 
 static const CGFloat    kLongPressTimeThreshold = 0.4f;
 static const NSUInteger kContinuousMovementDistanceThreshold = 1;
@@ -27,6 +27,11 @@ static const NSUInteger kMinimumPinchDelta = 1;
 
 static const NSUInteger kMaxNumberOfShapes = 50;
 static const NSUInteger kScrollableViewHeight = 80;
+static const NSUInteger kScrollableViewInitialOffset = 60;
+static const NSUInteger kMinDeleteVelocity = 200;
+
+static const NSUInteger kShapeOptionOverlayMinLayerSize = 100;
+static const NSUInteger kShapeOptionOverlayButtonSize = 40;
 
 
 #define FIRST_OPENING_PREF @"First Opening"

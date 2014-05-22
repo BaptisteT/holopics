@@ -15,10 +15,10 @@
 @interface ScrollableShapeView : UIImageView <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) id<ScrollableShapeViewDelegate> scrollableShapeViewDelegate;
-
+@property (strong, nonatomic) ShapeInfo *shapeInfo;
 
 - (id)initWithShapeInfo:(ShapeInfo *)shapeInfo;
-- (void)incremenentIndexAndFrame;
+- (void)incremenentIndexAndFrameOf:(int)position;
 
 @end
 
@@ -27,5 +27,6 @@
 - (ShapeView *)createNewShapeViewWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
 - (void)removeShape:(ShapeView *)shapeView;
 - (void)setShapeCenter:(ShapeView *)shapeView ToPoint:(CGPoint)point;
+- (void)deleteShapeFromScrollView:(ScrollableShapeView *)shapeInScrollView;
 
 @end

@@ -13,7 +13,6 @@
 
 @interface ScrollableShapeView()
 
-@property (strong, nonatomic) ShapeInfo *shapeInfo;
 @property (strong, nonatomic) UIImage *shapeImage;
 @property (nonatomic, strong) UIPanGestureRecognizer *panningRecognizer;
 @property (strong, nonatomic) ShapeView *controlledShapeView;
@@ -28,11 +27,9 @@
     self = [super init];
     if (self) {
         self.shapeInfo = shapeInfo;
-        
-        self.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.layer.borderWidth = 1.0f;
         self.userInteractionEnabled = YES;
         self.multipleTouchEnabled = NO;
+        self.contentMode = UIViewContentModeScaleAspectFit;
         self.panningRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanningGesture:)];
         [self addGestureRecognizer:self.panningRecognizer];
         self.panningRecognizer.delegate = self;
@@ -48,19 +45,29 @@
 - (void)setImage:(UIImage *)image
 {
     // crop image to show only path bounds
+    CGFloat side, xOrigin, yOrigin;
     CGRect pathBounds = self.shapeInfo.bezierPath.bounds;
-    CGFloat side = MAX(pathBounds.size.height,pathBounds.size.width);
-    CGRect newRect = CGRectMake(pathBounds.origin.x, pathBounds.origin.y, side, side);
+    if (pathBounds.size.height > pathBounds.size.width) {
+        side = pathBounds.size.height;
+        xOrigin = MAX(0,pathBounds.origin.x - (side - pathBounds.size.width) / 2);
+        yOrigin = pathBounds.origin.y;
+    } else {
+        side = pathBounds.size.width;
+        xOrigin = pathBounds.origin.x;
+        yOrigin = MAX(0,pathBounds.origin.y - (side - pathBounds.size.height) / 2);
+    }
+
+    CGRect newRect = CGRectMake(xOrigin, yOrigin, side, side);
     
     CGImageRef subImage = CGImageCreateWithImageInRect ([image CGImage],newRect);
     [super setImage:[UIImage imageWithCGImage:subImage]];
 }
 
-- (void)incremenentIndexAndFrame
+- (void)incremenentIndexAndFrameOf:(int)position
 {
-    self.shapeInfo.index = [NSNumber numberWithInt:[self.shapeInfo.index intValue] + 1];
+    self.shapeInfo.index = [NSNumber numberWithInt:[self.shapeInfo.index intValue] + position];
     
-    self.frame = CGRectMake([self.shapeInfo.index floatValue] * kScrollableViewHeight, 0, kScrollableViewHeight, kScrollableViewHeight);
+    self.frame = CGRectMake([self.shapeInfo.index floatValue] * kScrollableViewHeight + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
 }
 
 - (void)handlePanningGesture:(UIPanGestureRecognizer *)recognizer
@@ -71,7 +78,11 @@
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
         CGPoint velocity = [recognizer velocityInView:self];
-        if (- velocity.y < fabs(velocity.x) ) {
+        if (velocity.y > kMinDeleteVelocity && velocity.y > 2 * fabs(velocity.x)) {
+            isSlide = FALSE;
+            [self.scrollableShapeViewDelegate deleteShapeFromScrollView:self];
+            return;
+        } else if (- velocity.y < fabs(velocity.x) ) {
             isSlide = TRUE;
             initialCenter = ((UIScrollView *)self.superview).contentOffset;
         } else {

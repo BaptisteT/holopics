@@ -35,6 +35,9 @@
 
 @property (weak, nonatomic) IBOutlet UIView *backgroundOptionsView;
 @property (weak, nonatomic) IBOutlet UIScrollView *shapeOptionsScrollView;
+@property (strong, nonatomic) IBOutlet UIView*whiteBackgroundOptionsView;
+@property (weak, nonatomic) IBOutlet UIView *whiteShapeOptionsView;
+
 
 @property (weak, nonatomic) IBOutlet BackgroundView *backgroundView;
 @property (strong, nonatomic)  NSMutableArray *shapeViews;
@@ -72,10 +75,15 @@
     self.shapeOptionsScrollView.showsVerticalScrollIndicator = NO;
     self.shapeOptionsScrollView.scrollsToTop = NO;
     self.shapeOptionsScrollView.delegate = self;
+    [self.shapeOptionsScrollView setContentOffset:CGPointMake(0, 0)];
 
     // Some design
     [ImageUtilities outerGlow:self.shareButton];
     [ImageUtilities outerGlow:self.cancelButton];
+    NSUInteger buttonHeight = self.backgroundButton.bounds.size.height;
+    self.backgroundButton.layer.cornerRadius = buttonHeight/2;
+    buttonHeight = self.shapeButton.bounds.size.height;
+    self.shapeButton.layer.cornerRadius = buttonHeight/2;
     
     self.backgroundView.backgroundViewDelegate = self;
     
@@ -101,6 +109,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [self removeAllShapeOverlay];
     // save context
     NSError *error;
     if ([[self managedObjectContext] hasChanges] && ![[self managedObjectContext] save:&error]) {
@@ -124,6 +133,8 @@
     [self.shapeButton setHidden:YES];
     [self.shapeOptionsScrollView setHidden:YES];
     [self.backgroundOptionsView setHidden:YES];
+    [self.whiteBackgroundOptionsView setHidden:YES];
+    [self.whiteShapeOptionsView setHidden:YES];
     
     // Remove border around shapes
     for (ShapeView *views in self.shapeViews){
@@ -160,8 +171,11 @@
 - (IBAction)shapeButtonClicked:(id)sender {
     if (self.shapeOptionsScrollView.isHidden) {
         self.shapeOptionsScrollView.hidden = NO;
+        self.whiteShapeOptionsView.hidden = NO;
+        [self.shapeOptionsScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     } else {
         self.shapeOptionsScrollView.hidden = YES;
+        self.whiteShapeOptionsView.hidden = YES;
     }
 }
 
@@ -181,6 +195,8 @@
 - (void)setBackgoundImage:(UIImage *)image {
     self.backgroundView.originalImage = image;
     [self.backgroundView setImage:image];
+    [self.backgroundOptionsView setHidden:YES];
+    [self.whiteBackgroundOptionsView setHidden:YES];
 }
 
 
@@ -195,7 +211,7 @@
     }
 
     // Return if we reached the limit of images
-    if (self.subViewIndex > kMaxNumberOfShapes) {
+    if (self.subViewIndex >= kMaxNumberOfShapes) {
         [GeneralUtilities showMessage:@"You reached the maximum number of shapes!" withTitle:nil];
         return nil;
     }
@@ -207,11 +223,12 @@
     newShapeView.shapeViewDelegate = self;
     
     // Add it to the array
+    [self removeAllShapeOverlay];
     [self.shapeViews addObject:newShapeView];
     
     // Show it
-    [self.view insertSubview:newShapeView atIndex:self.subViewIndex];
     self.subViewIndex ++;
+    [self.view insertSubview:newShapeView atIndex:self.subViewIndex];
     
     return newShapeView;
 }
@@ -229,7 +246,21 @@
     CGFloat y = point.y + self.view.frame.size.height - kScrollableViewHeight;
     
     shapeView.center = CGPointMake(x, y);
+}
 
+- (void)deleteShapeFromScrollView:(ScrollableShapeView *)shapeInScrollView
+{
+    [self.scrollableShapeViews removeObject:shapeInScrollView];
+    
+    for (ScrollableShapeView* otherView in self.scrollableShapeViews) {
+        if (otherView.shapeInfo.index > shapeInScrollView.shapeInfo.index) {
+            [otherView incremenentIndexAndFrameOf:-1];
+        }
+    }
+     self.shapeOptionsScrollView.contentSize = CGSizeMake(self.shapeOptionsScrollView.contentSize.width - kScrollableViewHeight, kScrollableViewHeight);
+    
+    [shapeInScrollView removeFromSuperview];
+    [[self managedObjectContext] deleteObject:shapeInScrollView.shapeInfo];
 }
 
 
@@ -264,29 +295,27 @@
     // Create scrollable and shape views
     self.shapeOptionsScrollView.contentSize = CGSizeMake(self.shapeOptionsScrollView.contentSize.width + kScrollableViewHeight, kScrollableViewHeight);
     ScrollableShapeView *scrollableShape = [[ScrollableShapeView alloc] initWithShapeInfo:shapeInfo];
-    scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index floatValue], 0, kScrollableViewHeight, kScrollableViewHeight);
+    scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index floatValue] + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
     scrollableShape.scrollableShapeViewDelegate = self;
     
     // Increment Index and Frame
     for (ScrollableShapeView* scrollableShapeViews in self.scrollableShapeViews) {
-        [scrollableShapeViews incremenentIndexAndFrame];
+        [scrollableShapeViews incremenentIndexAndFrameOf:1];
     }
     
     // Add the new shape to the scrollable views
     [self.scrollableShapeViews addObject:scrollableShape];
     [self.shapeOptionsScrollView addSubview:scrollableShape];
-    
-    // Display it on the shape scroll views
-    [self.shapeOptionsScrollView setContentOffset:CGPointZero];
-    self.shapeOptionsScrollView.hidden = NO;
 }
 
 - (void)hideOrDisplayBackgroundOptionsView
 {
     if (self.backgroundOptionsView.isHidden) {
         self.backgroundOptionsView.hidden = NO;
+        self.whiteBackgroundOptionsView.hidden = NO;
     } else {
         self.backgroundOptionsView.hidden = YES;
+        self.whiteBackgroundOptionsView.hidden = YES;
     }
 }
 
@@ -295,15 +324,49 @@
     return self.shapeOptionsScrollView.isHidden;
 }
 
+- (void)hideShapesDuringDrawing
+{
+    self.shapeOptionsScrollView.hidden = YES;
+    self.whiteShapeOptionsView.hidden = YES;
+    
+    for(ShapeView *shapes in self.shapeViews) {
+        [shapes setHidden:YES];
+    }
+}
+
+- (void)displayShapesAfterDrawing
+{
+    [self.shapeOptionsScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    self.shapeOptionsScrollView.hidden = NO;
+    self.whiteShapeOptionsView.hidden = NO;
+    
+    for(ShapeView *shapes in self.shapeViews) {
+        [shapes setHidden:NO];
+    }
+}
+
 // --------------------------------
 // ShapeViewDelegate protocol
 // --------------------------------
 
 - (void)sendToFrontView:(ShapeView *)view
 {
-    [self.view insertSubview:view atIndex:self.subViewIndex-1];
+    [self.view insertSubview:view atIndex:self.subViewIndex];
 }
 
+- (void)deleteView:(ShapeView *)view
+{
+    [view removeFromSuperview];
+    [self.shapeViews removeObject:view];
+    self.subViewIndex --;
+}
+
+- (void)removeAllShapeOverlay
+{
+    for (ShapeView *shape in self.shapeViews) {
+        [shape hideOptionOverlayView];
+    }
+}
 
 // --------------------------------------------
 // Core Data related methods
@@ -327,10 +390,10 @@
     // Create scrollable shapeView
     self.scrollableShapeViews = [NSMutableArray arrayWithCapacity:requestResults.count];
     CGFloat squareWidth = CGRectGetHeight(self.shapeOptionsScrollView.frame);
-    self.shapeOptionsScrollView.contentSize = CGSizeMake(squareWidth * requestResults.count, squareWidth);
+    self.shapeOptionsScrollView.contentSize = CGSizeMake(squareWidth * requestResults.count + kScrollableViewInitialOffset, squareWidth);
     for(ShapeInfo* shapeInfo in requestResults) {
         ScrollableShapeView *scrollableShape = [[ScrollableShapeView alloc] initWithShapeInfo:shapeInfo];
-        scrollableShape.frame = CGRectMake(squareWidth * [shapeInfo.index floatValue], 0, squareWidth, squareWidth);
+        scrollableShape.frame = CGRectMake(squareWidth * [shapeInfo.index floatValue] + kScrollableViewInitialOffset, 0, squareWidth, squareWidth);
         scrollableShape.scrollableShapeViewDelegate = self;
         [self.scrollableShapeViews addObject:scrollableShape];
         [self.shapeOptionsScrollView addSubview:scrollableShape];
