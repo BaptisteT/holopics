@@ -13,7 +13,6 @@
 
 @property (weak, nonatomic) ShapeView *shapeView; // owner
 @property (weak, nonatomic) IBOutlet UIButton *BinButton;
-@property (weak, nonatomic) IBOutlet UIButton *resizeButton;
 @property (weak, nonatomic) IBOutlet UIButton *frontButton;
 
 
@@ -75,12 +74,9 @@
     [self.shapeView.shapeViewDelegate sendToFrontView:self.shapeView];
 }
 
-
 - (IBAction)binButtonClicked:(id)sender {
     [self.shapeView.shapeViewDelegate deleteView:self.shapeView];
 }
-
-
 
 - (IBAction)resizeButtonPanned:(UIPanGestureRecognizer *)recognizer {
     static CGFloat initialDistance;

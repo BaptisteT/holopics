@@ -170,11 +170,21 @@
         return NO;
     if (![gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] && ![gestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] && ![gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
         return NO;
-    if (![otherGestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] && ![otherGestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] && ![gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+    if (![otherGestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] && ![otherGestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]] && ![otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
         return NO;
     return YES;
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if (!self.shapeOptionOverlayView.isHidden && [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        CGPoint point = [touch locationInView:self.shapeOptionOverlayView];
+        if (CGRectContainsPoint(self.shapeOptionOverlayView.resizeButton.frame,point)) {
+            return NO;
+        }
+    }
+    return YES;
+}
 
 // ------------
 // Utilities
@@ -188,6 +198,14 @@
         return CGRectContainsPoint(self.shapeOptionOverlayView.frame, point);
     }
 }
+
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+//{
+//    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer.view isKindOfClass:[UIButton class]]){
+//        return YES;
+//    }
+//    return NO;
+//}
 
 - (void)initAndDisplayShapeOptionOverlay
 {

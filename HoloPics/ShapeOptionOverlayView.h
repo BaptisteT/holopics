@@ -11,9 +11,9 @@
 
 @interface ShapeOptionOverlayView : UIView
 
+@property (weak, nonatomic) IBOutlet UIButton *resizeButton;
 
 - (id)initWithShapeView:(ShapeView *)shapeView;
-
 -(void)revertTransformForOverlayButtons:(CGAffineTransform)transform scaleTransform:(CGAffineTransform)scaleTransform;
 
 @end
