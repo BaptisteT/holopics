@@ -85,5 +85,27 @@
     return area > kPathMinimalArea;
 }
 
++ (CGRect) getSquareBoundsOfPath:(UIBezierPath *)path
+{
+    // crop image to show only path bounds
+    CGFloat side, xOrigin, yOrigin;
+    CGRect pathBounds = path.bounds;
+    if (pathBounds.size.height > pathBounds.size.width) {
+        side = pathBounds.size.height;
+        if (side > kScreenWidth) {
+            xOrigin = (kScreenWidth - side)/2;
+        } else {
+            xOrigin = MAX(0,MIN(kScreenWidth - side,pathBounds.origin.x - (side - pathBounds.size.width) / 2));
+        }
+        yOrigin = pathBounds.origin.y;
+    } else {
+        side = pathBounds.size.width;
+        xOrigin = pathBounds.origin.x;
+        yOrigin = MAX(0,pathBounds.origin.y - (side - pathBounds.size.height) / 2);
+    }
+    
+    return CGRectMake(xOrigin, yOrigin, side, side);
+}
+
 
 @end

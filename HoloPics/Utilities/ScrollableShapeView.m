@@ -9,6 +9,7 @@
 #import "ScrollableShapeView.h"
 #import "ImageUtilities.h"
 #import "Constants.h"
+#import "PathUtility.h"
 
 
 @interface ScrollableShapeView()
@@ -35,8 +36,8 @@
         self.panningRecognizer.delegate = self;
         
         // Create Image
-        self.shapeImage = [ImageUtilities imageWithImage:[ImageUtilities getImageAtRelativePath:self.shapeInfo.relativeImagePath] scaledToSize:[[UIScreen mainScreen] bounds].size];
-        self.image = self.shapeImage;
+        self.shapeImage = [ImageUtilities getImageAtRelativePath:self.shapeInfo.relativeImagePath];
+        self.image = [ImageUtilities imageWithImage:self.shapeImage scaledToSize:[[UIScreen mainScreen] bounds].size];
     }
     return self;
 }
@@ -45,21 +46,9 @@
 - (void)setImage:(UIImage *)image
 {
     // crop image to show only path bounds
-    CGFloat side, xOrigin, yOrigin;
-    CGRect pathBounds = self.shapeInfo.bezierPath.bounds;
-    if (pathBounds.size.height > pathBounds.size.width) {
-        side = pathBounds.size.height;
-        xOrigin = MAX(0,pathBounds.origin.x - (side - pathBounds.size.width) / 2);
-        yOrigin = pathBounds.origin.y;
-    } else {
-        side = pathBounds.size.width;
-        xOrigin = pathBounds.origin.x;
-        yOrigin = MAX(0,pathBounds.origin.y - (side - pathBounds.size.height) / 2);
-    }
-
-    CGRect newRect = CGRectMake(xOrigin, yOrigin, side, side);
+    CGRect pathSquareBounds = [PathUtility getSquareBoundsOfPath:self.shapeInfo.bezierPath];
     
-    CGImageRef subImage = CGImageCreateWithImageInRect ([image CGImage],newRect);
+    CGImageRef subImage = CGImageCreateWithImageInRect ([image CGImage],pathSquareBounds);
     [super setImage:[UIImage imageWithCGImage:subImage]];
 }
 
@@ -100,7 +89,7 @@
         if (initialCenter.y + translation.y < 0) {
             self.center = initialCenter;
             if(!self.controlledShapeView) {
-                self.controlledShapeView = [self.scrollableShapeViewDelegate createNewShapeViewWithImage:self.shapeImage andPath:self.shapeInfo.bezierPath];
+                self.controlledShapeView = [self.scrollableShapeViewDelegate insertNewShapeViewWithImage:self.shapeImage andPath:self.shapeInfo.bezierPath];
             }
         } else {
             if (self.controlledShapeView) {

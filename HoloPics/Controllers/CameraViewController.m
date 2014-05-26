@@ -117,7 +117,7 @@
     }
     
     
-    [self.cameraVCDelegate setBackgoundImage:[ImageUtilities imageWithImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation] scaledToSize:self.view.bounds.size]];
+    [self.cameraVCDelegate setBackgoundImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation]];
     
     [self closeCamera];
 }

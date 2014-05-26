@@ -32,7 +32,7 @@
               frame:(CGRect) frame
             andPath:(UIBezierPath *)path
 {
-    self.attachedImage = [ImageUtilities imageWithImage:image scaledToSize:frame.size];
+    self.attachedImage = image;
     self.frame = frame;
     return [self initShapeViewWithPath:path];
 }
@@ -63,13 +63,15 @@
         self.userInteractionEnabled = YES;
         self.multipleTouchEnabled = YES;
         self.exclusiveTouch = YES;
+        self.clipsToBounds = NO;
+        self.layer.masksToBounds = NO;
         
         // Path
         self.imagePath = path;
         
         // Init anchor point
         self.anchorPoint = CGPointMake(path.bounds.origin.x + path.bounds.size.width / 2, path.bounds.origin.y + path.bounds.size.height / 2);
-        [GeneralUtilities setAnchorPoint:CGPointMake(self.anchorPoint.x / self.frame.size.width, self.anchorPoint.y/self.frame.size.height) forView:self];
+        [GeneralUtilities setAnchorPoint:CGPointMake(self.anchorPoint.x / [UIScreen mainScreen].bounds.size.width, self.anchorPoint.y/[UIScreen mainScreen].bounds.size.height) forView:self];
         
         // Init option overlay
         [self initAndDisplayShapeOptionOverlay];
@@ -106,6 +108,12 @@
                 }
             }
             self.transform = transform;
+            
+            // http://d3signerd.com/old/image-anti-aliasing-in-objective-c/
+            self.layer.shouldRasterize = YES;
+            self.layer.rasterizationScale = sqrt(transform.b * transform.b + transform.d * transform.d);
+            self.layer.edgeAntialiasingMask = kCALayerLeftEdge | kCALayerRightEdge | kCALayerBottomEdge | kCALayerTopEdge;
+
             
             // Revert transform for overlaybutton
             [self.shapeOptionOverlayView revertTransformForOverlayButtons:transform

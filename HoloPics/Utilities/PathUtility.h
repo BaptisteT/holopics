@@ -18,4 +18,6 @@
 
 + (BOOL) isMinimalSizePath:(UIBezierPath *)path;
 
++ (CGRect) getSquareBoundsOfPath:(UIBezierPath *)path;
+
 @end

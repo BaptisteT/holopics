@@ -95,6 +95,7 @@
     CGContextAddPath(context,path.CGPath);
     CGContextClip(context);
     CGContextClearRect(context,CGRectMake(0,0,fullImage.size.width,fullImage.size.height));
+    CGContextSetInterpolationQuality( UIGraphicsGetCurrentContext() , kCGInterpolationHigh );
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return img;
@@ -103,10 +104,11 @@
 // Draw the image inside the path
 + (UIImage *)drawFromImage:(UIImage *)fullImage insidePath:(UIBezierPath *)path
 {
-    UIGraphicsBeginImageContextWithOptions(fullImage.size, NO, 0);
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
     [path addClip];
-    [fullImage drawInRect:CGRectMake(0,0,fullImage.size.width,fullImage.size.height)];
-    [fullImage drawAtPoint:CGPointZero];
+    [fullImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    CGContextSetInterpolationQuality( UIGraphicsGetCurrentContext() , kCGInterpolationHigh );
     UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return img;

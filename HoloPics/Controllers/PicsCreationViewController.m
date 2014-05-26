@@ -21,6 +21,7 @@
 #include "AppDelegate.h"
 #include "ShapeInfo.h"
 #include "ScrollableShapeView.h"
+#import "PathUtility.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"return_to_feed", @"Strings", @"comment")
@@ -90,7 +91,7 @@
     // If there is a forwarded image, we display it
     if(self.forwardedImage) {
         self.backgroundView.originalImage = self.forwardedImage;
-        [self.backgroundView setImage:self.forwardedImage];
+        [self.backgroundView setImage:self.backgroundView.originalImage];
     }
     
     // Load shapes
@@ -194,7 +195,7 @@
 
 - (void)setBackgoundImage:(UIImage *)image {
     self.backgroundView.originalImage = image;
-    [self.backgroundView setImage:image];
+    [self.backgroundView setImage:self.backgroundView.originalImage];
     [self.backgroundOptionsView setHidden:YES];
     [self.whiteBackgroundOptionsView setHidden:YES];
 }
@@ -204,7 +205,7 @@
 // Scrollable Shape View protocol
 // --------------------------------
 
-- (ShapeView *)createNewShapeViewWithImage:(UIImage *)image andPath:(UIBezierPath *)path {
+- (ShapeView *)insertNewShapeViewWithImage:(UIImage *)image andPath:(UIBezierPath *)path {
 
     if (!self.shapeViews){
         self.shapeViews = [NSMutableArray arrayWithCapacity:1];
@@ -278,6 +279,7 @@
     
     // Cut and save image
     UIImage *croppedImage = [ImageUtilities drawFromImage:image insidePath:path];
+    
     if (![ImageUtilities saveImage:croppedImage inAppDirectoryPath:relativeImagePath]) {
         [GeneralUtilities showMessage:NSLocalizedStringFromTable(@"shape_saving_fail_message",@"Strings",@"comment") withTitle:nil];
         return;
@@ -292,20 +294,31 @@
     shapeInfo.relativeImagePath = relativeImagePath;
     shapeInfo.bezierPath = [UIBezierPath bezierPathWithCGPath:path.CGPath];
 
-    // Create scrollable and shape views
+    // Create scrollable shape view
     self.shapeOptionsScrollView.contentSize = CGSizeMake(self.shapeOptionsScrollView.contentSize.width + kScrollableViewHeight, kScrollableViewHeight);
     ScrollableShapeView *scrollableShape = [[ScrollableShapeView alloc] initWithShapeInfo:shapeInfo];
-    scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index floatValue] + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
     scrollableShape.scrollableShapeViewDelegate = self;
     
     // Increment Index and Frame
+    [self.shapeOptionsScrollView setContentOffset:CGPointMake(0, 0) animated:NO];
     for (ScrollableShapeView* scrollableShapeViews in self.scrollableShapeViews) {
         [scrollableShapeViews incremenentIndexAndFrameOf:1];
     }
     
+    // Set initial param before animation
+    CGRect frame = [self.view convertRect:[PathUtility getSquareBoundsOfPath:path] toView:self.shapeOptionsScrollView];
+    scrollableShape.frame = frame;
+    scrollableShape.backgroundColor = [UIColor blackColor];
+
+    
     // Add the new shape to the scrollable views
     [self.scrollableShapeViews addObject:scrollableShape];
     [self.shapeOptionsScrollView addSubview:scrollableShape];
+    
+    [UIView animateWithDuration:1.0 animations:^{
+        scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index floatValue] + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
+        scrollableShape.backgroundColor =[UIColor clearColor];
+    }];
 }
 
 - (void)hideOrDisplayBackgroundOptionsView
@@ -336,7 +349,6 @@
 
 - (void)displayShapesAfterDrawing
 {
-    [self.shapeOptionsScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     self.shapeOptionsScrollView.hidden = NO;
     self.whiteShapeOptionsView.hidden = NO;
     
@@ -409,7 +421,7 @@
     NSError *error;
     NSArray *requestResults = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if (error){
-        // todo
+        // todo error handling
     }
     return requestResults;
 }

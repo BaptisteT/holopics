@@ -23,7 +23,7 @@ static const NSUInteger kPathMinimalArea = 200;
 
 static const CGFloat    kLongPressTimeThreshold = 0.4f;
 static const NSUInteger kContinuousMovementDistanceThreshold = 1;
-static const NSUInteger kMinimumPinchDelta = 1;
+static const NSUInteger kMinimumScale = 1;
 
 static const NSUInteger kMaxNumberOfShapes = 50;
 static const NSUInteger kScrollableViewHeight = 80;

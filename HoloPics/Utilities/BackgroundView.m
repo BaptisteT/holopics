@@ -112,6 +112,24 @@
     [self.backgroundViewDelegate removeAllShapeOverlay];
 }
 
+//// Pinch
+//- (void)handlePinchGesture:(UIPinchGestureRecognizer *)gesture
+//{
+//    if (gesture.state == UIGestureRecognizerStateEnded
+//        || gesture.state == UIGestureRecognizerStateChanged) {
+//        CGFloat currentScale = self.frame.size.width / self.bounds.size.width;
+//        CGFloat newScale = currentScale * gesture.scale;
+//        
+//        if (newScale < kMinimumScale) {
+//            newScale = kMinimumScale;
+//        }
+//        
+//        CGAffineTransform transform = CGAffineTransformMakeScale(newScale, newScale);
+//        self.transform = transform;
+//        gesture.scale = 1;
+//    }
+//}
+
 
 // --------------------------------
 // Utilities
@@ -172,9 +190,16 @@
     [self addGestureRecognizer:self.oneTapRecognizer];
     
     self.panningRecognizer.delegate = self;
+    self.panningRecognizer.maximumNumberOfTouches = 1;
     self.oneTapRecognizer.delegate = self;
     self.oneTapRecognizer.numberOfTapsRequired = 1;
 }
+
+
+// -----------------------------
+// Gesture recogniser delegate
+// -----------------------------
+
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
@@ -190,6 +215,14 @@
     if (gestureRecognizer.view != self || otherGestureRecognizer.view != self)
         return NO;
     return YES;
+}
+
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if ([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] && [otherGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

@@ -24,7 +24,7 @@
 
 @protocol ScrollableShapeViewDelegate
 
-- (ShapeView *)createNewShapeViewWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
+- (ShapeView *)insertNewShapeViewWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
 - (void)removeShape:(ShapeView *)shapeView;
 - (void)setShapeCenter:(ShapeView *)shapeView ToPoint:(CGPoint)point;
 - (void)deleteShapeFromScrollView:(ScrollableShapeView *)shapeInScrollView;
