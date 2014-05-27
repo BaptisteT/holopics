@@ -39,4 +39,6 @@
 
 + (UIImage *)getImageAtRelativePath:(NSString *)relativePath;
 
++ (UIImage *)drawTitleinCornerOfImage:(UIImage*)image;
+
 @end

@@ -11,6 +11,4 @@
 
 @interface TutoImageView : UIImageView
 
-@property (weak, nonatomic) ShapeView *imageForTuto2;
-
 @end

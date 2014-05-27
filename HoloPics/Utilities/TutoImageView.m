@@ -26,10 +26,6 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self removeFromSuperview];
-    if(self.imageForTuto2) {
-        self.imageForTuto2.backgroundColor = [UIColor clearColor];
-        self.imageForTuto2.center = CGPointMake(self.imageForTuto2.center.x + 5, self.imageForTuto2.center.y + 5);
-    }
 }
 
 

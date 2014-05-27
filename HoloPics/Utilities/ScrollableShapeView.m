@@ -62,11 +62,13 @@
 - (void)handlePanningGesture:(UIPanGestureRecognizer *)recognizer
 {
     static CGPoint initialCenter;
+    CGFloat newCenter = 0;
+    CGPoint newCenterPoint, velocity;
     static BOOL isSlide = FALSE;
-    
+
     if (recognizer.state == UIGestureRecognizerStateBegan)
     {
-        CGPoint velocity = [recognizer velocityInView:self];
+        velocity = [recognizer velocityInView:self];
         if (velocity.y > kMinDeleteVelocity && velocity.y > 2 * fabs(velocity.x)) {
             isSlide = FALSE;
             [self.scrollableShapeViewDelegate deleteShapeFromScrollView:self];
@@ -81,10 +83,10 @@
     }
     CGPoint translation = [recognizer translationInView:recognizer.view.superview];
     if (isSlide) {
-        CGFloat newCenter = MIN( MAX(((UIScrollView *)self.superview).contentSize.width - kScreenWidth,0),MAX(initialCenter.x - translation.x, 0));
+        newCenter = MIN( MAX(((UIScrollView *)self.superview).contentSize.width - kScreenWidth,0),MAX(initialCenter.x - translation.x, 0));
         ((UIScrollView *)self.superview).contentOffset = CGPointMake(newCenter,0);
     } else {
-        CGPoint newCenterPoint = CGPointMake(initialCenter.x + translation.x,initialCenter.y + translation.y);
+        newCenterPoint = CGPointMake(initialCenter.x + translation.x,initialCenter.y + translation.y);
         self.center = newCenterPoint;
         if (initialCenter.y + translation.y < 0) {
             self.center = initialCenter;
@@ -103,12 +105,23 @@
     }
     
     if (recognizer.state == UIGestureRecognizerStateCancelled || recognizer.state == UIGestureRecognizerStateEnded){
-        if (!isSlide) {
+        if (isSlide) {
+            velocity = [recognizer velocityInView:self];
+            CGFloat finalCenter = MIN( MAX(((UIScrollView *)self.superview).contentSize.width - kScreenWidth,0),MAX(newCenter - velocity.x / 5, 0));
+            NSTimeInterval duration = MIN(0.5,abs(velocity.x/500));
+            [UIView animateWithDuration:duration delay:0
+                                options:(UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionBeginFromCurrentState)
+                             animations:^ {
+                                 ((UIScrollView *)self.superview).contentOffset = CGPointMake(finalCenter,0);
+                             }
+                             completion:NULL];
+        } else {
             self.center = initialCenter;
             self.controlledShapeView = nil;
         }
     }
 }
+
 
 
 @end

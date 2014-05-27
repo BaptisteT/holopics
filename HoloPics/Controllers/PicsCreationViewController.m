@@ -14,7 +14,6 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKitDefines.h>
 #import "ShapeView.h"
-#import "TutoImageView.h"
 #import "SharingViewController.h"
 #import "MBProgressHUD.h"
 #import "Holopic.h"
@@ -45,7 +44,6 @@
 @property (nonatomic) NSInteger subViewIndex;
 
 @property (nonatomic) BOOL firstOpening;
-@property (strong, nonatomic) TutoImageView *tutoView;
 
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *scrollableShapeViews;
@@ -81,6 +79,8 @@
     // Some design
     [ImageUtilities outerGlow:self.shareButton];
     [ImageUtilities outerGlow:self.cancelButton];
+    [ImageUtilities outerGlow:self.shapeButton];
+    [ImageUtilities outerGlow:self.backgroundButton];
     NSUInteger buttonHeight = self.backgroundButton.bounds.size.height;
     self.backgroundButton.layer.cornerRadius = buttonHeight/2;
     buttonHeight = self.shapeButton.bounds.size.height;

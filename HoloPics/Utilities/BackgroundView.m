@@ -166,7 +166,8 @@
 
 - (void)clearPathAndPictures
 {
-    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
+//    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
+    self.originalImage = [UIImage imageNamed:@"create_tuto"];
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
     [self setImage:self.originalImage];
@@ -180,7 +181,9 @@
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];
     
-    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
+//    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
+    self.originalImage = [UIImage imageNamed:@"create_tuto"];
+    [self setImage:self.originalImage];
     
     // Alloc and add gesture recognisers
     self.panningRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanningGesture:)];

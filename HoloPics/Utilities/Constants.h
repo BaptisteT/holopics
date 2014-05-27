@@ -33,6 +33,7 @@ static const NSUInteger kMinDeleteVelocity = 200;
 static const NSUInteger kShapeOptionOverlayMinLayerSize = 100;
 static const NSUInteger kShapeOptionOverlayButtonSize = 40;
 
+static NSString * const kAppTitle = @"Holopics";
 
 #define FIRST_OPENING_PREF @"First Opening"
 

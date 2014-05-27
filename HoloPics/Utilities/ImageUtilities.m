@@ -286,5 +286,29 @@
     return [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",relativePath]];
 }
 
+// Draw title in Image
++ (UIImage *)drawTitleinCornerOfImage:(UIImage*)image
+{
+    UIFont *font = [UIFont fontWithName:@"Avenir-Heavy" size:18];
+    CGSize size = [UIScreen mainScreen].bounds.size;
+    UIGraphicsBeginImageContext(size);
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
+    CGRect rect = CGRectMake(10,size.height - 40,300, 20);
+    NSMutableParagraphStyle *textStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    textStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    textStyle.alignment = NSTextAlignmentRight;
+    NSShadow *shadow = [[NSShadow alloc] init];
+    [shadow setShadowBlurRadius:3.0];
+    [shadow setShadowColor:[UIColor blackColor]];
+    NSDictionary *dictionary = @{ NSFontAttributeName: font,
+                                  NSForegroundColorAttributeName: [UIColor whiteColor],
+                                  NSParagraphStyleAttributeName: textStyle,
+                                  NSShadowAttributeName: shadow};
+    [kAppTitle drawInRect:rect withAttributes:dictionary];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 @end

@@ -47,9 +47,23 @@
     [[self.shareButton layer] setBorderColor:[UIColor blackColor].CGColor];
     [[self.publishButton layer] setCornerRadius:15];
     [self.imageView setImage:self.imageToShare];
-    [self.imageView setAlpha:0.4f];
+    
+    // Prepare for animation
+    [self.saveLibraryButton setAlpha:0];
+    [self.shareButton setAlpha:0];
+    [self.publishButton setAlpha:0];
     
     [ImageUtilities drawCustomNavBarWithLeftItem:@"back" rightItem:nil title:@"Publish " sizeBig:NO inViewController:self];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [UIView animateWithDuration:0.75 animations: ^{
+        [self.imageView setAlpha:0.4f];
+        [self.saveLibraryButton setAlpha:1];
+        [self.shareButton setAlpha:1];
+        [self.publishButton setAlpha:1];
+    }];
 }
 
 
@@ -85,15 +99,14 @@
     if (self.saveLibraryButton.enabled) {
         self.saveLibraryButton.enabled = NO;
         [[self.saveLibraryButton layer] setBorderColor:[UIColor grayColor].CGColor];
-        [self saveImageToFileSystem:self.imageToShare];
-//        [ImageUtilities saveImageInAppDirectory:self.imageToShare];
+        [self saveImageToFileSystem:[ImageUtilities drawTitleinCornerOfImage:self.imageToShare]];
     }
 }
 
 - (IBAction)shareButtonClicked:(id)sender {
     // Share to FB, sms, email.. using UIActivityViewController
     NSString *shareString = @"";
-    NSArray *activityItems = [NSArray arrayWithObjects:shareString, self.imageToShare, nil];
+    NSArray *activityItems = [NSArray arrayWithObjects:shareString, [ImageUtilities drawTitleinCornerOfImage:self.imageToShare], nil];
     UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     activityViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     activityViewController.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop, UIActivityTypeSaveToCameraRoll];
