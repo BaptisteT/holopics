@@ -11,6 +11,8 @@
 #import "ImageUtilities.h"
 #import "DisplayHolopicViewController.h"
 #import "PicsCreationViewController.h"
+#import "GeneralUtilities.h"
+#import "TutoImageView.h"
 
 #define PER_PAGE 10
 
@@ -65,6 +67,13 @@
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.scrollsToTop = NO;
     self.scrollView.delegate = self;
+    
+    // Tuto on first opening
+    if ([GeneralUtilities isFirstOpening]) {
+        TutoImageView *tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
+        tutoView.image = [UIImage imageNamed:@"tuto_feed.png"];
+        [self.view addSubview:tutoView];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -43,8 +43,6 @@
 @property (strong, nonatomic)  NSMutableArray *shapeViews;
 @property (nonatomic) NSInteger subViewIndex;
 
-@property (nonatomic) BOOL firstOpening;
-
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *scrollableShapeViews;
 
@@ -65,7 +63,6 @@
     [super viewDidLoad];
 
     // Some init
-    self.firstOpening = [GeneralUtilities isFirstOpening];
     self.subViewIndex = 0;
     
     // Scroll view

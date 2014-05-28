@@ -59,7 +59,7 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [UIView animateWithDuration:0.75 animations: ^{
-        [self.imageView setAlpha:0.4f];
+        [self.imageView setAlpha:0.3f];
         [self.saveLibraryButton setAlpha:1];
         [self.shareButton setAlpha:1];
         [self.publishButton setAlpha:1];

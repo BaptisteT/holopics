@@ -67,6 +67,7 @@
 		3C3E3E3F192CEFB6005E8366 /* delete_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3B192CEFB6005E8366 /* delete_button.png */; };
 		3C3E3E40192CEFB6005E8366 /* flip_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3C192CEFB6005E8366 /* flip_button.png */; };
 		3C3E3E41192CEFB6005E8366 /* size_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3D192CEFB6005E8366 /* size_button.png */; };
+		3C7C83BB1935E354002E1BB0 /* tuto_feed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7C83BA1935E354002E1BB0 /* tuto_feed.png */; };
 		3C7D53591934D15400DAEA34 /* bring_to_front_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D53581934D15400DAEA34 /* bring_to_front_button.png */; };
 		3C7D535B1934D17400DAEA34 /* forward_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D535A1934D17400DAEA34 /* forward_button.png */; };
 		3C7D535F1934D39400DAEA34 /* next_screen_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D535E1934D39400DAEA34 /* next_screen_button.png */; };
@@ -187,6 +188,7 @@
 		3C3E3E3B192CEFB6005E8366 /* delete_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_button.png; sourceTree = "<group>"; };
 		3C3E3E3C192CEFB6005E8366 /* flip_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flip_button.png; sourceTree = "<group>"; };
 		3C3E3E3D192CEFB6005E8366 /* size_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = size_button.png; sourceTree = "<group>"; };
+		3C7C83BA1935E354002E1BB0 /* tuto_feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tuto_feed.png; sourceTree = "<group>"; };
 		3C7D53581934D15400DAEA34 /* bring_to_front_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bring_to_front_button.png; sourceTree = "<group>"; };
 		3C7D535A1934D17400DAEA34 /* forward_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_button.png; sourceTree = "<group>"; };
 		3C7D535E1934D39400DAEA34 /* next_screen_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_screen_button.png; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3C7C83BA1935E354002E1BB0 /* tuto_feed.png */,
 				3C7D53601935024300DAEA34 /* create_tuto.png */,
 				3C7D535E1934D39400DAEA34 /* next_screen_button.png */,
 				3C7D53581934D15400DAEA34 /* bring_to_front_button.png */,
@@ -596,6 +599,7 @@
 				3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */,
 				3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */,
 				3C13959218FDACB700762572 /* CameraOverlayView.xib in Resources */,
+				3C7C83BB1935E354002E1BB0 /* tuto_feed.png in Resources */,
 				3C20FC261924EE63003F3858 /* flash_on@2x~iphone.png in Resources */,
 				3C20FC2A1924EEB5003F3858 /* camera_capture@2x~iphone.png in Resources */,
 				3C20FC241924EE63003F3858 /* flash_off@2x~iphone.png in Resources */,
