@@ -12,8 +12,9 @@
 #import "CameraViewController.h"
 #import <CoreData/CoreData.h>
 #import "ScrollableShapeView.h"
+#import "ImportPictureViewController.h"
 
-@interface PicsCreationViewController : UIViewController <BackgroundViewDelegate, UIActionSheetDelegate, ShapeViewDelegate, CameraViewControllerDelegate, UIScrollViewDelegate, ScrollableShapeViewDelegate>
+@interface PicsCreationViewController : UIViewController <BackgroundViewDelegate, UIActionSheetDelegate, ShapeViewDelegate, CameraViewControllerDelegate, UIScrollViewDelegate, ScrollableShapeViewDelegate, ImportPictureVCDelegate>
 
 @property (strong, nonatomic) UIImage *forwardedImage;
 

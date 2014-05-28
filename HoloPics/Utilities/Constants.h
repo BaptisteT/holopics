@@ -33,10 +33,12 @@ static const NSUInteger kMinDeleteVelocity = 200;
 static const NSUInteger kShapeOptionOverlayMinLayerSize = 100;
 static const NSUInteger kShapeOptionOverlayButtonSize = 40;
 
-static NSString * const kAppTitle = @"Holopics";
+static const NSString * kAppTitle = @"Holopics";
+static const NSUInteger kNumberOfImportPicsByCategory = 11;
 
 #define FIRST_OPENING_PREF @"First Opening"
 
 // Production
 static NSString * const kProdAFHolopicsAPIBaseURLString = @"http://holopics.herokuapp.com/";
 static NSString * const kProdHolopicsImageBaseURL = @"http://s3.amazonaws.com/holopics-production/original/image_";
+static NSString * const kProdHolopicsBackgroundBaseURL = @"http://s3.amazonaws.com/holopics-production/";

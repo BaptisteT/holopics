@@ -27,6 +27,7 @@
 		3C09FB06190949B7005DAA9C /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAE5190949B7005DAA9C /* UIWebView+AFNetworking.m */; };
 		3C09FB0B19094A29005DAA9C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FB0A19094A29005DAA9C /* Reachability.m */; };
 		3C09FB0E19095AEF005DAA9C /* Strings.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C09FB0D19095AEF005DAA9C /* Strings.strings */; };
+		3C0C2EB8193639C900ADCF0A /* empty_board.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C0C2EB7193639C900ADCF0A /* empty_board.png */; };
 		3C13955218FD9E7100762572 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955118FD9E7100762572 /* Foundation.framework */; };
 		3C13955418FD9E7100762572 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955318FD9E7100762572 /* CoreGraphics.framework */; };
 		3C13955618FD9E7100762572 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13955518FD9E7100762572 /* UIKit.framework */; };
@@ -68,6 +69,9 @@
 		3C3E3E40192CEFB6005E8366 /* flip_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3C192CEFB6005E8366 /* flip_button.png */; };
 		3C3E3E41192CEFB6005E8366 /* size_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3D192CEFB6005E8366 /* size_button.png */; };
 		3C7C83BB1935E354002E1BB0 /* tuto_feed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7C83BA1935E354002E1BB0 /* tuto_feed.png */; };
+		3C7C83BD1935E6BA002E1BB0 /* import_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7C83BC1935E6BA002E1BB0 /* import_picture.png */; };
+		3C7C83C01935EA5E002E1BB0 /* ImportPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C83BF1935EA5E002E1BB0 /* ImportPictureViewController.m */; };
+		3C7C83C61935F1F1002E1BB0 /* ImportPictureImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C83C51935F1F1002E1BB0 /* ImportPictureImageView.m */; };
 		3C7D53591934D15400DAEA34 /* bring_to_front_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D53581934D15400DAEA34 /* bring_to_front_button.png */; };
 		3C7D535B1934D17400DAEA34 /* forward_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D535A1934D17400DAEA34 /* forward_button.png */; };
 		3C7D535F1934D39400DAEA34 /* next_screen_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D535E1934D39400DAEA34 /* next_screen_button.png */; };
@@ -134,6 +138,7 @@
 		3C09FB0919094A29005DAA9C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		3C09FB0A19094A29005DAA9C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3C09FB0D19095AEF005DAA9C /* Strings.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Strings.strings; sourceTree = "<group>"; };
+		3C0C2EB7193639C900ADCF0A /* empty_board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty_board.png; sourceTree = "<group>"; };
 		3C13954E18FD9E7100762572 /* HoloPics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoloPics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C13955118FD9E7100762572 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3C13955318FD9E7100762572 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -189,6 +194,11 @@
 		3C3E3E3C192CEFB6005E8366 /* flip_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flip_button.png; sourceTree = "<group>"; };
 		3C3E3E3D192CEFB6005E8366 /* size_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = size_button.png; sourceTree = "<group>"; };
 		3C7C83BA1935E354002E1BB0 /* tuto_feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tuto_feed.png; sourceTree = "<group>"; };
+		3C7C83BC1935E6BA002E1BB0 /* import_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_picture.png; sourceTree = "<group>"; };
+		3C7C83BE1935EA5E002E1BB0 /* ImportPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportPictureViewController.h; sourceTree = "<group>"; };
+		3C7C83BF1935EA5E002E1BB0 /* ImportPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportPictureViewController.m; sourceTree = "<group>"; };
+		3C7C83C41935F1F1002E1BB0 /* ImportPictureImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportPictureImageView.h; sourceTree = "<group>"; };
+		3C7C83C51935F1F1002E1BB0 /* ImportPictureImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportPictureImageView.m; sourceTree = "<group>"; };
 		3C7D53581934D15400DAEA34 /* bring_to_front_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bring_to_front_button.png; sourceTree = "<group>"; };
 		3C7D535A1934D17400DAEA34 /* forward_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_button.png; sourceTree = "<group>"; };
 		3C7D535E1934D39400DAEA34 /* next_screen_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_screen_button.png; sourceTree = "<group>"; };
@@ -376,6 +386,8 @@
 				3CE01893191CCB490057EE0B /* SharingViewController.m */,
 				3C20FC2B1924F181003F3858 /* CameraViewController.h */,
 				3C20FC2C1924F181003F3858 /* CameraViewController.m */,
+				3C7C83BE1935EA5E002E1BB0 /* ImportPictureViewController.h */,
+				3C7C83BF1935EA5E002E1BB0 /* ImportPictureViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -417,6 +429,8 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3C0C2EB7193639C900ADCF0A /* empty_board.png */,
+				3C7C83BC1935E6BA002E1BB0 /* import_picture.png */,
 				3C7C83BA1935E354002E1BB0 /* tuto_feed.png */,
 				3C7D53601935024300DAEA34 /* create_tuto.png */,
 				3C7D535E1934D39400DAEA34 /* next_screen_button.png */,
@@ -467,6 +481,8 @@
 				3C20FC2F192647E1003F3858 /* ScrollableShapeView.m */,
 				3C2B1601192DF89D00413C90 /* ShapeOptionOverlayView.h */,
 				3C2B1602192DF89D00413C90 /* ShapeOptionOverlayView.m */,
+				3C7C83C41935F1F1002E1BB0 /* ImportPictureImageView.h */,
+				3C7C83C51935F1F1002E1BB0 /* ImportPictureImageView.m */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -580,6 +596,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C0C2EB8193639C900ADCF0A /* empty_board.png in Resources */,
 				3C3E3E41192CEFB6005E8366 /* size_button.png in Resources */,
 				3CBA8D7C191BB16F00064E7C /* explore_refresh@2x~iphone.png in Resources */,
 				3C20FC291924EEB5003F3858 /* camera_capture.png in Resources */,
@@ -618,6 +635,7 @@
 				3CE0189B191CF74A0057EE0B /* bar-back.png in Resources */,
 				3C3E3E40192CEFB6005E8366 /* flip_button.png in Resources */,
 				3C7D53591934D15400DAEA34 /* bring_to_front_button.png in Resources */,
+				3C7C83BD1935E6BA002E1BB0 /* import_picture.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +654,7 @@
 				3C09FAFE190949B7005DAA9C /* UIButton+AFNetworking.m in Sources */,
 				3C09FB02190949B7005DAA9C /* UIProgressView+AFNetworking.m in Sources */,
 				3C09FAE6190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */,
+				3C7C83C61935F1F1002E1BB0 /* ImportPictureImageView.m in Sources */,
 				3C13958518FDA3B400762572 /* PicsCreationViewController.m in Sources */,
 				3CBA8D78191B8FB100064E7C /* TimeUtilities.m in Sources */,
 				3C2B1603192DF89D00413C90 /* ShapeOptionOverlayView.m in Sources */,
@@ -645,6 +664,7 @@
 				3C09FAE8190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */,
 				3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */,
 				3C13956218FD9E7100762572 /* AppDelegate.m in Sources */,
+				3C7C83C01935EA5E002E1BB0 /* ImportPictureViewController.m in Sources */,
 				3C09FB00190949B7005DAA9C /* UIImageView+AFNetworking.m in Sources */,
 				3CBA8D6D191ABE9800064E7C /* MBProgressHUD.m in Sources */,
 				3C09FAEA190949B7005DAA9C /* AFHTTPSessionManager.m in Sources */,

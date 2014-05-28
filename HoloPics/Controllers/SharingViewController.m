@@ -53,7 +53,7 @@
     [self.shareButton setAlpha:0];
     [self.publishButton setAlpha:0];
     
-    [ImageUtilities drawCustomNavBarWithLeftItem:@"back" rightItem:nil title:@"Publish " sizeBig:NO inViewController:self];
+    [ImageUtilities drawCustomNavBarWithLeftItem:@"back" rightItem:nil title:@"Publish" sizeBig:NO inViewController:self];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -135,6 +135,4 @@
                                    }];
 }
 
-- (IBAction)shareLabel:(id)sender {
-}
 @end

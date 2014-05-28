@@ -166,7 +166,6 @@
 
 - (void)clearPathAndPictures
 {
-//    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
     self.originalImage = [UIImage imageNamed:@"create_tuto"];
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
@@ -177,11 +176,11 @@
 {
     [self setMultipleTouchEnabled:YES];
     self.exclusiveTouch = YES;
+    self.contentMode = UIViewContentModeScaleAspectFill;
     self.path = [UIBezierPath bezierPath];
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];
     
-//    self.originalImage = [ImageUtilities imageInRect:self.frame WithColor:[UIColor darkGrayColor]];
     self.originalImage = [UIImage imageNamed:@"create_tuto"];
     [self setImage:self.originalImage];
     

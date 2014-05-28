@@ -103,6 +103,10 @@
     if ([segueName isEqualToString: @"Share From Create Push Segue"]) {
         ((SharingViewController *) [segue destinationViewController]).imageToShare = (UIImage *)sender;
     }
+    
+    if ([segueName isEqualToString: @"Import From Create Push Segue"]) {
+        ((ImportPictureViewController *) [segue destinationViewController]).importPictureVCDelegate = self;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -183,6 +187,10 @@
 
 - (IBAction)libraryButtonClicked:(id)sender {
     [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (IBAction)importPictureButtonClicked:(id)sender {
+    [self performSegueWithIdentifier:@"Import From Create Push Segue" sender:nil];
 }
 
 
