@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HoloPics/Utilities/ScrollableShapeView.m"
-            timestampString = "423008608.810932"
+            filePath = "HoloPics/ShapeOptionOverlayView.m"
+            timestampString = "423057298.721665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "-incremenentIndexAndFrameOf:"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-transparencyButtonClicked:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HoloPics/ShapeOptionOverlayView.m"
-            timestampString = "423057298.721665"
+            filePath = "HoloPics/Controllers/CameraViewController.m"
+            timestampString = "423064620.753489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-transparencyButtonClicked:"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-allocAndInitFullScreenCamera"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

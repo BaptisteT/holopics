@@ -197,7 +197,7 @@
 
 - (void)setBackgoundImage:(UIImage *)image {
     double targetRatio = kScreenWidth / self.view.frame.size.height;
-    UIImageOrientation orientation =  image.size.width > image.size.height ? UIImageOrientationRight : UIImageOrientationUp;
+    UIImageOrientation orientation =  image.size.width > image.size.height ? UIImageOrientationRight : image.imageOrientation;
     self.backgroundView.originalImage = [ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation];
     [self.backgroundView setImage:self.backgroundView.originalImage];
     [self.backgroundOptionsView setHidden:YES];
