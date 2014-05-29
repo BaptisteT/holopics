@@ -87,8 +87,8 @@
     
     // If there is a forwarded image, we display it
     if(self.forwardedImage) {
-        self.backgroundView.originalImage = self.forwardedImage;
-        [self.backgroundView setImage:self.backgroundView.originalImage];
+        [self setBackgoundImage:self.forwardedImage];
+        self.forwardedImage = nil;
     }
     
     // Load shapes
@@ -196,7 +196,9 @@
 // --------------------------------
 
 - (void)setBackgoundImage:(UIImage *)image {
-    self.backgroundView.originalImage = image;
+    double targetRatio = kScreenWidth / self.view.frame.size.height;
+    UIImageOrientation orientation =  image.size.width > image.size.height ? UIImageOrientationRight : UIImageOrientationUp;
+    self.backgroundView.originalImage = [ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation];
     [self.backgroundView setImage:self.backgroundView.originalImage];
     [self.backgroundOptionsView setHidden:YES];
     [self.whiteBackgroundOptionsView setHidden:YES];
@@ -275,6 +277,10 @@
 - (void)createShapeWithImage:(UIImage *)image andPath:(UIBezierPath *)path
 {
     // todo check that we don't exceed a certain number
+    if (self.shapeOptionsScrollView.contentSize.width >= kMaxNumberOfShapesInMemory * kScrollableViewHeight) {
+        [GeneralUtilities showMessage:@"Delete shapes by sliding them toward the bottom of the screen" withTitle:@"You reached the maximum number of shapes in memory"];
+        return;
+    }
     
     // Image directory path
     NSString *relativeImagePath = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSinceReferenceDate]];

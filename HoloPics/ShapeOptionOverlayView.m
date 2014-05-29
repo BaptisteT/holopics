@@ -8,12 +8,13 @@
 
 #import "ShapeOptionOverlayView.h"
 #import "Constants.h"
+#import "ImageUtilities.h"
 
 @interface ShapeOptionOverlayView ()
 
 @property (weak, nonatomic) ShapeView *shapeView; // owner
 @property (weak, nonatomic) IBOutlet UIButton *BinButton;
-@property (weak, nonatomic) IBOutlet UIButton *frontButton;
+@property (weak, nonatomic) IBOutlet UIButton *transparencyButton;
 
 
 @end
@@ -49,6 +50,9 @@
     CGRect borderLayerFrame = CGRectMake(kShapeOptionOverlayButtonSize/2, kShapeOptionOverlayButtonSize/2,longPressOverlayFrame.size.width - kShapeOptionOverlayButtonSize, longPressOverlayFrame.size.height - kShapeOptionOverlayButtonSize);
     
     self.frame = longPressOverlayFrame;
+    [ImageUtilities outerGlow:self.BinButton];
+    [ImageUtilities outerGlow:self.resizeButton];
+    [ImageUtilities outerGlow:self.transparencyButton];
     
     CALayer *fill = [CALayer layer];
     fill.backgroundColor = [UIColor whiteColor].CGColor;
@@ -64,14 +68,15 @@
 {
     self.BinButton.transform = CGAffineTransformInvert(transform);
     self.resizeButton.transform = CGAffineTransformInvert(scaleTransform);
-    self.frontButton.transform = CGAffineTransformInvert(transform);
+    self.transparencyButton.transform = CGAffineTransformInvert(transform);
 }
 
 // --------------------------------
 // Shape Options Overlay Buttons
 // -------------------------------
-- (IBAction)frontButtonClicked:(id)sender {
-    [self.shapeView.shapeViewDelegate sendToFrontView:self.shapeView];
+- (IBAction)transparencyButtonClicked:(id)sender {
+    CGFloat newAlpha = (self.shapeView.alpha > 0.3) ? self.shapeView.alpha - 0.2 : 1;
+    [self.shapeView setAlpha:newAlpha];
 }
 
 - (IBAction)binButtonClicked:(id)sender {

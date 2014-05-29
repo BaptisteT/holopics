@@ -18,11 +18,11 @@
                         <constraint firstAttribute="height" constant="40" id="pcJ-v5-Wzn"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                    <state key="normal" image="bring_to_front_button.png">
+                    <state key="normal" image="transparency_icon.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="frontButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="poU-w6-4Zr"/>
+                        <action selector="transparencyButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Yd7-Sz-euI"/>
                     </connections>
                 </button>
                 <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7B-Yr-HY1">
@@ -68,8 +68,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="BinButton" destination="z7B-Yr-HY1" id="ch3-gk-DRm"/>
-                <outlet property="frontButton" destination="mqx-jH-AZO" id="jSh-BV-eSx"/>
                 <outlet property="resizeButton" destination="4SW-bS-a7C" id="dPi-fM-j4z"/>
+                <outlet property="transparencyButton" destination="mqx-jH-AZO" id="DHF-J4-isa"/>
             </connections>
         </view>
         <panGestureRecognizer minimumNumberOfTouches="1" id="Ct2-aS-exV">
@@ -80,7 +80,7 @@
     </objects>
     <resources>
         <image name="bin_button.png" width="56" height="71"/>
-        <image name="bring_to_front_button.png" width="162" height="164"/>
         <image name="size_button.png" width="56" height="57"/>
+        <image name="transparency_icon.png" width="407" height="391"/>
     </resources>
 </document>

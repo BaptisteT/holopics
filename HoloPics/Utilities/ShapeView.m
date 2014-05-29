@@ -142,6 +142,7 @@
 {
     if (self.shapeOptionOverlayView.isHidden) {
         [self.shapeViewDelegate removeAllShapeOverlay];
+        [self.shapeViewDelegate sendToFrontView:self];
         [self.shapeOptionOverlayView setHidden:NO];
     } else {
         [self.shapeOptionOverlayView setHidden:YES];
@@ -199,13 +200,6 @@
     }
 }
 
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-//{
-//    if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && [otherGestureRecognizer.view isKindOfClass:[UIButton class]]){
-//        return YES;
-//    }
-//    return NO;
-//}
 
 - (void)initAndDisplayShapeOptionOverlay
 {

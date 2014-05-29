@@ -28,6 +28,10 @@
     }
     CGFloat imageRatio = MIN(imageWidth,imageHeight) / MAX(imageWidth,imageHeight);
     
+    if (imageRatio == targetRatio) {
+        return image;
+    }
+    
     if (imageRatio > targetRatio) {
         if (imageWidth <= imageHeight) {
             // Create rectangle from middle of current image

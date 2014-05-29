@@ -76,6 +76,7 @@
 		3C7D535B1934D17400DAEA34 /* forward_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D535A1934D17400DAEA34 /* forward_button.png */; };
 		3C7D535F1934D39400DAEA34 /* next_screen_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D535E1934D39400DAEA34 /* next_screen_button.png */; };
 		3C7D53611935024300DAEA34 /* create_tuto.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7D53601935024300DAEA34 /* create_tuto.png */; };
+		3C989A021937568300629C1F /* transparency_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C989A011937568300629C1F /* transparency_icon.png */; };
 		3C9ED4F11918E98C003A8269 /* TutoImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9ED4F01918E98C003A8269 /* TutoImageView.m */; };
 		3CA89FDF190EA66A002E4D1D /* ShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA89FDE190EA66A002E4D1D /* ShapeView.m */; };
 		3CA89FE1190FE584002E4D1D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA89FE0190FE584002E4D1D /* trash.png */; };
@@ -203,6 +204,7 @@
 		3C7D535A1934D17400DAEA34 /* forward_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward_button.png; sourceTree = "<group>"; };
 		3C7D535E1934D39400DAEA34 /* next_screen_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_screen_button.png; sourceTree = "<group>"; };
 		3C7D53601935024300DAEA34 /* create_tuto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = create_tuto.png; sourceTree = "<group>"; };
+		3C989A011937568300629C1F /* transparency_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = transparency_icon.png; sourceTree = "<group>"; };
 		3C9ED4EF1918E98C003A8269 /* TutoImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutoImageView.h; path = Utilities/TutoImageView.h; sourceTree = "<group>"; };
 		3C9ED4F01918E98C003A8269 /* TutoImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutoImageView.m; path = Utilities/TutoImageView.m; sourceTree = "<group>"; };
 		3CA89FDD190EA66A002E4D1D /* ShapeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeView.h; path = Utilities/ShapeView.h; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3C989A011937568300629C1F /* transparency_icon.png */,
 				3C0C2EB7193639C900ADCF0A /* empty_board.png */,
 				3C7C83BC1935E6BA002E1BB0 /* import_picture.png */,
 				3C7C83BA1935E354002E1BB0 /* tuto_feed.png */,
@@ -610,6 +613,7 @@
 				3C20FC251924EE63003F3858 /* flash_on.png in Resources */,
 				3C7D535F1934D39400DAEA34 /* next_screen_button.png in Resources */,
 				3CBA8D75191B8AE200064E7C /* DisplayHolopic.xib in Resources */,
+				3C989A021937568300629C1F /* transparency_icon.png in Resources */,
 				3CBA8D7B191BB16F00064E7C /* explore_refresh.png in Resources */,
 				3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */,
 				3C1395A419006BDC00762572 /* camera-quit-button.png in Resources */,
@@ -800,6 +804,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8D843550-2421-45A2-85D9-5F3FF2D1E256";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -822,6 +827,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8D843550-2421-45A2-85D9-5F3FF2D1E256";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
