@@ -347,7 +347,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2n-ov-07X">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V2n-ov-07X">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -404,10 +404,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gAJ-ma-z4K" firstAttribute="leading" secondItem="edq-Kc-taQ" secondAttribute="leading" constant="10" id="2cU-uY-c8Y"/>
+                            <constraint firstAttribute="trailing" secondItem="V2n-ov-07X" secondAttribute="trailing" id="2zW-YB-ox9"/>
+                            <constraint firstItem="V2n-ov-07X" firstAttribute="leading" secondItem="edq-Kc-taQ" secondAttribute="leading" id="8Ez-b9-xNw"/>
+                            <constraint firstItem="V2n-ov-07X" firstAttribute="top" secondItem="UNu-kS-mDu" secondAttribute="bottom" id="CuP-zr-Ty7"/>
                             <constraint firstItem="WPL-5a-sNs" firstAttribute="top" secondItem="UNu-kS-mDu" secondAttribute="bottom" constant="140" id="I8h-eA-YZY"/>
                             <constraint firstItem="ybB-66-DMQ" firstAttribute="leading" secondItem="edq-Kc-taQ" secondAttribute="leading" constant="10" id="T6B-W2-5lL"/>
                             <constraint firstItem="gAJ-ma-z4K" firstAttribute="top" secondItem="WPL-5a-sNs" secondAttribute="bottom" constant="80" id="Wfl-TY-ZI6"/>
                             <constraint firstItem="ybB-66-DMQ" firstAttribute="top" secondItem="gAJ-ma-z4K" secondAttribute="bottom" constant="80" id="cbu-v8-hvz"/>
+                            <constraint firstItem="UvL-Br-ABv" firstAttribute="top" secondItem="V2n-ov-07X" secondAttribute="bottom" id="vIz-0f-koH"/>
                             <constraint firstItem="WPL-5a-sNs" firstAttribute="leading" secondItem="edq-Kc-taQ" secondAttribute="leading" constant="10" id="vul-bF-EXI"/>
                         </constraints>
                     </view>

@@ -112,23 +112,6 @@
     [self.backgroundViewDelegate removeAllShapeOverlay];
 }
 
-//// Pinch
-//- (void)handlePinchGesture:(UIPinchGestureRecognizer *)gesture
-//{
-//    if (gesture.state == UIGestureRecognizerStateEnded
-//        || gesture.state == UIGestureRecognizerStateChanged) {
-//        CGFloat currentScale = self.frame.size.width / self.bounds.size.width;
-//        CGFloat newScale = currentScale * gesture.scale;
-//        
-//        if (newScale < kMinimumScale) {
-//            newScale = kMinimumScale;
-//        }
-//        
-//        CGAffineTransform transform = CGAffineTransformMakeScale(newScale, newScale);
-//        self.transform = transform;
-//        gesture.scale = 1;
-//    }
-//}
 
 
 // --------------------------------
@@ -176,7 +159,7 @@
 {
     [self setMultipleTouchEnabled:YES];
     self.exclusiveTouch = YES;
-    self.contentMode = UIViewContentModeScaleAspectFill;
+//    self.contentMode = UIViewContentModeScaleAspectFill;
     self.path = [UIBezierPath bezierPath];
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];

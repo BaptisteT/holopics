@@ -54,9 +54,9 @@
 
 - (void)incremenentIndexAndFrameOf:(int)position
 {
-    self.shapeInfo.index = [NSNumber numberWithInt:[self.shapeInfo.index intValue] + position];
-    
-    self.frame = CGRectMake([self.shapeInfo.index floatValue] * kScrollableViewHeight + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
+    self.shapeInfo.index = [NSNumber numberWithInteger:[self.shapeInfo.index integerValue] + position];
+
+    self.frame = CGRectMake([self.shapeInfo.index integerValue] * kScrollableViewHeight + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
 }
 
 - (void)handlePanningGesture:(UIPanGestureRecognizer *)recognizer

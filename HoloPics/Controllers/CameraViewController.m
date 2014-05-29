@@ -83,14 +83,17 @@
         
         imagePickerController.cameraOverlayView = myView;
         
-        // Transform camera to get full screen
-        double translationFactor = (self.view.frame.size.height - kCameraHeight) / 2;
-        CGAffineTransform translate = CGAffineTransformMakeTranslation(0.0, translationFactor);
-        imagePickerController.cameraViewTransform = translate;
-        
-        double rescalingRatio = self.view.frame.size.height / kCameraHeight;
-        CGAffineTransform scale = CGAffineTransformScale(translate, rescalingRatio, rescalingRatio);
-        imagePickerController.cameraViewTransform = scale;
+        // Transform camera to get full screen (for iphone 5)
+        // ugly code
+        if (self.view.frame.size.height == 568) {
+            double translationFactor = (568 - kCameraHeight) / 2;
+            CGAffineTransform translate = CGAffineTransformMakeTranslation(0.0, translationFactor);
+            imagePickerController.cameraViewTransform = translate;
+            
+            double rescalingRatio = 568 / kCameraHeight;
+            CGAffineTransform scale = CGAffineTransformScale(translate, rescalingRatio, rescalingRatio);
+            imagePickerController.cameraViewTransform = scale;
+        }
         
         // flash disactivated by default
         self.flashOn = NO;

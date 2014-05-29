@@ -16,7 +16,7 @@
 // API Version
 static NSString * const kApiVersion = @"1";
 
-static const NSUInteger kCameraHeight = 426;
+static const NSUInteger kCameraHeight = 426;// iphone 5
 static const NSUInteger kScreenWidth = 320;
 
 static const NSUInteger kPathMinimalArea = 200;

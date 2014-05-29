@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "Holopic.h"
 #import <Twitter/Twitter.h>
+#import "AFHolopicsAPIClient.h"
 
 @interface SharingViewController ()
 
@@ -71,19 +72,20 @@
 // Button actions
 // -------------------------------
 - (IBAction)publishButtonClicked:(id)sender {
+    [AFHolopicsAPIClient sendAnalytics:@"publish" AndExecuteSuccess:nil failure:nil];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *encodedImage = [ImageUtilities encodeToBase64String:self.imageToShare];
     
     // Results block
-    typedef void (^SuccessBlock)(Holopic *);
-    SuccessBlock successBlock = ^(Holopic *holopic) {
+    typedef void (^SuccessBlock)();
+    SuccessBlock successBlock = ^() {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.navigationController popToRootViewControllerAnimated:YES];
     };
     
-    typedef void (^FailureBlock)(NSURLSessionDataTask *);
-    FailureBlock failureBlock = ^(NSURLSessionDataTask *task) {
+    typedef void (^FailureBlock)();
+    FailureBlock failureBlock = ^() {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
         NSString *title = NSLocalizedStringFromTable (@"create_holopic_failed_title", @"Strings", @"comment");
@@ -96,6 +98,7 @@
 }
 
 - (IBAction)saveLibraryButtonClicked:(id)sender {
+    [AFHolopicsAPIClient sendAnalytics:@"save" AndExecuteSuccess:nil failure:nil];
     if (self.saveLibraryButton.enabled) {
         self.saveLibraryButton.enabled = NO;
         [[self.saveLibraryButton layer] setBorderColor:[UIColor grayColor].CGColor];
@@ -104,6 +107,9 @@
 }
 
 - (IBAction)shareButtonClicked:(id)sender {
+    // Send analytics
+    [AFHolopicsAPIClient sendAnalytics:@"share" AndExecuteSuccess:nil failure:nil];
+    
     // Share to FB, sms, email.. using UIActivityViewController
     NSString *shareString = @"";
     NSArray *activityItems = [NSArray arrayWithObjects:shareString, [ImageUtilities drawTitleinCornerOfImage:self.imageToShare], nil];

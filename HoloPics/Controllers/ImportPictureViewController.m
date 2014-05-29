@@ -50,7 +50,8 @@
         url = [self getURLOfBackgroundImage:i fromCategory:category];
         imageRequest = [NSURLRequest requestWithURL:url];
         imageView = [ImportPictureImageView alloc];
-        [imageView setImageWithURLRequest:imageRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        __weak ImportPictureImageView *weakImageView = imageView;
+        [weakImageView setImageWithURLRequest:imageRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             [scrollView addSubview: [imageView initWithController:self index:i AndImage:image]];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         }];
@@ -79,7 +80,7 @@
 
 - (NSURL *)getURLOfBackgroundImage:(NSInteger)index fromCategory:(NSString *)category
 {
-    return [NSURL URLWithString:[kProdHolopicsBackgroundBaseURL stringByAppendingString:[category stringByAppendingFormat:@"/%lu%@",index,@".jpg"]]];
+    return [NSURL URLWithString:[kProdHolopicsBackgroundBaseURL stringByAppendingString:[category stringByAppendingFormat:@"/%lu%@",(long)index,@".jpg"]]];
 }
 
 - (void)popImportPictureViewController {

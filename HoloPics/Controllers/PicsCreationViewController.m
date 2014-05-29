@@ -138,10 +138,7 @@
     [self.whiteBackgroundOptionsView setHidden:YES];
     [self.whiteShapeOptionsView setHidden:YES];
     
-    // Remove border around shapes
-    for (ShapeView *views in self.shapeViews){
-        [views setImage:views.attachedImage];
-    }
+    [self removeAllShapeOverlay];
     
     // Create Image
     UIImage *imageToShare = [ImageUtilities imageFromView:self.view];
@@ -259,7 +256,7 @@
     [self.scrollableShapeViews removeObject:shapeInScrollView];
     
     for (ScrollableShapeView* otherView in self.scrollableShapeViews) {
-        if (otherView.shapeInfo.index > shapeInScrollView.shapeInfo.index) {
+        if ([otherView.shapeInfo.index integerValue] > [shapeInScrollView.shapeInfo.index integerValue]) {
             [otherView incremenentIndexAndFrameOf:-1];
         }
     }
@@ -321,7 +318,7 @@
     [self.shapeOptionsScrollView addSubview:scrollableShape];
     
     [UIView animateWithDuration:1.0 animations:^{
-        scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index floatValue] + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
+        scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index integerValue] + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
         scrollableShape.backgroundColor =[UIColor clearColor];
     }];
 }
@@ -410,7 +407,7 @@
     self.shapeOptionsScrollView.contentSize = CGSizeMake(squareWidth * requestResults.count + kScrollableViewInitialOffset, squareWidth);
     for(ShapeInfo* shapeInfo in requestResults) {
         ScrollableShapeView *scrollableShape = [[ScrollableShapeView alloc] initWithShapeInfo:shapeInfo];
-        scrollableShape.frame = CGRectMake(squareWidth * [shapeInfo.index floatValue] + kScrollableViewInitialOffset, 0, squareWidth, squareWidth);
+        scrollableShape.frame = CGRectMake(squareWidth * [shapeInfo.index integerValue] + kScrollableViewInitialOffset, 0, squareWidth, squareWidth);
         scrollableShape.scrollableShapeViewDelegate = self;
         [self.scrollableShapeViews addObject:scrollableShape];
         [self.shapeOptionsScrollView addSubview:scrollableShape];

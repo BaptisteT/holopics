@@ -18,7 +18,7 @@
                         <constraint firstAttribute="height" constant="40" id="pcJ-v5-Wzn"/>
                     </constraints>
                     <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                    <state key="normal" image="bring_to_front_Button.png">
+                    <state key="normal" image="bring_to_front_button.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -80,7 +80,7 @@
     </objects>
     <resources>
         <image name="bin_button.png" width="56" height="71"/>
-        <image name="bring_to_front_Button.png" width="214" height="208"/>
+        <image name="bring_to_front_button.png" width="162" height="164"/>
         <image name="size_button.png" width="56" height="57"/>
     </resources>
 </document>

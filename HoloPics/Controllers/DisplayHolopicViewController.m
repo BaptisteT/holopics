@@ -45,6 +45,7 @@
     [ImageUtilities outerGlow:self.timeStamp];
     
     self.imageView.clipsToBounds = YES;
+//    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     [self loadImage];
     
