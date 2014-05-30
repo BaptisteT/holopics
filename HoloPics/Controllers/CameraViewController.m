@@ -9,6 +9,7 @@
 #import "CameraViewController.h"
 #import "Constants.h"
 #import "ImageUtilities.h"
+#import "AFHolopicsAPIClient.h"
 
 @interface CameraViewController ()
 
@@ -118,7 +119,7 @@
     } else {
         orientation = UIImageOrientationRight;
     }
-    
+    [AFHolopicsAPIClient sendAnalytics:@"AddLibraryOrCameraPicture" AndExecuteSuccess:nil failure:nil];
     
     [self.cameraVCDelegate setBackgoundImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation]];
     

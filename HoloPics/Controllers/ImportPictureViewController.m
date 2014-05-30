@@ -32,8 +32,8 @@
     
     [self initUnicolorScrollView];
     // ugly code
-    [self initScrollView:self.moviesScrollView withCategory:@"movies"];
     [self initScrollView:self.paintingsScrollView withCategory:@"paintings"];
+    [self initScrollView:self.moviesScrollView withCategory:@"movies"];
 }
 
 - (void)initScrollView:(UIScrollView *)scrollView withCategory:(NSString *)category

@@ -70,6 +70,7 @@
     
     // Tuto on first opening
     if ([GeneralUtilities isFirstOpening]) {
+        [AFHolopicsAPIClient sendAnalytics:@"FirstOpening" AndExecuteSuccess:nil failure:nil];
         TutoImageView *tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
         tutoView.image = [UIImage imageNamed:@"tuto_feed.png"];
         [self.view addSubview:tutoView];
@@ -181,9 +182,11 @@
 // Feed Buttons Clicked
 // ------------------------------------------------
 - (IBAction)cameraButtonClicked:(id)sender {
+    [AFHolopicsAPIClient sendAnalytics:@"CameraButtonClicked" AndExecuteSuccess:nil failure:nil];
     [self performSegueWithIdentifier:@"Create From Feed Push Segue" sender:nil];
 }
 - (IBAction)forwardButtonClicked:(id)sender {
+    [AFHolopicsAPIClient sendAnalytics:@"ForwardButtonClicked" AndExecuteSuccess:nil failure:nil];
     DisplayHolopicViewController *controller = [self.viewControllers objectAtIndex:[self getScrollViewPage]];
     UIImage *forwardedImage = controller.imageView.image;
     [self performSegueWithIdentifier:@"Create From Feed Push Segue" sender:forwardedImage];
@@ -209,7 +212,7 @@
     if (page == self.lastPageScrolled) {
         return;
     }
-    
+    [AFHolopicsAPIClient sendAnalytics:@"ScrollPage" AndExecuteSuccess:nil failure:nil];
     self.lastPageScrolled = page;
     
     if (page > [self.viewControllers count] - 1) {

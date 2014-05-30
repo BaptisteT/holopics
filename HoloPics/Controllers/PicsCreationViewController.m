@@ -21,6 +21,7 @@
 #include "ShapeInfo.h"
 #include "ScrollableShapeView.h"
 #import "PathUtility.h"
+#import "AFHolopicsAPIClient.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"return_to_feed", @"Strings", @"comment")
@@ -128,6 +129,7 @@
 
 - (IBAction)saveButtonClicked:(id)sender {
 
+    [AFHolopicsAPIClient sendAnalytics:@"shareButtonClicked" AndExecuteSuccess:nil failure:nil];
     // Remove button before saving
     [self.shareButton setHidden:YES];
     [self.cancelButton setHidden:YES];
@@ -214,6 +216,7 @@
     if (!self.shapeViews){
         self.shapeViews = [NSMutableArray arrayWithCapacity:1];
     }
+    [AFHolopicsAPIClient sendAnalytics:@"InsertShape" AndExecuteSuccess:nil failure:nil];
 
     // Return if we reached the limit of images
     if (self.subViewIndex >= kMaxNumberOfShapes) {
@@ -281,6 +284,7 @@
         [GeneralUtilities showMessage:@"Delete shapes by sliding them toward the bottom of the screen" withTitle:@"You reached the maximum number of shapes in memory"];
         return;
     }
+    [AFHolopicsAPIClient sendAnalytics:@"CreateShape" AndExecuteSuccess:nil failure:nil];
     
     // Image directory path
     NSString *relativeImagePath = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSinceReferenceDate]];

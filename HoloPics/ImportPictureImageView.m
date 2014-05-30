@@ -10,12 +10,14 @@
 #import "ImportPictureViewController.h"
 #import "Constants.h"
 #import "ImageUtilities.h"
+#import "AFHolopicsAPIClient.h"
 
 @interface ImportPictureImageView()
 
 @property (weak, nonatomic) ImportPictureViewController *importPictureViewController; // owner
 @property (strong, nonatomic) UIImage *attachedImage;
 @property (strong, nonatomic) UITapGestureRecognizer *oneTapRecognizer;
+
 
 @end
 
@@ -55,6 +57,7 @@
 
 - (void)oneTapGesture:(UITapGestureRecognizer *)recognizer
 {
+    [AFHolopicsAPIClient sendAnalytics:@"ImportBackground" AndExecuteSuccess:nil failure:nil];
     [self.importPictureViewController.importPictureVCDelegate setBackgoundImage:self.attachedImage];
     [self.importPictureViewController popImportPictureViewController];
 }
