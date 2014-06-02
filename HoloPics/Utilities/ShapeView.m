@@ -212,5 +212,13 @@
     [self.shapeOptionOverlayView setHidden:YES];
 }
 
+- (void)applyTransform:(CGAffineTransform)transform
+{
+    self.transform = transform;
+    [self.shapeOptionOverlayView revertTransformForOverlayButtons:transform
+                                                   scaleTransform:transform];
+
+}
+
 
 @end

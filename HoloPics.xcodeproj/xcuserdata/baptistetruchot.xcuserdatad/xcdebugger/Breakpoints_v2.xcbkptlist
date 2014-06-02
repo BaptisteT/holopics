@@ -25,29 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "HoloPics/Utilities/AFHolopicsAPIClient.m"
-            timestampString = "422998970.600454"
+            filePath = "HoloPics/Controllers/PicsCreationViewController.m"
+            timestampString = "423401489.844665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "+sendAnalytics:AndExecuteSuccess:failure:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HoloPics/ShapeOptionOverlayView.m"
-            timestampString = "423057298.721665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-transparencyButtonClicked:"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "-insertNewShapeViewWithImage:andPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

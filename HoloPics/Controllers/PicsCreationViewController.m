@@ -226,9 +226,12 @@
 
     ShapeView *newShapeView = [[ShapeView alloc] initWithImage:image frame:self.view.frame andPath:path];
     
+    CGFloat ratio = 0.5 / MAX(path.bounds.size.width / self.view.frame.size.width, path.bounds.size.height / self.view.frame.size.height);
+    
     // Param
     newShapeView.frame = self.view.frame;
     newShapeView.shapeViewDelegate = self;
+    [newShapeView applyTransform:CGAffineTransformScale(newShapeView.transform, ratio, ratio)];
     
     // Add it to the array
     [self removeAllShapeOverlay];
@@ -291,7 +294,6 @@
     
     // Cut and save image
     UIImage *croppedImage = [ImageUtilities drawFromImage:image insidePath:path];
-    
     if (![ImageUtilities saveImage:croppedImage inAppDirectoryPath:relativeImagePath]) {
         [GeneralUtilities showMessage:NSLocalizedStringFromTable(@"shape_saving_fail_message",@"Strings",@"comment") withTitle:nil];
         return;

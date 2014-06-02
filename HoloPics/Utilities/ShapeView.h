@@ -21,6 +21,8 @@
 
 - (id)initWithImage:(UIImage *)image frame:(CGRect)frame andPath:(UIBezierPath *)path;
 - (void)hideOptionOverlayView;
+- (void)applyTransform:(CGAffineTransform)transform;
+
 
 @end
 

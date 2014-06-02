@@ -92,6 +92,7 @@
 // Analytics
 + (void)sendAnalytics:(NSString *)eventName AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock
 {
+    return;
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:1];
     AFHolopicsAPIClient *manager = [AFHolopicsAPIClient sharedClient];
     [parameters setObject:eventName forKey:@"name"];
