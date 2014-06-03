@@ -51,8 +51,10 @@
             cropRect = CGRectMake(croppedWidth / 2, 0.0, imageWidth - croppedWidth, imageHeight);
         }
     }
+
     // Create new cropped UIImage
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+    
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef
                                                 scale:1
                                           orientation:orientation];

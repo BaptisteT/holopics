@@ -159,7 +159,8 @@
 {
     [self setMultipleTouchEnabled:YES];
     self.exclusiveTouch = YES;
-//    self.contentMode = UIViewContentModeScaleAspectFill;
+//    self.contentMode = UIViewContentModeScaleAspectFit;
+    [self setBackgroundColor:[UIColor clearColor]];
     self.path = [UIBezierPath bezierPath];
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];

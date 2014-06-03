@@ -96,10 +96,10 @@
 {
     if (fullscreenMode) {
         _fullscreenMode = YES;
-        self.timeStamp.hidden = YES;
+//        self.timeStamp.hidden = YES;
     } else {
         _fullscreenMode = NO;
-        self.timeStamp.hidden = NO;
+//        self.timeStamp.hidden = NO;
     }
 }
 

@@ -226,7 +226,7 @@
 
     ShapeView *newShapeView = [[ShapeView alloc] initWithImage:image frame:self.view.frame andPath:path];
     
-    CGFloat ratio = 0.5 / MAX(path.bounds.size.width / self.view.frame.size.width, path.bounds.size.height / self.view.frame.size.height);
+    CGFloat ratio = 0.6 / MAX(path.bounds.size.width / self.view.frame.size.width, path.bounds.size.height / self.view.frame.size.height);
     
     // Param
     newShapeView.frame = self.view.frame;

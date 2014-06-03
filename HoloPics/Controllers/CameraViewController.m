@@ -110,6 +110,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)editInfo
 {
     UIImage *image =  [editInfo objectForKey:UIImagePickerControllerOriginalImage];
+
     UIImageOrientation orientation;
     double targetRatio = kScreenWidth / self.view.frame.size.height;
     
