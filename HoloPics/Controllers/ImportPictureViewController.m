@@ -57,12 +57,12 @@
     
     for (int i = 0; i < kNumberOfImportPicsByCategory; i++)
     {
-        url = [self getURLOfBackgroundImage:i fromCategory:category];
+        url = [self getURLOfThumbImage:i fromCategory:category];
         imageRequest = [NSURLRequest requestWithURL:url];
         imageView = [ImportPictureImageView alloc];
         __weak ImportPictureImageView *weakImageView = imageView;
         [weakImageView setImageWithURLRequest:imageRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            [scrollView addSubview: [imageView initWithController:self index:i AndImage:image]];
+            [scrollView addSubview: [imageView initWithController:self index:i category:category AndImage:image]];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         }];
     }
@@ -88,9 +88,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (NSURL *)getURLOfBackgroundImage:(NSInteger)index fromCategory:(NSString *)category
+- (NSURL *)getURLOfThumbImage:(NSInteger)index fromCategory:(NSString *)category
 {
-    return [NSURL URLWithString:[kProdHolopicsBackgroundBaseURL stringByAppendingString:[category stringByAppendingFormat:@"/%lu%@",(long)index,@".jpg"]]];
+    return [NSURL URLWithString:[kProdHolopicsBackgroundBaseURL stringByAppendingString:[category stringByAppendingFormat:@"%@/%lu%@",@"/thumbs",(long)index,@".jpg"]]];
 }
 
 - (void)popImportPictureViewController {
@@ -100,6 +100,8 @@
     [self.animalsScrollView setHidden:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 
 
 @end

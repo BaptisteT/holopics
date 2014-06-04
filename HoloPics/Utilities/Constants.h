@@ -43,3 +43,4 @@ static const NSUInteger kNumberOfImportPicsByCategory = 11;
 static NSString * const kProdAFHolopicsAPIBaseURLString = @"http://holopics.herokuapp.com/";
 static NSString * const kProdHolopicsImageBaseURL = @"http://s3.amazonaws.com/holopics-production/original/image_";
 static NSString * const kProdHolopicsBackgroundBaseURL = @"http://s3.amazonaws.com/holopics-production/";
+static NSString * const kProdHolopicsShapeBaseURL = @"http://s3.amazonaws.com/holopics-production/shapes/image_";

@@ -9,6 +9,7 @@
 #import "AFHolopicsAPIClient.h"
 #import "Constants.h"
 #import "Holopic.h"
+#import "Shape.h"
 
 @implementation AFHolopicsAPIClient
 
@@ -103,6 +104,44 @@
         if (successBlock) {
             successBlock();
         }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failureBlock) {
+            failureBlock();
+        }
+    }];
+}
+
+// Create Shapes
++ (void)createShapesWithEncodedImage:(NSString *)encodedImage encodedPath:(NSString *)encodedPath AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock
+{
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:2];
+    AFHolopicsAPIClient *manager = [AFHolopicsAPIClient sharedClient];
+    [parameters setObject:encodedImage forKey:@"avatar"];
+    [parameters setObject:encodedPath forKey:@"path"];
+    
+    NSString *path = [[AFHolopicsAPIClient getBasePath] stringByAppendingString:@"shapes.json"];
+    
+    [manager POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
+        if (successBlock) {
+            successBlock();
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (failureBlock) {
+            failureBlock();
+        }
+    }];
+}
+
+// Retrieve shapes
++ (void)getShapesAndExecuteSuccess:(void(^)(NSArray *shapes))successBlock failure:(void (^)())failureBlock
+{
+    NSString *path = [[AFHolopicsAPIClient getBasePath] stringByAppendingString:@"shapes.json"];
+    
+    [[AFHolopicsAPIClient sharedClient] GET:path parameters:nil success:^(NSURLSessionDataTask *task, id JSON) {
+        NSDictionary *result = [JSON valueForKeyPath:@"result"];
+        NSArray *rawShapes = [result valueForKeyPath:@"shapes"];
+        successBlock([Shape rawShapesToInstances:rawShapes]);
+        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         if (failureBlock) {
             failureBlock();

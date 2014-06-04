@@ -21,5 +21,7 @@
 @protocol ImportPictureVCDelegate
 
 - (void)setBackgoundImage:(UIImage *)image;
+- (void)showHUD;
+- (void)hideHUD;
 
 @end

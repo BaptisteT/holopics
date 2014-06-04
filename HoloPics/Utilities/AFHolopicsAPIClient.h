@@ -18,4 +18,8 @@
 
 + (void)sendAnalytics:(NSString *)eventName AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock;
 
++ (void)createShapesWithEncodedImage:(NSString *)encodedImage encodedPath:(NSString *)encodedPath AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock;
+
++ (void)getShapesAndExecuteSuccess:(void(^)(NSArray *shapes))successBlock failure:(void (^)())failureBlock;
+
 @end

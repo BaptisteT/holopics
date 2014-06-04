@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C01355C193F206F0009607C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01355B193F206F0009607C /* Shape.m */; };
 		3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAB71908F917005DAA9C /* PathUtility.m */; };
 		3C09FAE6190949B7005DAA9C /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC2190949B6005DAA9C /* AFHTTPRequestOperation.m */; };
 		3C09FAE8190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C09FAC4190949B6005DAA9C /* AFHTTPRequestOperationManager.m */; };
@@ -101,6 +102,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C01355A193F206F0009607C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shape.h; path = Models/Shape.h; sourceTree = "<group>"; };
+		3C01355B193F206F0009607C /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Shape.m; path = Models/Shape.m; sourceTree = "<group>"; };
 		3C09FAB61908F917005DAA9C /* PathUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUtility.h; sourceTree = "<group>"; };
 		3C09FAB71908F917005DAA9C /* PathUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUtility.m; sourceTree = "<group>"; };
 		3C09FAC1190949B6005DAA9C /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				3C20FC161924AFA6003F3858 /* ShapeCD.xcdatamodeld */,
 				3C20FC191924B18D003F3858 /* ShapeInfo.h */,
 				3C20FC1A1924B18D003F3858 /* ShapeInfo.m */,
+				3C01355A193F206F0009607C /* Shape.h */,
+				3C01355B193F206F0009607C /* Shape.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -677,6 +682,7 @@
 				3C9ED4F11918E98C003A8269 /* TutoImageView.m in Sources */,
 				3C09FAFC190949B7005DAA9C /* UIAlertView+AFNetworking.m in Sources */,
 				3CA89FDF190EA66A002E4D1D /* ShapeView.m in Sources */,
+				3C01355C193F206F0009607C /* Shape.m in Sources */,
 				3C09FAE8190949B7005DAA9C /* AFHTTPRequestOperationManager.m in Sources */,
 				3C09FAB81908F917005DAA9C /* PathUtility.m in Sources */,
 				3C13956218FD9E7100762572 /* AppDelegate.m in Sources */,

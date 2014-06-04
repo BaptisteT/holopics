@@ -22,6 +22,9 @@
 #include "ScrollableShapeView.h"
 #import "PathUtility.h"
 #import "AFHolopicsAPIClient.h"
+#import "Shape.h"
+#import "UIImageView+AFNetworking.h"
+#import "PrintablePath.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"return_to_feed", @"Strings", @"comment")
@@ -93,7 +96,9 @@
     }
     
     // Load shapes
-    [self loadShapesInfoInCoreData];
+    [self loadShapesInfoFromCoreData];
+    
+    [self loadShapesInAWS];
 }
 
 
@@ -282,7 +287,6 @@
 // Create flexible subview with the image inside the path
 - (void)createShapeWithImage:(UIImage *)image andPath:(UIBezierPath *)path
 {
-    // todo check that we don't exceed a certain number
     if (self.shapeOptionsScrollView.contentSize.width >= kMaxNumberOfShapesInMemory * kScrollableViewHeight) {
         [GeneralUtilities showMessage:@"Delete shapes by sliding them toward the bottom of the screen" withTitle:@"You reached the maximum number of shapes in memory"];
         return;
@@ -333,6 +337,12 @@
         scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index integerValue] + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
         scrollableShape.backgroundColor =[UIColor clearColor];
     }];
+    
+    // todo temporary
+    NSString *encodedImage = [ImageUtilities encodeToBase64String:croppedImage];
+    NSData *bezierData = [NSKeyedArchiver archivedDataWithRootObject:path];
+    NSString *encodedPath = [bezierData base64EncodedStringWithOptions:kNilOptions];
+    [AFHolopicsAPIClient createShapesWithEncodedImage:encodedImage encodedPath:encodedPath AndExecuteSuccess:nil failure:nil];
 }
 
 - (void)hideOrDisplayBackgroundOptionsView
@@ -394,6 +404,20 @@
     }
 }
 
+
+// --------------------------------
+// ImportPictureVCDelegate protocol
+// --------------------------------
+- (void)showHUD
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)hideHUD
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 // --------------------------------------------
 // Core Data related methods
 // --------------------------------------------
@@ -409,7 +433,7 @@
     return _managedObjectContext;
 }
 
-- (void)loadShapesInfoInCoreData
+- (void)loadShapesInfoFromCoreData
 {
     NSArray *requestResults = [self getShapeInCoreData];
     
@@ -438,6 +462,63 @@
         // todo error handling
     }
     return requestResults;
+}
+
+
+// --------------------------------
+// Get Shapes in AWS methods
+// --------------------------------
+- (void)loadShapesInAWS
+{
+    CGFloat squareWidth = CGRectGetHeight(self.shapeOptionsScrollView.frame);
+    if (![GeneralUtilities connected]) {
+        // error handling
+        return;
+    }
+    
+    [AFHolopicsAPIClient getShapesAndExecuteSuccess:^(NSArray *shapes) {
+        
+        self.shapeOptionsScrollView.contentSize = CGSizeMake(self.shapeOptionsScrollView.contentSize.width + squareWidth * shapes.count, squareWidth);
+        
+        for(Shape *shape in shapes) {
+            
+            // Create scrollable shape
+            ScrollableShapeView *scrollableShape = [ScrollableShapeView alloc];
+            scrollableShape.scrollableShapeViewDelegate = self;
+            [self.scrollableShapeViews addObject:scrollableShape];
+            __weak __typeof(scrollableShape)weakScrollableShape = scrollableShape;
+            __weak __typeof(self)weakSelf = self;
+            
+            // Request image
+            NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[shape getShapeImageURL]];
+            [scrollableShape setImageWithURLRequest:imageRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                
+                // Image path
+                NSString *relativeImagePath = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSinceReferenceDate]];
+                // Save image
+                if (![ImageUtilities saveImage:image inAppDirectoryPath:relativeImagePath]) {
+                    return;
+                }
+                
+                // Create new shape Info
+                ShapeInfo *shapeInfo = [NSEntityDescription
+                                        insertNewObjectForEntityForName:@"ShapeInfo"
+                                        inManagedObjectContext:[weakSelf managedObjectContext]];
+                shapeInfo.index = [NSNumber numberWithInteger:[weakSelf.scrollableShapeViews indexOfObject:weakScrollableShape]];
+                shapeInfo.relativeImagePath = relativeImagePath;
+                shapeInfo.bezierPath = shape.bezierpath;
+                
+                // Add the new shape to the scrollable views
+                [weakSelf.shapeOptionsScrollView addSubview:[weakScrollableShape initWithShapeInfo:shapeInfo]];
+                weakScrollableShape.frame = CGRectMake(squareWidth * [shapeInfo.index integerValue] + kScrollableViewInitialOffset, 0, squareWidth, squareWidth);
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                // todo error handling
+                [weakSelf.scrollableShapeViews removeObject:weakScrollableShape];
+            }];
+        }
+    } failure:^{
+        // todo error handling
+    }];
 }
 
 
