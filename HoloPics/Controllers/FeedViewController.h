@@ -10,8 +10,17 @@
 #import "Holopic.h"
 #import "DisplayHolopicViewController.h"
 
+@protocol FeedVCDelegate;
+
 @interface FeedViewController : UIViewController <UIScrollViewDelegate, DisplayHolopicVCDelegate>
 
 @property (nonatomic) BOOL fullscreenModeInExplore;
+@property (nonatomic, strong) id<FeedVCDelegate> feedVCDelegate;
+
+@end
+
+@protocol  FeedVCDelegate
+
+- (void)setBackgoundImage:(UIImage *)image;
 
 @end

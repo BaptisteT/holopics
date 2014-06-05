@@ -71,6 +71,7 @@
     
     if (self.sourceType == UIImagePickerControllerSourceTypeCamera) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
         
         // Custom buttons
         imagePickerController.showsCameraControls = NO;

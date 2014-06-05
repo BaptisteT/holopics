@@ -73,6 +73,17 @@
     }
 }
 
++ (BOOL)hasLoadedShapes
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    if([prefs objectForKey:SHAPES_LOADED_PREF]) {
+        return NO;
+    } else {
+        [prefs setObject:[NSNumber numberWithBool:YES] forKey:SHAPES_LOADED_PREF];
+        return YES;
+    }
+}
 
 @end
 

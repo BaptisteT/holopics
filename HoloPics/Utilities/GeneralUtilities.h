@@ -19,4 +19,6 @@
 + (void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view;
 + (BOOL)isFirstOpening;
 
++ (BOOL)hasLoadedShapes;
+
 @end

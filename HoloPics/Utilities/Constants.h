@@ -38,6 +38,7 @@ static const NSString * kAppTitle = @"Holopics";
 static const NSUInteger kNumberOfImportPicsByCategory = 11;
 
 #define FIRST_OPENING_PREF @"First Opening"
+#define SHAPES_LOADED_PREF @"Has loaded shapes?"
 
 // Production
 static NSString * const kProdAFHolopicsAPIBaseURLString = @"http://holopics.herokuapp.com/";

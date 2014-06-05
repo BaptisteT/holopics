@@ -86,16 +86,6 @@
     [self.scrollView setContentOffset:CGPointMake(0, 0)];
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSString * segueName = segue.identifier;
-    
-    if ([segueName isEqualToString: @"Create From Feed Push Segue"]) {
-        if (sender) {
-            ((PicsCreationViewController *) [segue destinationViewController]).forwardedImage = (UIImage *)sender;
-        }
-    }
-}
 
 // ------------------------------------------------
 // Loading Holopics
@@ -174,7 +164,7 @@
             [self loadScrollViewWithPage:i];
         } else {
             [self unloadScrollViewWithPage:i];
-        }
+        }   
     }
 }
 
@@ -183,13 +173,14 @@
 // ------------------------------------------------
 - (IBAction)cameraButtonClicked:(id)sender {
     [AFHolopicsAPIClient sendAnalytics:@"CameraButtonClicked" AndExecuteSuccess:nil failure:nil];
-    [self performSegueWithIdentifier:@"Create From Feed Push Segue" sender:nil];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 - (IBAction)forwardButtonClicked:(id)sender {
     [AFHolopicsAPIClient sendAnalytics:@"ForwardButtonClicked" AndExecuteSuccess:nil failure:nil];
     DisplayHolopicViewController *controller = [self.viewControllers objectAtIndex:[self getScrollViewPage]];
     UIImage *forwardedImage = controller.imageView.image;
-    [self performSegueWithIdentifier:@"Create From Feed Push Segue" sender:forwardedImage];
+    [self.feedVCDelegate setBackgoundImage:forwardedImage];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 

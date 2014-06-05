@@ -5,7 +5,7 @@
 
 "no_connection" = "No connection";
 "incomplete_pics" = "Finish the pics before saving it!";
-"return_feed" = "Return to feed";
+"go_to_feed" = "Discover others' creations";
 "clean_screen" = "Clean screen";
 "cancel" = "Cancel";
 "create_holopic_failed_title" = "Connection problem";

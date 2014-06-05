@@ -24,10 +24,10 @@
 #import "AFHolopicsAPIClient.h"
 #import "Shape.h"
 #import "UIImageView+AFNetworking.h"
-#import "PrintablePath.h"
+#import "FeedViewController.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
-#define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"return_to_feed", @"Strings", @"comment")
+#define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"go_to_feed", @"Strings", @"comment")
 #define ACTION_SHEET_CANCEL NSLocalizedStringFromTable (@"cancel", @"Strings", @"comment")
 
 @interface PicsCreationViewController ()
@@ -65,7 +65,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    if ([GeneralUtilities connected]) {
+        if ([GeneralUtilities hasLoadedShapes]) {
+            [self loadShapesInAWS];
+        }
+    }
     // Some init
     self.subViewIndex = 0;
     
@@ -97,8 +102,6 @@
     
     // Load shapes
     [self loadShapesInfoFromCoreData];
-    
-    [self loadShapesInAWS];
 }
 
 
@@ -112,6 +115,9 @@
     
     if ([segueName isEqualToString: @"Import From Create Push Segue"]) {
         ((ImportPictureViewController *) [segue destinationViewController]).importPictureVCDelegate = self;
+    }
+    if ([segueName isEqualToString: @"Feed From Pics View Controller"]) {
+        ((FeedViewController *) [segue destinationViewController]).feedVCDelegate = self;
     }
 }
 
@@ -338,11 +344,11 @@
         scrollableShape.backgroundColor =[UIColor clearColor];
     }];
     
-    // todo temporary
-    NSString *encodedImage = [ImageUtilities encodeToBase64String:croppedImage];
-    NSData *bezierData = [NSKeyedArchiver archivedDataWithRootObject:path];
-    NSString *encodedPath = [bezierData base64EncodedStringWithOptions:kNilOptions];
-    [AFHolopicsAPIClient createShapesWithEncodedImage:encodedImage encodedPath:encodedPath AndExecuteSuccess:nil failure:nil];
+    // Save Shape
+//    NSString *encodedImage = [ImageUtilities encodeToBase64String:croppedImage];
+//    NSData *bezierData = [NSKeyedArchiver archivedDataWithRootObject:path];
+//    NSString *encodedPath = [bezierData base64EncodedStringWithOptions:kNilOptions];
+//    [AFHolopicsAPIClient createShapesWithEncodedImage:encodedImage encodedPath:encodedPath AndExecuteSuccess:nil failure:nil];
 }
 
 - (void)hideOrDisplayBackgroundOptionsView
@@ -541,7 +547,7 @@
         }
         self.shapeViews = nil;
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
-        [self.navigationController popViewControllerAnimated:NO];
+        [self performSegueWithIdentifier:@"Feed From Pics View Controller" sender:nil];
     }
 }
 
