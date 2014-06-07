@@ -63,9 +63,6 @@
 {
     // Create custom camera view
     UIImagePickerController *imagePickerController = [UIImagePickerController new];
-    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        return;
-    }
     imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
     imagePickerController.delegate = self;
     
@@ -101,7 +98,7 @@
         self.flashOn = NO;
         imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
     } else {
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePickerController.sourceType = self.sourceType;
     }
     
     self.imagePickerController = imagePickerController;

@@ -102,6 +102,8 @@
     
     // Load shapes
     [self loadShapesInfoFromCoreData];
+    
+    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 
@@ -127,7 +129,7 @@
     // save context
     NSError *error;
     if ([[self managedObjectContext] hasChanges] && ![[self managedObjectContext] save:&error]) {
-        // todo deal with error
+        // todo error handling
         // save here??
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
@@ -182,6 +184,7 @@
 // Display or hide shape options
 - (IBAction)shapeButtonClicked:(id)sender {
     if (self.shapeOptionsScrollView.isHidden) {
+        [self displayToastWithMessage:@"Insert shapes"];
         self.shapeOptionsScrollView.hidden = NO;
         self.whiteShapeOptionsView.hidden = NO;
         [self.shapeOptionsScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -196,7 +199,7 @@
 }
 
 - (IBAction)libraryButtonClicked:(id)sender {
-    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
 }
 
 - (IBAction)importPictureButtonClicked:(id)sender {
@@ -213,8 +216,14 @@
     UIImageOrientation orientation =  image.size.width > image.size.height ? UIImageOrientationRight : image.imageOrientation;
     self.backgroundView.originalImage = [ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation];
     [self.backgroundView setImage:self.backgroundView.originalImage];
+    
+    // Hide background option
     [self.backgroundOptionsView setHidden:YES];
     [self.whiteBackgroundOptionsView setHidden:YES];
+    
+    // Show Shapes
+    self.shapeOptionsScrollView.hidden = NO;
+    self.whiteShapeOptionsView.hidden = NO;
 }
 
 
@@ -354,6 +363,7 @@
 - (void)hideOrDisplayBackgroundOptionsView
 {
     if (self.backgroundOptionsView.isHidden) {
+        [self displayToastWithMessage:@"Change background"];
         self.backgroundOptionsView.hidden = NO;
         self.whiteBackgroundOptionsView.hidden = NO;
     } else {
@@ -558,5 +568,18 @@
     [self.navigationController pushViewController:cameraViewController animated:NO];
 }
 
+- (void)displayToastWithMessage:(NSString *)message {
+    MBProgressHUD *toast = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    toast.userInteractionEnabled = NO;
+    // Configure for text only and offset down
+    toast.mode = MBProgressHUDModeText;
+//    toast.labelText = message;
+    toast.opacity = 0.3f;
+    toast.margin =10.f;
+//    toast.yOffset = -150.f;
+    toast.detailsLabelFont = [UIFont boldSystemFontOfSize:18];
+    toast.detailsLabelText = message;
+    [toast hide:YES afterDelay:1];
+}
 
 @end

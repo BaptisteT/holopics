@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *errorMessage;
 @property (nonatomic, strong) NSMutableArray *viewControllers;
 @property (nonatomic, strong) NSMutableArray *holopics;
+@property (weak, nonatomic) IBOutlet UILabel *appName;
 
 @end
 
@@ -60,6 +61,7 @@
     self.forwardButton.layer.cornerRadius = buttonHeight/2;
     [ImageUtilities outerGlow:self.cameraButton];
     [ImageUtilities outerGlow:self.forwardButton];
+    [ImageUtilities outerGlow:self.appName];
     
     // a page is the width of the scroll view
     self.scrollView.pagingEnabled = YES;
@@ -69,12 +71,12 @@
     self.scrollView.delegate = self;
     
     // Tuto on first opening
-    if ([GeneralUtilities isFirstOpening]) {
-        [AFHolopicsAPIClient sendAnalytics:@"FirstOpening" AndExecuteSuccess:nil failure:nil];
-        TutoImageView *tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
-        tutoView.image = [UIImage imageNamed:@"tuto_feed.png"];
-        [self.view addSubview:tutoView];
-    }
+//    if ([GeneralUtilities isFirstOpening]) {
+//        [AFHolopicsAPIClient sendAnalytics:@"FirstOpening" AndExecuteSuccess:nil failure:nil];
+//        TutoImageView *tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
+//        tutoView.image = [UIImage imageNamed:@"tuto_feed.png"];
+//        [self.view addSubview:tutoView];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -362,6 +364,7 @@
     self.fullscreenModeInExplore = YES;
     self.cameraButton.hidden = YES;
     self.forwardButton.hidden = YES;
+    self.appName.hidden = YES;
     self.statusBarContainer.hidden = YES;
     
     for (DisplayHolopicViewController *controller in self.viewControllers) {
@@ -378,6 +381,7 @@
     self.fullscreenModeInExplore = NO;
     self.cameraButton.hidden = NO;
     self.forwardButton.hidden = NO;
+    self.appName.hidden = NO;
     self.statusBarContainer.hidden = NO;
     
     for (DisplayHolopicViewController *controller in self.viewControllers) {

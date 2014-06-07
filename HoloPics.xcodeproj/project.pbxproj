@@ -69,7 +69,6 @@
 		3C3E3E3F192CEFB6005E8366 /* delete_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3B192CEFB6005E8366 /* delete_button.png */; };
 		3C3E3E40192CEFB6005E8366 /* flip_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3C192CEFB6005E8366 /* flip_button.png */; };
 		3C3E3E41192CEFB6005E8366 /* size_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3D192CEFB6005E8366 /* size_button.png */; };
-		3C7C83BB1935E354002E1BB0 /* tuto_feed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7C83BA1935E354002E1BB0 /* tuto_feed.png */; };
 		3C7C83BD1935E6BA002E1BB0 /* import_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7C83BC1935E6BA002E1BB0 /* import_picture.png */; };
 		3C7C83C01935EA5E002E1BB0 /* ImportPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C83BF1935EA5E002E1BB0 /* ImportPictureViewController.m */; };
 		3C7C83C61935F1F1002E1BB0 /* ImportPictureImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7C83C51935F1F1002E1BB0 /* ImportPictureImageView.m */; };
@@ -85,6 +84,7 @@
 		3CA89FDF190EA66A002E4D1D /* ShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA89FDE190EA66A002E4D1D /* ShapeView.m */; };
 		3CA89FE1190FE584002E4D1D /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CA89FE0190FE584002E4D1D /* trash.png */; };
 		3CAF48B51913E3C3000C79CC /* MagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF48B41913E3C3000C79CC /* MagnifierView.m */; };
+		3CB432411940CA5A001B6922 /* more-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CB432401940CA5A001B6922 /* more-button@2x~iphone.png */; };
 		3CBA8BAA191A980F00064E7C /* AFHolopicsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8BA9191A980F00064E7C /* AFHolopicsAPIClient.m */; };
 		3CBA8BB1191A9DE100064E7C /* Holopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8BB0191A9DE100064E7C /* Holopic.m */; };
 		3CBA8D6D191ABE9800064E7C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CBA8D6C191ABE9800064E7C /* MBProgressHUD.m */; };
@@ -200,7 +200,6 @@
 		3C3E3E3B192CEFB6005E8366 /* delete_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_button.png; sourceTree = "<group>"; };
 		3C3E3E3C192CEFB6005E8366 /* flip_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flip_button.png; sourceTree = "<group>"; };
 		3C3E3E3D192CEFB6005E8366 /* size_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = size_button.png; sourceTree = "<group>"; };
-		3C7C83BA1935E354002E1BB0 /* tuto_feed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tuto_feed.png; sourceTree = "<group>"; };
 		3C7C83BC1935E6BA002E1BB0 /* import_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_picture.png; sourceTree = "<group>"; };
 		3C7C83BE1935EA5E002E1BB0 /* ImportPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportPictureViewController.h; sourceTree = "<group>"; };
 		3C7C83BF1935EA5E002E1BB0 /* ImportPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportPictureViewController.m; sourceTree = "<group>"; };
@@ -221,6 +220,7 @@
 		3CA89FE0190FE584002E4D1D /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		3CAF48B31913E3C3000C79CC /* MagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagnifierView.h; path = Utilities/MagnifierView.h; sourceTree = "<group>"; };
 		3CAF48B41913E3C3000C79CC /* MagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagnifierView.m; path = Utilities/MagnifierView.m; sourceTree = "<group>"; };
+		3CB432401940CA5A001B6922 /* more-button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more-button@2x~iphone.png"; sourceTree = "<group>"; };
 		3CBA8BA8191A980F00064E7C /* AFHolopicsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHolopicsAPIClient.h; sourceTree = "<group>"; };
 		3CBA8BA9191A980F00064E7C /* AFHolopicsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHolopicsAPIClient.m; sourceTree = "<group>"; };
 		3CBA8BAF191A9DE100064E7C /* Holopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Holopic.h; path = Models/Holopic.h; sourceTree = "<group>"; };
@@ -443,10 +443,10 @@
 				3C989A11193883F200629C1F /* app_icon_58.png */,
 				3C989A12193883F200629C1F /* app_icon_80.png */,
 				3C989A13193883F200629C1F /* app_icon_120.png */,
+				3CB432401940CA5A001B6922 /* more-button@2x~iphone.png */,
 				3C989A011937568300629C1F /* transparency_icon.png */,
 				3C0C2EB7193639C900ADCF0A /* empty_board.png */,
 				3C7C83BC1935E6BA002E1BB0 /* import_picture.png */,
-				3C7C83BA1935E354002E1BB0 /* tuto_feed.png */,
 				3C7D53601935024300DAEA34 /* create_tuto.png */,
 				3C7D535E1934D39400DAEA34 /* next_screen_button.png */,
 				3C7D53581934D15400DAEA34 /* bring_to_front_button.png */,
@@ -628,6 +628,7 @@
 				3C7D535F1934D39400DAEA34 /* next_screen_button.png in Resources */,
 				3CBA8D75191B8AE200064E7C /* DisplayHolopic.xib in Resources */,
 				3C989A16193883F200629C1F /* app_icon_120.png in Resources */,
+				3CB432411940CA5A001B6922 /* more-button@2x~iphone.png in Resources */,
 				3C989A021937568300629C1F /* transparency_icon.png in Resources */,
 				3CBA8D7B191BB16F00064E7C /* explore_refresh.png in Resources */,
 				3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */,
@@ -635,7 +636,6 @@
 				3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */,
 				3C1395B81900C66C00762572 /* create_send_button@2x~iphone.png in Resources */,
 				3C13959218FDACB700762572 /* CameraOverlayView.xib in Resources */,
-				3C7C83BB1935E354002E1BB0 /* tuto_feed.png in Resources */,
 				3C20FC261924EE63003F3858 /* flash_on@2x~iphone.png in Resources */,
 				3C20FC2A1924EEB5003F3858 /* camera_capture@2x~iphone.png in Resources */,
 				3C20FC241924EE63003F3858 /* flash_off@2x~iphone.png in Resources */,
