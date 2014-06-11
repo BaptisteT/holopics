@@ -10,14 +10,16 @@
 #import "Constants.h"
 #import "ImageUtilities.h"
 #import "AFHolopicsAPIClient.h"
+#import "ImportPictureViewController.h"
 
 @interface CameraViewController ()
 
 @property (strong, nonatomic) UIImagePickerController * imagePickerController;
-@property (weak, nonatomic) IBOutlet UIButton *flashButton;
 @property (weak, nonatomic) IBOutlet UIButton *cameraFlipButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
-@property (nonatomic) BOOL flashOn;
+@property (weak, nonatomic) IBOutlet UIButton *importPictureButton;
+@property (weak, nonatomic) IBOutlet UIButton *libraryButton;
+
 
 @end
 
@@ -37,10 +39,37 @@
     // Init and present full screen camera
     [self allocAndInitFullScreenCamera];
     
+    // Libray Button
+    self.libraryButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [[self.libraryButton layer] setBorderWidth:0.8f];
+    [[self.libraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+             if (nil != group) {
+                 // be sure to filter the group so you only get photos
+                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+                 [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:group.numberOfAssets - 1]
+                                         options:0
+                                      usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                                          if (nil != result) {
+                                              ALAssetRepresentation *repr = [result defaultRepresentation];
+                                              UIImageOrientation orientation = [ImageUtilities convertAssetOrientationToImageOrientation:[repr orientation]];
+                                              UIImage *img = [UIImage imageWithCGImage:[repr fullResolutionImage] scale:1 orientation:orientation];
+                                              [self.libraryButton setImage:img forState:UIControlStateNormal];
+                                              *stop = YES;
+                                          }
+                                      }];
+             }
+             
+             *stop = NO;
+         } failureBlock:^(NSError *error) {
+             NSLog(@"error: %@", error);
+         }];
+    
     // design
-    [ImageUtilities outerGlow:self.flashButton];
     [ImageUtilities outerGlow:self.cancelButton];
     [ImageUtilities outerGlow:self.cameraFlipButton];
+    [ImageUtilities outerGlow:self.importPictureButton];
     
     isOpening = YES;
 }
@@ -95,7 +124,6 @@
         }
         
         // flash disactivated by default
-        self.flashOn = NO;
         imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
     } else {
         imagePickerController.sourceType = self.sourceType;
@@ -127,23 +155,42 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    if (self.imagePickerController.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
+        self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        [self closeCamera];
+    }
+}
+
+// --------------------------------
+// Import VC delegate
+// --------------------------------
+- (void)closeCameraAndSetBackgoundImage:(UIImage *)image
+{
+    [self.cameraVCDelegate setBackgoundImage:image];
     [self closeCamera];
 }
+- (void)closeImportPictureController
+{
+    [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 // --------------------------------
 // Camera button clicked
 // --------------------------------
 
-- (IBAction)flashButtonClicked:(id)sender {
-    if(self.flashOn == NO){
-        [self.flashButton setImage:[UIImage imageNamed:@"flash_on.png"] forState:UIControlStateNormal];
-        self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
-        self.flashOn = YES;
-    } else {
-        [self.flashButton setImage:[UIImage imageNamed:@"flash_off.png"] forState:UIControlStateNormal];
-        self.imagePickerController.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-        self.flashOn = NO;
-    }
+- (IBAction)ImportPictureButtonClicked:(id)sender {
+    NSString * storyboardName = @"Main";
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle: nil];
+    ImportPictureViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"ImportPictureController"];
+    vc.importPictureVCDelegate = self;
+    [self.imagePickerController presentViewController:vc animated:YES completion:nil];
+}
+
+- (IBAction)libraryButtonClicked:(id)sender {
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
 }
 
 - (IBAction)takePictureButtonClicked:(id)sender {

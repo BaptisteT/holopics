@@ -25,8 +25,8 @@ static const CGFloat    kLongPressTimeThreshold = 0.4f;
 static const NSUInteger kContinuousMovementDistanceThreshold = 1;
 static const NSUInteger kMinimumScale = 1;
 
-static const NSUInteger kMaxNumberOfShapes = 50;
-static const NSUInteger kMaxNumberOfShapesInMemory = 50;
+static const NSUInteger kMaxNumberOfShapes = 20;
+static const NSUInteger kMaxNumberOfShapesInMemory = 60;
 static const NSUInteger kScrollableViewHeight = 80;
 static const NSUInteger kScrollableViewInitialOffset = 60;
 static const NSUInteger kMinDeleteVelocity = 200;

@@ -24,7 +24,6 @@
 @protocol BackgroundViewDelegate
 
 - (void)createShapeWithImage:(UIImage *)image andPath:(UIBezierPath *)path;
-- (void)hideOrDisplayBackgroundOptionsView;
 - (BOOL)isShapeScrollableViewHidden;
 - (void)hideShapesDuringDrawing;
 - (void)displayShapesAfterDrawing;

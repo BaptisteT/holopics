@@ -17,6 +17,8 @@
 
 + (ALAssetOrientation)convertImageOrientationToAssetOrientation:(UIImageOrientation)orientation;
 
++ (UIImageOrientation)convertAssetOrientationToImageOrientation:(ALAssetOrientation)orientation;
+
 + (UIImage *)drawFromImage:(UIImage *)fullImage outsidePath:(UIBezierPath *)path;
 
 + (UIImage *)drawFromImage:(UIImage *)fullImage insidePath:(UIBezierPath *)path;

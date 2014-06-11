@@ -149,7 +149,7 @@
 
 - (void)clearPathAndPictures
 {
-    self.originalImage = [UIImage imageNamed:@"create_tuto"];
+    self.originalImage = [UIImage imageNamed:@"empty_board"];
     [self.globalPath removeAllPoints];
     [self.path removeAllPoints];
     [self setImage:self.originalImage];
@@ -159,13 +159,12 @@
 {
     [self setMultipleTouchEnabled:YES];
     self.exclusiveTouch = YES;
-//    self.contentMode = UIViewContentModeScaleAspectFit;
     [self setBackgroundColor:[UIColor clearColor]];
     self.path = [UIBezierPath bezierPath];
     [self.path setLineWidth:2.0];
     self.globalPath = [UIBezierPath bezierPath];
     
-    self.originalImage = [UIImage imageNamed:@"create_tuto"];
+    self.originalImage = [UIImage imageNamed:@"empty_board"];
     [self setImage:self.originalImage];
     
     // Alloc and add gesture recognisers

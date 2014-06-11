@@ -15,13 +15,13 @@
 @property (weak, nonatomic) id <ImportPictureVCDelegate> importPictureVCDelegate;
 
 - (void)popImportPictureViewController;
-
+- (void)showHUD;
+- (void)hideHUD;
 @end
 
 @protocol ImportPictureVCDelegate
 
-- (void)setBackgoundImage:(UIImage *)image;
-- (void)showHUD;
-- (void)hideHUD;
+- (void)closeImportPictureController;
+- (void)closeCameraAndSetBackgoundImage:(UIImage *)image;
 
 @end

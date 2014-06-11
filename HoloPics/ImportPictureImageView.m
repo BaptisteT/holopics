@@ -73,20 +73,18 @@
         NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
         __weak typeof(self) weakSelf = self;
         NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(failureResponseSelector:) userInfo:self.importPictureViewController repeats:NO];
-        [weakSelf.importPictureViewController.importPictureVCDelegate showHUD];
+        [weakSelf.importPictureViewController showHUD];
         [self setImageWithURLRequest:imageRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-            [weakSelf.importPictureViewController.importPictureVCDelegate setBackgoundImage:image];
-            [weakSelf.importPictureViewController.importPictureVCDelegate hideHUD];
+            [weakSelf.importPictureViewController.importPictureVCDelegate closeCameraAndSetBackgoundImage:image];
+            [weakSelf.importPictureViewController hideHUD];
             [timer invalidate];
         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-            [weakSelf.importPictureViewController.importPictureVCDelegate hideHUD];
+            [weakSelf.importPictureViewController hideHUD];
             [GeneralUtilities showMessage:@"Sorry, we could not import this picture" withTitle:nil];
             [timer invalidate];
         }];
-        [weakSelf.importPictureViewController popImportPictureViewController];
     } else {
-        [self.importPictureViewController.importPictureVCDelegate setBackgoundImage:self.thumbImage];
-        [self.importPictureViewController popImportPictureViewController];
+        [self.importPictureViewController.importPictureVCDelegate closeCameraAndSetBackgoundImage:self.thumbImage];
     }
 }
 
@@ -98,7 +96,7 @@
 - (void)failureResponseSelector:(NSTimer *)timer
 {
     ImportPictureViewController *controller = timer.userInfo;
-    [controller.importPictureVCDelegate hideHUD];
+    [controller hideHUD];
     [GeneralUtilities showMessage:@"Sorry, we could not import this picture" withTitle:nil];
 }
 

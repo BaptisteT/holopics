@@ -11,6 +11,7 @@
 #import "ImportPictureImageView.h"
 #import "Constants.h"
 #import "UIImageView+AFNetworking.h"
+#import "MBProgressHUD.h"
 
 @interface ImportPictureViewController()
 
@@ -85,7 +86,7 @@
 }
 
 - (void)backButtonClicked {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.importPictureVCDelegate closeImportPictureController];
 }
 
 - (NSURL *)getURLOfThumbImage:(NSInteger)index fromCategory:(NSString *)category
@@ -98,7 +99,17 @@
     [self.moviesScrollView setHidden:YES];
     [self.celebritiesScrollView setHidden:YES];
     [self.animalsScrollView setHidden:YES];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)showHUD
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)hideHUD
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 

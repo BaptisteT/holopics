@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Baptiste Truchot. All rights reserved.
 //
 
+#import "ImportPictureViewController.h"
 #import <UIKit/UIKit.h>
 
 @protocol CameraViewControllerDelegate;
 
-@interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface CameraViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImportPictureVCDelegate>
 
 @property (weak, nonatomic) id<CameraViewControllerDelegate> cameraVCDelegate;
 @property (nonatomic) UIImagePickerControllerSourceType sourceType;
@@ -20,5 +21,6 @@
 @protocol CameraViewControllerDelegate
 
 - (void)setBackgoundImage:(UIImage *)image;
+
 
 @end

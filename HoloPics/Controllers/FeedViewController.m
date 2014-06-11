@@ -70,23 +70,13 @@
     self.scrollView.scrollsToTop = NO;
     self.scrollView.delegate = self;
     
-    // Tuto on first opening
-//    if ([GeneralUtilities isFirstOpening]) {
-//        [AFHolopicsAPIClient sendAnalytics:@"FirstOpening" AndExecuteSuccess:nil failure:nil];
-//        TutoImageView *tutoView = [[TutoImageView alloc] initWithFrame:self.view.bounds];
-//        tutoView.image = [UIImage imageNamed:@"tuto_feed.png"];
-//        [self.view addSubview:tutoView];
-//    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
     self.page = 1;
     self.noMoreHolopicToPull = NO;
     self.pullingMoreHolopics = NO;
     [self loadFirstPageHolopics];
     [self.scrollView setContentOffset:CGPointMake(0, 0)];
 }
+
 
 
 // ------------------------------------------------

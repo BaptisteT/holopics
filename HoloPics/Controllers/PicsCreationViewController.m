@@ -37,11 +37,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *backgroundButton;
 @property (weak, nonatomic) IBOutlet UIButton *shapeButton;
 
-@property (weak, nonatomic) IBOutlet UIView *backgroundOptionsView;
 @property (weak, nonatomic) IBOutlet UIScrollView *shapeOptionsScrollView;
-@property (strong, nonatomic) IBOutlet UIView*whiteBackgroundOptionsView;
 @property (weak, nonatomic) IBOutlet UIView *whiteShapeOptionsView;
-
 
 @property (weak, nonatomic) IBOutlet BackgroundView *backgroundView;
 @property (strong, nonatomic)  NSMutableArray *shapeViews;
@@ -49,6 +46,8 @@
 
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *scrollableShapeViews;
+
+@property (nonatomic) BOOL isFirstOpening;
 
 @end
 
@@ -71,8 +70,10 @@
             [self loadShapesInAWS];
         }
     }
+    
     // Some init
     self.subViewIndex = 0;
+    self.isFirstOpening = [GeneralUtilities isFirstOpening];
     
     // Scroll view
     self.shapeOptionsScrollView.clipsToBounds = NO;
@@ -106,6 +107,13 @@
     [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.isFirstOpening) {
+        // Todo tuto create
+    }
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -113,10 +121,6 @@
 
     if ([segueName isEqualToString: @"Share From Create Push Segue"]) {
         ((SharingViewController *) [segue destinationViewController]).imageToShare = (UIImage *)sender;
-    }
-    
-    if ([segueName isEqualToString: @"Import From Create Push Segue"]) {
-        ((ImportPictureViewController *) [segue destinationViewController]).importPictureVCDelegate = self;
     }
     if ([segueName isEqualToString: @"Feed From Pics View Controller"]) {
         ((FeedViewController *) [segue destinationViewController]).feedVCDelegate = self;
@@ -149,8 +153,6 @@
     [self.backgroundButton setHidden:YES];
     [self.shapeButton setHidden:YES];
     [self.shapeOptionsScrollView setHidden:YES];
-    [self.backgroundOptionsView setHidden:YES];
-    [self.whiteBackgroundOptionsView setHidden:YES];
     [self.whiteShapeOptionsView setHidden:YES];
     
     [self removeAllShapeOverlay];
@@ -178,13 +180,14 @@
 
 // Display or hide background options
 - (IBAction)backgroundButtonClicked:(id)sender {
-    [self hideOrDisplayBackgroundOptionsView];
+//    [self hideOrDisplayBackgroundOptionsView];
+    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 // Display or hide shape options
 - (IBAction)shapeButtonClicked:(id)sender {
     if (self.shapeOptionsScrollView.isHidden) {
-        [self displayToastWithMessage:@"Insert shapes"];
+        [self displayToastWithMessage:@"Drag shapes to the picture"];
         self.shapeOptionsScrollView.hidden = NO;
         self.whiteShapeOptionsView.hidden = NO;
         [self.shapeOptionsScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -192,18 +195,6 @@
         self.shapeOptionsScrollView.hidden = YES;
         self.whiteShapeOptionsView.hidden = YES;
     }
-}
-
-- (IBAction)cameraButtonClicked:(id)sender {
-    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
-}
-
-- (IBAction)libraryButtonClicked:(id)sender {
-    [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-}
-
-- (IBAction)importPictureButtonClicked:(id)sender {
-    [self performSegueWithIdentifier:@"Import From Create Push Segue" sender:nil];
 }
 
 
@@ -216,10 +207,6 @@
     UIImageOrientation orientation =  image.size.width > image.size.height ? UIImageOrientationRight : image.imageOrientation;
     self.backgroundView.originalImage = [ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation];
     [self.backgroundView setImage:self.backgroundView.originalImage];
-    
-    // Hide background option
-    [self.backgroundOptionsView setHidden:YES];
-    [self.whiteBackgroundOptionsView setHidden:YES];
     
     // Show Shapes
     self.shapeOptionsScrollView.hidden = NO;
@@ -303,9 +290,10 @@
 - (void)createShapeWithImage:(UIImage *)image andPath:(UIBezierPath *)path
 {
     if (self.shapeOptionsScrollView.contentSize.width >= kMaxNumberOfShapesInMemory * kScrollableViewHeight) {
-        [GeneralUtilities showMessage:@"Delete shapes by sliding them toward the bottom of the screen" withTitle:@"You reached the maximum number of shapes in memory"];
+        [GeneralUtilities showMessage:@"Delete shapes by quickly dragging them downwards" withTitle:@"You reached the maximum number of shapes in memory !"];
         return;
     }
+
     [AFHolopicsAPIClient sendAnalytics:@"CreateShape" AndExecuteSuccess:nil failure:nil];
     
     // Image directory path
@@ -358,17 +346,10 @@
 //    NSData *bezierData = [NSKeyedArchiver archivedDataWithRootObject:path];
 //    NSString *encodedPath = [bezierData base64EncodedStringWithOptions:kNilOptions];
 //    [AFHolopicsAPIClient createShapesWithEncodedImage:encodedImage encodedPath:encodedPath AndExecuteSuccess:nil failure:nil];
-}
-
-- (void)hideOrDisplayBackgroundOptionsView
-{
-    if (self.backgroundOptionsView.isHidden) {
-        [self displayToastWithMessage:@"Change background"];
-        self.backgroundOptionsView.hidden = NO;
-        self.whiteBackgroundOptionsView.hidden = NO;
-    } else {
-        self.backgroundOptionsView.hidden = YES;
-        self.whiteBackgroundOptionsView.hidden = YES;
+    
+    // Todo tuto insert
+    if (self.isFirstOpening) {
+        self.isFirstOpening = false;
     }
 }
 
@@ -420,19 +401,6 @@
     }
 }
 
-
-// --------------------------------
-// ImportPictureVCDelegate protocol
-// --------------------------------
-- (void)showHUD
-{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-- (void)hideHUD
-{
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-}
 
 // --------------------------------------------
 // Core Data related methods
@@ -573,10 +541,8 @@
     toast.userInteractionEnabled = NO;
     // Configure for text only and offset down
     toast.mode = MBProgressHUDModeText;
-//    toast.labelText = message;
     toast.opacity = 0.3f;
     toast.margin =10.f;
-//    toast.yOffset = -150.f;
     toast.detailsLabelFont = [UIFont boldSystemFontOfSize:18];
     toast.detailsLabelText = message;
     [toast hide:YES afterDelay:1];

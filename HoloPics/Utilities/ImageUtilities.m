@@ -90,6 +90,21 @@
     }
 }
 
++ (UIImageOrientation)convertAssetOrientationToImageOrientation:(ALAssetOrientation)orientation
+{
+    if (orientation == ALAssetOrientationUp) {
+        return UIImageOrientationUp;
+    } else if (orientation == ALAssetOrientationDown) {
+        return UIImageOrientationDown;
+    } else if (orientation == ALAssetOrientationLeft) {
+        return UIImageOrientationLeft;
+    } else if (orientation == ALAssetOrientationRight) {
+        return UIImageOrientationRight;
+    } else {
+        return 0;
+    }
+}
+
 // Draw the image outside the path
 + (UIImage *)drawFromImage:(UIImage *)fullImage outsidePath:(UIBezierPath *)path
 {
