@@ -65,6 +65,7 @@
         self.exclusiveTouch = YES;
         self.clipsToBounds = NO;
         self.layer.masksToBounds = NO;
+//        [self setContentMode:UIViewContentMode];
         
         // Path
         self.imagePath = path;

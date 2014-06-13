@@ -25,6 +25,7 @@
 #import "Shape.h"
 #import "UIImageView+AFNetworking.h"
 #import "FeedViewController.h"
+#import "TutoImageView.h"
 
 #define ACTION_SHEET_OPTION_1 NSLocalizedStringFromTable (@"clean_screen", @"Strings", @"comment")
 #define ACTION_SHEET_OPTION_2 NSLocalizedStringFromTable (@"go_to_feed", @"Strings", @"comment")
@@ -111,7 +112,9 @@
 {
     [super viewDidAppear:animated];
     if (self.isFirstOpening) {
-        // Todo tuto create
+        TutoImageView *tuto = [[TutoImageView alloc] initWithFrame:self.view.frame];
+        [tuto setImage:[UIImage imageNamed:@"tutoCreateBig"]];
+        [self.view addSubview:tuto];
     }
 }
 
@@ -180,7 +183,6 @@
 
 // Display or hide background options
 - (IBAction)backgroundButtonClicked:(id)sender {
-//    [self hideOrDisplayBackgroundOptionsView];
     [self presentCameraViewControllerWithSourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
@@ -231,12 +233,14 @@
         return nil;
     }
 
-    ShapeView *newShapeView = [[ShapeView alloc] initWithImage:image frame:self.view.frame andPath:path];
+    CGRect imageFrame = CGRectMake(0, 0, 320, (float)image.size.height / image.size.width * 320);
+    ShapeView *newShapeView = [[ShapeView alloc] initWithImage:image frame:imageFrame andPath:path];
     
+    // dirty code
     CGFloat ratio = 0.6 / MAX(path.bounds.size.width / self.view.frame.size.width, path.bounds.size.height / self.view.frame.size.height);
     
     // Param
-    newShapeView.frame = self.view.frame;
+    newShapeView.frame = imageFrame;
     newShapeView.shapeViewDelegate = self;
     [newShapeView applyTransform:CGAffineTransformScale(newShapeView.transform, ratio, ratio)];
     
@@ -280,6 +284,8 @@
     [shapeInScrollView removeFromSuperview];
     [[self managedObjectContext] deleteObject:shapeInScrollView.shapeInfo];
 }
+
+
 
 
 // --------------------------------
@@ -339,6 +345,13 @@
     [UIView animateWithDuration:1.0 animations:^{
         scrollableShape.frame = CGRectMake(kScrollableViewHeight * [shapeInfo.index integerValue] + kScrollableViewInitialOffset, 0, kScrollableViewHeight, kScrollableViewHeight);
         scrollableShape.backgroundColor =[UIColor clearColor];
+    } completion:^(BOOL completion) {
+        if (self.isFirstOpening) {
+            self.isFirstOpening = false;
+            TutoImageView *tuto = [[TutoImageView alloc] initWithFrame:self.view.frame];
+            [tuto setImage:[UIImage imageNamed:@"tutoBig"]];
+            [self.view addSubview:tuto];
+        }
     }];
     
     // Save Shape
@@ -346,11 +359,6 @@
 //    NSData *bezierData = [NSKeyedArchiver archivedDataWithRootObject:path];
 //    NSString *encodedPath = [bezierData base64EncodedStringWithOptions:kNilOptions];
 //    [AFHolopicsAPIClient createShapesWithEncodedImage:encodedImage encodedPath:encodedPath AndExecuteSuccess:nil failure:nil];
-    
-    // Todo tuto insert
-    if (self.isFirstOpening) {
-        self.isFirstOpening = false;
-    }
 }
 
 - (BOOL)isShapeScrollableViewHidden
@@ -526,6 +534,7 @@
         self.shapeViews = nil;
     } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
         [self performSegueWithIdentifier:@"Feed From Pics View Controller" sender:nil];
+        [AFHolopicsAPIClient sendAnalytics:@"FeedClicked" AndExecuteSuccess:nil failure:nil];
     }
 }
 

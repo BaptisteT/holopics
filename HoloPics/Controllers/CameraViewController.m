@@ -155,6 +155,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [AFHolopicsAPIClient sendAnalytics:@"imagepicjerdidcancel" AndExecuteSuccess:nil failure:nil];
     if (self.imagePickerController.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     } else {
@@ -187,10 +188,12 @@
     ImportPictureViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"ImportPictureController"];
     vc.importPictureVCDelegate = self;
     [self.imagePickerController presentViewController:vc animated:YES completion:nil];
+    [AFHolopicsAPIClient sendAnalytics:@"ImportClicked" AndExecuteSuccess:nil failure:nil];
 }
 
 - (IBAction)libraryButtonClicked:(id)sender {
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    [AFHolopicsAPIClient sendAnalytics:@"LibraryClicked" AndExecuteSuccess:nil failure:nil];
 }
 
 - (IBAction)takePictureButtonClicked:(id)sender {

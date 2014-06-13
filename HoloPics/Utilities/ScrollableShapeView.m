@@ -116,6 +116,7 @@
                              }
                              completion:NULL];
         } else {
+//            [self.scrollableShapeViewDelegate displayCreateTutoIfOpening];
             self.center = initialCenter;
             self.controlledShapeView = nil;
         }

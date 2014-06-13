@@ -48,6 +48,8 @@
 		3C1395A619006BDC00762572 /* camera-quit-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A319006BDC00762572 /* camera-quit-button@2x~iphone.png */; };
 		3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A819006C4100762572 /* camera-flip-button.png */; };
 		3C1395AC19006C4100762572 /* camera-flip-button@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */; };
+		3C178427194B1D1100D6F010 /* tutoBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C178425194B1D1100D6F010 /* tutoBig.png */; };
+		3C17842A194B20A700D6F010 /* tutoCreateBig.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C178429194B20A700D6F010 /* tutoCreateBig.png */; };
 		3C20FBD71922189D003F3858 /* create-button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C20FBD61922189D003F3858 /* create-button2.png */; };
 		3C20FC181924AFA6003F3858 /* ShapeCD.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C20FC161924AFA6003F3858 /* ShapeCD.xcdatamodeld */; };
 		3C20FC1B1924B18D003F3858 /* ShapeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C20FC1A1924B18D003F3858 /* ShapeInfo.m */; };
@@ -61,6 +63,8 @@
 		3C3E3E3E192CEFB6005E8366 /* bin_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3A192CEFB6005E8366 /* bin_button.png */; };
 		3C3E3E3F192CEFB6005E8366 /* delete_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3B192CEFB6005E8366 /* delete_button.png */; };
 		3C3E3E41192CEFB6005E8366 /* size_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E3E3D192CEFB6005E8366 /* size_button.png */; };
+		3C4EEB77194B02CC004F6D45 /* splash_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4EEB75194B02CC004F6D45 /* splash_small.png */; };
+		3C4EEB78194B02CC004F6D45 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4EEB76194B02CC004F6D45 /* splash.png */; };
 		3C5D6DF11948861C00B97396 /* import_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D6DF01948861C00B97396 /* import_icon.png */; };
 		3C5D6DF5194891F500B97396 /* app-icon-58.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D6DF2194891F500B97396 /* app-icon-58.png */; };
 		3C5D6DF6194891F500B97396 /* app-icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C5D6DF3194891F500B97396 /* app-icon-80.png */; };
@@ -162,6 +166,8 @@
 		3C1395A319006BDC00762572 /* camera-quit-button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-quit-button@2x~iphone.png"; sourceTree = "<group>"; };
 		3C1395A819006C4100762572 /* camera-flip-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flip-button.png"; sourceTree = "<group>"; };
 		3C1395A919006C4100762572 /* camera-flip-button@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-flip-button@2x~iphone.png"; sourceTree = "<group>"; };
+		3C178425194B1D1100D6F010 /* tutoBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutoBig.png; sourceTree = "<group>"; };
+		3C178429194B20A700D6F010 /* tutoCreateBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tutoCreateBig.png; sourceTree = "<group>"; };
 		3C20FBD61922189D003F3858 /* create-button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create-button2.png"; sourceTree = "<group>"; };
 		3C20FC171924AFA6003F3858 /* ShapeCD.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ShapeCD.xcdatamodel; sourceTree = "<group>"; };
 		3C20FC191924B18D003F3858 /* ShapeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeInfo.h; path = Models/ShapeInfo.h; sourceTree = "<group>"; };
@@ -179,6 +185,8 @@
 		3C3E3E3A192CEFB6005E8366 /* bin_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bin_button.png; sourceTree = "<group>"; };
 		3C3E3E3B192CEFB6005E8366 /* delete_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete_button.png; sourceTree = "<group>"; };
 		3C3E3E3D192CEFB6005E8366 /* size_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = size_button.png; sourceTree = "<group>"; };
+		3C4EEB75194B02CC004F6D45 /* splash_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_small.png; sourceTree = "<group>"; };
+		3C4EEB76194B02CC004F6D45 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		3C5D6DF01948861C00B97396 /* import_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = import_icon.png; sourceTree = "<group>"; };
 		3C5D6DF2194891F500B97396 /* app-icon-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-58.png"; sourceTree = "<group>"; };
 		3C5D6DF3194891F500B97396 /* app-icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-80.png"; sourceTree = "<group>"; };
@@ -414,6 +422,10 @@
 		3C13959018FDAC2A00762572 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				3C178425194B1D1100D6F010 /* tutoBig.png */,
+				3C178429194B20A700D6F010 /* tutoCreateBig.png */,
+				3C4EEB75194B02CC004F6D45 /* splash_small.png */,
+				3C4EEB76194B02CC004F6D45 /* splash.png */,
 				3C5D6DF2194891F500B97396 /* app-icon-58.png */,
 				3C5D6DF3194891F500B97396 /* app-icon-80.png */,
 				3C5D6DF4194891F500B97396 /* app-icon-120.png */,
@@ -580,6 +592,7 @@
 				3C20FC291924EEB5003F3858 /* camera_capture.png in Resources */,
 				3CE0189C191CF74A0057EE0B /* bar-back@2x~iphone.png in Resources */,
 				3C3E3E3E192CEFB6005E8366 /* bin_button.png in Resources */,
+				3C4EEB77194B02CC004F6D45 /* splash_small.png in Resources */,
 				3C09FB0E19095AEF005DAA9C /* Strings.strings in Resources */,
 				3C3E3E3F192CEFB6005E8366 /* delete_button.png in Resources */,
 				3C7D535F1934D39400DAEA34 /* next_screen_button.png in Resources */,
@@ -592,6 +605,8 @@
 				3C1395A419006BDC00762572 /* camera-quit-button.png in Resources */,
 				3C5D6DF7194891F500B97396 /* app-icon-120.png in Resources */,
 				3C1395AA19006C4100762572 /* camera-flip-button.png in Resources */,
+				3C4EEB78194B02CC004F6D45 /* splash.png in Resources */,
+				3C17842A194B20A700D6F010 /* tutoCreateBig.png in Resources */,
 				3C13959218FDACB700762572 /* CameraOverlayView.xib in Resources */,
 				3C5D6DF5194891F500B97396 /* app-icon-58.png in Resources */,
 				3C20FC2A1924EEB5003F3858 /* camera_capture@2x~iphone.png in Resources */,
@@ -602,6 +617,7 @@
 				3C7D535B1934D17400DAEA34 /* forward_button.png in Resources */,
 				3C13955C18FD9E7100762572 /* InfoPlist.strings in Resources */,
 				3C5D6DF11948861C00B97396 /* import_icon.png in Resources */,
+				3C178427194B1D1100D6F010 /* tutoBig.png in Resources */,
 				3C3E3E33192BAD30005E8366 /* library_button.png in Resources */,
 				3C13956418FD9E7100762572 /* Images.xcassets in Resources */,
 				3CE0189B191CF74A0057EE0B /* bar-back.png in Resources */,
@@ -692,8 +708,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LINCS";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINCS";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -711,7 +727,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
+				PROVISIONING_PROFILE = "B5680FB5-84F9-48AA-94FD-A5B9E5CC9A3A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -733,8 +749,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: LINCS";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LINCS";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -745,7 +761,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "51C8E355-2740-4DAE-9C5B-E059F47669A1";
+				PROVISIONING_PROFILE = "B5680FB5-84F9-48AA-94FD-A5B9E5CC9A3A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -757,8 +773,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -769,7 +785,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8D843550-2421-45A2-85D9-5F3FF2D1E256";
+				PROVISIONING_PROFILE = "B5680FB5-84F9-48AA-94FD-A5B9E5CC9A3A";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -780,8 +796,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bastien Beurier (9X2H84A9C9)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bastien Beurier (9688VHJV6U)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -792,7 +808,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8D843550-2421-45A2-85D9-5F3FF2D1E256";
+				PROVISIONING_PROFILE = "B5680FB5-84F9-48AA-94FD-A5B9E5CC9A3A";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
