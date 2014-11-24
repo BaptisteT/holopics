@@ -26,7 +26,7 @@
 {
     NSString *xibName = @"ShapeOptionOverlay";
     NSArray* nibViews = [[NSBundle mainBundle] loadNibNamed:xibName owner:self options:nil];
-    self = [ nibViews objectAtIndex: 0];
+    self = [nibViews objectAtIndex: 0];
     
     self.shapeView = shapeView;
     

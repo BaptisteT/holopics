@@ -66,11 +66,11 @@
 {
     [super viewDidLoad];
     
-    if ([GeneralUtilities connected]) {
-        if ([GeneralUtilities hasLoadedShapes]) {
-            [self loadShapesInAWS];
-        }
-    }
+//    if ([GeneralUtilities connected]) {
+//        if ([GeneralUtilities hasLoadedShapes]) {
+//            [self loadShapesInAWS];
+//        }
+//    }
     
     // Some init
     self.subViewIndex = 0;
@@ -125,9 +125,6 @@
     if ([segueName isEqualToString: @"Share From Create Push Segue"]) {
         ((SharingViewController *) [segue destinationViewController]).imageToShare = (UIImage *)sender;
     }
-    if ([segueName isEqualToString: @"Feed From Pics View Controller"]) {
-        ((FeedViewController *) [segue destinationViewController]).feedVCDelegate = self;
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -176,7 +173,7 @@
 // Cancel path and pictures
 - (IBAction)cancelButtonClicked:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_1, ACTION_SHEET_OPTION_2, nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:ACTION_SHEET_CANCEL destructiveButtonTitle:nil otherButtonTitles:ACTION_SHEET_OPTION_1, nil];
     
     [actionSheet showInView:self.backgroundView];
 }
@@ -532,9 +529,6 @@
             [(ShapeView *)subView removeFromSuperview];
         }
         self.shapeViews = nil;
-    } else if ([buttonTitle isEqualToString:ACTION_SHEET_OPTION_2]) {
-        [self performSegueWithIdentifier:@"Feed From Pics View Controller" sender:nil];
-        [AFHolopicsAPIClient sendAnalytics:@"FeedClicked" AndExecuteSuccess:nil failure:nil];
     }
 }
 

@@ -177,7 +177,6 @@
 }
 
 
-
 // --------------------------------
 // Camera button clicked
 // --------------------------------
@@ -219,5 +218,6 @@
     [self dismissViewControllerAnimated:NO completion:nil];
     [self.navigationController popViewControllerAnimated:NO];
 }
+
 
 @end
