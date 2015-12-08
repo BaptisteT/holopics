@@ -40,31 +40,32 @@
     [self allocAndInitFullScreenCamera];
     
     // Libray Button
-    self.libraryButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [[self.libraryButton layer] setBorderWidth:0.8f];
-    [[self.libraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
-    ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-             if (nil != group) {
-                 // be sure to filter the group so you only get photos
-                 [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-                 [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:group.numberOfAssets - 1]
-                                         options:0
-                                      usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                                          if (nil != result) {
-                                              ALAssetRepresentation *repr = [result defaultRepresentation];
-                                              UIImageOrientation orientation = [ImageUtilities convertAssetOrientationToImageOrientation:[repr orientation]];
-                                              UIImage *img = [UIImage imageWithCGImage:[repr fullResolutionImage] scale:1 orientation:orientation];
-                                              [self.libraryButton setImage:img forState:UIControlStateNormal];
-                                              *stop = YES;
-                                          }
-                                      }];
-             }
-             
-             *stop = NO;
-         } failureBlock:^(NSError *error) {
-             NSLog(@"error: %@", error);
-         }];
+    self.libraryButton.hidden = YES;
+//    self.libraryButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+//    [[self.libraryButton layer] setBorderWidth:0.8f];
+//    [[self.libraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
+//    ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
+//    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+////         if (nil != group) {
+////             // be sure to filter the group so you only get photos
+////             [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+////             [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:group.numberOfAssets - 1]
+////                                     options:0
+////                                  usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+////                                      if (nil != result) {
+////                                          ALAssetRepresentation *repr = [result defaultRepresentation];
+////                                          UIImageOrientation orientation = [ImageUtilities convertAssetOrientationToImageOrientation:[repr orientation]];
+////                                          UIImage *img = [UIImage imageWithCGImage:[repr fullResolutionImage] scale:1 orientation:orientation];
+////                                          [self.libraryButton setImage:img forState:UIControlStateNormal];
+////                                          *stop = YES;
+////                                      }
+////                                  }];
+////         }
+//        
+//             *stop = NO;
+//         } failureBlock:^(NSError *error) {
+//             NSLog(@"error: %@", error);
+//         }];
     
     // design
     [ImageUtilities outerGlow:self.cancelButton];
