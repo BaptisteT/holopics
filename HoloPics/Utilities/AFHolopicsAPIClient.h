@@ -16,8 +16,6 @@
 
 + (void)getHolopicsAtPage:(NSUInteger)page pageSize:(NSUInteger)pageSize AndExecuteSuccess:(void(^)(NSArray *holopics, NSInteger page))successBlock failure:(void (^)())failureBlock;
 
-+ (void)sendAnalytics:(NSString *)eventName AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock;
-
 + (void)createShapesWithEncodedImage:(NSString *)encodedImage encodedPath:(NSString *)encodedPath AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock;
 
 + (void)getShapesAndExecuteSuccess:(void(^)(NSArray *shapes))successBlock failure:(void (^)())failureBlock;

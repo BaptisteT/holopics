@@ -63,7 +63,6 @@
 
 - (void)oneTapGesture:(UITapGestureRecognizer *)recognizer
 {
-    [AFHolopicsAPIClient sendAnalytics:@"ImportBackground" AndExecuteSuccess:nil failure:nil];
     if (self.category) {
         if (![GeneralUtilities connected]) {
              [GeneralUtilities showMessage:@"Please try again" withTitle:@"There is a problem with your connection"];

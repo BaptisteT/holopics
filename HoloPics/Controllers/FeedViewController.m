@@ -150,7 +150,6 @@
     }
 
     NSUInteger count = [self.viewControllers count];
-    
     for (int i = 0; i < count; i = i + 1) {
         if (i >= MAX(page - 2, 0) && i <= page + 2) {
             [self loadScrollViewWithPage:i];
@@ -164,11 +163,10 @@
 // Feed Buttons Clicked
 // ------------------------------------------------
 - (IBAction)cameraButtonClicked:(id)sender {
-    [AFHolopicsAPIClient sendAnalytics:@"CameraButtonClicked" AndExecuteSuccess:nil failure:nil];
     [self.navigationController popViewControllerAnimated:NO];
 }
+
 - (IBAction)forwardButtonClicked:(id)sender {
-    [AFHolopicsAPIClient sendAnalytics:@"ForwardButtonClicked" AndExecuteSuccess:nil failure:nil];
     DisplayHolopicViewController *controller = [self.viewControllers objectAtIndex:[self getScrollViewPage]];
     UIImage *forwardedImage = controller.imageView.image;
     [self.feedVCDelegate setBackgoundImage:forwardedImage];
@@ -195,7 +193,6 @@
     if (page == self.lastPageScrolled) {
         return;
     }
-    [AFHolopicsAPIClient sendAnalytics:@"ScrollPage" AndExecuteSuccess:nil failure:nil];
     self.lastPageScrolled = page;
     
     if (page > [self.viewControllers count] - 1) {

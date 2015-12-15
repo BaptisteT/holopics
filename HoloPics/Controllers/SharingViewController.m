@@ -71,8 +71,8 @@
 // -------------------------------
 // Button actions
 // -------------------------------
-- (IBAction)publishButtonClicked:(id)sender {
-    [AFHolopicsAPIClient sendAnalytics:@"publish" AndExecuteSuccess:nil failure:nil];
+- (IBAction)publishButtonClicked:(id)sender
+{
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *encodedImage = [ImageUtilities encodeToBase64String:self.imageToShare];
@@ -98,7 +98,6 @@
 }
 
 - (IBAction)saveLibraryButtonClicked:(id)sender {
-    [AFHolopicsAPIClient sendAnalytics:@"save" AndExecuteSuccess:nil failure:nil];
     if (self.saveLibraryButton.enabled) {
         self.saveLibraryButton.enabled = NO;
         [[self.saveLibraryButton layer] setBorderColor:[UIColor grayColor].CGColor];
@@ -106,10 +105,7 @@
     }
 }
 
-- (IBAction)shareButtonClicked:(id)sender {
-    // Send analytics
-    [AFHolopicsAPIClient sendAnalytics:@"share" AndExecuteSuccess:nil failure:nil];
-    
+- (IBAction)shareButtonClicked:(id)sender {    
     // Share to FB, sms, email.. using UIActivityViewController
     NSString *shareString = @"";
     NSArray *activityItems = [NSArray arrayWithObjects:shareString, [ImageUtilities drawTitleinCornerOfImage:self.imageToShare], nil];

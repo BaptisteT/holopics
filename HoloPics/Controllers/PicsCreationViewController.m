@@ -66,12 +66,6 @@
 {
     [super viewDidLoad];
     
-//    if ([GeneralUtilities connected]) {
-//        if ([GeneralUtilities hasLoadedShapes]) {
-//            [self loadShapesInAWS];
-//        }
-//    }
-    
     // Some init
     self.subViewIndex = 0;
     self.isFirstOpening = [GeneralUtilities isFirstOpening];
@@ -144,9 +138,8 @@
 // Buttons clicked
 // --------------------------------
 
-- (IBAction)saveButtonClicked:(id)sender {
-
-    [AFHolopicsAPIClient sendAnalytics:@"shareButtonClicked" AndExecuteSuccess:nil failure:nil];
+- (IBAction)saveButtonClicked:(id)sender
+{
     // Remove button before saving
     [self.shareButton setHidden:YES];
     [self.cancelButton setHidden:YES];
@@ -222,7 +215,6 @@
     if (!self.shapeViews){
         self.shapeViews = [NSMutableArray arrayWithCapacity:1];
     }
-    [AFHolopicsAPIClient sendAnalytics:@"InsertShape" AndExecuteSuccess:nil failure:nil];
 
     // Return if we reached the limit of images
     if (self.subViewIndex >= kMaxNumberOfShapes) {
@@ -296,8 +288,6 @@
         [GeneralUtilities showMessage:@"Delete shapes by quickly dragging them downwards" withTitle:@"You reached the maximum number of shapes in memory !"];
         return;
     }
-
-    [AFHolopicsAPIClient sendAnalytics:@"CreateShape" AndExecuteSuccess:nil failure:nil];
     
     // Image directory path
     NSString *relativeImagePath = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSinceReferenceDate]];
@@ -469,7 +459,7 @@
         
         self.shapeOptionsScrollView.contentSize = CGSizeMake(self.shapeOptionsScrollView.contentSize.width + squareWidth * shapes.count, squareWidth);
         
-        for(Shape *shape in shapes) {
+        for (Shape *shape in shapes) {
             
             // Create scrollable shape
             ScrollableShapeView *scrollableShape = [ScrollableShapeView alloc];

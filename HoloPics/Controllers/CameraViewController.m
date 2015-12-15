@@ -5,6 +5,7 @@
 //  Created by Baptiste Truchot on 5/15/14.
 //  Copyright (c) 2014 Baptiste Truchot. All rights reserved.
 //
+#import <Photos/Photos.h>
 
 #import "CameraViewController.h"
 #import "Constants.h"
@@ -40,32 +41,26 @@
     [self allocAndInitFullScreenCamera];
     
     // Libray Button
-    self.libraryButton.hidden = YES;
-//    self.libraryButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    [[self.libraryButton layer] setBorderWidth:0.8f];
-//    [[self.libraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
-//    ALAssetsLibrary *assetsLibrary = [[ALAssetsLibrary alloc] init];
-//    [assetsLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-////         if (nil != group) {
-////             // be sure to filter the group so you only get photos
-////             [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-////             [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:group.numberOfAssets - 1]
-////                                     options:0
-////                                  usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-////                                      if (nil != result) {
-////                                          ALAssetRepresentation *repr = [result defaultRepresentation];
-////                                          UIImageOrientation orientation = [ImageUtilities convertAssetOrientationToImageOrientation:[repr orientation]];
-////                                          UIImage *img = [UIImage imageWithCGImage:[repr fullResolutionImage] scale:1 orientation:orientation];
-////                                          [self.libraryButton setImage:img forState:UIControlStateNormal];
-////                                          *stop = YES;
-////                                      }
-////                                  }];
-////         }
-//        
-//             *stop = NO;
-//         } failureBlock:^(NSError *error) {
-//             NSLog(@"error: %@", error);
-//         }];
+    self.importPictureButton.hidden = YES;
+    self.libraryButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [[self.libraryButton layer] setBorderWidth:0.8f];
+    [[self.libraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
+    
+    PHFetchResult *result = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+    
+    PHImageManager *imgManager = [PHImageManager defaultManager];
+    PHImageRequestOptions *requestOptions = [PHImageRequestOptions new];
+    requestOptions.synchronous = true;
+    if (result.count > 0) {
+        PHAsset *asset = [result objectAtIndex:result.count - 1];
+        [imgManager requestImageForAsset:asset targetSize:self.libraryButton.frame.size
+                             contentMode:PHImageContentModeAspectFill
+                                 options:requestOptions
+                           resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                               if (result)
+                                   [self.libraryButton setImage:result forState:UIControlStateNormal];
+                           }];
+    }
     
     // design
     [ImageUtilities outerGlow:self.cancelButton];
@@ -147,8 +142,7 @@
     } else {
         orientation = UIImageOrientationRight;
     }
-    [AFHolopicsAPIClient sendAnalytics:@"AddLibraryOrCameraPicture" AndExecuteSuccess:nil failure:nil];
-    
+
     [self.cameraVCDelegate setBackgoundImage:[ImageUtilities cropImage:image toFitWidthOnHeightTargetRatio:targetRatio andOrientate:orientation]];
     
     [self closeCamera];
@@ -156,7 +150,6 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [AFHolopicsAPIClient sendAnalytics:@"imagepicjerdidcancel" AndExecuteSuccess:nil failure:nil];
     if (self.imagePickerController.sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
         self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     } else {
@@ -188,12 +181,10 @@
     ImportPictureViewController * vc = [storyboard instantiateViewControllerWithIdentifier:@"ImportPictureController"];
     vc.importPictureVCDelegate = self;
     [self.imagePickerController presentViewController:vc animated:YES completion:nil];
-    [AFHolopicsAPIClient sendAnalytics:@"ImportClicked" AndExecuteSuccess:nil failure:nil];
 }
 
 - (IBAction)libraryButtonClicked:(id)sender {
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    [AFHolopicsAPIClient sendAnalytics:@"LibraryClicked" AndExecuteSuccess:nil failure:nil];
 }
 
 - (IBAction)takePictureButtonClicked:(id)sender {

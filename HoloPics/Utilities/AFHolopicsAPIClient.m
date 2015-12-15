@@ -90,25 +90,6 @@
     }];
 }
 
-// Analytics
-+ (void)sendAnalytics:(NSString *)eventName AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock
-{
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] initWithCapacity:1];
-    AFHolopicsAPIClient *manager = [AFHolopicsAPIClient sharedClient];
-    [parameters setObject:eventName forKey:@"name"];
-    
-    NSString *path = [[AFHolopicsAPIClient getBasePath] stringByAppendingString:@"events.json"];
-    
-    [manager POST:path parameters:parameters success:^(NSURLSessionDataTask *task, id JSON) {
-        if (successBlock) {
-            successBlock();
-        }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (failureBlock) {
-            failureBlock();
-        }
-    }];
-}
 
 // Create Shapes
 + (void)createShapesWithEncodedImage:(NSString *)encodedImage encodedPath:(NSString *)encodedPath AndExecuteSuccess:(void(^)())successBlock failure:(void (^)())failureBlock
