@@ -42,7 +42,6 @@
     
     // Libray Button
     self.importPictureButton.hidden = YES;
-    self.libraryButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [[self.libraryButton layer] setBorderWidth:0.8f];
     [[self.libraryButton layer] setBorderColor:[UIColor blackColor].CGColor];
     
@@ -53,12 +52,15 @@
     requestOptions.synchronous = true;
     if (result.count > 0) {
         PHAsset *asset = [result objectAtIndex:result.count - 1];
-        [imgManager requestImageForAsset:asset targetSize:self.libraryButton.frame.size
+        [imgManager requestImageForAsset:asset
+                              targetSize:self.view.frame.size
                              contentMode:PHImageContentModeAspectFill
                                  options:requestOptions
                            resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
-                               if (result)
+                               if (result) {
+                                   self.libraryButton.imageView.contentMode = UIViewContentModeScaleAspectFill;
                                    [self.libraryButton setImage:result forState:UIControlStateNormal];
+                               }
                            }];
     }
     
